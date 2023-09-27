@@ -7,8 +7,8 @@ build:
   image: node:19
   script:
     - echo "Building the project"
-    - npm ci
-    - npm run build
+    - pnpm ci
+    - pnpm run build
   only:
     - merge_requests
 
