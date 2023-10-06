@@ -1,40 +1,21 @@
 .container {
   background-color: #1f1f1f;
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  height: 90vh;
+}
+
+.logoContainer {
+  height: 100%;
 }
 
 .loginFormUsername {
   margin-bottom: 10px;
 }
 
-.logo {
-  position: fixed;
-  padding: 20px;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 24px;
-  gap: 8px;
-  font-weight: 500;
-  text-decoration: none;
-  color: white;
-  user-select: none;
-  background-color: rgba(0, 0, 0, 0);
-}
-
-.logo:focus {
-  outline: 2px dashed #99a74b;
-  outline-offset: -2px;
-}
-
-.logo:hover {
-  cursor: pointer;
-  color: white;
-}
-
 .loginContainer {
-  margin: auto;
+  margin: 0 auto;
   background-color: #333;
   width: 75vw;
   height: 40vh;

@@ -1,7 +1,7 @@
 import styles from "./LoginFormDesktop.module.css";
-import HopsUpLogo from "../../assets/hopsup.svg";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import { Card, Form, Input, Button, theme } from "antd";
+import Logo from "../logo/Logo";
 
 const { useToken } = theme;
 
@@ -22,10 +22,9 @@ const LoginFormDesktop = ({
   const { token } = useToken();
   return (
     <div className={styles.container}>
-      <a className={styles.logo} href="/" aria-label="HopsUp">
-        <img src={HopsUpLogo} alt="HopsUp-logo" />
-        <span>HopsUp</span>
-      </a>
+      <div className={styles.logoContainer}>
+        <Logo />
+      </div>
       <div className={styles.loginContainer}>
         <div className={styles.loginText}>
           <h2>
@@ -51,7 +50,7 @@ const LoginFormDesktop = ({
               height: "100%",
               backgroundColor: token.colorPrimaryBg,
             }}
-            bodyStyle={{ padding: "0", height: "100%" }}
+            bodyStyle={{ padding: "20", height: "100%" }}
           >
             <h1>Log in</h1>
             <Form

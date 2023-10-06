@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import App from "./App";
+import App from "./pages/App.tsx";
 import { ConfigProvider, theme } from "antd";
 import { App as AntdApp } from "antd";
 import "./index.css";
-import "./App.css";
 import LogInPage from "./pages/LogIn.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
