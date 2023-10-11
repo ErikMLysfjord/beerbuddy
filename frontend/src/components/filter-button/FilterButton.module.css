@@ -1,0 +1,9 @@
+.filterButtonWrapper {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .filterButtonWrapper {
+    display: inline-block;
+  }
+}

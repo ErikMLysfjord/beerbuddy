@@ -3,6 +3,7 @@ import Actionbar from "../components/actionbar/Actionbar";
 import UserIntro from "../components/user-intro/UserIntro";
 import styles from "./App.module.css";
 import BeerList from "../components/beer-list/BeerList";
+import Filters from "../components/filters/Filters";
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
         <Actionbar />
         <BeerList />
       </section>
-      <Sidebar />
+      <Sidebar>
+        <Filters />
+      </Sidebar>
     </div>
   );
 }

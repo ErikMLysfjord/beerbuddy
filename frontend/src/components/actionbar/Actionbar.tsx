@@ -1,6 +1,6 @@
-import { Select, Input, Button } from "antd";
+import { Select, Input } from "antd";
 import styles from "./Actionbar.module.css";
-import { FilterFilled } from "@ant-design/icons";
+import FilterButton from "../filter-button/FilterButton";
 
 const Actionbar = () => {
   return (
@@ -16,9 +16,7 @@ const Actionbar = () => {
         ]}
       />
       <Input.Search aria-label="Searchbar" />
-      <div className={styles.filterButtonWrapper}>
-        <Button type="primary" icon={<FilterFilled />}></Button>
-      </div>
+      <FilterButton />
     </div>
   );
 };
