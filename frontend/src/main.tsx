@@ -20,12 +20,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           colorError: "#fe6b6b",
         },
         algorithm: theme.darkAlgorithm,
-      }}
-    >
+      }}>
       <AntdApp>
         <BrowserRouter basename="/project2">
           <Routes>
             <Route path="/login" element={<LogInPage />} />
+            <Route path="/signup" element={<LogInPage />} />
             <Route path="/" element={<App />} />
             <Route path="*" element={<h1>Not Found</h1>} />
           </Routes>

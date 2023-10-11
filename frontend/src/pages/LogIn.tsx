@@ -14,8 +14,20 @@ const LogInPage = () => {
   const { message } = App.useApp();
   const { width } = useWindowDimensions();
 
-  const showMessage = (string: { username: string; password: string }) => {
-    message.success(string.username + " " + string.password);
+  const showMessage = (string: {
+    username: string;
+    password: string;
+    repeatPassword?: string;
+    email?: string;
+  }) => {
+    message.success(
+      string.username +
+        " " +
+        string.password +
+        " " +
+        (string.repeatPassword ? string.repeatPassword + " " : " ") +
+        (string.email ? string.email : "")
+    );
   };
 
   if (width < 768) {

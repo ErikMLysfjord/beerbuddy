@@ -1,19 +1,19 @@
 import styles from "./LoginFormDesktop.module.css";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
-import { Card, Form, Input, Button, theme } from "antd";
+import { theme } from "antd";
 import Logo from "../logo/Logo";
+import LoginFormDesktopContainer from "./LoginFormDesktopContainer.tsx";
+import RegisterFormDesktopContainer from "./RegisterFormDesktopContainer.tsx";
 
 const { useToken } = theme;
-
-type FieldType = {
-  username?: string;
-  password?: string;
-};
 
 interface LoginFormDesktopProps {
   showMessage: (string: { username: string; password: string }) => void;
   onFinishFailed: (errorInfo: ValidateErrorEntity) => void;
 }
+
+//chose last index of pathname to determine if login or signup
+const login = window.location.pathname.split("/")[2] === "login";
 
 const LoginFormDesktop = ({
   showMessage,
@@ -21,7 +21,7 @@ const LoginFormDesktop = ({
 }: LoginFormDesktopProps) => {
   const { token } = useToken();
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <div className={styles.logoContainer}>
         <Logo />
       </div>
@@ -39,62 +39,24 @@ const LoginFormDesktop = ({
           <a
             style={{ color: token.colorPrimary }}
             className={styles.loginLink}
-            href="/"
-          >
-            {"Not a user? Sign up here"}
+            href={"/project2/" + (login ? "signup" : "login")}
+            tabIndex={0}>
+            {login ? "Not a user? Sign up here" : "Already a user? Log in here"}
           </a>
         </div>
-        <div className={styles.loginFormContainer}>
-          <Card
-            style={{
-              height: "100%",
-              backgroundColor: token.colorPrimaryBg,
-            }}
-            bodyStyle={{ padding: "20", height: "100%" }}
-          >
-            <h1>Log in</h1>
-            <Form
-              name="basic"
-              className={styles.loginForm}
-              layout="vertical"
-              initialValues={{ remember: true }}
-              onFinish={showMessage}
-              onFinishFailed={onFinishFailed}
-              autoComplete="off"
-            >
-              <Form.Item<FieldType>
-                label="Username"
-                name="username"
-                rules={[
-                  { required: true, message: "Please input your username!" },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-
-              <Form.Item<FieldType>
-                label="Password"
-                name="password"
-                rules={[
-                  { required: true, message: "Please input your password!" },
-                ]}
-              >
-                <Input.Password className={styles.loginFormPasswordContainer} />
-              </Form.Item>
-              <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className={styles.loginButton}
-                >
-                  Submit
-                </Button>
-              </Form.Item>
-            </Form>
-          </Card>
-        </div>
+        {login ? (
+          <LoginFormDesktopContainer
+            showMessage={showMessage}
+            onFinishFailed={onFinishFailed}
+          />
+        ) : (
+          <RegisterFormDesktopContainer
+            showMessage={showMessage}
+            onFinishFailed={onFinishFailed}
+          />
+        )}
       </div>
-    </div>
+    </main>
   );
 };
 
