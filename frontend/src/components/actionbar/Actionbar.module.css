@@ -2,3 +2,13 @@
   display: flex;
   gap: 1rem;
 }
+
+.filterButtonWrapper {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .filterButtonWrapper {
+    display: inline-block;
+  }
+}

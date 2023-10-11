@@ -8,7 +8,7 @@ interface BeerCardInterface {
 
 const BeerCard = (props: BeerCardInterface) => {
   return (
-    <button className={styles.card}>
+    <button aria-label={props.name} className={styles.card}>
       <div className={styles.textWrapper}>
         <h1 className={styles.beerName}>{props.name}</h1>
         <p className={styles.breweryName}>{props.brewery}</p>

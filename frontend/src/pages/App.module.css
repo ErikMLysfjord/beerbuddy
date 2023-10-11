@@ -10,3 +10,9 @@
   flex-grow: 1;
   padding: 3rem 10rem;
 }
+
+@media screen and (max-width: 1000px) {
+  .mainSection {
+    padding: 3rem 2rem;
+  }
+}
