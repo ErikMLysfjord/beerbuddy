@@ -5,11 +5,13 @@ import styles from "./Voter.module.css";
 const Voter = () => {
   const upvote = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
+    event.preventDefault();
     console.log("upvote");
   };
 
   const downvote = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
+    event.preventDefault();
     console.log("downvote");
   };
 
