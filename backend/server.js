@@ -1,4 +1,3 @@
-const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const {
   beerSchema,
@@ -7,7 +6,7 @@ const {
   reactSchema,
   commentSchema,
   updateUserSchema,
-  deleteUserSchema
+  deleteUserSchema,
 } = require("./schema");
 const {
   beerResolver,
@@ -16,11 +15,21 @@ const {
   reactResolver,
   commentResolver,
   updateUserResolver,
-  deleteUserResolver
+  deleteUserResolver,
 } = require("./resolvers");
 
-// Create an express server and a GraphQL endpoint
+
+const { Client } = require("pg");
+const express = require("express");
+
 const app = express();
+
+// Connect to postgres database
+const client = new Client({
+  password: "root",
+  user: "root",
+  host: "postgres",
+});
 
 // Access static files from backend
 app.use(express.static("public"));
@@ -88,7 +97,26 @@ app.post(
   })
 );
 
-// Start the server
-app.listen(4000, () => {
-  console.log("Running a GraphQL API server at http://localhost:4000/");
+
+app.get("/employees", async (req, res) => {
+  const results = await client
+    .query("SELECT * FROM employees")
+    .then((payload) => {
+      console.log("test");
+      return payload.rows;
+    })
+    .catch(() => {
+      throw new Error("Query failed");
+    });
+  res.setHeader("Content-Type", "application/json");
+  res.status(200);
+  res.send(JSON.stringify(results));
 });
+
+(async () => {
+  await client.connect();
+
+  app.listen(4000, () => {
+    console.log(`Example app listening at http://localhost:4000`);
+  });
+})();
