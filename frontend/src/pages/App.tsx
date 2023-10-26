@@ -6,6 +6,13 @@ import BeerList from "../components/beer-list/BeerList";
 import Filters from "../components/filters/Filters";
 
 function App() {
+  if (
+    !localStorage.getItem("userIdBeerBuddy") ||
+    !localStorage.getItem("userNameBeerBuddy")
+  ) {
+    window.location.replace("/project2/login");
+  }
+
   return (
     <div className={styles.appBody}>
       <section className={styles.mainSection}>

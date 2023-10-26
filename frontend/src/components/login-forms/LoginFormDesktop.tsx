@@ -1,25 +1,19 @@
 import styles from "./LoginFormDesktop.module.css";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
-import { theme } from "antd";
 import Logo from "../logo/Logo";
 import LoginFormDesktopContainer from "./LoginFormDesktopContainer.tsx";
-import RegisterFormDesktopContainer from "./RegisterFormDesktopContainer.tsx";
-
-const { useToken } = theme;
 
 interface LoginFormDesktopProps {
-  showMessage: (string: { username: string; password: string }) => void;
+  showMessage: (string: { username: string }) => void;
   onFinishFailed: (errorInfo: ValidateErrorEntity) => void;
+  saveUser: (string: { username: string }) => void;
 }
-
-//chose last index of pathname to determine if login or signup
-const login = window.location.pathname.split("/")[2] === "login";
 
 const LoginFormDesktop = ({
   showMessage,
   onFinishFailed,
+  saveUser,
 }: LoginFormDesktopProps) => {
-  const { token } = useToken();
   return (
     <main className={styles.container}>
       <div className={styles.logoContainer}>
@@ -36,26 +30,12 @@ const LoginFormDesktop = ({
             <br />
             {"features and be part of a global craft beer conversation."}
           </p>
-          <a
-            style={{ color: token.colorPrimary }}
-            className={styles.loginLink}
-            href={"/project2/" + (login ? "signup" : "login")}
-            tabIndex={0}
-          >
-            {login ? "Not a user? Sign up here" : "Already a user? Log in here"}
-          </a>
         </div>
-        {login ? (
-          <LoginFormDesktopContainer
-            showMessage={showMessage}
-            onFinishFailed={onFinishFailed}
-          />
-        ) : (
-          <RegisterFormDesktopContainer
-            showMessage={showMessage}
-            onFinishFailed={onFinishFailed}
-          />
-        )}
+        <LoginFormDesktopContainer
+          showMessage={showMessage}
+          onFinishFailed={onFinishFailed}
+          saveUser={saveUser}
+        />
       </div>
     </main>
   );

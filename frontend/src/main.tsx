@@ -27,7 +27,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <BrowserRouter basename="/project2">
           <Routes>
             <Route path="/login" element={<LogInPage />} />
-            <Route path="/signup" element={<LogInPage />} />
             <Route path="/" element={<App />} />
             <Route path="/beer/:id" element={<BeerPage />} />
             <Route path="*" element={<h1>Not Found</h1>} />

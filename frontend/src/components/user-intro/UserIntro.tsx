@@ -22,7 +22,10 @@ const UserIntro = () => {
       <header className={styles.headingWrapper}>
         <div className={styles.profilePicture}></div>
         <h1 className={styles.heading}>
-          <span className={styles.bold}>Welcome</span>, Per-Christian Ringnes
+          <span className={styles.bold}>Welcome</span>,{" "}
+          {localStorage.getItem("userNameBeerBuddy")
+            ? localStorage.getItem("userNameBeerBuddy")
+            : ""}
         </h1>
         <img className={styles.emoji} src={emoji} alt="Waving Emoji" />
       </header>

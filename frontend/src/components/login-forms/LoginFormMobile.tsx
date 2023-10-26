@@ -3,21 +3,19 @@ import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import HopsUpLogo from "../../assets/hopsup.svg";
 import styles from "./LoginFormMobile.module.css";
 import LoginFormMobileContainer from "./LoginFormMobileContainer";
-import RegisterFormMobileContainer from "./RegisterFormMobileContainer";
 
 const { useToken } = theme;
 
 interface LoginFormMobileProps {
-  showMessage: (string: { username: string; password: string }) => void;
+  showMessage: (string: { username: string }) => void;
   onFinishFailed: (errorInfo: ValidateErrorEntity) => void;
+  saveUser: (string: { username: string }) => void;
 }
-
-//chose last index of pathname to determine if login or signup
-const login = window.location.pathname.split("/")[2] === "login";
 
 const LoginFormMobile = ({
   showMessage,
   onFinishFailed,
+  saveUser,
 }: LoginFormMobileProps) => {
   const { token } = useToken();
   return (
@@ -33,25 +31,11 @@ const LoginFormMobile = ({
         }}
         className={styles.mobileCard}
       >
-        {login ? (
-          <LoginFormMobileContainer
-            showMessage={showMessage}
-            onFinishFailed={onFinishFailed}
-          />
-        ) : (
-          <RegisterFormMobileContainer
-            showMessage={showMessage}
-            onFinishFailed={onFinishFailed}
-          />
-        )}
-        <a
-          style={{ color: token.colorPrimary }}
-          className={styles.loginLink}
-          href={"/project2/" + (login ? "signup" : "login")}
-          tabIndex={0}
-        >
-          {login ? "Not a user? Sign up here" : "Already a user? Log in here"}
-        </a>
+        <LoginFormMobileContainer
+          showMessage={showMessage}
+          onFinishFailed={onFinishFailed}
+          saveUser={saveUser}
+        />
       </Card>
     </main>
   );

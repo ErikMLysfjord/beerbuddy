@@ -10,13 +10,15 @@ type FieldType = {
 };
 
 interface LoginFormDesktopProps {
-  showMessage: (string: { username: string; password: string }) => void;
+  showMessage: (string: { username: string }) => void;
   onFinishFailed: (errorInfo: ValidateErrorEntity) => void;
+  saveUser: (string: { username: string }) => void;
 }
 
 const LoginFormDesktop = ({
   showMessage,
   onFinishFailed,
+  saveUser,
 }: LoginFormDesktopProps) => {
   const { token } = useToken();
   return (
@@ -34,7 +36,10 @@ const LoginFormDesktop = ({
           className={styles.loginForm}
           layout="vertical"
           initialValues={{ remember: true }}
-          onFinish={showMessage}
+          onFinish={(values) => {
+            showMessage({ username: values.username });
+            saveUser({ username: values.username });
+          }}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
@@ -46,13 +51,6 @@ const LoginFormDesktop = ({
             <Input />
           </Form.Item>
 
-          <Form.Item<FieldType>
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
-          >
-            <Input.Password className={styles.loginFormPasswordContainer} />
-          </Form.Item>
           <Form.Item>
             <Button
               type="primary"

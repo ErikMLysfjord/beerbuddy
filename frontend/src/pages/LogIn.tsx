@@ -3,9 +3,10 @@ import useWindowDimensions from "../utils/useWindowDimensions";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import LoginFormMobile from "../components/login-forms/LoginFormMobile";
 import LoginFormDesktop from "../components/login-forms/LoginFormDesktop";
+import { v4 } from "uuid";
 
 const onFinishFailed = (
-  errorInfo: ValidateErrorEntity<{ username: string; password: string }>
+  errorInfo: ValidateErrorEntity<{ username: string }>
 ) => {
   console.log("Failed:", errorInfo);
 };
@@ -14,20 +15,24 @@ const LogInPage = () => {
   const { message } = App.useApp();
   const { width } = useWindowDimensions();
 
-  const showMessage = (string: {
-    username: string;
-    password: string;
-    repeatPassword?: string;
-    email?: string;
-  }) => {
-    message.success(
-      string.username +
-        " " +
-        string.password +
-        " " +
-        (string.repeatPassword ? string.repeatPassword + " " : " ") +
-        (string.email ? string.email : "")
-    );
+  if (localStorage.getItem("userNameBeerBuddy")) {
+    if (!localStorage.getItem("userIdBeerBuddy")) {
+      localStorage.setItem("userIdBeerBuddy", v4());
+    }
+    window.location.replace("/");
+  }
+
+  const showMessage = (string: { username: string }) => {
+    message.success("Welcome " + string.username + "!");
+  };
+
+  const saveUser = (string: { username: string }) => {
+    if (!localStorage.getItem("userIdBeerBuddy")) {
+      localStorage.setItem("userIdBeerBuddy", v4());
+    }
+
+    localStorage.setItem("userNameBeerBuddy", string.username);
+    window.location.replace("/");
   };
 
   if (width < 768) {
@@ -35,6 +40,7 @@ const LogInPage = () => {
       <LoginFormMobile
         showMessage={showMessage}
         onFinishFailed={onFinishFailed}
+        saveUser={saveUser}
       />
     );
   }
@@ -42,6 +48,7 @@ const LogInPage = () => {
     <LoginFormDesktop
       showMessage={showMessage}
       onFinishFailed={onFinishFailed}
+      saveUser={saveUser}
     />
   );
 };
