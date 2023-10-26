@@ -35,13 +35,13 @@ const beerSchema = buildSchema(`
 
 const loginSchema = buildSchema(`
   type Query {
-    login(username: String! password: String!): String
+    login(username: String!): String
   }
 `);
 
 const signUpSchema = buildSchema(`
   type Query {
-    signUp(username: String! password: String!): String
+    signUp(username: String!): String
   }
 `);
 
@@ -59,13 +59,13 @@ const commentSchema = buildSchema(`
 
 const updateUserSchema = buildSchema(`
   type Query {
-    updateUser(username: String! password: String!): String
+    updateUser(username: String!): String
   }
 `);
 
 const deleteUserSchema = buildSchema(`
   type Query {
-    deleteUser(username: String! password: String!): String
+    deleteUser(username: String!): String
   }
 `);
 
@@ -76,7 +76,6 @@ const querySchema = buildSchema(`
     query(query: String!): Any
   }
 `);
-
 
 module.exports = {
   beerSchema,

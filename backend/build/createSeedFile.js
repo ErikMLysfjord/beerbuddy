@@ -4,29 +4,8 @@ const csv = require("csv-parser");
 // empty the data.sql file
 fs.writeFileSync("database-seed.sql", "", { flag: "w" });
 
-// create the table
-let createTableSql = `
-CREATE TABLE beers (
-    number INT,
-    abv DECIMAL(5,2),
-    ibu DECIMAL(5,2),
-    id INT PRIMARY KEY,
-    name VARCHAR(255),
-    style VARCHAR(255),
-    brewery_id INT,
-    ounces DECIMAL(5,2)
-);
-
-CREATE TABLE breweries (
-  id INT PRIMARY KEY,
-  name VARCHAR(255),
-  city VARCHAR(255),
-  state VARCHAR(255)
-);
-
-`;
-
-fs.writeFileSync("database-seed.sql", createTableSql, { flag: "a" });
+const tablesSql = fs.readFileSync("build/tables.sql", "utf8");
+fs.writeFileSync("database-seed.sql", tablesSql + "\n\n", { flag: "a" });
 
 const results = [];
 

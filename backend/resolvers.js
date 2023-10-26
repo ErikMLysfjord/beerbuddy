@@ -6,7 +6,10 @@ const client = new Client({
 });
 
 const sqlQuery = async (query) => {
-  await client.connect();
+  if (!client._connected) {
+    await client.connect();
+  }
+
   const results = await client
     .query(query)
     .then((payload) => {
@@ -15,8 +18,10 @@ const sqlQuery = async (query) => {
     .catch(() => {
       return "Error in query";
     });
+
+  // console.log("results", results);
   return results;
-}
+};
 
 const beerResolver = {
   beerName: ({ id }) => {
@@ -30,14 +35,14 @@ const beerResolver = {
 };
 
 const loginResolver = {
-  login: ({ username, password }) => {
+  login: ({ username }) => {
     // Does something to username and password
     return "You are logged in!";
   },
 };
 
 const signUpResolver = {
-  signUp: ({ username, password }) => {
+  signUp: ({ username }) => {
     // Does something to username and password
     return "You are signed up!";
   },
@@ -58,14 +63,14 @@ const commentResolver = {
 };
 
 const updateUserResolver = {
-  updateUser: ({ username, password }) => {
+  updateUser: ({ username }) => {
     // Does something to username and password
     return "You updated your user!";
   },
 };
 
 const deleteUserResolver = {
-  deleteUser: ({ username, password }) => {
+  deleteUser: ({ username }) => {
     // Does something to username and password
     return "You deleted your user!";
   },
