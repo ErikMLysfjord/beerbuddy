@@ -1,4 +1,5 @@
-import { Checkbox, Divider, Slider } from "antd";
+import { Checkbox, Slider } from "antd";
+import Filter from "./Filter";
 
 const beerStyles = [
   "IPA",
@@ -22,16 +23,18 @@ const beerStyles = [
 const Filters = () => {
   return (
     <>
-      <Divider />
-      <h2>Style</h2>
-      <Checkbox.Group options={beerStyles} />
-      <Divider />
-      <h2>IBU</h2>
-      <Slider range defaultValue={[0, 24]} />
-      <Divider />
-      <h2>Alcohol</h2>
-      <Slider min={0} max={25} range defaultValue={[4, 8]} />
-      <Divider />
+      <Filter heading="Style" tooltip="Filter on certain styles of beer.">
+        <Checkbox.Group options={beerStyles} />
+      </Filter>
+      <Filter
+        heading="IBU"
+        tooltip="IBU is International Bitternes Units, a metric for the bitternes of your beer. The higher the number, the more bitter the beer."
+      >
+        <Slider range defaultValue={[0, 24]} />
+      </Filter>
+      <Filter heading="Alcohol" tooltip="Percentage of alcohol in the beer">
+        <Slider min={0} max={25} range defaultValue={[4, 8]} />
+      </Filter>
     </>
   );
 };
