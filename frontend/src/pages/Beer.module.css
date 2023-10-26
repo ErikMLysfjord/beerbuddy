@@ -10,8 +10,8 @@
 
 .menuButton {
   background-color: transparent;
-  color: #FFCC48;
-  border: 2px solid #FFCC48;
+  color: #ffcc48;
+  border: 2px solid #ffcc48;
   padding: 5px 30px 5px 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -24,7 +24,7 @@
   .logo {
     left: 1.5rem;
   }
-  .menuButton{
+  .menuButton {
     position: absolute;
     right: 2rem;
     top: 1rem;

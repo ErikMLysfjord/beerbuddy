@@ -21,7 +21,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           colorError: "#fe6b6b",
         },
         algorithm: theme.darkAlgorithm,
-      }}>
+      }}
+    >
       <AntdApp>
         <BrowserRouter basename="/project2">
           <Routes>

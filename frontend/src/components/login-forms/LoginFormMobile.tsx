@@ -31,7 +31,8 @@ const LoginFormMobile = ({
         style={{
           backgroundColor: token.colorPrimaryBg,
         }}
-        className={styles.mobileCard}>
+        className={styles.mobileCard}
+      >
         {login ? (
           <LoginFormMobileContainer
             showMessage={showMessage}
@@ -47,7 +48,8 @@ const LoginFormMobile = ({
           style={{ color: token.colorPrimary }}
           className={styles.loginLink}
           href={"/project2/" + (login ? "signup" : "login")}
-          tabIndex={0}>
+          tabIndex={0}
+        >
           {login ? "Not a user? Sign up here" : "Already a user? Log in here"}
         </a>
       </Card>

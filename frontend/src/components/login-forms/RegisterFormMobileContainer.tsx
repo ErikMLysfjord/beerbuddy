@@ -33,33 +33,38 @@ const LoginFormMobile = ({
         initialValues={{ remember: true }}
         onFinish={showMessage}
         onFinishFailed={onFinishFailed}
-        autoComplete="off">
+        autoComplete="off"
+      >
         <Form.Item<FieldType>
           label="Username"
           name="username"
           className={styles.loginFormUsername}
-          rules={[{ required: true, message: "Please input your username!" }]}>
+          rules={[{ required: true, message: "Please input your username!" }]}
+        >
           <Input />
         </Form.Item>
 
         <Form.Item<FieldType>
           label="Email"
           name="email"
-          rules={[{ required: true, message: "Please input your email!" }]}>
+          rules={[{ required: true, message: "Please input your email!" }]}
+        >
           <Input />
         </Form.Item>
 
         <Form.Item<FieldType>
           label="Password"
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}>
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
           <Input.Password className={styles.loginFormPasswordContainer} />
         </Form.Item>
 
         <Form.Item<FieldType>
           label="Repeat your password"
           name="repeatPassword"
-          rules={[{ required: true, message: "Please input your password!" }]}>
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
           <Input.Password className={styles.loginFormPasswordContainer} />
         </Form.Item>
 
@@ -67,7 +72,8 @@ const LoginFormMobile = ({
           <Button
             type="primary"
             htmlType="submit"
-            className={styles.loginButton}>
+            className={styles.loginButton}
+          >
             Submit
           </Button>
         </Form.Item>

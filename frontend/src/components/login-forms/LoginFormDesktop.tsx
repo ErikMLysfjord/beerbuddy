@@ -40,7 +40,8 @@ const LoginFormDesktop = ({
             style={{ color: token.colorPrimary }}
             className={styles.loginLink}
             href={"/project2/" + (login ? "signup" : "login")}
-            tabIndex={0}>
+            tabIndex={0}
+          >
             {login ? "Not a user? Sign up here" : "Already a user? Log in here"}
           </a>
         </div>
