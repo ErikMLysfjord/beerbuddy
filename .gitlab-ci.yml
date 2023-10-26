@@ -1,6 +1,7 @@
 stages:
   - lint
   - prettier
+  - test
   - build
   - deploy
 
@@ -23,6 +24,17 @@ prettier:
     - cd frontend
     - npm ci
     - npm run prettiercheck
+  only:
+    - merge_requests
+
+test:
+  stage: test
+  image: node:19
+  script:
+    - echo "Testing the project"
+    - cd frontend
+    - npm ci
+    - npm run test
   only:
     - merge_requests
 

@@ -1,0 +1,95 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BeerContent > renders correctly 1`] = `
+<div>
+  <p
+    class="_breweryName_a0d0d4"
+  >
+    Nico Freccia Breweries (Beer-brand)
+  </p>
+  <p
+    class="_beerName_a0d0d4"
+  >
+    21st Amendment Bitter American (Beer-name)
+  </p>
+  <div
+    class="_rating_a0d0d4"
+  >
+    <p
+      class="_ratingNumber_a0d0d4"
+    >
+      137
+    </p>
+    <p
+      class="_ratingText_a0d0d4"
+    >
+      rated
+    </p>
+  </div>
+  <p
+    class="_basedOn_a0d0d4"
+  >
+    Based on 547 reviews
+  </p>
+  <div
+    class="_info_a0d0d4"
+  >
+    <div
+      class="_attributeContainer_a0d0d4"
+    >
+      <p
+        class="_attributeText_a0d0d4"
+      >
+        Style
+      </p>
+      <h1
+        class="_attributeText_a0d0d4"
+      >
+        APA
+      </h1>
+    </div>
+    <div
+      class="_attributeContainer_a0d0d4"
+    >
+      <p
+        class="_attributeText_a0d0d4"
+      >
+        IBU
+      </p>
+      <h1
+        class="_attributeText_a0d0d4"
+      >
+        23
+      </h1>
+    </div>
+    <div
+      class="_attributeContainer_a0d0d4"
+    >
+      <p
+        class="_attributeText_a0d0d4"
+      >
+        Abv
+      </p>
+      <h1
+        class="_attributeText_a0d0d4"
+      >
+        5,4%
+      </h1>
+    </div>
+    <div
+      class="_attributeContainer_a0d0d4"
+    >
+      <p
+        class="_attributeText_a0d0d4"
+      >
+        Volume
+      </p>
+      <h1
+        class="_attributeText_a0d0d4"
+      >
+        4oz
+      </h1>
+    </div>
+  </div>
+</div>
+`;
