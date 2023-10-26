@@ -1,0 +1,53 @@
+.commentContainer {
+  background-color: #333333;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+}
+
+.emptyProfilePic {
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.commentContentContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.commentHeader {
+  display: inline-block;
+  border-bottom: 1px solid #ffcc48;
+}
+
+.commentAuthor {
+  padding: 0px;
+  margin: 0px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.dot {
+  color: #ffcc48;
+  padding: 0px;
+  font-weight: bold;
+  margin: 0px 10px;
+  display: inline-block;
+}
+
+.commentDate {
+  padding: 0px;
+  margin: 0px;
+  font-weight: lighter;
+  display: inline-block;
+}
+
+.commentText {
+  padding-top: 5px;
+  margin: 0px;
+}

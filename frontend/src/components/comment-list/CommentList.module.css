@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  justify-content: end;
+}
+
+.commentButton {
+  background-color: transparent;
+  color: #ffcc48;
+  border: 2px solid #ffcc48;
+  width: 120px;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  margin-top: 50px;
+}
+
+.divider {
+  border: 1px solid #ffcc48;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.commentListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
