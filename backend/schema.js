@@ -27,9 +27,11 @@ const AnyType = new GraphQLScalarType({
 });
 
 const beerSchema = buildSchema(`
+  scalar Any
+
   type Query {
     beerName(id: Int!): String
-    beers(size: Int! start: Int): [String]
+    beers(size: Int! start: Int): Any
   }
 `);
 

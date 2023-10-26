@@ -30,7 +30,25 @@ const beerResolver = {
   },
   beers: ({ size, start }) => {
     // Does something to size and start
-    return ["Beers size: " + size + " start: " + start];
+    const result = sqlQuery(
+      `
+      SELECT 
+        beers.name AS beer_name, 
+        breweries.name AS brewery_name, 
+        SUM(CASE WHEN votes.vote_type = 'upvote' THEN 1 WHEN votes.vote_type = 'downvote' THEN -1 ELSE 0 END) AS vote_sum
+      FROM 
+        beers
+      JOIN 
+        breweries ON beers.brewery_id = breweries.id
+      LEFT JOIN 
+        votes ON beers.id = votes.beer_id
+      GROUP BY 
+        beers.name, 
+        breweries.name
+      LIMIT ${size} OFFSET ${start};
+      `
+    );
+    return result;
   },
 };
 
