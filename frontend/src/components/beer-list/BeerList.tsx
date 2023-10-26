@@ -1,4 +1,5 @@
 import BeerCard from "../beer-card/BeerCard";
+import styles from "./BeerList.module.css";
 
 /**
  * BeerList component
@@ -7,16 +8,26 @@ import BeerCard from "../beer-card/BeerCard";
 const BeerList = () => {
   return (
     <main>
-      <BeerCard
-        name="21st Amendment Bitter American"
-        brewery="Nico Freccia breweries"
-      />
-      <BeerCard name="Borg Citra" brewery="Hansa-Borg" />
-      <BeerCard
-        name="Sierra Nevada Pale Ale"
-        brewery="Sierra Nevada Brewing Co."
-      />
-      <BeerCard name="Mono Stereo Mosaic" brewery="To Øl" />
+      <ul className={styles.list}>
+        <li>
+          <BeerCard
+            name="21st Amendment Bitter American"
+            brewery="Nico Freccia breweries"
+          />
+        </li>
+        <li>
+          <BeerCard name="Borg Citra" brewery="Hansa-Borg" />
+        </li>
+        <li>
+          <BeerCard
+            name="Sierra Nevada Pale Ale"
+            brewery="Sierra Nevada Brewing Co."
+          />
+        </li>
+        <li>
+          <BeerCard name="Mono Stereo Mosaic" brewery="To Øl" />
+        </li>
+      </ul>
     </main>
   );
 };
