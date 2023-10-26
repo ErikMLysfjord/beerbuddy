@@ -1,41 +1,31 @@
-const fs = require("fs");
-const csv = require("csv-parser");
+const { Client } = require("pg");
+const client = new Client({
+  password: "root",
+  user: "root",
+  host: "postgres",
+});
+
+const sqlQuery = async (query) => {
+  await client.connect();
+  const results = await client
+    .query(query)
+    .then((payload) => {
+      return payload.rows;
+    })
+    .catch(() => {
+      return "Error in query";
+    });
+  return results;
+}
 
 const beerResolver = {
   beerName: ({ id }) => {
-    // query beers.csv, not json, for a beer name:
-    return new Promise((resolve, reject) => {
-      const results = [];
-      fs.createReadStream("public/beers.csv")
-        .pipe(csv())
-        .on("data", (data) => results.push(data))
-        .on("end", () => {
-          const beer = results.find((beer) => beer.id == id);
-          if (beer) {
-            resolve(beer.name);
-          } else {
-            reject(new Error(`Beer with ID ${id} not found`));
-          }
-        });
-    });
+    // Does something to id
+    return "Beer id: " + id;
   },
   beers: ({ size, start }) => {
-    // query beers.csv, not json, for a beer name:
-    return new Promise((resolve, reject) => {
-      const startFrom = start || 0;
-      const endAt = startFrom + size;
-      const results = [];
-      fs.createReadStream("public/beers.csv")
-        .pipe(csv())
-        .on("data", (data) => results.push(data))
-        .on("end", () => {
-          if (size) {
-            resolve(results.slice(startFrom, endAt).map((beer) => beer.name));
-          } else {
-            resolve(results.map((beer) => beer.name));
-          }
-        });
-    });
+    // Does something to size and start
+    return ["Beers size: " + size + " start: " + start];
   },
 };
 
@@ -81,6 +71,11 @@ const deleteUserResolver = {
   },
 };
 
+const queryResolver = {
+  query: ({ query }) => {
+    return sqlQuery(query);
+  },
+};
 
 module.exports = {
   beerResolver,
@@ -89,5 +84,6 @@ module.exports = {
   reactResolver,
   commentResolver,
   updateUserResolver,
-  deleteUserResolver
+  deleteUserResolver,
+  queryResolver,
 };

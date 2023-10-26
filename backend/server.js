@@ -7,6 +7,7 @@ const {
   commentSchema,
   updateUserSchema,
   deleteUserSchema,
+  querySchema,
 } = require("./schema");
 const {
   beerResolver,
@@ -16,8 +17,8 @@ const {
   commentResolver,
   updateUserResolver,
   deleteUserResolver,
+  queryResolver,
 } = require("./resolvers");
-
 
 const { Client } = require("pg");
 const express = require("express");
@@ -39,6 +40,15 @@ app.get(
   graphqlHTTP({
     schema: beerSchema,
     rootValue: beerResolver,
+    graphiql: true,
+  })
+);
+
+app.get(
+  "/sqlQuery",
+  graphqlHTTP({
+    schema: querySchema,
+    rootValue: queryResolver,
     graphiql: true,
   })
 );
@@ -96,22 +106,6 @@ app.post(
     graphiql: true,
   })
 );
-
-
-app.get("/employees", async (req, res) => {
-  const results = await client
-    .query("SELECT * FROM employees")
-    .then((payload) => {
-      console.log("test");
-      return payload.rows;
-    })
-    .catch(() => {
-      throw new Error("Query failed");
-    });
-  res.setHeader("Content-Type", "application/json");
-  res.status(200);
-  res.send(JSON.stringify(results));
-});
 
 (async () => {
   await client.connect();

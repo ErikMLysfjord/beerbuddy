@@ -1,4 +1,30 @@
-const { buildSchema } = require("graphql");
+const { buildSchema, GraphQLScalarType, Kind } = require('graphql');
+
+// Creates type Any for testing purposes
+const AnyType = new GraphQLScalarType({
+  name: 'Any',
+  description: 'Any type',
+  parseValue(value) {
+    return value;
+  },
+  serialize(value) {
+    return value;
+  },
+  parseLiteral(ast) {
+    switch (ast.kind) {
+      case Kind.STRING:
+      case Kind.BOOLEAN:
+        return ast.value;
+      case Kind.INT:
+      case Kind.FLOAT:
+        return parseFloat(ast.value);
+      case Kind.OBJECT: 
+        throw new Error(`Not sure how to parse object: ${ast}`);
+      default:
+        return null;
+    }
+  }
+});
 
 const beerSchema = buildSchema(`
   type Query {
@@ -43,6 +69,14 @@ const deleteUserSchema = buildSchema(`
   }
 `);
 
+const querySchema = buildSchema(`
+  scalar Any
+
+  type Query {
+    query(query: String!): Any
+  }
+`);
+
 
 module.exports = {
   beerSchema,
@@ -51,5 +85,6 @@ module.exports = {
   reactSchema,
   commentSchema,
   updateUserSchema,
-  deleteUserSchema
+  deleteUserSchema,
+  querySchema
 };
