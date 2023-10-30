@@ -19,3 +19,13 @@ To set up the backend and database, please go to the [backend documentation](./b
 ## Set up frontend
 
 To set up the frontend, please go to the [frontend documentation](./frontend/README.md).
+
+# Run tests
+
+## Run backend tests
+
+To be implemented...
+
+## Run frontend tests
+
+To test the frontend, please go to the [frontend documentation](./frontend/README.md).

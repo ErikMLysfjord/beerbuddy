@@ -8,12 +8,26 @@ const CommentList = () => (
     </div>
     <hr className={styles.divider} />
     <div className={styles.commentListContainer}>
-      <CommentItem />
-      <CommentItem />
-      <CommentItem />
-      <CommentItem />
-      <CommentItem />
-      <CommentItem />
+      <ul className={styles.commentList}>
+        <li>
+          <CommentItem />
+        </li>
+        <li>
+          <CommentItem />
+        </li>
+        <li>
+          <CommentItem />
+        </li>
+        <li>
+          <CommentItem />
+        </li>
+        <li>
+          <CommentItem />
+        </li>
+        <li>
+          <CommentItem />
+        </li>
+      </ul>
     </div>
   </div>
 );

@@ -26,3 +26,11 @@
   flex-direction: column;
   gap: 10px;
 }
+
+.commentList {
+  list-style: none;
+}
+
+.commentList > li:not(:last-child) {
+  margin-bottom: 10px;
+}
