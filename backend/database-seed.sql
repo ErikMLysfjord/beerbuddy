@@ -18,14 +18,14 @@ CREATE TABLE beers (
 );
 
 CREATE TABLE users (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     username VARCHAR(255)
 );
 
 CREATE TYPE vote_type AS ENUM ('upvote', 'downvote', 'unreact');
 
 CREATE TABLE votes (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INT,
     beer_id INT,
     vote_type vote_type,
@@ -34,10 +34,11 @@ CREATE TABLE votes (
 );
 
 CREATE TABLE comments (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INT,
     beer_id INT,
     comment_text TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (beer_id) REFERENCES beers(id)
 );

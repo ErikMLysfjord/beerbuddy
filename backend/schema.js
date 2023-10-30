@@ -30,7 +30,7 @@ const beerSchema = buildSchema(`
   scalar Any
 
   type Query {
-    beerName(id: Int!): String
+    beer(id: Int!): Any
     beers(size: Int! start: Int): Any
   }
 `);
@@ -43,19 +43,19 @@ const loginSchema = buildSchema(`
 
 const signUpSchema = buildSchema(`
   type Query {
-    signUp(username: String!): String
+    signUp(username: String!): Int
   }
 `);
 
 const reactSchema = buildSchema(`
   type Query {
-    react(id: Int! action: String!): String
+    react(userId: Int! beerId: Int! action: String!): String
   }
 `);
 
 const commentSchema = buildSchema(`
   type Query {
-    comment(id: Int! comment: String!): String
+    comment(userId: Int! beerId: Int! comment: String!): String
   }
 `);
 
