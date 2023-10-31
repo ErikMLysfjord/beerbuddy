@@ -1,0 +1,33 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UserIntro > renders correctly 1`] = `
+<div>
+  <header
+    class="_headingWrapper_95bd34"
+  >
+    <div
+      class="_profilePicture_95bd34"
+    />
+    <h1
+      class="_heading_95bd34"
+    >
+      <span
+        class="_bold_95bd34"
+      >
+        Welcome
+      </span>
+      ,
+       
+      Erik
+    </h1>
+    <img
+      alt="Waving Emoji"
+      class="_emoji_95bd34"
+      src="/project2/src/assets/waving-emoji.svg"
+    />
+  </header>
+  <hr
+    class="_separator_95bd34"
+  />
+</div>
+`;

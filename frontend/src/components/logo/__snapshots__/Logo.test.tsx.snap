@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Logo > renders correctly 1`] = `
+<div>
+  <a
+    class="_wrapper_4f3c83"
+    href="/"
+  >
+    <img
+      alt="logo"
+      class="_icon_4f3c83"
+      src="/project2/src/assets/hopsup.svg"
+    />
+    <h3
+      class="_heading_4f3c83"
+    >
+      HopsUp
+    </h3>
+  </a>
+</div>
+`;

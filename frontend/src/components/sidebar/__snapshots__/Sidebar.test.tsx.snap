@@ -1,0 +1,40 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Sidebar > renders correctly 1`] = `
+<div>
+  <section
+    class="_container_26077f"
+  >
+    <div>
+      <a
+        class="_wrapper_4f3c83"
+        href="/"
+      >
+        <img
+          alt="logo"
+          class="_icon_4f3c83"
+          src="/project2/src/assets/hopsup.svg"
+        />
+        <h3
+          class="_heading_4f3c83"
+        >
+          HopsUp
+        </h3>
+      </a>
+      <main>
+        <p>
+          Test
+        </p>
+      </main>
+    </div>
+    <button
+      class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary"
+      type="button"
+    >
+      <span>
+        Apply Filters
+      </span>
+    </button>
+  </section>
+</div>
+`;
