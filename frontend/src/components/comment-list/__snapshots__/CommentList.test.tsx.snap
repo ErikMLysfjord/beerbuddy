@@ -2,7 +2,7 @@
 
 exports[`CommentList > matches snapshot 1`] = `
 <div>
-  <div>
+  <section>
     <div
       class="_container_907aa3"
     >
@@ -257,6 +257,6 @@ exports[`CommentList > matches snapshot 1`] = `
         </li>
       </ul>
     </div>
-  </div>
+  </section>
 </div>
 `;

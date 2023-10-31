@@ -16,11 +16,11 @@ const LoginFormDesktop = ({
 }: LoginFormDesktopProps) => {
   return (
     <main className={styles.container}>
-      <div className={styles.logoContainer}>
+      <header className={styles.logoContainer}>
         <Logo />
-      </div>
+      </header>
       <div className={styles.loginContainer}>
-        <div className={styles.loginText}>
+        <section className={styles.loginText}>
           <h2>
             {"Taste, Rate, Repeat -"}
             <br /> {"The craft beer journey"}
@@ -30,7 +30,7 @@ const LoginFormDesktop = ({
             <br />
             {"features and be part of a global craft beer conversation."}
           </p>
-        </div>
+        </section>
         <LoginFormDesktopContainer
           showMessage={showMessage}
           onFinishFailed={onFinishFailed}

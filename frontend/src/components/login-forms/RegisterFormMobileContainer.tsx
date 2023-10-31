@@ -5,31 +5,33 @@ import styles from "./LoginFormMobile.module.css";
 type FieldType = {
   username?: string;
   password?: string;
+  repeatPassword?: string;
+  email?: string;
 };
 
 interface LoginFormMobileProps {
-  showMessage: (string: { username: string }) => void;
+  showMessage: (string: {
+    username: string;
+    password: string;
+    repeatPassword: string;
+    email: string;
+  }) => void;
   onFinishFailed: (errorInfo: ValidateErrorEntity) => void;
-  saveUser: (string: { username: string }) => void;
 }
 
 const LoginFormMobile = ({
   showMessage,
   onFinishFailed,
-  saveUser,
 }: LoginFormMobileProps) => {
   return (
     <section>
-      <h1 className={styles.loginFormHeaderMobile}>Log in</h1>
+      <h1 className={styles.loginFormHeaderMobile}>Register</h1>
       <Form
         name="basic"
         className={styles.loginFormMobile}
         layout="vertical"
         initialValues={{ remember: true }}
-        onFinish={(values) => {
-          showMessage({ username: values.username });
-          saveUser({ username: values.username });
-        }}
+        onFinish={showMessage}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
@@ -40,6 +42,30 @@ const LoginFormMobile = ({
           rules={[{ required: true, message: "Please input your username!" }]}
         >
           <Input />
+        </Form.Item>
+
+        <Form.Item<FieldType>
+          label="Email"
+          name="email"
+          rules={[{ required: true, message: "Please input your email!" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item<FieldType>
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
+          <Input.Password className={styles.loginFormPasswordContainer} />
+        </Form.Item>
+
+        <Form.Item<FieldType>
+          label="Repeat your password"
+          name="repeatPassword"
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
+          <Input.Password className={styles.loginFormPasswordContainer} />
         </Form.Item>
 
         <Form.Item>

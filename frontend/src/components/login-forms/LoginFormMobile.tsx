@@ -1,8 +1,8 @@
 import { Card, theme } from "antd";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
-import HopsUpLogo from "../../assets/hopsup.svg";
 import styles from "./LoginFormMobile.module.css";
 import LoginFormMobileContainer from "./LoginFormMobileContainer";
+import Logo from "../logo/Logo";
 
 const { useToken } = theme;
 
@@ -20,10 +20,9 @@ const LoginFormMobile = ({
   const { token } = useToken();
   return (
     <main className={styles.mobileContainer}>
-      <a className={styles.logo} href="/" aria-label="HopsUp">
-        <img src={HopsUpLogo} alt="HopsUp-logo" />
-        <span>HopsUp</span>
-      </a>
+      <header className={styles.logoSection}>
+        <Logo />
+      </header>
 
       <Card
         style={{

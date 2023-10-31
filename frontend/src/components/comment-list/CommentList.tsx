@@ -2,7 +2,7 @@ import CommentItem from "../comment-item/CommentItem";
 import styles from "./CommentList.module.css";
 
 const CommentList = () => (
-  <div>
+  <section>
     <div className={styles.container}>
       <button className={styles.commentButton}>Comment</button>
     </div>
@@ -29,7 +29,7 @@ const CommentList = () => (
         </li>
       </ul>
     </div>
-  </div>
+  </section>
 );
 
 export default CommentList;

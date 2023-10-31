@@ -7,7 +7,7 @@ import styles from "./BeerList.module.css";
  */
 const BeerList = () => {
   return (
-    <main>
+    <section>
       <ul className={styles.list}>
         <li>
           <BeerCard
@@ -28,7 +28,7 @@ const BeerList = () => {
           <BeerCard name="Mono Stereo Mosaic" brewery="To Øl" />
         </li>
       </ul>
-    </main>
+    </section>
   );
 };
 export default BeerList;

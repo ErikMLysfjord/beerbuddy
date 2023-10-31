@@ -12,3 +12,16 @@
     display: inline-block;
   }
 }
+
+.sortLabel {
+  margin-bottom: 0.625rem;
+  display: flex;
+  color: #b3b3b3;
+  flex-direction: column;
+}
+
+.searchLabel {
+  margin-bottom: 0.625rem;
+  color: #b3b3b3;
+  width: 100%;
+}

@@ -17,9 +17,19 @@ const Voter = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Button type="primary" icon={<CaretUpFilled />} onClick={upvote} />
+      <Button
+        type="primary"
+        icon={<CaretUpFilled />}
+        onClick={upvote}
+        aria-label="Upvote this beer"
+      />
       <p className={styles.count}>321</p>
-      <Button type="primary" icon={<CaretDownFilled />} onClick={downvote} />
+      <Button
+        type="primary"
+        icon={<CaretDownFilled />}
+        onClick={downvote}
+        aria-label="Downvote this beer"
+      />
     </div>
   );
 };

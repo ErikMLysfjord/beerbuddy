@@ -27,6 +27,7 @@ exports[`BeerCard > renders correctly 1`] = `
         class="_wrapper_0f0ab2"
       >
         <button
+          aria-label="Upvote this beer"
           class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary ant-btn-icon-only"
           type="button"
         >
@@ -60,6 +61,7 @@ exports[`BeerCard > renders correctly 1`] = `
           321
         </p>
         <button
+          aria-label="Downvote this beer"
           class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary ant-btn-icon-only"
           type="button"
         >

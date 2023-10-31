@@ -13,7 +13,6 @@ describe("Actionbar", () => {
   it("renders with correct dropdown", () => {
     const { getByRole } = render(<Actionbar />);
     expect(getByRole("combobox")).toBeInTheDocument();
-    expect(getByRole("combobox")).toHaveAttribute("aria-label", "Sort by");
     expect(screen.queryByText("Ascending")).not.toBeInTheDocument();
     expect(screen.queryByText("Descending")).not.toBeInTheDocument();
   });
@@ -36,6 +35,5 @@ describe("Actionbar", () => {
   it("renders with correct searchbar", () => {
     const { getByRole } = render(<Actionbar />);
     expect(getByRole("textbox")).toBeInTheDocument();
-    expect(getByRole("textbox")).toHaveAttribute("aria-label", "Searchbar");
   });
 });

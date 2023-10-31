@@ -7,22 +7,27 @@ const { useToken } = theme;
 type FieldType = {
   username?: string;
   password?: string;
+  repeatPassword?: string;
+  email?: string;
 };
 
 interface LoginFormDesktopProps {
-  showMessage: (string: { username: string }) => void;
+  showMessage: (string: {
+    username: string;
+    password: string;
+    repeatPassword: string;
+    email: string;
+  }) => void;
   onFinishFailed: (errorInfo: ValidateErrorEntity) => void;
-  saveUser: (string: { username: string }) => void;
 }
 
 const LoginFormDesktop = ({
   showMessage,
   onFinishFailed,
-  saveUser,
 }: LoginFormDesktopProps) => {
   const { token } = useToken();
   return (
-    <section className={styles.loginFormContainer}>
+    <section className={styles.registerFormContainer}>
       <Card
         style={{
           height: "100%",
@@ -30,16 +35,13 @@ const LoginFormDesktop = ({
         }}
         bodyStyle={{ padding: "20", height: "100%" }}
       >
-        <h1>Log in</h1>
+        <h1>Register</h1>
         <Form
           name="basic"
-          className={styles.loginForm}
+          className={styles.registerForm}
           layout="vertical"
           initialValues={{ remember: true }}
-          onFinish={(values) => {
-            showMessage({ username: values.username });
-            saveUser({ username: values.username });
-          }}
+          onFinish={showMessage}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
@@ -49,6 +51,30 @@ const LoginFormDesktop = ({
             rules={[{ required: true, message: "Please input your username!" }]}
           >
             <Input />
+          </Form.Item>
+
+          <Form.Item<FieldType>
+            label="Email"
+            name="email"
+            rules={[{ required: true, message: "Please input your email!" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item<FieldType>
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: "Please input your password!" }]}
+          >
+            <Input.Password className={styles.loginFormPasswordContainer} />
+          </Form.Item>
+
+          <Form.Item<FieldType>
+            label="Repeat your password"
+            name="repeatPassword"
+            rules={[{ required: true, message: "Please input your password!" }]}
+          >
+            <Input.Password className={styles.loginFormPasswordContainer} />
           </Form.Item>
 
           <Form.Item>

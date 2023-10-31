@@ -11,15 +11,15 @@ exports[`Sidebar > renders correctly 1`] = `
         href="/"
       >
         <img
-          alt="logo"
+          alt="HopsUp logo"
           class="_icon_4f3c83"
           src="/project2/src/assets/hopsup.svg"
         />
-        <h3
+        <h2
           class="_heading_4f3c83"
         >
           HopsUp
-        </h3>
+        </h2>
       </a>
       <main>
         <p>
