@@ -9,6 +9,7 @@
 .mainSection {
   flex-grow: 1;
   padding: 3rem 10rem;
+  overflow-y: scroll;
 }
 
 @media screen and (max-width: 1000px) {

@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className={styles.appBody}>
-      <section className={styles.mainSection}>
+      <section className={styles.mainSection} id="infiniteScrollTarget">
         <UserIntro />
         <Actionbar />
         <BeerList />

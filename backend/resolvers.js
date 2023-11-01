@@ -50,6 +50,7 @@ const beerResolver = {
     return sqlQuery(
       `
       SELECT 
+        beers.id AS beer_id,
         beers.name AS beer_name, 
         breweries.name AS brewery_name, 
         beers.id AS beer_id,
@@ -62,6 +63,7 @@ const beerResolver = {
       LEFT JOIN 
           votes ON beers.id = votes.beer_id
       GROUP BY 
+        beers.id,
         beers.name, 
         breweries.name,
         beers.id

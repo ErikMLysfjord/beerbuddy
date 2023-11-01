@@ -6,6 +6,7 @@
   width: 20%;
   padding: 1rem;
   background-color: #333;
+  position: sticky;
 }
 
 @media screen and (max-width: 1000px) {

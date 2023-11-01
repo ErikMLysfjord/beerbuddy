@@ -37,7 +37,7 @@ exports[`Voter > should render 1`] = `
     <p
       class="_count_0f0ab2"
     >
-      321
+      10
     </p>
     <button
       aria-label="Downvote this beer"

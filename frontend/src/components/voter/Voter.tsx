@@ -2,7 +2,11 @@ import { CaretDownFilled, CaretUpFilled } from "@ant-design/icons";
 import { Button } from "antd";
 import styles from "./Voter.module.css";
 
-const Voter = () => {
+interface VoterInterface {
+  votes: number;
+}
+
+const Voter = (props: VoterInterface) => {
   const upvote = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     event.preventDefault();
@@ -23,7 +27,7 @@ const Voter = () => {
         onClick={upvote}
         aria-label="Upvote this beer"
       />
-      <p className={styles.count}>321</p>
+      <p className={styles.count}>{props.votes}</p>
       <Button
         type="primary"
         icon={<CaretDownFilled />}
