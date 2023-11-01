@@ -1,11 +1,11 @@
 .wrapper {
   display: inline-flex;
-  gap: 0.5em;
   align-items: center;
+  gap: 1rem;
 }
 
 .icon {
-  scale: 1;
+  height: 40px;
 }
 
 .heading {
@@ -16,7 +16,7 @@
 }
 
 .wrapper:focus {
-  outline: 2px dashed #99a74b;
+  outline: 2px dashed #ffcc48;
   outline-offset: -2px;
 }
 

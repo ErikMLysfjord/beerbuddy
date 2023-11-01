@@ -21,9 +21,9 @@ exports[`UserIntro > renders correctly 1`] = `
       Erik
     </h1>
     <img
-      alt="Waving Emoji"
+      alt="Beer clinking Emoji"
       class="_emoji_95bd34"
-      src="/project2/src/assets/waving-emoji.svg"
+      src="/project2/beerEmoji.svg"
     />
   </header>
   <hr

@@ -7,15 +7,15 @@ exports[`Logo > renders correctly 1`] = `
     href="/"
   >
     <img
-      alt="HopsUp logo"
+      alt="BeerBuddy logo"
       class="_icon_4f3c83"
-      src="/project2/src/assets/hopsup.svg"
+      src="/teku.svg"
     />
-    <h2
+    <h1
       class="_heading_4f3c83"
     >
-      HopsUp
-    </h2>
+      BeerBuddy
+    </h1>
   </a>
 </div>
 `;

@@ -12,7 +12,7 @@ describe("Logo", () => {
   it("renders with correct logo", () => {
     const { getByRole } = render(<Logo />);
     expect(getByRole("img")).toBeInTheDocument();
-    expect(getByRole("img")).toHaveAttribute("alt", "HopsUp logo");
+    expect(getByRole("img")).toHaveAttribute("alt", "BeerBuddy logo");
   });
 
   it("renders with correct link", () => {

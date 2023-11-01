@@ -1,6 +1,6 @@
 # About the project
 
-HopsUp is a website where you can find and review beers. The website displays craft beers from the US, and uses a dataset [https://www.kaggle.com/datasets/nickhould/craft-cans/data](from Kaggle). The website is made with a frontend in React and a backend in GraphQL. The backend uses a PostgreSQL database.
+BeerBuddy is a website where you can find and review beers. The website displays craft beers from the US, and uses a dataset [https://www.kaggle.com/datasets/nickhould/craft-cans/data](from Kaggle). The website is made with a frontend in React and a backend in GraphQL. The backend uses a PostgreSQL database.
 
 ## How to use the website
 

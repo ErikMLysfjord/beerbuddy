@@ -1,4 +1,4 @@
-import emoji from "../../assets/waving-emoji.svg";
+import emoji from "/beerEmoji.svg";
 import useWindowDimensions from "../../utils/useWindowDimensions";
 import Logo from "../logo/Logo";
 import styles from "./UserIntro.module.css";
@@ -27,7 +27,7 @@ const UserIntro = () => {
             ? localStorage.getItem("userNameBeerBuddy")
             : ""}
         </h1>
-        <img className={styles.emoji} src={emoji} alt="Waving Emoji" />
+        <img className={styles.emoji} src={emoji} alt="Beer clinking Emoji" />
       </header>
       <hr className={styles.separator} />
     </>

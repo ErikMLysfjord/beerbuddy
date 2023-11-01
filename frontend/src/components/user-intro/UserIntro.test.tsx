@@ -26,7 +26,7 @@ describe("UserIntro", () => {
 
   it("renders with correct emoji", () => {
     const { getByAltText } = render(<UserIntro />);
-    expect(getByAltText("Waving Emoji")).toBeInTheDocument();
+    expect(getByAltText("Beer clinking Emoji")).toBeInTheDocument();
   });
 
   it("renders with correct separator", () => {
