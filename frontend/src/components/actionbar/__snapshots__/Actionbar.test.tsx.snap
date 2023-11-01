@@ -42,7 +42,7 @@ exports[`Actionbar > renders correctly 1`] = `
             class="ant-select-selection-item"
             title="Sort by"
           >
-            Popularity
+            Most popular
           </span>
         </div>
         <span

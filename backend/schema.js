@@ -31,7 +31,7 @@ const beerSchema = buildSchema(`
 
   type Query {
     beer(id: Int! ): Any
-    beers(size: Int! start: Int userId: Int!): Any
+    beers(size: Int! start: Int userId: Int! filters: Any sort: Any search: String): Any
   }
 `);
 
@@ -73,6 +73,12 @@ const deleteUserSchema = buildSchema(`
   }
 `);
 
+const loginOrSignUpSchema = buildSchema(`
+  type Query {
+    loginOrSignUp(username: String!): Int
+  }
+`);
+
 const querySchema = buildSchema(`
   scalar Any
 
@@ -90,4 +96,5 @@ module.exports = {
   updateUserSchema,
   deleteUserSchema,
   querySchema,
+  loginOrSignUpSchema,
 };

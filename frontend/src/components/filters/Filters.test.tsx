@@ -19,7 +19,7 @@ describe("Filters", () => {
     render(<Filters />);
     expect(screen.getAllByRole("checkbox").length).toBe(16);
 
-    const firstCheckbox = screen.getByLabelText("IPA");
+    const firstCheckbox = screen.getByLabelText("American IPA");
     expect(firstCheckbox).toBeInTheDocument();
     expect(firstCheckbox).not.toBeChecked();
 

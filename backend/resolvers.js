@@ -26,7 +26,7 @@ const sqlQuery = async (query) => {
 const beerResolver = {
   beer: async ({ id }) => {
     return await sqlQuery(`
-    SELECT 
+      SELECT 
         beers.abv, 
         beers.ibu, 
         beers.name, 
@@ -58,7 +58,119 @@ const beerResolver = {
     WHERE beers.id = ${id};
     `);
   },
-  beers: async ({ size, start, userId }) => {
+  beers: async ({ size, start, userId, filters, sort, search }) => {
+    const minAbv = filters?.abv?.min || 0;
+    const maxAbv = filters?.abv?.max || 1;
+
+    const minIbu = filters?.ibu?.min || 0;
+    const maxIbu = filters?.ibu?.max || 140;
+
+    const otherStyles = [
+      "Cider",
+      "German Pilsener",
+      "American Black Ale",
+      "Märzen / Oktoberfest",
+      "American Amber / Red Lager",
+      "Cream Ale",
+      "Czech Pilsener",
+      "American Pilsner",
+      "Belgian Pale Ale",
+      "Pumpkin Ale",
+      "Munich Helles Lager",
+      "Vienna Lager",
+      "Extra Special / Strong Bitter (ESB)",
+      "Scottish Ale",
+      "Belgian IPA",
+      "English Brown Ale",
+      "American Adjunct Lager",
+      "Oatmeal Stout",
+      "Rye Beer",
+      "Winter Warmer",
+      "Scotch Ale / Wee Heavy",
+      "American Strong Ale",
+      "Altbier",
+      "English India Pale Ale (IPA)",
+      "English Pale Ale",
+      "Irish Red Ale",
+      "Light Lager",
+      "American White IPA",
+      "Berliner Weissbier",
+      "Belgian Dark Ale",
+      "Russian Imperial Stout",
+      "Tripel",
+      "Milk / Sweet Stout",
+      "Gose",
+      "Herbed / Spiced Beer",
+      "Schwarzbier",
+      "American Double / Imperial Stout",
+      "Bock",
+      "American Dark Wheat Ale",
+      "Belgian Strong Pale Ale",
+      "Bière de Garde",
+      "Doppelbock",
+      "American Wild Ale",
+      "English Dark Mild Ale",
+      "Foreign / Export Stout",
+      "Belgian Strong Dark Ale",
+      "California Common / Steam Beer",
+      "Dortmunder / Export Lager",
+      "Baltic Porter",
+      "Mead",
+      "Dubbel",
+      "Maibock / Helles Bock",
+      "",
+      "Euro Dark Lager",
+      "Irish Dry Stout",
+      "Quadrupel (Quad)",
+      "Munich Dunkel Lager",
+      "Dunkelweizen",
+      "English Strong Ale",
+      "Radler",
+      "English Pale Mild Ale",
+      "Keller Bier / Zwickel Bier",
+      "Chile Beer",
+      "American Barleywine",
+      "English Barleywine",
+      "American India Pale Lager",
+      "Shandy",
+      "English Bitter",
+      "Euro Pale Lager",
+      "Rauchbier",
+      "American Double / Imperial Pilsner",
+      "Abbey Single Ale",
+      "English Stout",
+      "Old Ale",
+      "Roggenbier",
+      "Grisette",
+      "Other",
+      "Smoked Beer",
+      "Kristalweizen",
+      "Braggot",
+      "American Malt Liquor",
+      "Flanders Oud Bruin",
+      "Low Alcohol Beer",
+      "Flanders Red Ale",
+      "Wheat Ale",
+    ];
+
+    const styles = filters?.styles || [];
+
+    if (styles.includes("Other")) {
+      styles.push(...otherStyles);
+    }
+
+    const searchQuery = search || "";
+
+    const sorting = sort
+      ? sort === "low"
+        ? "vote_sum ASC"
+        : sort === "atoz"
+        ? "beer_name ASC"
+        : sort === "ztoa"
+        ? "beer_name DESC"
+        : "vote_sum DESC"
+      : "vote_sum DESC";
+
     return await sqlQuery(
       `
       SELECT 
@@ -74,12 +186,25 @@ const beerResolver = {
         breweries ON beers.brewery_id = breweries.id
       LEFT JOIN 
           votes ON beers.id = votes.beer_id
+      WHERE
+          beers.abv > ${minAbv} AND beers.abv < ${maxAbv} AND
+          beers.ibu > ${minIbu} AND beers.ibu < ${maxIbu} AND
+          beers.name LIKE '%${searchQuery}%'
+          ${
+            styles.length > 0
+              ? `AND beers.style IN (${styles
+                  .map((style) => `'${style}'`)
+                  .join(", ")})`
+              : ""
+          }
       GROUP BY 
         beers.id,
         beers.name, 
         breweries.name,
         beers.id
-      LIMIT ${size} OFFSET ${start};
+      ORDER BY
+        ${sorting}
+      LIMIT ${size} OFFSET ${start || 0};
       `
     );
   },
@@ -200,6 +325,27 @@ const deleteUserResolver = {
   },
 };
 
+const loginOrSignUpResolver = {
+  loginOrSignUp: async ({ username }) => {
+    const userExists = await sqlQuery(
+      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
+    );
+    if (userExists.length > 0) {
+      return userExists[0].id;
+    }
+
+    const res = await sqlQuery(
+      `INSERT INTO users (username) VALUES ('${username}') RETURNING id;`
+    );
+
+    if (res === "Error in query") {
+      throw new Error("Error in query");
+    }
+
+    return res[0].id;
+  },
+};
+
 const queryResolver = {
   query: ({ query }) => {
     return sqlQuery(query);
@@ -215,4 +361,5 @@ module.exports = {
   updateUserResolver,
   deleteUserResolver,
   queryResolver,
+  loginOrSignUpResolver,
 };

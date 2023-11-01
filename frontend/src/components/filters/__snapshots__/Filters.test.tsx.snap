@@ -47,14 +47,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="IPA"
+          value="American IPA"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        IPA
+        American IPA
       </span>
     </label>
     <label
@@ -66,14 +66,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Stout"
+          value="American Pale Ale (APA)"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Stout
+        American Pale Ale (APA)
       </span>
     </label>
     <label
@@ -85,14 +85,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Lager"
+          value="American Amber / Red Ale"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Lager
+        American Amber / Red Ale
       </span>
     </label>
     <label
@@ -104,14 +104,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Pilsner"
+          value="American Blonde Ale"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Pilsner
+        American Blonde Ale
       </span>
     </label>
     <label
@@ -123,14 +123,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Pale Ale"
+          value="American Double / Imperial IPA"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Pale Ale
+        American Double / Imperial IPA
       </span>
     </label>
     <label
@@ -142,14 +142,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Wheat"
+          value="American Pale Wheat Ale"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Wheat
+        American Pale Wheat Ale
       </span>
     </label>
     <label
@@ -161,14 +161,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Sour"
+          value="American Brown Ale"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Sour
+        American Brown Ale
       </span>
     </label>
     <label
@@ -180,14 +180,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Porter"
+          value="American Porter"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Porter
+        American Porter
       </span>
     </label>
     <label
@@ -199,14 +199,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Belgian"
+          value="Saison / Farmhouse Ale"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Belgian
+        Saison / Farmhouse Ale
       </span>
     </label>
     <label
@@ -218,14 +218,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Brown Ale"
+          value="Witbier"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Brown Ale
+        Witbier
       </span>
     </label>
     <label
@@ -237,14 +237,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Red Ale"
+          value="Fruit / Vegetable Beer"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Red Ale
+        Fruit / Vegetable Beer
       </span>
     </label>
     <label
@@ -256,14 +256,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Barleywine"
+          value="Kölsch"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Barleywine
+        Kölsch
       </span>
     </label>
     <label
@@ -275,14 +275,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Saison"
+          value="Hefeweizen"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Saison
+        Hefeweizen
       </span>
     </label>
     <label
@@ -294,14 +294,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Bock"
+          value="American Pale Lager"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Bock
+        American Pale Lager
       </span>
     </label>
     <label
@@ -313,14 +313,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="Amber Ale"
+          value="American Stout"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        Amber Ale
+        American Stout
       </span>
     </label>
     <label
@@ -332,14 +332,14 @@ exports[`Filters > renders correctly 1`] = `
         <input
           class="ant-checkbox-input"
           type="checkbox"
-          value="APA"
+          value="Other"
         />
         <span
           class="ant-checkbox-inner"
         />
       </span>
       <span>
-        APA
+        Other
       </span>
     </label>
   </div>
@@ -384,7 +384,7 @@ exports[`Filters > renders correctly 1`] = `
     />
     <div
       class="ant-slider-track ant-slider-track-1"
-      style="left: 0%; width: 24%;"
+      style="left: 14.285714285714285%; width: 57.142857142857146%;"
     />
     <div
       class="ant-slider-step"
@@ -392,23 +392,23 @@ exports[`Filters > renders correctly 1`] = `
     <div
       aria-disabled="false"
       aria-orientation="horizontal"
-      aria-valuemax="100"
+      aria-valuemax="140"
       aria-valuemin="0"
-      aria-valuenow="0"
+      aria-valuenow="20"
       class="ant-slider-handle ant-slider-handle-1"
       role="slider"
-      style="left: 0%; transform: translateX(-50%);"
+      style="left: 14.285714285714285%; transform: translateX(-50%);"
       tabindex="0"
     />
     <div
       aria-disabled="false"
       aria-orientation="horizontal"
-      aria-valuemax="100"
+      aria-valuemax="140"
       aria-valuemin="0"
-      aria-valuenow="24"
+      aria-valuenow="100"
       class="ant-slider-handle ant-slider-handle-2"
       role="slider"
-      style="left: 24%; transform: translateX(-50%);"
+      style="left: 71.42857142857143%; transform: translateX(-50%);"
       tabindex="0"
     />
   </div>
@@ -453,7 +453,7 @@ exports[`Filters > renders correctly 1`] = `
     />
     <div
       class="ant-slider-track ant-slider-track-1"
-      style="left: 16%; width: 16%;"
+      style="left: 0%; width: 100%;"
     />
     <div
       class="ant-slider-step"
@@ -461,23 +461,23 @@ exports[`Filters > renders correctly 1`] = `
     <div
       aria-disabled="false"
       aria-orientation="horizontal"
-      aria-valuemax="25"
+      aria-valuemax="14"
       aria-valuemin="0"
-      aria-valuenow="4"
+      aria-valuenow="0"
       class="ant-slider-handle ant-slider-handle-1"
       role="slider"
-      style="left: 16%; transform: translateX(-50%);"
+      style="left: 0%; transform: translateX(-50%);"
       tabindex="0"
     />
     <div
       aria-disabled="false"
       aria-orientation="horizontal"
-      aria-valuemax="25"
+      aria-valuemax="14"
       aria-valuemin="0"
-      aria-valuenow="8"
+      aria-valuenow="14"
       class="ant-slider-handle ant-slider-handle-2"
       role="slider"
-      style="left: 32%; transform: translateX(-50%);"
+      style="left: 100%; transform: translateX(-50%);"
       tabindex="0"
     />
   </div>

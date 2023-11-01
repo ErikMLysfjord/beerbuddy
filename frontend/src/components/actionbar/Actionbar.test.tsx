@@ -26,8 +26,9 @@ describe("Actionbar", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByText("Ascending")).toBeInTheDocument();
-      expect(screen.getByText("Descending")).toBeInTheDocument();
+      expect(screen.getByText("Least popular")).toBeInTheDocument();
+      expect(screen.getByText("A-Z")).toBeInTheDocument();
+      expect(screen.getByText("Z-A")).toBeInTheDocument();
     });
   });
 

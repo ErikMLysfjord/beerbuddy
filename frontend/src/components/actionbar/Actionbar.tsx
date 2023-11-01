@@ -8,12 +8,14 @@ const Actionbar = () => {
       <label className={styles.sortLabel}>
         Sort by
         <Select
-          defaultValue="Popularity"
+          defaultValue="top"
           title="Sort by"
           style={{ width: 200 }}
           options={[
-            { value: "asc", label: "Ascending" },
-            { value: "desc", label: "Descending" },
+            { value: "top", label: "Most popular" },
+            { value: "low", label: "Least popular" },
+            { value: "atoz", label: "A-Z" },
+            { value: "ztoa", label: "Z-A" },
           ]}
         />
       </label>

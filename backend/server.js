@@ -8,6 +8,7 @@ const {
   updateUserSchema,
   deleteUserSchema,
   querySchema,
+  loginOrSignUpSchema,
 } = require("./schema");
 const {
   beerResolver,
@@ -18,6 +19,7 @@ const {
   updateUserResolver,
   deleteUserResolver,
   queryResolver,
+  loginOrSignUpResolver,
 } = require("./resolvers");
 
 const { Client } = require("pg");
@@ -45,7 +47,7 @@ const client = new Client({
 // Access static files from backend
 app.use(express.static("public"));
 
-app.post(
+app.use(
   "/beer",
   graphqlHTTP({
     schema: beerSchema,
@@ -54,7 +56,7 @@ app.post(
   })
 );
 
-app.get(
+app.use(
   "/sqlQuery",
   graphqlHTTP({
     schema: querySchema,
@@ -63,7 +65,16 @@ app.get(
   })
 );
 
-app.post(
+app.use(
+  "/loginorsignup",
+  graphqlHTTP({
+    schema: loginOrSignUpSchema,
+    rootValue: loginOrSignUpResolver,
+    graphiql: true,
+  })
+)
+
+app.use(
   "/login",
   graphqlHTTP({
     schema: loginSchema,
@@ -72,7 +83,7 @@ app.post(
   })
 );
 
-app.post(
+app.use(
   "/signup",
   graphqlHTTP({
     schema: signUpSchema,
@@ -81,7 +92,7 @@ app.post(
   })
 );
 
-app.post(
+app.use(
   "/react",
   graphqlHTTP({
     schema: reactSchema,
@@ -90,7 +101,7 @@ app.post(
   })
 );
 
-app.post(
+app.use(
   "/comment",
   graphqlHTTP({
     schema: commentSchema,
@@ -99,7 +110,7 @@ app.post(
   })
 );
 
-app.post(
+app.use(
   "/updateuser",
   graphqlHTTP({
     schema: updateUserSchema,
@@ -108,7 +119,7 @@ app.post(
   })
 );
 
-app.post(
+app.use(
   "/deleteuser",
   graphqlHTTP({
     schema: deleteUserSchema,
