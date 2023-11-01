@@ -1,9 +1,9 @@
-const { buildSchema, GraphQLScalarType, Kind } = require('graphql');
+const { buildSchema, GraphQLScalarType, Kind } = require("graphql");
 
 // Creates type Any for testing purposes
 const AnyType = new GraphQLScalarType({
-  name: 'Any',
-  description: 'Any type',
+  name: "Any",
+  description: "Any type",
   parseValue(value) {
     return value;
   },
@@ -18,26 +18,28 @@ const AnyType = new GraphQLScalarType({
       case Kind.INT:
       case Kind.FLOAT:
         return parseFloat(ast.value);
-      case Kind.OBJECT: 
+      case Kind.OBJECT:
         throw new Error(`Not sure how to parse object: ${ast}`);
       default:
         return null;
     }
-  }
+  },
 });
 
 const beerSchema = buildSchema(`
   scalar Any
 
   type Query {
-    beer(id: Int!): Any
-    beers(size: Int! start: Int): Any
+    beer(id: Int! ): Any
+    beers(size: Int! start: Int userId: Int!): Any
   }
 `);
 
 const loginSchema = buildSchema(`
+  scalar Any
+
   type Query {
-    login(username: String!): String
+    login(username: String!): Any
   }
 `);
 
@@ -61,13 +63,13 @@ const commentSchema = buildSchema(`
 
 const updateUserSchema = buildSchema(`
   type Query {
-    updateUser(username: String!): String
+    updateUser(userId: Int! username: String!): String
   }
 `);
 
 const deleteUserSchema = buildSchema(`
   type Query {
-    deleteUser(username: String!): String
+    deleteUser(userId: Int!): String
   }
 `);
 
@@ -87,5 +89,5 @@ module.exports = {
   commentSchema,
   updateUserSchema,
   deleteUserSchema,
-  querySchema
+  querySchema,
 };

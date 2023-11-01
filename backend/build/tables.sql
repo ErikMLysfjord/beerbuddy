@@ -29,7 +29,7 @@ CREATE TABLE votes (
     user_id INT,
     beer_id INT,
     vote_type vote_type,
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (beer_id) REFERENCES beers(id)
 );
 
@@ -39,6 +39,6 @@ CREATE TABLE comments (
     beer_id INT,
     comment_text TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (beer_id) REFERENCES beers(id)
 );
