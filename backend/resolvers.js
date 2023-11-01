@@ -210,15 +210,13 @@ const beerResolver = {
   },
 };
 
-const loginResolver = {
+const userResolver = {
   login: ({ username }) => {
     return sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
   },
-};
 
-const signUpResolver = {
   signUp: async ({ username }) => {
     const userExists = await sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
@@ -237,9 +235,59 @@ const signUpResolver = {
 
     return res[0].id;
   },
+
+  updateUser: async ({ userId, username }) => {
+    const userExists = await sqlQuery(
+      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
+    );
+    if (userExists.length > 0) {
+      throw new Error("Username already exists");
+    }
+    const user = await sqlQuery(
+      `SELECT id FROM users WHERE id = ${userId} LIMIT 1;`
+    );
+    if (user.length === 0) {
+      throw new Error("User does not exist");
+    }
+    const res = sqlQuery(
+      `UPDATE users SET username = '${username}' WHERE id = ${userId};`
+    );
+
+    return "You updated your user!";
+  },
+
+  deleteUser: async ({ userId }) => {
+    const user = await sqlQuery(
+      `SELECT id FROM users WHERE id = ${userId} LIMIT 1;`
+    );
+    if (user.length === 0) {
+      throw new Error("User does not exist");
+    }
+    const res = sqlQuery(`DELETE FROM users WHERE id = ${userId};`);
+    return "You deleted your user!";
+  },
+
+  loginOrSignUp: async ({ username }) => {
+    const userExists = await sqlQuery(
+      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
+    );
+    if (userExists.length > 0) {
+      return userExists[0].id;
+    }
+
+    const res = await sqlQuery(
+      `INSERT INTO users (username) VALUES ('${username}') RETURNING id;`
+    );
+
+    if (res === "Error in query") {
+      throw new Error("Error in query");
+    }
+
+    return res[0].id;
+  },
 };
 
-const reactResolver = {
+const actionResolver = {
   react: async ({ userId, beerId, action }) => {
     if (!["upvote", "downvote", "unreact"].includes(action)) {
       throw new Error("Invalid action");
@@ -275,9 +323,7 @@ const reactResolver = {
 
     return "You reacted!";
   },
-};
 
-const commentResolver = {
   comment: async ({ userId, beerId, comment }) => {
     const res = await sqlQuery(
       `INSERT INTO comments (user_id, beer_id, comment_text) VALUES (${userId}, ${beerId}, '${comment}');`
@@ -290,62 +336,6 @@ const commentResolver = {
   },
 };
 
-const updateUserResolver = {
-  updateUser: async ({ userId, username }) => {
-    const userExists = await sqlQuery(
-      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
-    );
-    if (userExists.length > 0) {
-      throw new Error("Username already exists");
-    }
-    const user = await sqlQuery(
-      `SELECT id FROM users WHERE id = ${userId} LIMIT 1;`
-    );
-    if (user.length === 0) {
-      throw new Error("User does not exist");
-    }
-    const res = sqlQuery(
-      `UPDATE users SET username = '${username}' WHERE id = ${userId};`
-    );
-
-    return "You updated your user!";
-  },
-};
-
-const deleteUserResolver = {
-  deleteUser: async ({ userId }) => {
-    const user = await sqlQuery(
-      `SELECT id FROM users WHERE id = ${userId} LIMIT 1;`
-    );
-    if (user.length === 0) {
-      throw new Error("User does not exist");
-    }
-    const res = sqlQuery(`DELETE FROM users WHERE id = ${userId};`);
-    return "You deleted your user!";
-  },
-};
-
-const loginOrSignUpResolver = {
-  loginOrSignUp: async ({ username }) => {
-    const userExists = await sqlQuery(
-      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
-    );
-    if (userExists.length > 0) {
-      return userExists[0].id;
-    }
-
-    const res = await sqlQuery(
-      `INSERT INTO users (username) VALUES ('${username}') RETURNING id;`
-    );
-
-    if (res === "Error in query") {
-      throw new Error("Error in query");
-    }
-
-    return res[0].id;
-  },
-};
-
 const queryResolver = {
   query: ({ query }) => {
     return sqlQuery(query);
@@ -354,12 +344,7 @@ const queryResolver = {
 
 module.exports = {
   beerResolver,
-  loginResolver,
-  signUpResolver,
-  reactResolver,
-  commentResolver,
-  updateUserResolver,
-  deleteUserResolver,
   queryResolver,
-  loginOrSignUpResolver,
+  userResolver,
+  actionResolver,
 };

@@ -1,25 +1,15 @@
 const { graphqlHTTP } = require("express-graphql");
 const {
   beerSchema,
-  loginSchema,
-  signUpSchema,
-  reactSchema,
-  commentSchema,
-  updateUserSchema,
-  deleteUserSchema,
   querySchema,
-  loginOrSignUpSchema,
+  userSchema,
+  actionSchema,
 } = require("./schema");
 const {
   beerResolver,
-  loginResolver,
-  signUpResolver,
-  reactResolver,
-  commentResolver,
-  updateUserResolver,
-  deleteUserResolver,
   queryResolver,
-  loginOrSignUpResolver,
+  userResolver,
+  actionResolver,
 } = require("./resolvers");
 
 const { Client } = require("pg");
@@ -57,73 +47,29 @@ app.use(
 );
 
 app.use(
+  "/user",
+  graphqlHTTP({
+    schema: userSchema,
+    rootValue: userResolver,
+    graphiql: true,
+  })
+);
+
+app.use(
+  "/action",
+  graphqlHTTP({
+    schema: actionSchema,
+    rootValue: actionResolver,
+    graphiql: true,
+  })
+);
+
+// Testing only
+app.use(
   "/sqlQuery",
   graphqlHTTP({
     schema: querySchema,
     rootValue: queryResolver,
-    graphiql: true,
-  })
-);
-
-app.use(
-  "/loginorsignup",
-  graphqlHTTP({
-    schema: loginOrSignUpSchema,
-    rootValue: loginOrSignUpResolver,
-    graphiql: true,
-  })
-)
-
-app.use(
-  "/login",
-  graphqlHTTP({
-    schema: loginSchema,
-    rootValue: loginResolver,
-    graphiql: true,
-  })
-);
-
-app.use(
-  "/signup",
-  graphqlHTTP({
-    schema: signUpSchema,
-    rootValue: signUpResolver,
-    graphiql: true,
-  })
-);
-
-app.use(
-  "/react",
-  graphqlHTTP({
-    schema: reactSchema,
-    rootValue: reactResolver,
-    graphiql: true,
-  })
-);
-
-app.use(
-  "/comment",
-  graphqlHTTP({
-    schema: commentSchema,
-    rootValue: commentResolver,
-    graphiql: true,
-  })
-);
-
-app.use(
-  "/updateuser",
-  graphqlHTTP({
-    schema: updateUserSchema,
-    rootValue: updateUserResolver,
-    graphiql: true,
-  })
-);
-
-app.use(
-  "/deleteuser",
-  graphqlHTTP({
-    schema: deleteUserSchema,
-    rootValue: deleteUserResolver,
     graphiql: true,
   })
 );
