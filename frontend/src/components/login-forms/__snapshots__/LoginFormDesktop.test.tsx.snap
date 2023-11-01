@@ -1,0 +1,137 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LoginFormDesktop > matches snapshot 1`] = `
+<div>
+  <main
+    class="_container_b973b1"
+  >
+    <header
+      class="_logoContainer_b973b1"
+    >
+      <a
+        class="_wrapper_4f3c83"
+        href="/"
+      >
+        <img
+          alt="HopsUp logo"
+          class="_icon_4f3c83"
+          src="/project2/src/assets/hopsup.svg"
+        />
+        <h2
+          class="_heading_4f3c83"
+        >
+          HopsUp
+        </h2>
+      </a>
+    </header>
+    <div
+      class="_loginContainer_b973b1"
+    >
+      <section
+        class="_loginText_b973b1"
+      >
+        <h2>
+          Taste, Rate, Repeat -
+          <br />
+           
+          The craft beer journey
+        </h2>
+        <p>
+          Join the RateMyBrew community to unlock exclusive
+          <br />
+          features and be part of a global craft beer conversation.
+        </p>
+      </section>
+      <section
+        class="_loginFormContainer_b973b1"
+      >
+        <div
+          class="ant-card ant-card-bordered css-dev-only-do-not-override-pr0fja"
+          style="height: 100%; background-color: rgb(230, 244, 255);"
+        >
+          <div
+            class="ant-card-body"
+            style="height: 100%;"
+          >
+            <h1>
+              Log in
+            </h1>
+            <form
+              autocomplete="off"
+              class="ant-form ant-form-vertical css-dev-only-do-not-override-pr0fja _loginForm_b973b1"
+              id="basic"
+            >
+              <div
+                class="ant-form-item css-dev-only-do-not-override-pr0fja"
+              >
+                <div
+                  class="ant-row ant-form-item-row css-dev-only-do-not-override-pr0fja"
+                >
+                  <div
+                    class="ant-col ant-form-item-label css-dev-only-do-not-override-pr0fja"
+                  >
+                    <label
+                      class="ant-form-item-required"
+                      for="basic_username"
+                      title="Username"
+                    >
+                      Username
+                    </label>
+                  </div>
+                  <div
+                    class="ant-col ant-form-item-control css-dev-only-do-not-override-pr0fja"
+                  >
+                    <div
+                      class="ant-form-item-control-input"
+                    >
+                      <div
+                        class="ant-form-item-control-input-content"
+                      >
+                        <input
+                          aria-required="true"
+                          class="ant-input css-dev-only-do-not-override-pr0fja"
+                          id="basic_username"
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-form-item css-dev-only-do-not-override-pr0fja"
+              >
+                <div
+                  class="ant-row ant-form-item-row css-dev-only-do-not-override-pr0fja"
+                >
+                  <div
+                    class="ant-col ant-form-item-control css-dev-only-do-not-override-pr0fja"
+                  >
+                    <div
+                      class="ant-form-item-control-input"
+                    >
+                      <div
+                        class="ant-form-item-control-input-content"
+                      >
+                        <button
+                          class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary _loginButton_b973b1"
+                          type="submit"
+                        >
+                          <span>
+                            Submit
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+`;

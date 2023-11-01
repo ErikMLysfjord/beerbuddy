@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import Actionbar from "./Actionbar";
 import { act } from "react-dom/test-utils";
 

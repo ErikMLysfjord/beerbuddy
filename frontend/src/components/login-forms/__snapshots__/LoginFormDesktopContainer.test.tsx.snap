@@ -1,0 +1,95 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LoginFormDesktopContainer > matches snapshot 1`] = `
+<div>
+  <section
+    class="_loginFormContainer_b973b1"
+  >
+    <div
+      class="ant-card ant-card-bordered css-dev-only-do-not-override-pr0fja"
+      style="height: 100%; background-color: rgb(230, 244, 255);"
+    >
+      <div
+        class="ant-card-body"
+        style="height: 100%;"
+      >
+        <h1>
+          Log in
+        </h1>
+        <form
+          autocomplete="off"
+          class="ant-form ant-form-vertical css-dev-only-do-not-override-pr0fja _loginForm_b973b1"
+          id="basic"
+        >
+          <div
+            class="ant-form-item css-dev-only-do-not-override-pr0fja"
+          >
+            <div
+              class="ant-row ant-form-item-row css-dev-only-do-not-override-pr0fja"
+            >
+              <div
+                class="ant-col ant-form-item-label css-dev-only-do-not-override-pr0fja"
+              >
+                <label
+                  class="ant-form-item-required"
+                  for="basic_username"
+                  title="Username"
+                >
+                  Username
+                </label>
+              </div>
+              <div
+                class="ant-col ant-form-item-control css-dev-only-do-not-override-pr0fja"
+              >
+                <div
+                  class="ant-form-item-control-input"
+                >
+                  <div
+                    class="ant-form-item-control-input-content"
+                  >
+                    <input
+                      aria-required="true"
+                      class="ant-input css-dev-only-do-not-override-pr0fja"
+                      id="basic_username"
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-form-item css-dev-only-do-not-override-pr0fja"
+          >
+            <div
+              class="ant-row ant-form-item-row css-dev-only-do-not-override-pr0fja"
+            >
+              <div
+                class="ant-col ant-form-item-control css-dev-only-do-not-override-pr0fja"
+              >
+                <div
+                  class="ant-form-item-control-input"
+                >
+                  <div
+                    class="ant-form-item-control-input-content"
+                  >
+                    <button
+                      class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary _loginButton_b973b1"
+                      type="submit"
+                    >
+                      <span>
+                        Submit
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+`;
