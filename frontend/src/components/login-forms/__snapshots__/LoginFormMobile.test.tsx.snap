@@ -110,14 +110,6 @@ exports[`LoginFormMobile > matches snapshot 1`] = `
             </div>
           </form>
         </section>
-        <a
-          class="_loginLink_b69d51"
-          href="/project2/signup"
-          style="color: rgb(22, 119, 255);"
-          tabindex="0"
-        >
-          Not a user? Sign up here
-        </a>
       </div>
     </div>
   </main>

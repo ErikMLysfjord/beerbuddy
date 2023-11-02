@@ -3,7 +3,7 @@
 exports[`BeerCard > renders correctly 1`] = `
 <div>
   <a
-    aria-label="Example brewery"
+    aria-label="Example beer"
     class="_card_539764"
     href="./project2/beer/2"
   >
@@ -13,7 +13,7 @@ exports[`BeerCard > renders correctly 1`] = `
       <h1
         class="_beerName_539764"
       >
-        Example brewery
+        Example beer
       </h1>
       <p
         class="_breweryName_539764"

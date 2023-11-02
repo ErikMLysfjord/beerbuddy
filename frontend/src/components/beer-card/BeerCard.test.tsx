@@ -1,13 +1,26 @@
 import { describe, it, expect } from "vitest";
 import { render } from "@testing-library/react";
 import BeerCard from "./BeerCard";
+import { axe } from "jest-axe";
 
 describe("BeerCard", () => {
+  it("is accessible", async () => {
+    const { container } = render(
+      <BeerCard
+        name={"Example beer"}
+        brewery={"Example brewery"}
+        beer_id={10}
+        votes={10}
+      />
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   it("renders correctly", () => {
     const { container } = render(
       <BeerCard
         beer_id={2}
-        name={"Example brewery"}
+        name={"Example beer"}
         brewery={"Example brewery"}
         votes={10}
       />

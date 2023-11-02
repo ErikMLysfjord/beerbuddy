@@ -2,8 +2,14 @@ import { describe, it, expect } from "vitest";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Logo from "./Logo";
+import { axe } from "jest-axe";
 
 describe("Logo", () => {
+  it("is accessible", async () => {
+    const { container } = render(<Logo />);
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   it("renders correctly", () => {
     const { container } = render(<Logo />);
     expect(container).toMatchSnapshot();

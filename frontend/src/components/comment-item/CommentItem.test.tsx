@@ -1,8 +1,14 @@
 import { describe, it, expect } from "vitest";
 import { render } from "@testing-library/react";
 import CommentItem from "./CommentItem";
+import { axe } from "jest-axe";
 
 describe("CommentItem", () => {
+  it("is accessible", async () => {
+    const { container } = render(<CommentItem />);
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   it("matches snapshot", () => {
     const { container } = render(<CommentItem />);
     expect(container).toMatchSnapshot();

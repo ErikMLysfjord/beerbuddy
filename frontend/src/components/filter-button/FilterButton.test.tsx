@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import FilterButton from "./FilterButton";
 import { act } from "react-dom/test-utils";
+import { axe } from "jest-axe";
 
 // Fixes a warning which seems to be a bug.
 // https://github.com/nickcolley/jest-axe/issues/147
@@ -10,6 +11,11 @@ const { getComputedStyle } = window;
 window.getComputedStyle = (elt) => getComputedStyle(elt);
 
 describe("FilterButton", () => {
+  it("is accessible", async () => {
+    const { container } = render(<FilterButton />);
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   it("renders correctly", () => {
     const { container } = render(<FilterButton />);
     expect(container).toMatchSnapshot();

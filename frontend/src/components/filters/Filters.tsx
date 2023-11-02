@@ -1,5 +1,7 @@
-import { Checkbox, Slider } from "antd";
+import { Checkbox } from "antd";
 import Filter from "./Filter";
+import { Slider, SliderProps, alpha, styled } from "@mui/material";
+import { useState } from "react";
 
 const beerStyles = [
   "American IPA",
@@ -20,7 +22,22 @@ const beerStyles = [
   "Other",
 ];
 
+const StyledSlider = styled(Slider)<SliderProps>(() => ({
+  color: "#FFCC48",
+  "& .MuiSlider-thumb": {
+    "&:hover, &.Mui-focusVisible": {
+      boxShadow: `0px 0px 0px 8px ${alpha("#FFCC48", 0.16)}`,
+    },
+    "&.Mui-active": {
+      boxShadow: `0px 0px 0px 14px ${alpha("#FFCC48", 0.16)}`,
+    },
+  },
+}));
+
 const Filters = () => {
+  const [IBU, setIBU] = useState<number[]>([20, 37]);
+  const [alcohol, setAlcohol] = useState<number[]>([20, 37]);
+
   return (
     <>
       <Filter heading="Style" tooltip="Filter on certain styles of beer.">
@@ -30,10 +47,30 @@ const Filters = () => {
         heading="IBU"
         tooltip="IBU is International Bitternes Units, a metric for the bitternes of your beer. The higher the number, the more bitter the beer."
       >
-        <Slider range min={0} max={140} defaultValue={[20, 100]} />
+        <StyledSlider
+          getAriaLabel={() => "Temperature range"}
+          value={IBU}
+          onChange={(e: Event, newValue: number | number[]) => {
+            e.preventDefault();
+            setIBU(newValue as number[]);
+          }}
+          valueLabelDisplay="auto"
+          getAriaValueText={() => `Min value is ${IBU[0]}, max is ${IBU[1]}`}
+        />
       </Filter>
       <Filter heading="Alcohol" tooltip="Percentage of alcohol in the beer">
-        <Slider min={0} max={14} range defaultValue={[0, 14]} />
+        <StyledSlider
+          getAriaLabel={() => "Temperature range"}
+          value={alcohol}
+          onChange={(e: Event, newValue: number | number[]) => {
+            e.preventDefault();
+            setAlcohol(newValue as number[]);
+          }}
+          valueLabelDisplay="auto"
+          getAriaValueText={() =>
+            `Min value is ${alcohol[0]}, max is ${alcohol[1]}`
+          }
+        />
       </Filter>
     </>
   );

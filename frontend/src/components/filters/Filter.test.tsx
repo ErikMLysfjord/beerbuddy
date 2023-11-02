@@ -3,8 +3,18 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Filter from "./Filter";
 import { act } from "react-dom/test-utils";
+import { axe } from "jest-axe";
 
 describe("Filter", () => {
+  it("is accessible", async () => {
+    const { container } = render(
+      <Filter heading="Style" tooltip="Filter on certain styles of beer.">
+        <p>Test</p>
+      </Filter>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   it("renders correctly", () => {
     const { container } = render(
       <Filter heading="Style" tooltip="Filter on certain styles of beer.">

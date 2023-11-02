@@ -1,10 +1,16 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Voter from "./Voter";
+import { axe } from "jest-axe";
 
 console.log = vi.fn();
 
 describe("Voter", () => {
+  it("is accessible", async () => {
+    const { container } = render(<Voter votes={10} />);
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   it("should render", () => {
     const { container } = render(<Voter votes={10} />);
     expect(container).toMatchSnapshot();

@@ -1,7 +1,8 @@
-import { describe, it, expect, vi, afterEach } from "vitest";
+import { describe, it, expect, vi, afterEach, Mock } from "vitest";
 import { render, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import BeerList from "./BeerList";
+import { axe } from "jest-axe";
 
 describe("BeerList", () => {
   const mockData = {
@@ -36,11 +37,18 @@ describe("BeerList", () => {
   };
 
   global.fetch = vi.fn(() =>
-    Promise.resolve(new Response(JSON.stringify(mockData)))
-  );
+    Promise.resolve({
+      json: () => Promise.resolve(mockData),
+    })
+  ) as Mock;
 
   afterEach(() => {
     vi.clearAllMocks();
+  });
+
+  it("is accessible", async () => {
+    const { container } = render(<BeerList />);
+    expect(await axe(container)).toHaveNoViolations();
   });
 
   it("renders correctly", () => {

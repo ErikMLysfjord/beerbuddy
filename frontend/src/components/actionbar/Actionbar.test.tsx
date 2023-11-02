@@ -2,8 +2,14 @@ import { describe, it, expect } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Actionbar from "./Actionbar";
 import { act } from "react-dom/test-utils";
+import { axe } from "jest-axe";
 
 describe("Actionbar", () => {
+  it("is accessible", async () => {
+    const { container } = render(<Actionbar />);
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   it("renders correctly", () => {
     const { container } = render(<Actionbar />);
     expect(container).toMatchSnapshot();

@@ -2,8 +2,18 @@ import { describe, it, expect } from "vitest";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Sidebar from "./Sidebar";
+import { axe } from "jest-axe";
 
 describe("Sidebar", () => {
+  it("is accessible", async () => {
+    const { container } = render(
+      <Sidebar>
+        <p>Test</p>
+      </Sidebar>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   it("renders correctly", () => {
     const { container } = render(
       <Sidebar>

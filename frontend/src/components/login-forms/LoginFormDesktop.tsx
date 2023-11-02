@@ -2,9 +2,6 @@ import styles from "./LoginFormDesktop.module.css";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import Logo from "../logo/Logo";
 import LoginFormDesktopContainer from "./LoginFormDesktopContainer.tsx";
-import RegisterFormDesktopContainer from "./RegisterFormDesktopContainer.tsx";
-
-const login = true; //change to real logic later
 
 interface LoginFormDesktopProps {
   showMessage: (string: { username: string }) => void;
@@ -34,18 +31,11 @@ const LoginFormDesktop = ({
             {"features and be part of a global craft beer conversation."}
           </p>
         </section>
-        {login ? (
-          <LoginFormDesktopContainer
-            showMessage={showMessage}
-            onFinishFailed={onFinishFailed}
-            saveUser={saveUser}
-          />
-        ) : (
-          <RegisterFormDesktopContainer
-            showMessage={showMessage}
-            onFinishFailed={onFinishFailed}
-          />
-        )}
+        <LoginFormDesktopContainer
+          showMessage={showMessage}
+          onFinishFailed={onFinishFailed}
+          saveUser={saveUser}
+        />
       </div>
     </main>
   );

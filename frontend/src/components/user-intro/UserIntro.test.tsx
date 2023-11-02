@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import UserIntro from "./UserIntro";
 import { act } from "react-dom/test-utils";
+import { axe } from "jest-axe";
 
 // Mock localStorage so it returns "Erik".
 global.localStorage = {
@@ -11,6 +12,11 @@ global.localStorage = {
 };
 
 describe("UserIntro", () => {
+  it("is accessible", async () => {
+    const { container } = render(<UserIntro />);
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   it("renders correctly", () => {
     const { container } = render(<UserIntro />);
     expect(container).toMatchSnapshot();

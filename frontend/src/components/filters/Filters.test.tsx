@@ -1,10 +1,28 @@
-import { it, expect, describe } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { it, expect, describe, vi, vitest } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Filters from "./Filters";
 import { act } from "react-dom/test-utils";
+import { axe } from "jest-axe";
+import { useState as useStateMock } from "react";
+
+vi.mock("react", () => ({
+  ...vitest.importActual("react"),
+  useState: vi.fn(),
+}));
 
 describe("Filters", () => {
+  const setState = vi.fn();
+
+  beforeEach(() => {
+    (useStateMock as jest.Mock).mockImplementation((init) => [init, setState]);
+  });
+
+  it("is accessible", async () => {
+    const { container } = render(<Filters />);
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   it("renders correctly", () => {
     const { container } = render(<Filters />);
     expect(container).toMatchSnapshot();
@@ -45,5 +63,44 @@ describe("Filters", () => {
 
     expect(screen.getByText("Alcohol")).toBeInTheDocument();
     expect(screen.getByText("Alcohol")).toBeInstanceOf(HTMLHeadingElement);
+  });
+
+  it("changes value of IBU slider", () => {
+    render(<Filters />);
+    const minSlider = screen.getAllByRole("slider")[0];
+    const maxSlider = screen.getAllByRole("slider")[1];
+    act(() => {
+      fireEvent.change(minSlider, { target: { value: 25 } });
+    });
+    expect(setState).toHaveBeenCalledTimes(1);
+    expect(setState).toHaveBeenCalledWith([25, 37]);
+
+    setState.mockReset();
+    act(() => {
+      fireEvent.change(maxSlider, { target: { value: 90 } });
+    });
+
+    expect(setState).toHaveBeenCalledTimes(1);
+    expect(setState).toHaveBeenCalledWith([20, 90]);
+    setState.mockReset();
+  });
+
+  it("changes value of alcohol slider", () => {
+    render(<Filters />);
+    const minSlider = screen.getAllByRole("slider")[2];
+    const maxSlider = screen.getAllByRole("slider")[3];
+    act(() => {
+      fireEvent.change(minSlider, { target: { value: 10 } });
+    });
+    expect(setState).toHaveBeenCalledTimes(1);
+    expect(setState).toHaveBeenCalledWith([10, 37]);
+
+    setState.mockReset();
+    act(() => {
+      fireEvent.change(maxSlider, { target: { value: 75 } });
+    });
+
+    expect(setState).toHaveBeenCalledTimes(1);
+    expect(setState).toHaveBeenCalledWith([20, 75]);
   });
 });
