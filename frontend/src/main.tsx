@@ -7,6 +7,12 @@ import { App as AntdApp } from "antd";
 import "./index.css";
 import LogInPage from "./pages/LogIn.tsx";
 import BeerPage from "./pages/Beer.tsx";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: "http://localhost:4000/",
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -23,12 +29,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     >
       <AntdApp>
         <BrowserRouter basename="/project2">
-          <Routes>
-            <Route path="/login" element={<LogInPage />} />
-            <Route path="/" element={<App />} />
-            <Route path="/beer/:id" element={<BeerPage />} />
-            <Route path="*" element={<h1>Not Found</h1>} />
-          </Routes>
+          <ApolloProvider client={client}>
+            <Routes>
+              <Route path="/login" element={<LogInPage />} />
+              <Route path="/" element={<App />} />
+              <Route path="/beer/:id" element={<BeerPage />} />
+              <Route path="*" element={<h1>Not Found</h1>} />
+            </Routes>
+          </ApolloProvider>
         </BrowserRouter>
       </AntdApp>
     </ConfigProvider>

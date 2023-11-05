@@ -1,3 +1,4 @@
+import { gql, useQuery } from "@apollo/client";
 import { useState } from "react";
 
 interface Beer {
@@ -15,12 +16,21 @@ interface Beer {
 const useFetchMoreBeers = (fetchSize: number) => {
   const [beers, setBeers] = useState<Beer[]>([]);
 
-  const query = `
-      query Beers($size: Int! $start: Int!) {
-        beers(size: $size, start: $start)
-      }
-    `;
+  const query = gql`
+    query Beers($size: Int!, $start: Int!) {
+      beers(size: $size, start: $start)
+    }
+  `;
 
+  const { data } = useQuery(query, {
+    variables: { start: beers.length, size: fetchSize },
+  });
+
+  const fetchMore = () => {
+    setBeers([...beers, ...data.beers]);
+  };
+
+  /*
   const fetchMore = async () => {
     await fetch("http://localhost:4000/beer", {
       method: "POST",
@@ -35,7 +45,9 @@ const useFetchMoreBeers = (fetchSize: number) => {
     })
       .then((r) => r.json())
       .then((data) => setBeers([...beers, ...data.data.beers]));
-  };
+      */
+
+  console.log(beers);
 
   return { beers, fetchMore };
 };
