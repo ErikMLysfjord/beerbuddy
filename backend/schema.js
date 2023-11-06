@@ -1,29 +1,4 @@
-const { buildSchema, GraphQLScalarType, Kind } = require("graphql");
-
-const AnyType = new GraphQLScalarType({
-  name: "Any",
-  description: "Any type",
-  parseValue(value) {
-    return value;
-  },
-  serialize(value) {
-    return value;
-  },
-  parseLiteral(ast) {
-    switch (ast.kind) {
-      case Kind.STRING:
-      case Kind.BOOLEAN:
-        return ast.value;
-      case Kind.INT:
-      case Kind.FLOAT:
-        return parseFloat(ast.value);
-      case Kind.OBJECT:
-        throw new Error(`Not sure how to parse object: ${ast}`);
-      default:
-        return null;
-    }
-  },
-});
+const { buildSchema } = require("graphql");
 
 const beerSchema = buildSchema(`
   scalar Any

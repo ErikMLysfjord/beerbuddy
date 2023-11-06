@@ -1,18 +1,17 @@
 const { graphqlHTTP } = require("express-graphql");
 const {
   beerSchema,
-  querySchema,
   userSchema,
   actionSchema,
+  querySchema,
 } = require("./schema");
 const {
   beerResolver,
-  queryResolver,
   userResolver,
   actionResolver,
+  queryResolver,
 } = require("./resolvers");
 
-const { Client } = require("pg");
 const express = require("express");
 
 const app = express();
@@ -25,34 +24,20 @@ var allowCrossDomain = function (req, res, next) {
   next();
 };
 
+const client = require("./db.js");
 app.use(allowCrossDomain);
-
-// Connect to postgres database
-const client = new Client({
-  password: "root",
-  user: "root",
-  host: "postgres",
-});
 
 // Access static files from backend
 app.use(express.static("public"));
 
 app.use(
   "/beer",
-  graphqlHTTP({
-    schema: beerSchema,
-    rootValue: beerResolver,
-    graphiql: true,
-  })
+  graphqlHTTP({ schema: beerSchema, rootValue: beerResolver, graphiql: true })
 );
 
 app.use(
   "/user",
-  graphqlHTTP({
-    schema: userSchema,
-    rootValue: userResolver,
-    graphiql: true,
-  })
+  graphqlHTTP({ schema: userSchema, rootValue: userResolver, graphiql: true })
 );
 
 app.use(
@@ -65,19 +50,15 @@ app.use(
 );
 
 // Testing only
-app.use(
-  "/sqlQuery",
-  graphqlHTTP({
-    schema: querySchema,
-    rootValue: queryResolver,
-    graphiql: true,
-  })
-);
+// app.use(
+//   "/sqlQuery",
+//   graphqlHTTP({ schema: querySchema, rootValue: queryResolver, graphiql: true })
+// );
 
 (async () => {
   await client.connect();
 
   app.listen(4000, () => {
-    console.log(`Example app listening at http://localhost:4000`);
+    console.log(`App listening at http://localhost:4000`);
   });
 })();

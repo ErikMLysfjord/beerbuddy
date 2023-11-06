@@ -1,11 +1,7 @@
-const { Client } = require("pg");
-const client = new Client({
-  password: "root",
-  user: "root",
-  host: "postgres",
-});
+const client = require('./db.js');
 
 const sqlQuery = async (query) => {
+
   if (!client._connected) {
     await client.connect();
   }
