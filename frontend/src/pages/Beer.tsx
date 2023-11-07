@@ -11,7 +11,7 @@ function BeerPage() {
           <Logo />
         </div>
         <a href="../../">
-          <button className={styles.menuButton}>{"<- Back to menu"}</button>
+          <button className={styles.menuButton}>{"Back to menu"}</button>
         </a>
         <BeerContent />
         <CommentList />

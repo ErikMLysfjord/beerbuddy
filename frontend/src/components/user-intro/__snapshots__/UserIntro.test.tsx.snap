@@ -5,9 +5,6 @@ exports[`UserIntro > renders correctly 1`] = `
   <header
     class="_headingWrapper_95bd34"
   >
-    <div
-      class="_profilePicture_95bd34"
-    />
     <h1
       class="_heading_95bd34"
     >

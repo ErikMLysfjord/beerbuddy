@@ -29,6 +29,7 @@
 
 .commentList {
   list-style: none;
+  padding: 0;
 }
 
 .commentList > li:not(:last-child) {

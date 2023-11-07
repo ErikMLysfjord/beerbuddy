@@ -6,9 +6,6 @@ exports[`CommentItem > matches snapshot 1`] = `
     class="_commentContainer_7a79ad"
   >
     <div
-      class="_emptyProfilePic_7a79ad"
-    />
-    <div
       class="_commentContentContainer_7a79ad"
     >
       <div>

@@ -2,7 +2,6 @@ import styles from "./CommentItem.module.css";
 
 const CommentItem = () => (
   <div className={styles.commentContainer}>
-    <div className={styles.emptyProfilePic} />
     <div className={styles.commentContentContainer}>
       <div>
         <div className={styles.commentHeader}>

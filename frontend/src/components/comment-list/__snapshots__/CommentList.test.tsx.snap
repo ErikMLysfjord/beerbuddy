@@ -26,8 +26,41 @@ exports[`CommentList > matches snapshot 1`] = `
             class="_commentContainer_7a79ad"
           >
             <div
-              class="_emptyProfilePic_7a79ad"
-            />
+              class="_commentContentContainer_7a79ad"
+            >
+              <div>
+                <div
+                  class="_commentHeader_7a79ad"
+                >
+                  <p
+                    class="_commentAuthor_7a79ad"
+                  >
+                    Martin Hansa-Borg
+                  </p>
+                  <p
+                    class="_dot_7a79ad"
+                  >
+                    •
+                  </p>
+                  <p
+                    class="_commentDate_7a79ad"
+                  >
+                    5 days ago
+                  </p>
+                </div>
+              </div>
+              <p
+                class="_commentText_7a79ad"
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus sem diam, eget consectetur quam interdum eu. Aliquam ornare lectus vel sapien blandit eleifend. Aenean ac vestibulum metus. Nam auctor sed dui dapibus pharetra.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div
+            class="_commentContainer_7a79ad"
+          >
             <div
               class="_commentContentContainer_7a79ad"
             >
@@ -65,8 +98,41 @@ exports[`CommentList > matches snapshot 1`] = `
             class="_commentContainer_7a79ad"
           >
             <div
-              class="_emptyProfilePic_7a79ad"
-            />
+              class="_commentContentContainer_7a79ad"
+            >
+              <div>
+                <div
+                  class="_commentHeader_7a79ad"
+                >
+                  <p
+                    class="_commentAuthor_7a79ad"
+                  >
+                    Martin Hansa-Borg
+                  </p>
+                  <p
+                    class="_dot_7a79ad"
+                  >
+                    •
+                  </p>
+                  <p
+                    class="_commentDate_7a79ad"
+                  >
+                    5 days ago
+                  </p>
+                </div>
+              </div>
+              <p
+                class="_commentText_7a79ad"
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus sem diam, eget consectetur quam interdum eu. Aliquam ornare lectus vel sapien blandit eleifend. Aenean ac vestibulum metus. Nam auctor sed dui dapibus pharetra.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div
+            class="_commentContainer_7a79ad"
+          >
             <div
               class="_commentContentContainer_7a79ad"
             >
@@ -104,9 +170,6 @@ exports[`CommentList > matches snapshot 1`] = `
             class="_commentContainer_7a79ad"
           >
             <div
-              class="_emptyProfilePic_7a79ad"
-            />
-            <div
               class="_commentContentContainer_7a79ad"
             >
               <div>
@@ -142,87 +205,6 @@ exports[`CommentList > matches snapshot 1`] = `
           <div
             class="_commentContainer_7a79ad"
           >
-            <div
-              class="_emptyProfilePic_7a79ad"
-            />
-            <div
-              class="_commentContentContainer_7a79ad"
-            >
-              <div>
-                <div
-                  class="_commentHeader_7a79ad"
-                >
-                  <p
-                    class="_commentAuthor_7a79ad"
-                  >
-                    Martin Hansa-Borg
-                  </p>
-                  <p
-                    class="_dot_7a79ad"
-                  >
-                    •
-                  </p>
-                  <p
-                    class="_commentDate_7a79ad"
-                  >
-                    5 days ago
-                  </p>
-                </div>
-              </div>
-              <p
-                class="_commentText_7a79ad"
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus sem diam, eget consectetur quam interdum eu. Aliquam ornare lectus vel sapien blandit eleifend. Aenean ac vestibulum metus. Nam auctor sed dui dapibus pharetra.
-              </p>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div
-            class="_commentContainer_7a79ad"
-          >
-            <div
-              class="_emptyProfilePic_7a79ad"
-            />
-            <div
-              class="_commentContentContainer_7a79ad"
-            >
-              <div>
-                <div
-                  class="_commentHeader_7a79ad"
-                >
-                  <p
-                    class="_commentAuthor_7a79ad"
-                  >
-                    Martin Hansa-Borg
-                  </p>
-                  <p
-                    class="_dot_7a79ad"
-                  >
-                    •
-                  </p>
-                  <p
-                    class="_commentDate_7a79ad"
-                  >
-                    5 days ago
-                  </p>
-                </div>
-              </div>
-              <p
-                class="_commentText_7a79ad"
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus sem diam, eget consectetur quam interdum eu. Aliquam ornare lectus vel sapien blandit eleifend. Aenean ac vestibulum metus. Nam auctor sed dui dapibus pharetra.
-              </p>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div
-            class="_commentContainer_7a79ad"
-          >
-            <div
-              class="_emptyProfilePic_7a79ad"
-            />
             <div
               class="_commentContentContainer_7a79ad"
             >

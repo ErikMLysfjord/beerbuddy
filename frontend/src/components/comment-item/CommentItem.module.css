@@ -1,17 +1,8 @@
 .commentContainer {
   background-color: #333333;
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px 5vw;
   display: flex;
-}
-
-.emptyProfilePic {
-  width: 50px;
-  height: 50px;
-  background-color: black;
-  border-radius: 50%;
-  margin-right: 10px;
-  margin-top: 5px;
 }
 
 .commentContentContainer {

@@ -11,7 +11,6 @@ const UserIntro = () => {
       <>
         <header className={styles.headingWrapper}>
           <Logo />
-          <div className={styles.profilePicture}></div>
         </header>
         <hr className={styles.separator} />
       </>
@@ -20,7 +19,6 @@ const UserIntro = () => {
   return (
     <>
       <header className={styles.headingWrapper}>
-        <div className={styles.profilePicture}></div>
         <h1 className={styles.heading}>
           <span className={styles.bold}>Welcome</span>,{" "}
           {localStorage.getItem("userNameBeerBuddy")
