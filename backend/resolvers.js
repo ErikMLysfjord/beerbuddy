@@ -1,7 +1,6 @@
-const client = require('./db.js');
+const client = require("./db.js");
 
 const sqlQuery = async (query) => {
-
   if (!client._connected) {
     await client.connect();
   }
@@ -54,7 +53,18 @@ const beerResolver = {
     WHERE beers.id = ${id};
     `);
   },
-  beers: async ({ size, start, userId, sort, search, minAbv, maxAbv, minIbu, maxIbu, styles }) => {
+  beers: async ({
+    size,
+    start,
+    userId,
+    sort,
+    search,
+    minAbv,
+    maxAbv,
+    minIbu,
+    maxIbu,
+    styles,
+  }) => {
     const minAbvs = minAbv || 0;
     const maxAbvs = maxAbv || 40;
 

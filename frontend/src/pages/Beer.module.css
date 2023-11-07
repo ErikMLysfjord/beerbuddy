@@ -1,4 +1,4 @@
-.section {
+.main {
   padding: 1rem 15rem;
 }
 
@@ -8,6 +8,65 @@
   top: 10px;
 }
 
+.breweryName {
+  font-size: 20px;
+  font-weight: lighter;
+  margin-bottom: -15px;
+}
+
+.beerName {
+  font-size: 40px;
+  font-weight: medium;
+  margin: 0px;
+}
+
+.rating {
+  display: flex;
+  gap: 0.2rem;
+  align-items: end;
+}
+
+.ratingNumber {
+  font-size: 30px;
+  color: #ffcc48;
+  margin-bottom: 0px;
+}
+
+.ratingText {
+  font-size: 30px;
+  margin-bottom: 0px;
+  font-weight: 400;
+}
+
+.ratingText span {
+  font-size: 30px;
+  color: #ffcc48;
+}
+
+.basedOn {
+  font-size: 15px;
+  font-weight: lighter;
+  margin-top: -10px;
+}
+
+.info {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 20px;
+}
+
+.attributeContainer {
+  background-color: #333333;
+  padding: 10px;
+  width: 80px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.attributeText {
+  margin: 0;
+}
+
 .menuButton {
   background-color: transparent;
   color: #ffcc48;
@@ -15,6 +74,48 @@
   padding: 5px 30px;
   border-radius: 5px;
   cursor: pointer;
+  display: inline-block;
+}
+
+.menuButton:focus {
+  outline: 2px dashed #ffcc48;
+}
+
+.centerContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/*comments*/
+.container {
+  display: flex;
+  justify-content: end;
+}
+
+.commentButton {
+  background-color: transparent;
+  color: #ffcc48;
+  border: 2px solid #ffcc48;
+  width: 120px;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  margin-top: 50px;
+}
+
+.divider {
+  border: 1px solid #ffcc48;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.commentListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 @media screen and (max-width: 1000px) {
