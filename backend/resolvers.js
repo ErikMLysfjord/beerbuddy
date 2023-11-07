@@ -55,14 +55,14 @@ const beerResolver = {
     `);
   },
   beers: async ({ size, start, userId, sort, search, minAbv, maxAbv, minIbu, maxIbu }) => {
-    const minAbv = minAbv || 0;
-    const maxAbv = maxAbv || 40;
+    const minAbvs = minAbv || 0;
+    const maxAbvs = maxAbv || 40;
 
-    const minIbu = minIbu || 0;
-    const maxIbu = maxIbu || 140;
+    const minIbus = minIbu || 0;
+    const maxIbus = maxIbu || 140;
 
-    const minAbvProsent = minAbv / 100;
-    const maxAbvProsent = maxAbv / 100;
+    const minAbvProsent = minAbvs / 100;
+    const maxAbvProsent = maxAbvs / 100;
 
     const otherStyles = [
       "Cider",
@@ -187,7 +187,7 @@ const beerResolver = {
           votes ON beers.id = votes.beer_id
       WHERE
           beers.abv > ${minAbvProsent} AND beers.abv < ${maxAbvProsent} AND
-          beers.ibu > ${minIbu} AND beers.ibu < ${maxIbu} AND
+          beers.ibu > ${minIbus} AND beers.ibu < ${maxIbus} AND
           beers.name LIKE '%${searchQuery}%'
           ${
             styles.length > 0
