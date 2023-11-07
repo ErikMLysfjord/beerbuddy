@@ -8,13 +8,11 @@ type FieldType = {
 };
 
 interface LoginFormMobileProps {
-  showMessage: (string: { username: string }) => void;
   onFinishFailed: (errorInfo: ValidateErrorEntity) => void;
   saveUser: (string: { username: string }) => void;
 }
 
 const LoginFormMobile = ({
-  showMessage,
   onFinishFailed,
   saveUser,
 }: LoginFormMobileProps) => {
@@ -27,7 +25,6 @@ const LoginFormMobile = ({
         layout="vertical"
         initialValues={{ remember: true }}
         onFinish={(values) => {
-          showMessage({ username: values.username });
           saveUser({ username: values.username });
         }}
         onFinishFailed={onFinishFailed}

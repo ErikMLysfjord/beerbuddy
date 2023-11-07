@@ -7,13 +7,11 @@ import Logo from "../logo/Logo";
 const { useToken } = theme;
 
 interface LoginFormMobileProps {
-  showMessage: (string: { username: string }) => void;
   onFinishFailed: (errorInfo: ValidateErrorEntity) => void;
   saveUser: (string: { username: string }) => void;
 }
 
 const LoginFormMobile = ({
-  showMessage,
   onFinishFailed,
   saveUser,
 }: LoginFormMobileProps) => {
@@ -31,7 +29,6 @@ const LoginFormMobile = ({
         className={styles.mobileCard}
       >
         <LoginFormMobileContainer
-          showMessage={showMessage}
           onFinishFailed={onFinishFailed}
           saveUser={saveUser}
         />

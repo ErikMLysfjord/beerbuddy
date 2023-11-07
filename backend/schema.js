@@ -17,7 +17,7 @@ const userSchema = buildSchema(`
     signUp(username: String!): Any
     updateUser(userId: String! username: String!): String
     deleteUser(userId: String!): String
-    loginOrSignUp(username: String! uuid: String!): String
+    loginOrSignUp(username: String! uuid: String!): Any
   }
 `);
 

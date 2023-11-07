@@ -10,13 +10,11 @@ type FieldType = {
 };
 
 interface LoginFormDesktopProps {
-  showMessage: (string: { username: string }) => void;
   onFinishFailed: (errorInfo: ValidateErrorEntity) => void;
   saveUser: (string: { username: string }) => void;
 }
 
 const LoginFormDesktop = ({
-  showMessage,
   onFinishFailed,
   saveUser,
 }: LoginFormDesktopProps) => {
@@ -37,7 +35,6 @@ const LoginFormDesktop = ({
           layout="vertical"
           initialValues={{ remember: true }}
           onFinish={(values) => {
-            showMessage({ username: values.username });
             saveUser({ username: values.username });
           }}
           onFinishFailed={onFinishFailed}

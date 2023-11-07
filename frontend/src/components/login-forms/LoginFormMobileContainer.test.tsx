@@ -9,7 +9,6 @@ import {
 import LoginFormMobileContainer from "./LoginFormMobileContainer";
 import { axe } from "jest-axe";
 
-const showMessage = vi.fn();
 const onFinishFailed = vi.fn();
 const saveUser = vi.fn();
 
@@ -17,7 +16,6 @@ describe("LoginFormMobileContainer", () => {
   it("is accessible", async () => {
     const { container } = render(
       <LoginFormMobileContainer
-        showMessage={showMessage}
         onFinishFailed={onFinishFailed}
         saveUser={saveUser}
       />
@@ -29,7 +27,6 @@ describe("LoginFormMobileContainer", () => {
   it("matches snapshot", async () => {
     const { container } = render(
       <LoginFormMobileContainer
-        showMessage={showMessage}
         onFinishFailed={onFinishFailed}
         saveUser={saveUser}
       />
@@ -40,7 +37,6 @@ describe("LoginFormMobileContainer", () => {
   it("renders without crashing", () => {
     const { container } = render(
       <LoginFormMobileContainer
-        showMessage={showMessage}
         onFinishFailed={onFinishFailed}
         saveUser={saveUser}
       />
@@ -51,9 +47,6 @@ describe("LoginFormMobileContainer", () => {
   it("handles submit", async () => {
     render(
       <LoginFormMobileContainer
-        showMessage={(string: { username: string }) => {
-          showMessage(string.username);
-        }}
         onFinishFailed={onFinishFailed}
         saveUser={(string: { username: string }) => saveUser(string.username)}
       />
@@ -67,8 +60,6 @@ describe("LoginFormMobileContainer", () => {
     });
 
     await waitFor(() => {
-      expect(showMessage).toHaveBeenCalledTimes(1);
-      expect(showMessage).toHaveBeenCalledWith("test");
       expect(saveUser).toHaveBeenCalledTimes(1);
       expect(saveUser).toHaveBeenCalledWith("test");
     });

@@ -4,6 +4,7 @@ import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import LoginFormMobile from "../components/login-forms/LoginFormMobile";
 import LoginFormDesktop from "../components/login-forms/LoginFormDesktop";
 import { v4 } from "uuid";
+import { useEffect, useState } from "react";
 
 const onFinishFailed = (
   errorInfo: ValidateErrorEntity<{ username: string }>
@@ -11,7 +12,12 @@ const onFinishFailed = (
   console.log("Failed:", errorInfo);
 };
 
-const fetchLoginId = async (username: string, uuid: string) => {
+const fetchLoginId = async (
+  username: string,
+  uuid: string,
+  setIsNewUser: React.Dispatch<React.SetStateAction<string>>,
+  isNewUser: string
+) => {
   const res = await fetch("http://localhost:4000/user", {
     method: "POST",
     headers: {
@@ -24,46 +30,52 @@ const fetchLoginId = async (username: string, uuid: string) => {
   }).then((r) => r.json());
 
   if (!localStorage.getItem("userIdBeerBuddy")) {
-    localStorage.setItem("userIdBeerBuddy", res.data.loginOrSignUp);
+    localStorage.setItem("userIdBeerBuddy", res.data.loginOrSignUp.id);
   }
-  window.location.replace("/");
+
+  if (!isNewUser) {
+    setIsNewUser(res.data.loginOrSignUp.isNewUser);
+  }
+
+  await setTimeout(() => {
+    window.location.replace("/");
+  }, 2000);
 };
 
 const LogInPage = () => {
   const { message } = App.useApp();
   const { width } = useWindowDimensions();
   const username = localStorage.getItem("userNameBeerBuddy");
+  const [isNewUser, setIsNewUser] = useState("");
 
   if (username) {
-    fetchLoginId(username, v4());
+    fetchLoginId(username, v4(), setIsNewUser, isNewUser);
   }
 
-  const showMessage = (string: { username: string }) => {
-    message.success("Welcome " + string.username + "!");
-  };
+  useEffect(() => {
+    if (isNewUser) {
+      message.success(
+        isNewUser === "no"
+          ? "Welcome back " + username + "!"
+          : "Created new user " + username + "!"
+      );
+    }
+  }, [isNewUser, message, username]);
 
   const saveUser = (string: { username: string }) => {
     if (!localStorage.getItem("userIdBeerBuddy")) {
-      fetchLoginId(string.username, v4());
+      fetchLoginId(string.username, v4(), setIsNewUser, isNewUser);
     }
     localStorage.setItem("userNameBeerBuddy", string.username);
   };
 
   if (width < 768) {
     return (
-      <LoginFormMobile
-        showMessage={showMessage}
-        onFinishFailed={onFinishFailed}
-        saveUser={saveUser}
-      />
+      <LoginFormMobile onFinishFailed={onFinishFailed} saveUser={saveUser} />
     );
   }
   return (
-    <LoginFormDesktop
-      showMessage={showMessage}
-      onFinishFailed={onFinishFailed}
-      saveUser={saveUser}
-    />
+    <LoginFormDesktop onFinishFailed={onFinishFailed} saveUser={saveUser} />
   );
 };
 

@@ -4,13 +4,11 @@ import Logo from "../logo/Logo";
 import LoginFormDesktopContainer from "./LoginFormDesktopContainer.tsx";
 
 interface LoginFormDesktopProps {
-  showMessage: (string: { username: string }) => void;
   onFinishFailed: (errorInfo: ValidateErrorEntity) => void;
   saveUser: (string: { username: string }) => void;
 }
 
 const LoginFormDesktop = ({
-  showMessage,
   onFinishFailed,
   saveUser,
 }: LoginFormDesktopProps) => {
@@ -32,7 +30,6 @@ const LoginFormDesktop = ({
           </p>
         </section>
         <LoginFormDesktopContainer
-          showMessage={showMessage}
           onFinishFailed={onFinishFailed}
           saveUser={saveUser}
         />

@@ -281,7 +281,7 @@ const userResolver = {
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
     if (userExists.length > 0) {
-      return userExists[0].id;
+      return { id: userExists[0].id, isNewUser: "no" };
     }
 
     const res = await sqlQuery(
@@ -292,7 +292,7 @@ const userResolver = {
       throw new Error("Error in query");
     }
 
-    return res[0].id;
+    return { id: res[0].id, isNewUser: "yes" };
   },
 };
 
