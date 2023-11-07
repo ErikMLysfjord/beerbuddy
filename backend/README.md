@@ -5,8 +5,11 @@ Make sure you have "Docker desktop" installed on your machine. Open docker deskt
 - cd backend
 - make dev
 
-The database may take a long time to start up, so if you get an error when running the backend, wait until the database is ready and try again or go into server.js and click save to restart the backend. (Its running nodemon so it will restart automatically when you save)
-
+The backend is ready when you get:
+```
+[nodemon] starting `node server.js`
+App listening at http://localhost:4000
+```
 ## Bugfixing for backend and database
 
 ### Empty database

@@ -1,7 +1,8 @@
-version: '3.8'
+version: "3.8"
 services:
   app:
     build: .
+    command: ["/usr/wait-for-database.sh", "postgres:5432", "--", "npm", "start"]
     depends_on:
       - postgres
     ports:

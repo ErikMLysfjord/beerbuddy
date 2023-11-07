@@ -1,14 +1,17 @@
-FROM node:20-alpine3.17
+# Dockerfile
+FROM node:14
 
+RUN apt-get update && apt-get install -y postgresql-client
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm ci
+RUN npm install
 
 COPY . .
 
-EXPOSE 4000
+COPY wait-for-database.sh /usr/wait-for-database.sh
+RUN chmod +x /usr/wait-for-database.sh
 
-CMD [ "npm", "run", "start" ]
+CMD [ "node", "run", "start" ]
