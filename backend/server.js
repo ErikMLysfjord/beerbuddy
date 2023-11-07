@@ -1,4 +1,6 @@
 const { graphqlHTTP } = require("express-graphql");
+const cors = require("cors");
+const client = require("./db");
 const {
   beerSchema,
   userSchema,
@@ -16,16 +18,11 @@ const express = require("express");
 
 const app = express();
 
-// Allow CORS
-var allowCrossDomain = function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type,token");
-  next();
+const corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
 };
-
-const client = require("./db.js");
-app.use(allowCrossDomain);
+app.use(cors(corsOptions));
 
 // Access static files from backend
 app.use(express.static("public"));
