@@ -5,7 +5,7 @@ const beerSchema = buildSchema(`
 
   type Query {
     beer(id: Int! ): Any
-    beers(size: Int! start: Int userId: Int! filters: Any sort: Any search: String): Any
+    beers(size: Int! start: Int userId: Int! sort: String search: String minAbv: Int maxAbv: Int minIbu: Int maxIbu: Int ): Any
   }
 `);
 

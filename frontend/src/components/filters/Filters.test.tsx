@@ -73,15 +73,15 @@ describe("Filters", () => {
       fireEvent.change(minSlider, { target: { value: 25 } });
     });
     expect(setState).toHaveBeenCalledTimes(1);
-    expect(setState).toHaveBeenCalledWith([25, 37]);
+    expect(setState).toHaveBeenCalledWith([25, 140]);
 
     setState.mockReset();
     act(() => {
-      fireEvent.change(maxSlider, { target: { value: 90 } });
+      fireEvent.change(maxSlider, { target: { value: 30 } });
     });
 
     expect(setState).toHaveBeenCalledTimes(1);
-    expect(setState).toHaveBeenCalledWith([20, 90]);
+    expect(setState).toHaveBeenCalledWith([0, 30]);
     setState.mockReset();
   });
 
@@ -93,14 +93,14 @@ describe("Filters", () => {
       fireEvent.change(minSlider, { target: { value: 10 } });
     });
     expect(setState).toHaveBeenCalledTimes(1);
-    expect(setState).toHaveBeenCalledWith([10, 37]);
+    expect(setState).toHaveBeenCalledWith([10, 40]);
 
     setState.mockReset();
     act(() => {
-      fireEvent.change(maxSlider, { target: { value: 75 } });
+      fireEvent.change(maxSlider, { target: { value: 30 } });
     });
 
     expect(setState).toHaveBeenCalledTimes(1);
-    expect(setState).toHaveBeenCalledWith([20, 75]);
+    expect(setState).toHaveBeenCalledWith([0, 30]);
   });
 });

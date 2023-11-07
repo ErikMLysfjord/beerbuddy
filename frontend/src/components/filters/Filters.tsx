@@ -35,8 +35,8 @@ const StyledSlider = styled(Slider)<SliderProps>(() => ({
 }));
 
 const Filters = () => {
-  const [IBU, setIBU] = useState<number[]>([20, 37]);
-  const [alcohol, setAlcohol] = useState<number[]>([20, 37]);
+  const [IBU, setIBU] = useState<number[]>([0, 140]);
+  const [alcohol, setAlcohol] = useState<number[]>([0, 40]);
 
   return (
     <>
@@ -56,6 +56,8 @@ const Filters = () => {
           }}
           valueLabelDisplay="auto"
           getAriaValueText={() => `Min value is ${IBU[0]}, max is ${IBU[1]}`}
+          min={0}
+          max={140}
         />
       </Filter>
       <Filter heading="Alcohol" tooltip="Percentage of alcohol in the beer">
@@ -70,6 +72,8 @@ const Filters = () => {
           getAriaValueText={() =>
             `Min value is ${alcohol[0]}, max is ${alcohol[1]}`
           }
+          min={0}
+          max={40}
         />
       </Filter>
     </>
