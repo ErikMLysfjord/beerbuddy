@@ -23,6 +23,7 @@ const useFetchMoreBeers = (
   sort: string
 ) => {
   const [beers, setBeers] = useState<Beer[]>([]);
+  const userId = localStorage.getItem("userIdBeerBuddy");
 
   const fetchMore = async (reset?: boolean) => {
     await fetch("http://localhost:4000/beer", {
@@ -36,7 +37,7 @@ const useFetchMoreBeers = (
           beers(
             size: ${fetchSize}
             start: ${beers.length}
-            userId: 1
+            userId: ${userId}
             sort: "${sort}" 
             minAbv: ${minAbv}
             maxAbv: ${maxAbv}

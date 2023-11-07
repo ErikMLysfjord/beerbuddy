@@ -212,8 +212,10 @@ const beerResolver = {
         breweries.name,
         beers.id
       ORDER BY
-        ${sorting}
-      LIMIT ${size} OFFSET ${start || 0};
+        ${sorting},
+        beer_name ASC,
+        beer_id
+      LIMIT ${size} OFFSET ${start};
       `
     );
   },
