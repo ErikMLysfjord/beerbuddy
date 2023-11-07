@@ -11,15 +11,31 @@ const onFinishFailed = (
   console.log("Failed:", errorInfo);
 };
 
+const fetchLoginId = async (username: string, uuid: string) => {
+  const res = await fetch("http://localhost:4000/user", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query: `{ loginOrSignUp(username: "${username}" uuid: "${uuid}") }`,
+    }),
+  }).then((r) => r.json());
+
+  if (!localStorage.getItem("userIdBeerBuddy")) {
+    localStorage.setItem("userIdBeerBuddy", res.data.loginOrSignUp);
+  }
+  window.location.replace("/");
+};
+
 const LogInPage = () => {
   const { message } = App.useApp();
   const { width } = useWindowDimensions();
+  const username = localStorage.getItem("userNameBeerBuddy");
 
-  if (localStorage.getItem("userNameBeerBuddy")) {
-    if (!localStorage.getItem("userIdBeerBuddy")) {
-      localStorage.setItem("userIdBeerBuddy", v4());
-    }
-    window.location.replace("/");
+  if (username) {
+    fetchLoginId(username, v4());
   }
 
   const showMessage = (string: { username: string }) => {
@@ -28,11 +44,9 @@ const LogInPage = () => {
 
   const saveUser = (string: { username: string }) => {
     if (!localStorage.getItem("userIdBeerBuddy")) {
-      localStorage.setItem("userIdBeerBuddy", v4());
+      fetchLoginId(string.username, v4());
     }
-
     localStorage.setItem("userNameBeerBuddy", string.username);
-    window.location.replace("/");
   };
 
   if (width < 768) {

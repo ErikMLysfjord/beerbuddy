@@ -18,7 +18,7 @@ CREATE TABLE beers (
 );
 
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
+    id VARCHAR(255) PRIMARY KEY,
     username VARCHAR(255)
 );
 
@@ -26,7 +26,7 @@ CREATE TYPE vote_type AS ENUM ('upvote', 'downvote', 'unreact');
 
 CREATE TABLE votes (
     id SERIAL PRIMARY KEY,
-    user_id INT,
+    user_id VARCHAR(255),
     beer_id INT,
     vote_type vote_type,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
@@ -35,7 +35,7 @@ CREATE TABLE votes (
 
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
-    user_id INT,
+    user_id VARCHAR(255),
     beer_id INT,
     comment_text TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

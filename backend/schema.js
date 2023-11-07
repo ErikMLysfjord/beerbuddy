@@ -5,7 +5,7 @@ const beerSchema = buildSchema(`
 
   type Query {
     beer(id: Int! ): Any
-    beers(size: Int! start: Int userId: Int! sort: String search: String minAbv: Int maxAbv: Int minIbu: Int maxIbu: Int ): Any
+    beers(size: Int! start: Int userId: String! sort: String search: String minAbv: Int maxAbv: Int minIbu: Int maxIbu: Int ): Any
   }
 `);
 
@@ -14,17 +14,17 @@ const userSchema = buildSchema(`
 
   type Query {
     login(username: String!): Any
-    signUp(username: String!): Int
-    updateUser(userId: Int! username: String!): String
-    deleteUser(userId: Int!): String
-    loginOrSignUp(username: String!): Int
+    signUp(username: String!): Any
+    updateUser(userId: String! username: String!): String
+    deleteUser(userId: String!): String
+    loginOrSignUp(username: String! uuid: String!): String
   }
 `);
 
 const actionSchema = buildSchema(`
   type Query {
-    react(userId: Int! beerId: Int! action: String!): String
-    comment(userId: Int! beerId: Int! comment: String!): String
+    react(userId: String! beerId: Int! action: String!): String
+    comment(userId: String! beerId: Int! comment: String!): String
   }
 `);
 

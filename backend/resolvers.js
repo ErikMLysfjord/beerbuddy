@@ -216,7 +216,7 @@ const userResolver = {
     );
   },
 
-  signUp: async ({ username }) => {
+  signUp: async ({ username, uuid }) => {
     const userExists = await sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
@@ -225,7 +225,7 @@ const userResolver = {
     }
 
     const res = await sqlQuery(
-      `INSERT INTO users (username) VALUES ('${username}') RETURNING id;`
+      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}') RETURNING id;`
     );
 
     if (res === "Error in query") {
@@ -243,13 +243,13 @@ const userResolver = {
       throw new Error("Username already exists");
     }
     const user = await sqlQuery(
-      `SELECT id FROM users WHERE id = ${userId} LIMIT 1;`
+      `SELECT id FROM users WHERE id = '${userId}' LIMIT 1;`
     );
     if (user.length === 0) {
       throw new Error("User does not exist");
     }
     const res = sqlQuery(
-      `UPDATE users SET username = '${username}' WHERE id = ${userId};`
+      `UPDATE users SET username = '${username}' WHERE id = '${userId}';`
     );
 
     return "You updated your user!";
@@ -257,16 +257,16 @@ const userResolver = {
 
   deleteUser: async ({ userId }) => {
     const user = await sqlQuery(
-      `SELECT id FROM users WHERE id = ${userId} LIMIT 1;`
+      `SELECT id FROM users WHERE id = '${userId}' LIMIT 1;`
     );
     if (user.length === 0) {
       throw new Error("User does not exist");
     }
-    const res = sqlQuery(`DELETE FROM users WHERE id = ${userId};`);
+    const res = sqlQuery(`DELETE FROM users WHERE id = '${userId}';`);
     return "You deleted your user!";
   },
 
-  loginOrSignUp: async ({ username }) => {
+  loginOrSignUp: async ({ username, uuid }) => {
     const userExists = await sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
@@ -275,7 +275,7 @@ const userResolver = {
     }
 
     const res = await sqlQuery(
-      `INSERT INTO users (username) VALUES ('${username}') RETURNING id;`
+      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}') RETURNING id;`
     );
 
     if (res === "Error in query") {
@@ -293,27 +293,27 @@ const actionResolver = {
     }
 
     const user = await sqlQuery(
-      `SELECT id FROM users WHERE id = ${userId} LIMIT 1;`
+      `SELECT id FROM users WHERE id = '${userId}' LIMIT 1;`
     );
     if (user.length === 0) {
       throw new Error("User does not exist");
     }
 
     const userReaction = await sqlQuery(
-      `SELECT vote_type FROM votes WHERE user_id = ${userId} AND beer_id = ${beerId} LIMIT 1;`
+      `SELECT vote_type FROM votes WHERE user_id = '${userId}' AND beer_id = ${beerId} LIMIT 1;`
     );
     if (userReaction.length > 0) {
       if (userReaction[0].vote_type === action) {
         throw new Error("User has already reacted");
       }
       const res = await sqlQuery(
-        `UPDATE votes SET vote_type = '${action}' WHERE user_id = ${userId} AND beer_id = ${beerId};`
+        `UPDATE votes SET vote_type = '${action}' WHERE user_id = '${userId}' AND beer_id = ${beerId};`
       );
       return "You reacted!";
     }
 
     const res = await sqlQuery(
-      `INSERT INTO votes (user_id, beer_id, vote_type) VALUES (${userId}, ${beerId}, '${action}');`
+      `INSERT INTO votes (user_id, beer_id, vote_type) VALUES ('${userId}', ${beerId}, '${action}');`
     );
 
     if (res === "Error in query") {
@@ -325,7 +325,7 @@ const actionResolver = {
 
   comment: async ({ userId, beerId, comment }) => {
     const res = await sqlQuery(
-      `INSERT INTO comments (user_id, beer_id, comment_text) VALUES (${userId}, ${beerId}, '${comment}');`
+      `INSERT INTO comments (user_id, beer_id, comment_text) VALUES ('${userId}', ${beerId}, '${comment}');`
     );
 
     if (res === "Error in query") {
