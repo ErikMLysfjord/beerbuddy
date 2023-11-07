@@ -1,16 +1,28 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 import BeerCard from "../beer-card/BeerCard";
-import styles from "./BeerList.module.css";
+import style from "./BeerList.module.css";
 import useFetchMoreBeers from "../../utils/useFetchMoreBeers";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Button } from "antd";
+import { FilterContext } from "../../context/FilterContext";
 
 /**
  * BeerList component
  * @returns a list of beers, that should be dynamically loaded when the user scrolls down.
  */
-const BeerList = () => {
-  const { beers, fetchMore } = useFetchMoreBeers(10);
 
+const BeerList = () => {
+  const { searchString, IBU, ABV, styles, sorting } = useContext(FilterContext);
+  const { beers, fetchMore } = useFetchMoreBeers(
+    10,
+    searchString,
+    ABV[0],
+    ABV[1],
+    IBU[0],
+    IBU[1],
+    styles,
+    sorting
+  );
   const [mounted, setMounted] = useState(false);
 
   if (!mounted) {
@@ -20,6 +32,28 @@ const BeerList = () => {
 
   return (
     <main>
+      <Button
+        type="primary"
+        onClick={() => {
+          console.log("searchString: ", searchString);
+          console.log("IBU: ", IBU);
+          console.log("ABV: ", ABV);
+          console.log("styles: ", styles);
+          console.log("sorting: ", sorting);
+        }}
+      >
+        Log filter
+      </Button>
+      <Button
+        type="primary"
+        onClick={(e) => {
+          e.preventDefault();
+          fetchMore(true);
+        }}
+      >
+        apply filter
+      </Button>
+
       <InfiniteScroll
         dataLength={beers.length}
         next={fetchMore}
@@ -37,7 +71,7 @@ const BeerList = () => {
         scrollThreshold={1}
         scrollableTarget="infiniteScrollTarget"
       >
-        <ul className={styles.list}>
+        <ul className={style.list}>
           {beers?.map((beer) => (
             <li key={beer.beer_id}>
               <BeerCard

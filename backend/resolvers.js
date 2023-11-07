@@ -54,7 +54,7 @@ const beerResolver = {
     WHERE beers.id = ${id};
     `);
   },
-  beers: async ({ size, start, userId, sort, search, minAbv, maxAbv, minIbu, maxIbu }) => {
+  beers: async ({ size, start, userId, sort, search, minAbv, maxAbv, minIbu, maxIbu, styles }) => {
     const minAbvs = minAbv || 0;
     const maxAbvs = maxAbv || 40;
 
@@ -152,10 +152,10 @@ const beerResolver = {
       "Wheat Ale",
     ];
 
-    const styles = filters?.styles || [];
+    const beerStyles = styles || [];
 
-    if (styles.includes("Other")) {
-      styles.push(...otherStyles);
+    if (beerStyles.includes("Other")) {
+      beerStyles.push(...otherStyles);
     }
 
     const searchQuery = search || "";
@@ -190,8 +190,8 @@ const beerResolver = {
           beers.ibu > ${minIbus} AND beers.ibu < ${maxIbus} AND
           beers.name LIKE '%${searchQuery}%'
           ${
-            styles.length > 0
-              ? `AND beers.style IN (${styles
+            beerStyles.length > 0
+              ? `AND beers.style IN (${beerStyles
                   .map((style) => `'${style}'`)
                   .join(", ")})`
               : ""

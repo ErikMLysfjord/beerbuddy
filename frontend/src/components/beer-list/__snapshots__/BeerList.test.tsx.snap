@@ -3,6 +3,22 @@
 exports[`BeerList > renders correctly 1`] = `
 <div>
   <main>
+    <button
+      class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary"
+      type="button"
+    >
+      <span>
+        Log filter
+      </span>
+    </button>
+    <button
+      class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary"
+      type="button"
+    >
+      <span>
+        apply filter
+      </span>
+    </button>
     <div
       class="infinite-scroll-component__outerdiv"
     >

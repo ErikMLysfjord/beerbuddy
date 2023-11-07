@@ -1,8 +1,12 @@
 import { Select, Input } from "antd";
 import styles from "./Actionbar.module.css";
 import FilterButton from "../filter-button/FilterButton";
+import { useContext } from "react";
+import { FilterContext } from "../../context/FilterContext";
 
 const Actionbar = () => {
+  const { setSearchString, setSorting } = useContext(FilterContext);
+
   return (
     <div className={styles.wrapper}>
       <label className={styles.sortLabel}>
@@ -17,11 +21,16 @@ const Actionbar = () => {
             { value: "atoz", label: "A-Z" },
             { value: "ztoa", label: "Z-A" },
           ]}
+          onChange={(value) => setSorting(value)}
         />
       </label>
       <label className={styles.searchLabel}>
         Search
-        <Input.Search />
+        <Input.Search
+          onChange={(e) => {
+            setSearchString(e.target.value);
+          }}
+        />
       </label>
       <FilterButton />
     </div>

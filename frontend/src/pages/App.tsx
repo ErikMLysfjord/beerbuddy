@@ -4,6 +4,7 @@ import UserIntro from "../components/user-intro/UserIntro";
 import styles from "./App.module.css";
 import BeerList from "../components/beer-list/BeerList";
 import Filters from "../components/filters/Filters";
+import { FilterContextProvider } from "../context/FilterContext";
 
 function App() {
   if (
@@ -15,14 +16,16 @@ function App() {
 
   return (
     <div className={styles.appBody}>
-      <section className={styles.mainSection} id="infiniteScrollTarget">
-        <UserIntro />
-        <Actionbar />
-        <BeerList />
-      </section>
-      <Sidebar>
-        <Filters />
-      </Sidebar>
+      <FilterContextProvider>
+        <section className={styles.mainSection} id="infiniteScrollTarget">
+          <UserIntro />
+          <Actionbar />
+          <BeerList />
+        </section>
+        <Sidebar>
+          <Filters />
+        </Sidebar>
+      </FilterContextProvider>
     </div>
   );
 }

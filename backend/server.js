@@ -54,7 +54,6 @@ app.use(
 
 (async () => {
   await client.connect();
-
   app.listen(4000, () => {
     console.log(`App listening at http://localhost:4000`);
   });

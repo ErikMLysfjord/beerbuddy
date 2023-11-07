@@ -12,16 +12,19 @@ interface Beer {
  * @param fetchSize - The number of beers to fetch per request.
  * @returns An object containing an array of beers and a function to fetch more beers.
  */
-const useFetchMoreBeers = (fetchSize: number) => {
+const useFetchMoreBeers = (
+  fetchSize: number,
+  searchString: string,
+  minAbv: number,
+  maxAbv: number,
+  minIbu: number,
+  maxIbu: number,
+  styles: string[],
+  sort: string
+) => {
   const [beers, setBeers] = useState<Beer[]>([]);
 
-  const query = `
-      query Beers($size: Int! $start: Int!) {
-        beers(size: $size, start: $start)
-      }
-    `;
-
-  const fetchMore = async () => {
+  const fetchMore = async (reset?: boolean) => {
     await fetch("http://localhost:4000/beer", {
       method: "POST",
       headers: {
@@ -29,12 +32,26 @@ const useFetchMoreBeers = (fetchSize: number) => {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        query,
-        variables: { start: beers.length, size: fetchSize },
+        query: `{ 
+          beers(
+            size: ${fetchSize}
+            start: ${beers.length}
+            userId: 1
+            sort: "${sort}" 
+            minAbv: ${minAbv}
+            maxAbv: ${maxAbv}
+            minIbu: ${minIbu}
+            maxIbu: ${maxIbu}
+            search: "${searchString}"
+            styles: ${JSON.stringify(styles)}
+          )
+        }`,
       }),
     })
       .then((r) => r.json())
-      .then((data) => setBeers([...beers, ...data.data.beers]));
+      .then((data) =>
+        setBeers(reset ? data.data.beers : [...beers, ...data.data.beers])
+      );
   };
 
   return { beers, fetchMore };

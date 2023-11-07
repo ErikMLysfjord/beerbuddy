@@ -1,7 +1,8 @@
 import { Checkbox } from "antd";
 import Filter from "./Filter";
 import { Slider, SliderProps, alpha, styled } from "@mui/material";
-import { useState } from "react";
+import { useContext } from "react";
+import { FilterContext } from "../../context/FilterContext";
 
 const beerStyles = [
   "American IPA",
@@ -35,13 +36,17 @@ const StyledSlider = styled(Slider)<SliderProps>(() => ({
 }));
 
 const Filters = () => {
-  const [IBU, setIBU] = useState<number[]>([0, 140]);
-  const [alcohol, setAlcohol] = useState<number[]>([0, 40]);
+  const { IBU, setIBU, ABV, setABV, setStyles } = useContext(FilterContext);
 
   return (
     <>
       <Filter heading="Style" tooltip="Filter on certain styles of beer.">
-        <Checkbox.Group options={beerStyles} />
+        <Checkbox.Group
+          options={beerStyles}
+          onChange={(checkedValues) =>
+            setStyles(checkedValues.map((value) => value.toString()))
+          }
+        />
       </Filter>
       <Filter
         heading="IBU"
@@ -54,26 +59,22 @@ const Filters = () => {
             e.preventDefault();
             setIBU(newValue as number[]);
           }}
+          max={140}
           valueLabelDisplay="auto"
           getAriaValueText={() => `Min value is ${IBU[0]}, max is ${IBU[1]}`}
-          min={0}
-          max={140}
         />
       </Filter>
       <Filter heading="Alcohol" tooltip="Percentage of alcohol in the beer">
         <StyledSlider
           getAriaLabel={() => "Temperature range"}
-          value={alcohol}
+          value={ABV}
           onChange={(e: Event, newValue: number | number[]) => {
             e.preventDefault();
-            setAlcohol(newValue as number[]);
+            setABV(newValue as number[]);
           }}
-          valueLabelDisplay="auto"
-          getAriaValueText={() =>
-            `Min value is ${alcohol[0]}, max is ${alcohol[1]}`
-          }
-          min={0}
           max={40}
+          valueLabelDisplay="auto"
+          getAriaValueText={() => `Min value is ${ABV[0]}, max is ${ABV[1]}`}
         />
       </Filter>
     </>
