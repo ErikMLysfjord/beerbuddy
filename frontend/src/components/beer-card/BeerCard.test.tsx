@@ -57,6 +57,6 @@ describe("BeerCard", () => {
         reaction="unreact"
       />
     );
-    expect(getByRole("link")).toHaveAttribute("href", "./project2/beer/2");
+    expect(getByRole("link")).toHaveAttribute("href", "./beer/2");
   });
 });

@@ -5,7 +5,7 @@ exports[`BeerCard > renders correctly 1`] = `
   <a
     aria-label="Example beer"
     class="_card_539764"
-    href="./project2/beer/2"
+    href="./beer/2"
   >
     <div
       class="_textWrapper_539764"

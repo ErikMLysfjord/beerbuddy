@@ -10,12 +10,12 @@ exports[`LoginFormDesktop > matches snapshot 1`] = `
     >
       <a
         class="_wrapper_4f3c83"
-        href="/"
+        href="/project2"
       >
         <img
           alt="BeerBuddy logo"
           class="_icon_4f3c83"
-          src="/teku.svg"
+          src="/project2/teku.svg"
         />
         <h1
           class="_heading_4f3c83"

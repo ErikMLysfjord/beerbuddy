@@ -94,7 +94,7 @@ const BeerPage = () => {
       <div className={styles.logo}>
         <Logo />
       </div>
-      <a href="/" className={styles.menuButton}>
+      <a href="/project2" className={styles.menuButton}>
         {"Back to menu"}
       </a>
       <p className={styles.breweryName}>{beer?.brewery_name}</p>
@@ -110,26 +110,26 @@ const BeerPage = () => {
       <div className={styles.info}>
         <BeerAttribute
           attribute="Style"
-          icon={"/bottle.svg"}
+          icon={"/project2/bottle.svg"}
           altText={"Bottle icon"}
           value={beer.style}
         />
         <BeerAttribute
           attribute="ABV"
-          icon={"/percent.svg"}
+          icon={"/project2/percent.svg"}
           altText={"Percentage icon"}
           value={String((beer.abv * 100).toFixed(1)) + "%"}
         />
         {beer.ibu !== null && (
           <BeerAttribute
-            icon={"/hop.svg"}
+            icon={"/project2/hop.svg"}
             altText={"Hop icon"}
             attribute="IBU"
             value={String(beer.ibu).split(".")[0]}
           />
         )}
         <BeerAttribute
-          icon={"/volume.svg"}
+          icon={"/project2/volume.svg"}
           altText={"Glass volume"}
           attribute="Volume"
           value={beer.ounces + "oz"}

@@ -38,7 +38,7 @@ const fetchLoginId = async (
   }
 
   await setTimeout(() => {
-    window.location.replace("/");
+    window.location.replace("/project2");
   }, 2000);
 };
 

@@ -13,7 +13,7 @@ interface BeerCardInterface {
 const BeerCard = (props: BeerCardInterface) => {
   return (
     <a
-      href={"./project2/beer/" + props.beer_id}
+      href={"./beer/" + props.beer_id}
       aria-label={props.name}
       className={styles.card}
     >

@@ -10,6 +10,8 @@ import { FilterContext } from "../../context/FilterContext";
  * @returns a list of beers, that should be dynamically loaded when the user scrolls down.
  */
 
+type ReactionType = "unreact" | "upvote" | "downvote";
+
 interface BeerListProps {
   beers: {
     beer_id: number;
@@ -17,6 +19,7 @@ interface BeerListProps {
     brewery_name: string;
     vote_sum: number;
     beer_count: number;
+    reaction: ReactionType;
   }[];
   fetchMore: (reset?: boolean) => Promise<void>;
 }
