@@ -13,7 +13,6 @@ vi.mock("react", () => ({
   useContext: vi.fn(),
 }));
 
-
 describe("Filters", () => {
   const setState = vi.fn();
 
@@ -21,15 +20,15 @@ describe("Filters", () => {
     (useStateMock as jest.Mock).mockImplementation((init) => [init, setState]);
     (useContext as jest.Mock).mockImplementation(() => ({
       searchString: "",
-      setSearchString: () => { },
+      setSearchString: () => {},
       IBU: [0, 140],
-      setIBU: () => { },
+      setIBU: () => {},
       ABV: [0, 40],
-      setABV: () => { },
+      setABV: () => {},
       styles: [],
-      setStyles: () => { },
+      setStyles: () => {},
       sorting: "top",
-      setSorting: () => { },
+      setSorting: () => {},
     }));
   });
 
@@ -80,7 +79,6 @@ describe("Filters", () => {
     expect(screen.getByText("Alcohol")).toBeInstanceOf(HTMLHeadingElement);
   });
 });
-
 
 // it("changes value of IBU slider", () => {
 //   render(<Filters />);
