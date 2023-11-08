@@ -80,58 +80,103 @@ describe("Filters", () => {
   });
 });
 
-// it("changes value of IBU slider", () => {
-//   render(<Filters />);
-//   const minSlider = screen.getAllByRole("slider")[0];
-//   const maxSlider = screen.getAllByRole("slider")[1];
-//   act(() => {
-//     fireEvent.change(minSlider, { target: { value: 25 } });
-//   });
-//   expect(setState).toHaveBeenCalledTimes(1);
-//   expect(setState).toHaveBeenCalledWith([25, 140]);
+it("changes value of IBU slider", () => {
+  const setIBU = vi.fn();
 
-//   setState.mockReset();
-//   act(() => {
-//     fireEvent.change(maxSlider, { target: { value: 30 } });
-//   });
+  // Must mock again because it can't be done in beforeEach since it needs a const
+  (useContext as jest.Mock).mockImplementation(() => ({
+    searchString: "",
+    setSearchString: () => {},
+    IBU: [0, 140],
+    setIBU,
+    ABV: [0, 40],
+    setABV: () => {},
+    styles: [],
+    setStyles: () => {},
+    sorting: "top",
+    setSorting: () => {},
+  }));
 
-//   expect(setState).toHaveBeenCalledTimes(1);
-//   expect(setState).toHaveBeenCalledWith([0, 30]);
-//   setState.mockReset();
-// });
+  render(<Filters />);
+  const minSlider = screen.getAllByRole("slider")[0];
+  const maxSlider = screen.getAllByRole("slider")[1];
+  act(() => {
+    fireEvent.change(minSlider, { target: { value: 25 } });
+  });
 
-// it("changes value of alcohol slider", () => {
-//   render(<Filters />);
-//   const minSlider = screen.getAllByRole("slider")[2];
-//   const maxSlider = screen.getAllByRole("slider")[3];
-//   act(() => {
-//     fireEvent.change(minSlider, { target: { value: 10 } });
-//   });
-//   expect(setState).toHaveBeenCalledTimes(1);
-//   expect(setState).toHaveBeenCalledWith([10, 40]);
+  expect(setIBU).toHaveBeenCalledTimes(1);
+  expect(setIBU).toHaveBeenCalledWith([25, 140]);
 
-//   setState.mockReset();
-//   act(() => {
-//     fireEvent.change(maxSlider, { target: { value: 30 } });
-//   });
+  act(() => {
+    fireEvent.change(maxSlider, { target: { value: 30 } });
+  });
 
-//   expect(setState).toHaveBeenCalledTimes(1);
-//   expect(setState).toHaveBeenCalledWith([0, 30]);
-// });
+  expect(setIBU).toHaveBeenCalledTimes(2);
+  expect(setIBU).toHaveBeenCalledWith([0, 30]);
+});
 
-// it("changes value of styles", () => {
-//   render(<Filters />);
-//   const checkbox = screen.getByLabelText("American IPA");
-//   act(() => {
-//     fireEvent.click(checkbox);
-//   });
-//   expect(setState).toHaveBeenCalledTimes(1);
-//   expect(setState).toHaveBeenCalledWith(["American IPA"]);
+it("changes value of alcohol slider", () => {
+  const setABV = vi.fn();
 
-//   setState.mockReset();
-//   act(() => {
-//     fireEvent.click(checkbox);
-//   });
-//   expect(setState).toHaveBeenCalledTimes(1);
-//   expect(setState).toHaveBeenCalledWith([]);
-// });
+  // Must mock again because it can't be done in beforeEach since it needs a const
+  (useContext as jest.Mock).mockImplementation(() => ({
+    searchString: "",
+    setSearchString: () => {},
+    IBU: [0, 140],
+    setIBU: () => {},
+    ABV: [0, 40],
+    setABV,
+    styles: [],
+    setStyles: () => {},
+    sorting: "top",
+    setSorting: () => {},
+  }));
+
+  render(<Filters />);
+  const minSlider = screen.getAllByRole("slider")[2];
+  const maxSlider = screen.getAllByRole("slider")[3];
+  act(() => {
+    fireEvent.change(minSlider, { target: { value: 10 } });
+  });
+  expect(setABV).toHaveBeenCalledTimes(1);
+  expect(setABV).toHaveBeenCalledWith([10, 40]);
+
+  act(() => {
+    fireEvent.change(maxSlider, { target: { value: 30 } });
+  });
+
+  expect(setABV).toHaveBeenCalledTimes(2);
+  expect(setABV).toHaveBeenCalledWith([0, 30]);
+});
+
+it("changes value of styles", () => {
+  const setStyles = vi.fn();
+
+  // Must mock again because it can't be done in beforeEach since it needs a const
+  (useContext as jest.Mock).mockImplementation(() => ({
+    searchString: "",
+    setSearchString: () => {},
+    IBU: [0, 140],
+    setIBU: () => {},
+    ABV: [0, 40],
+    setABV: () => {},
+    styles: [],
+    setStyles,
+    sorting: "top",
+    setSorting: () => {},
+  }));
+
+  render(<Filters />);
+  const checkbox = screen.getByLabelText("American IPA");
+  act(() => {
+    fireEvent.click(checkbox);
+  });
+  expect(setStyles).toHaveBeenCalledTimes(1);
+  expect(setStyles).toHaveBeenCalledWith(["American IPA"]);
+
+  act(() => {
+    fireEvent.click(checkbox);
+  });
+  expect(setStyles).toHaveBeenCalledTimes(2);
+  expect(setStyles).toHaveBeenCalledWith([]);
+});
