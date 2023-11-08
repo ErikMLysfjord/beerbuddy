@@ -13,7 +13,6 @@ const fetchBeer = async (id: number, onSuccess: (data: Beer) => void) => {
     body: JSON.stringify(query),
   })
     .then((response) => {
-      console.log("response:", response);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }

@@ -7,6 +7,7 @@ import useFetchBeer from "../utils/useFetchBeer";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CommentItem from "../components/comment-item/CommentItem";
 import { useEffect, useState } from "react";
+import CommentBar from "../components/comment-bar/CommentBar";
 
 type CommentInterface = {
   username: string;
@@ -51,6 +52,7 @@ const BeerPage = () => {
   const { id } = useParams<{ id: string }>();
   const [commentsLoading, setCommentsLoading] = useState(false);
   const [offset, setOffset] = useState(0);
+  const [newComment, setNewComment] = useState(false);
 
   const limit = 5;
   const [comments, setComments] = useState<CommentInterface[]>([]);
@@ -60,14 +62,16 @@ const BeerPage = () => {
     if (id === undefined) return;
 
     setCommentsLoading(true);
+    setOffset(0);
     fetchComments(id, 0)
       .then((data) => {
         setComments(data);
       })
       .finally(() => {
         setCommentsLoading(false);
+        setNewComment(false);
       });
-  }, [id]);
+  }, [id, newComment]);
 
   const { beer, isLoading, isError } = useFetchBeer({
     id: Number(id),
@@ -133,7 +137,7 @@ const BeerPage = () => {
       </div>
       <hr className={styles.divider} />
       <InfiniteScroll
-        style={{ overflow: "hidden" }}
+        style={{ overflow: "hidden", minHeight: "35vh" }}
         dataLength={comments.length}
         next={() => {
           /* Fetch the next comments we need, and add them to the comments state */
@@ -149,7 +153,6 @@ const BeerPage = () => {
           </div>
         }
         scrollThreshold={1}
-        scrollableTarget="infiniteScrollTarget"
       >
         <ul className={styles.commentListContainer}>
           {commentsLoading ? (
@@ -172,6 +175,7 @@ const BeerPage = () => {
           )}
         </ul>
       </InfiniteScroll>
+      <CommentBar onSuccess={() => setNewComment(true)} />
     </main>
   );
 };
