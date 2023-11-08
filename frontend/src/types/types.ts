@@ -8,5 +8,5 @@ export type Beer = {
   brewery_name: string;
   rating: number;
   vote_count: number;
-  comments: string;
+  comment_count: number;
 };

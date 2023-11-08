@@ -81,6 +81,11 @@
   outline: 2px dashed #ffcc48;
 }
 
+.menuButton:hover {
+  color: #000;
+  background-color: #ffcc48;
+}
+
 .centerContent {
   display: flex;
   justify-content: center;
@@ -115,7 +120,12 @@
 .commentListContainer {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
+  padding: 0;
+}
+
+.listItem {
+  list-style: none;
 }
 
 @media screen and (max-width: 1000px) {

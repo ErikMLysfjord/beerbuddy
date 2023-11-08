@@ -4,6 +4,7 @@ const beerSchema = buildSchema(`
   scalar Any
 
   type Query {
+    comments(id: Int! size: Int! start: Int ): Any
     beer(id: Int! ): Any
     beers(size: Int! start: Int userId: String! sort: String search: String minAbv: Int maxAbv: Int minIbu: Int maxIbu: Int styles: Any ): Any
   }

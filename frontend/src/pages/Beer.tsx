@@ -4,9 +4,71 @@ import { useParams } from "react-router";
 import Logo from "../components/logo/Logo";
 import { Spin } from "antd";
 import useFetchBeer from "../utils/useFetchBeer";
+import InfiniteScroll from "react-infinite-scroll-component";
+import CommentItem from "../components/comment-item/CommentItem";
+import { useEffect, useState } from "react";
+
+type CommentInterface = {
+  username: string;
+  comment_text: string;
+  created_at: string;
+};
+
+/**
+ * Fetches comments from the backend.
+ * @param id - The ID of the beer to fetch comments for.
+ * @param offset - The offset to start fetching comments from.
+ * @returns - An array of comments.
+ */
+const fetchComments = async (id: string, offset: number) => {
+  const query = {
+    query: `{ comments(id: ${id}, size: 5, start: ${offset}) }`,
+  };
+
+  return await fetch("http://localhost:4000/beer", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(query),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      return data.data.comments;
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+    });
+};
 
 const BeerPage = () => {
   const { id } = useParams<{ id: string }>();
+  const [commentsLoading, setCommentsLoading] = useState(false);
+  const [offset, setOffset] = useState(0);
+
+  const limit = 5;
+  const [comments, setComments] = useState<CommentInterface[]>([]);
+
+  useEffect(() => {
+    /* If there is no ID, then we must do an early return */
+    if (id === undefined) return;
+
+    setCommentsLoading(true);
+    fetchComments(id, 0)
+      .then((data) => {
+        setComments(data);
+      })
+      .finally(() => {
+        setCommentsLoading(false);
+      });
+  }, [id]);
+
   const { beer, isLoading, isError } = useFetchBeer({
     id: Number(id),
   });
@@ -19,7 +81,7 @@ const BeerPage = () => {
     );
   }
 
-  if (isError) {
+  if (isError || id === undefined) {
     return <div>Error fetching beer</div>;
   }
 
@@ -70,24 +132,46 @@ const BeerPage = () => {
         />
       </div>
       <hr className={styles.divider} />
-      <div className={styles.commentListContainer}>
-        {/* <InfiniteScroll
-            dataLength={getCommentsLength(10)}
-            next={fetchMoreComments}
-            hasMore={comments.length < getCommentsLength(10) ? true : false}
-            loader={<Spin />}
-            scrollThreshold={1}
-          >
-            {comments.map((comment) => (
-              <CommentItem
-                key={comments.indexOf(comment)}
-                user={comment.user_name}
-                comment={comment.comment_text}
-                timestamp={comment.created_at}
-              />
-            ))}
-          </InfiniteScroll> */}
-      </div>
+      <InfiniteScroll
+        style={{ overflow: "hidden" }}
+        dataLength={comments.length}
+        next={() => {
+          /* Fetch the next comments we need, and add them to the comments state */
+          fetchComments(id, offset + limit).then((data) => {
+            setComments([...comments, ...data]);
+            setOffset(offset + limit);
+          });
+        }}
+        hasMore={comments.length < beer.comment_count}
+        loader={
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Spin size="default" />
+          </div>
+        }
+        scrollThreshold={1}
+        scrollableTarget="infiniteScrollTarget"
+      >
+        <ul className={styles.commentListContainer}>
+          {commentsLoading ? (
+            <div className={styles.centerContent}>
+              <Spin size="default" />
+            </div>
+          ) : (
+            comments.map((comment) => (
+              <li
+                className={styles.listItem}
+                key={`${comment.username}-${comment.created_at}}`}
+              >
+                <CommentItem
+                  username={comment.username}
+                  commentText={comment.comment_text}
+                  timestamp={comment.created_at}
+                />
+              </li>
+            ))
+          )}
+        </ul>
+      </InfiniteScroll>
     </main>
   );
 };

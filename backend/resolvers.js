@@ -19,6 +19,20 @@ const sqlQuery = async (query) => {
 };
 
 const beerResolver = {
+  comments: async ({ id, size, start }) => {
+    return await sqlQuery(
+      `SELECT 
+        comments.comment_text, 
+        comments.created_at, 
+        users.username 
+      FROM comments 
+      JOIN users 
+      ON comments.user_id = users.id 
+      WHERE comments.beer_id = ${id} 
+      ORDER BY created_at DESC
+      LIMIT ${size} OFFSET ${start || 0};`
+    );
+  },
   beer: async ({ id }) => {
     return await sqlQuery(`
       SELECT 
@@ -31,7 +45,7 @@ const beerResolver = {
         breweries.name AS brewery_name, 
         rating.rating, 
         rating.vote_count, 
-        comments.comments
+        comments.comment_count
     FROM beers 
     JOIN breweries ON beers.brewery_id = breweries.id 
     LEFT JOIN (
@@ -45,7 +59,7 @@ const beerResolver = {
     LEFT JOIN (
         SELECT 
             beer_id, 
-            ARRAY_AGG((comment_text, created_at, username) ORDER BY created_at DESC) AS comments
+            COUNT(comment_text) AS comment_count
         FROM comments 
         JOIN users ON comments.user_id = users.id
         GROUP BY beer_id

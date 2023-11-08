@@ -37,7 +37,7 @@ const useFetchMoreBeers = (
           beers(
             size: ${fetchSize}
             start: ${beers.length}
-            userId: ${userId}
+            userId: "${userId}"
             sort: "${sort}" 
             minAbv: ${minAbv}
             maxAbv: ${maxAbv}
