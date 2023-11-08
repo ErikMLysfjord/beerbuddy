@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 const onFinishFailed = (
   errorInfo: ValidateErrorEntity<{ username: string }>
 ) => {
-  console.log("Failed:", errorInfo);
+  console.error("Failed:", errorInfo);
 };
 
 const fetchLoginId = async (

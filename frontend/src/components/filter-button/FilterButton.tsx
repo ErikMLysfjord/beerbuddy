@@ -8,7 +8,6 @@ const FilterButton = () => {
   const [showFilter, setShowFilter] = useState(false);
 
   const handleClick = () => {
-    console.log("Filter button clicked");
     setShowFilter(!showFilter);
   };
 
