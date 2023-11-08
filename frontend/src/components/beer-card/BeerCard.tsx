@@ -1,11 +1,13 @@
 import Voter from "../voter/Voter";
 import styles from "./BeerCard.module.css";
 
+type ReactionType = "unreact" | "upvote" | "downvote";
 interface BeerCardInterface {
   name: string;
   brewery: string;
   beer_id: number;
   votes: number;
+  reaction: ReactionType;
 }
 
 const BeerCard = (props: BeerCardInterface) => {
@@ -19,7 +21,11 @@ const BeerCard = (props: BeerCardInterface) => {
         <h1 className={styles.beerName}>{props.name}</h1>
         <p className={styles.breweryName}>{props.brewery}</p>
       </div>
-      <Voter votes={props.votes} />
+      <Voter
+        votes={props.votes}
+        reaction={props.reaction}
+        beerId={props.beer_id}
+      />
     </a>
   );
 };

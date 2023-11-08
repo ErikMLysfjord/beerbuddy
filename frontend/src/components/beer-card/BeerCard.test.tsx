@@ -11,6 +11,7 @@ describe("BeerCard", () => {
         brewery={"Example brewery"}
         beer_id={10}
         votes={10}
+        reaction="unreact"
       />
     );
     expect(await axe(container)).toHaveNoViolations();
@@ -23,6 +24,7 @@ describe("BeerCard", () => {
         name={"Example beer"}
         brewery={"Example brewery"}
         votes={10}
+        reaction="unreact"
       />
     );
     expect(container).toMatchSnapshot();
@@ -35,6 +37,7 @@ describe("BeerCard", () => {
         name={"Example beer"}
         brewery={"Example brewery"}
         votes={10}
+        reaction="unreact"
       />
     );
     expect(getByText("Example beer")).toBeInTheDocument();
@@ -51,6 +54,7 @@ describe("BeerCard", () => {
         name={"Example beer"}
         brewery={"Example brewery"}
         votes={10}
+        reaction="unreact"
       />
     );
     expect(getByRole("link")).toHaveAttribute("href", "./project2/beer/2");

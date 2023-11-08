@@ -1,12 +1,14 @@
 import { useContext, useState } from "react";
 import { FilterContext } from "../context/FilterContext";
 
+type ReactionType = "unreact" | "upvote" | "downvote";
 interface Beer {
   beer_id: number;
   beer_name: string;
   brewery_name: string;
   vote_sum: number;
   beer_count: number;
+  reaction: ReactionType;
 }
 
 /**

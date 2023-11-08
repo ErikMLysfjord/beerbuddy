@@ -39,6 +39,7 @@ exports[`BeerList > renders correctly 1`] = `
                 <button
                   aria-label="Upvote this beer"
                   class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary ant-btn-icon-only"
+                  style="filter: brightness(0.8);"
                   type="button"
                 >
                   <span
@@ -68,11 +69,12 @@ exports[`BeerList > renders correctly 1`] = `
                 <p
                   class="_count_0f0ab2"
                 >
-                  0
+                  NaN
                 </p>
                 <button
                   aria-label="Downvote this beer"
                   class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary ant-btn-icon-only"
+                  style="filter: brightness(0.8);"
                   type="button"
                 >
                   <span
@@ -128,6 +130,7 @@ exports[`BeerList > renders correctly 1`] = `
                 <button
                   aria-label="Upvote this beer"
                   class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary ant-btn-icon-only"
+                  style="filter: brightness(0.8);"
                   type="button"
                 >
                   <span
@@ -157,11 +160,12 @@ exports[`BeerList > renders correctly 1`] = `
                 <p
                   class="_count_0f0ab2"
                 >
-                  0
+                  NaN
                 </p>
                 <button
                   aria-label="Downvote this beer"
                   class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary ant-btn-icon-only"
+                  style="filter: brightness(0.8);"
                   type="button"
                 >
                   <span
@@ -217,6 +221,7 @@ exports[`BeerList > renders correctly 1`] = `
                 <button
                   aria-label="Upvote this beer"
                   class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary ant-btn-icon-only"
+                  style="filter: brightness(0.8);"
                   type="button"
                 >
                   <span
@@ -246,11 +251,12 @@ exports[`BeerList > renders correctly 1`] = `
                 <p
                   class="_count_0f0ab2"
                 >
-                  0
+                  NaN
                 </p>
                 <button
                   aria-label="Downvote this beer"
                   class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary ant-btn-icon-only"
+                  style="filter: brightness(0.8);"
                   type="button"
                 >
                   <span
@@ -306,6 +312,7 @@ exports[`BeerList > renders correctly 1`] = `
                 <button
                   aria-label="Upvote this beer"
                   class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary ant-btn-icon-only"
+                  style="filter: brightness(0.8);"
                   type="button"
                 >
                   <span
@@ -335,11 +342,12 @@ exports[`BeerList > renders correctly 1`] = `
                 <p
                   class="_count_0f0ab2"
                 >
-                  0
+                  NaN
                 </p>
                 <button
                   aria-label="Downvote this beer"
                   class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary ant-btn-icon-only"
+                  style="filter: brightness(0.8);"
                   type="button"
                 >
                   <span

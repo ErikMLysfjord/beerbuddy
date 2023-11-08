@@ -64,6 +64,7 @@ const BeerList = (props: BeerListProps) => {
                 name={beer.beer_name}
                 brewery={beer.brewery_name}
                 votes={beer.vote_sum}
+                reaction={beer.reaction}
               />
             </li>
           ))}
