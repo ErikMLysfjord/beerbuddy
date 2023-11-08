@@ -4,16 +4,25 @@ import styles from "./Sidebar.module.css";
 
 interface SidebarProps {
   children: React.ReactNode;
+  fetchMore: (reset?: boolean) => Promise<void>;
 }
 
-const Sidebar = (props: SidebarProps) => {
+const Sidebar = ({ children, fetchMore }: SidebarProps) => {
   return (
     <section className={styles.container}>
       <div>
         <Logo />
-        <main>{props.children}</main>
+        <main>{children}</main>
       </div>
-      <Button type="primary">Apply Filters</Button>
+      <Button
+        type="primary"
+        onClick={(e) => {
+          e.preventDefault();
+          fetchMore(true);
+        }}
+      >
+        Apply Filters
+      </Button>
     </section>
   );
 };

@@ -36,7 +36,8 @@ const StyledSlider = styled(Slider)<SliderProps>(() => ({
 }));
 
 const Filters = () => {
-  const { IBU, setIBU, ABV, setABV, setStyles } = useContext(FilterContext);
+  const { IBU, setIBU, ABV, setABV, setStyles, styles } =
+    useContext(FilterContext);
 
   return (
     <>
@@ -46,6 +47,7 @@ const Filters = () => {
           onChange={(checkedValues) =>
             setStyles(checkedValues.map((value) => value.toString()))
           }
+          value={styles}
         />
       </Filter>
       <Filter

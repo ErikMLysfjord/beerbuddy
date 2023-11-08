@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 interface FilterContextType {
   searchString: string;
@@ -29,11 +29,30 @@ export const FilterContext = createContext<FilterContextType>({
 export const FilterContextProvider: React.FC<
   React.PropsWithChildren<object>
 > = ({ children }) => {
-  const [searchString, setSearchString] = useState("");
-  const [IBU, setIBU] = useState<number[]>([0, 140]);
-  const [ABV, setABV] = useState<number[]>([0, 40]);
-  const [styles, setStyles] = useState<string[]>([]);
-  const [sorting, setSorting] = useState<string>("top");
+  const [searchString, setSearchString] = useState(
+    localStorage.getItem("searchString") || ""
+  );
+  const [IBU, setIBU] = useState<number[]>(
+    JSON.parse(localStorage.getItem("IBU") || "[0, 140]") as number[]
+  );
+  const [ABV, setABV] = useState<number[]>(
+    JSON.parse(localStorage.getItem("ABV") || "[0, 40]") as number[]
+  );
+  const [styles, setStyles] = useState<string[]>(
+    JSON.parse(localStorage.getItem("styles") || "[]") as string[]
+  );
+  const [sorting, setSorting] = useState<string>(
+    localStorage.getItem("sorting") || "top"
+  );
+
+  // update localStorage when searchString changes
+  useEffect(() => {
+    localStorage.setItem("searchString", searchString);
+    localStorage.setItem("IBU", JSON.stringify(IBU));
+    localStorage.setItem("ABV", JSON.stringify(ABV));
+    localStorage.setItem("styles", JSON.stringify(styles));
+    localStorage.setItem("sorting", sorting);
+  }, [searchString, IBU, ABV, styles, sorting]);
 
   return (
     <FilterContext.Provider

@@ -1,9 +1,8 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 import BeerCard from "../beer-card/BeerCard";
 import style from "./BeerList.module.css";
-import useFetchMoreBeers from "../../utils/useFetchMoreBeers";
-import { useContext, useState } from "react";
-import { Button } from "antd";
+import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
 
 /**
@@ -11,53 +10,39 @@ import { FilterContext } from "../../context/FilterContext";
  * @returns a list of beers, that should be dynamically loaded when the user scrolls down.
  */
 
-const BeerList = () => {
-  const { searchString, IBU, ABV, styles, sorting } = useContext(FilterContext);
-  const { beers, fetchMore } = useFetchMoreBeers(
-    10,
-    searchString,
-    ABV[0],
-    ABV[1],
-    IBU[0],
-    IBU[1],
-    styles,
-    sorting
-  );
+interface BeerListProps {
+  beers: {
+    beer_id: number;
+    beer_name: string;
+    brewery_name: string;
+    vote_sum: number;
+    beer_count: number;
+  }[];
+  fetchMore: (reset?: boolean) => Promise<void>;
+}
+
+const BeerList = (props: BeerListProps) => {
+  const { searchString, sorting } = useContext(FilterContext);
   const [mounted, setMounted] = useState(false);
 
   if (!mounted) {
     setMounted(true);
-    fetchMore();
+    props.fetchMore();
   }
+
+  useEffect(() => {
+    props.fetchMore(true);
+    // The following line is to ignore the lint warning. We know this is bad practice.
+    // However, we will find a fix for this and remove it for the next delivery when we have more time.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchString, sorting]);
 
   return (
     <main>
-      <Button
-        type="primary"
-        onClick={() => {
-          console.log("searchString: ", searchString);
-          console.log("IBU: ", IBU);
-          console.log("ABV: ", ABV);
-          console.log("styles: ", styles);
-          console.log("sorting: ", sorting);
-        }}
-      >
-        Log filter
-      </Button>
-      <Button
-        type="primary"
-        onClick={(e) => {
-          e.preventDefault();
-          fetchMore(true);
-        }}
-      >
-        apply filter
-      </Button>
-
       <InfiniteScroll
-        dataLength={beers.length}
-        next={fetchMore}
-        hasMore={beers.length < 2410 ? true : false}
+        dataLength={props.beers.length}
+        next={props.fetchMore}
+        hasMore={props.beers?.length < props.beers[0]?.beer_count}
         loader={
           <p style={{ textAlign: "center" }}>
             <b>Loading...</b>
@@ -68,11 +53,11 @@ const BeerList = () => {
             <b>Yay! You have seen it all</b>
           </p>
         }
-        scrollThreshold={1}
+        scrollThreshold={0.99}
         scrollableTarget="infiniteScrollTarget"
       >
         <ul className={style.list}>
-          {beers?.map((beer) => (
+          {props.beers?.map((beer) => (
             <li key={beer.beer_id}>
               <BeerCard
                 beer_id={beer.beer_id}

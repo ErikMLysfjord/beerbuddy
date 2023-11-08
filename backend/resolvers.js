@@ -202,7 +202,8 @@ const beerResolver = {
         breweries.name AS brewery_name, 
         beers.id AS beer_id,
         SUM(CASE WHEN votes.vote_type = 'upvote' THEN 1 WHEN votes.vote_type = 'downvote' THEN -1 ELSE 0 END) AS vote_sum,
-        COALESCE((SELECT vote_type FROM votes JOIN users ON votes.user_id = users.id WHERE users.id = '${userId}' AND votes.beer_id = beers.id), 'unreact') AS reaction
+        COALESCE((SELECT vote_type FROM votes JOIN users ON votes.user_id = users.id WHERE users.id = '${userId}' AND votes.beer_id = beers.id), 'unreact') AS reaction,
+        COUNT(beers.id) OVER() AS beer_count
       FROM 
         beers
       JOIN 

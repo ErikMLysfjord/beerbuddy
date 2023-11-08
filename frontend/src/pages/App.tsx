@@ -1,10 +1,10 @@
 import Sidebar from "../components/sidebar/Sidebar";
 import Actionbar from "../components/actionbar/Actionbar";
 import UserIntro from "../components/user-intro/UserIntro";
-import styles from "./App.module.css";
 import BeerList from "../components/beer-list/BeerList";
 import Filters from "../components/filters/Filters";
-import { FilterContextProvider } from "../context/FilterContext";
+import useFetchMoreBeers from "../utils/useFetchMoreBeers";
+import appStyles from "./App.module.css";
 
 function App() {
   if (
@@ -13,19 +13,18 @@ function App() {
   ) {
     window.location.replace("/project2/login");
   }
+  const { beers, fetchMore } = useFetchMoreBeers();
 
   return (
-    <div className={styles.appBody}>
-      <FilterContextProvider>
-        <section className={styles.mainSection} id="infiniteScrollTarget">
-          <UserIntro />
-          <Actionbar />
-          <BeerList />
-        </section>
-        <Sidebar>
-          <Filters />
-        </Sidebar>
-      </FilterContextProvider>
+    <div className={appStyles.appBody}>
+      <section className={appStyles.mainSection} id="infiniteScrollTarget">
+        <UserIntro />
+        <Actionbar />
+        <BeerList beers={beers} fetchMore={fetchMore} />
+      </section>
+      <Sidebar fetchMore={fetchMore}>
+        <Filters />
+      </Sidebar>
     </div>
   );
 }

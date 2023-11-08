@@ -7,30 +7,33 @@ import { App as AntdApp } from "antd";
 import "./index.css";
 import LogInPage from "./pages/LogIn.tsx";
 import BeerPage from "./pages/Beer.tsx";
+import { FilterContextProvider } from "./context/FilterContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: "#FFCC48",
-          borderRadius: 5,
-          colorPrimaryBg: "#1f1f1f",
-          colorError: "#fe6b6b",
-        },
-        algorithm: theme.darkAlgorithm,
-      }}
-    >
-      <AntdApp>
-        <BrowserRouter basename="/project2">
-          <Routes>
-            <Route path="/login" element={<LogInPage />} />
-            <Route path="/" element={<App />} />
-            <Route path="/beer/:id" element={<BeerPage />} />
-            <Route path="*" element={<h1>Not Found</h1>} />
-          </Routes>
-        </BrowserRouter>
-      </AntdApp>
-    </ConfigProvider>
+    <FilterContextProvider>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "#FFCC48",
+            borderRadius: 5,
+            colorPrimaryBg: "#1f1f1f",
+            colorError: "#fe6b6b",
+          },
+          algorithm: theme.darkAlgorithm,
+        }}
+      >
+        <AntdApp>
+          <BrowserRouter basename="/project2">
+            <Routes>
+              <Route path="/login" element={<LogInPage />} />
+              <Route path="/" element={<App />} />
+              <Route path="/beer/:id" element={<BeerPage />} />
+              <Route path="*" element={<h1>Not Found</h1>} />
+            </Routes>
+          </BrowserRouter>
+        </AntdApp>
+      </ConfigProvider>
+    </FilterContextProvider>
   </React.StrictMode>
 );

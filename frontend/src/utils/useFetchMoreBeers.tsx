@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { FilterContext } from "../context/FilterContext";
 
 interface Beer {
   beer_id: number;
   beer_name: string;
   brewery_name: string;
   vote_sum: number;
+  beer_count: number;
 }
 
 /**
@@ -12,16 +14,9 @@ interface Beer {
  * @param fetchSize - The number of beers to fetch per request.
  * @returns An object containing an array of beers and a function to fetch more beers.
  */
-const useFetchMoreBeers = (
-  fetchSize: number,
-  searchString: string,
-  minAbv: number,
-  maxAbv: number,
-  minIbu: number,
-  maxIbu: number,
-  styles: string[],
-  sort: string
-) => {
+
+const useFetchMoreBeers = () => {
+  const { searchString, IBU, ABV, styles, sorting } = useContext(FilterContext);
   const [beers, setBeers] = useState<Beer[]>([]);
   const userId = localStorage.getItem("userIdBeerBuddy");
 
@@ -35,14 +30,14 @@ const useFetchMoreBeers = (
       body: JSON.stringify({
         query: `{ 
           beers(
-            size: ${fetchSize}
-            start: ${beers.length}
+            size: 10
+            start: ${reset ? 0 : beers.length}
             userId: "${userId}"
-            sort: "${sort}" 
-            minAbv: ${minAbv}
-            maxAbv: ${maxAbv}
-            minIbu: ${minIbu}
-            maxIbu: ${maxIbu}
+            sort: "${sorting}" 
+            minAbv: ${ABV[0]}
+            maxAbv: ${ABV[1]}
+            minIbu: ${IBU[0]}
+            maxIbu: ${IBU[1]}
             search: "${searchString}"
             styles: ${JSON.stringify(styles)}
           )
@@ -53,6 +48,10 @@ const useFetchMoreBeers = (
       .then((data) =>
         setBeers(reset ? data.data.beers : [...beers, ...data.data.beers])
       );
+
+    reset
+      ? document.getElementById("infiniteScrollTarget")?.scrollTo(0, 0)
+      : null;
   };
 
   return { beers, fetchMore };
