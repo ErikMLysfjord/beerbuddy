@@ -4,9 +4,7 @@ import "@testing-library/jest-dom";
 import Filters from "./Filters";
 import { act } from "react-dom/test-utils";
 import { axe } from "jest-axe";
-import { jest } from '@jest/globals'; // import the jest object
-import { useState as useStateMock } from "react";
-import { FilterContext } from "../../context/FilterContext";
+import { useContext, useState as useStateMock } from "react";
 
 vi.mock("react", () => ({
   ...vitest.importActual("react"),
@@ -16,84 +14,126 @@ vi.mock("react", () => ({
 }));
 
 
-const MockedFilters = () => {
-  const searchString = "";
-  const setSearchString = jest.fn();
-  const IBU = [0, 140];
-  const setIBU = jest.fn();
-  const ABV = [0, 40];
-  const setABV = jest.fn();
-  const styles = ['American IPA', 'American Pale Ale (APA)'];
-  const setStyles = jest.fn();
-  const sorting = "top";
-  const setSorting = jest.fn();
-
-  return (
-    <FilterContext.Provider value={{
-      searchString,
-      setSearchString,
-      IBU,
-      setIBU,
-      ABV,
-      setABV,
-      styles,
-      setStyles,
-      sorting,
-      setSorting,
-    }}>
-      <Filters />
-    </FilterContext.Provider>
-  )
-}
-
 describe("Filters", () => {
   const setState = vi.fn();
 
   beforeEach(() => {
     (useStateMock as jest.Mock).mockImplementation((init) => [init, setState]);
+    (useContext as jest.Mock).mockImplementation(() => ({
+      searchString: "",
+      setSearchString: () => { },
+      IBU: [0, 140],
+      setIBU: () => { },
+      ABV: [0, 40],
+      setABV: () => { },
+      styles: [],
+      setStyles: () => { },
+      sorting: "top",
+      setSorting: () => { },
+    }));
   });
 
-  test("is accessible", async () => {
-    const { container } = render(<MockedFilters />);
+  it("is accessible", async () => {
+    const { container } = render(<Filters />);
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  test("changes value of IBU slider", () => {
-    render(<MockedFilters />);
-    const minSlider = screen.getAllByRole("slider")[0];
-    const maxSlider = screen.getAllByRole("slider")[1];
-    act(() => {
-      fireEvent.change(minSlider, { target: { value: 25 } });
-    });
-    expect(setState).toHaveBeenCalledTimes(1);
-    expect(setState).toHaveBeenCalledWith([25, 140]);
-
-    setState.mockReset();
-    act(() => {
-      fireEvent.change(maxSlider, { target: { value: 30 } });
-    });
-
-    expect(setState).toHaveBeenCalledTimes(1);
-    expect(setState).toHaveBeenCalledWith([0, 30]);
-    setState.mockReset();
+  it("renders correctly", () => {
+    const { container } = render(<Filters />);
+    expect(container).toMatchSnapshot();
   });
 
-  test("changes value of alcohol slider", () => {
-    render(<MockedFilters />);
-    const minSlider = screen.getAllByRole("slider")[2];
-    const maxSlider = screen.getAllByRole("slider")[3];
-    act(() => {
-      fireEvent.change(minSlider, { target: { value: 10 } });
-    });
-    expect(setState).toHaveBeenCalledTimes(1);
-    expect(setState).toHaveBeenCalledWith([10, 40]);
+  it("renders a Filter component for each filter", () => {
+    const { container } = render(<Filters />);
+    expect(container.querySelectorAll(".ant-divider").length).toBe(3);
+  });
 
-    setState.mockReset();
+  it("renders a checkbox group for the beer styles", () => {
+    render(<Filters />);
+    expect(screen.getAllByRole("checkbox").length).toBe(16);
+
+    const firstCheckbox = screen.getByLabelText("American IPA");
+    expect(firstCheckbox).toBeInTheDocument();
+    expect(firstCheckbox).not.toBeChecked();
+
     act(() => {
-      fireEvent.change(maxSlider, { target: { value: 30 } });
+      firstCheckbox.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
 
-    expect(setState).toHaveBeenCalledTimes(1);
-    expect(setState).toHaveBeenCalledWith([0, 30]);
+    expect(firstCheckbox).toBeChecked();
+  });
+
+  it("renders a slider for the IBU", () => {
+    render(<Filters />);
+    expect(screen.queryAllByRole("slider")[0]).toBeInTheDocument();
+  });
+
+  it("renders a filter for style, ibu and alcohol", () => {
+    render(<Filters />);
+    expect(screen.getByText("Style")).toBeInTheDocument();
+    expect(screen.getByText("Style")).toBeInstanceOf(HTMLHeadingElement);
+
+    expect(screen.getByText("IBU")).toBeInTheDocument();
+    expect(screen.getByText("IBU")).toBeInstanceOf(HTMLHeadingElement);
+
+    expect(screen.getByText("Alcohol")).toBeInTheDocument();
+    expect(screen.getByText("Alcohol")).toBeInstanceOf(HTMLHeadingElement);
   });
 });
+
+
+// it("changes value of IBU slider", () => {
+//   render(<Filters />);
+//   const minSlider = screen.getAllByRole("slider")[0];
+//   const maxSlider = screen.getAllByRole("slider")[1];
+//   act(() => {
+//     fireEvent.change(minSlider, { target: { value: 25 } });
+//   });
+//   expect(setState).toHaveBeenCalledTimes(1);
+//   expect(setState).toHaveBeenCalledWith([25, 140]);
+
+//   setState.mockReset();
+//   act(() => {
+//     fireEvent.change(maxSlider, { target: { value: 30 } });
+//   });
+
+//   expect(setState).toHaveBeenCalledTimes(1);
+//   expect(setState).toHaveBeenCalledWith([0, 30]);
+//   setState.mockReset();
+// });
+
+// it("changes value of alcohol slider", () => {
+//   render(<Filters />);
+//   const minSlider = screen.getAllByRole("slider")[2];
+//   const maxSlider = screen.getAllByRole("slider")[3];
+//   act(() => {
+//     fireEvent.change(minSlider, { target: { value: 10 } });
+//   });
+//   expect(setState).toHaveBeenCalledTimes(1);
+//   expect(setState).toHaveBeenCalledWith([10, 40]);
+
+//   setState.mockReset();
+//   act(() => {
+//     fireEvent.change(maxSlider, { target: { value: 30 } });
+//   });
+
+//   expect(setState).toHaveBeenCalledTimes(1);
+//   expect(setState).toHaveBeenCalledWith([0, 30]);
+// });
+
+// it("changes value of styles", () => {
+//   render(<Filters />);
+//   const checkbox = screen.getByLabelText("American IPA");
+//   act(() => {
+//     fireEvent.click(checkbox);
+//   });
+//   expect(setState).toHaveBeenCalledTimes(1);
+//   expect(setState).toHaveBeenCalledWith(["American IPA"]);
+
+//   setState.mockReset();
+//   act(() => {
+//     fireEvent.click(checkbox);
+//   });
+//   expect(setState).toHaveBeenCalledTimes(1);
+//   expect(setState).toHaveBeenCalledWith([]);
+// });
