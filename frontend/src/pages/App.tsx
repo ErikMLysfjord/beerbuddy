@@ -8,7 +8,7 @@ import appStyles from "./App.module.css";
 import protectRoute from "../utils/protectRoute";
 
 function App() {
-  protectRoute()
+  protectRoute();
   const { beers, fetchMore } = useFetchMoreBeers();
 
   return (
