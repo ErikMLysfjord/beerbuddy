@@ -6,9 +6,12 @@ import Filters from "../components/filters/Filters";
 import useFetchMoreBeers from "../utils/useFetchMoreBeers";
 import appStyles from "./App.module.css";
 import protectRoute from "../utils/protectRoute";
+import { useEffect } from "react";
 
 function App() {
-  protectRoute();
+  useEffect(() => {
+    protectRoute();
+  }, []);
   const { beers, fetchMore } = useFetchMoreBeers();
 
   return (

@@ -50,7 +50,9 @@ const fetchComments = async (id: string, offset: number) => {
 };
 
 const BeerPage = () => {
-  protectRoute();
+  useEffect(() => {
+    protectRoute();
+  }, []);
   const { id } = useParams<{ id: string }>();
   const [commentsLoading, setCommentsLoading] = useState(false);
   const [offset, setOffset] = useState(0);
