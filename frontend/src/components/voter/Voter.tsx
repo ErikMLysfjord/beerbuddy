@@ -2,6 +2,7 @@ import { CaretDownFilled, CaretUpFilled } from "@ant-design/icons";
 import { Button } from "antd";
 import styles from "./Voter.module.css";
 import { useState } from "react";
+import protectRoute from "../../utils/protectRoute";
 
 type ReactionType = "unreact" | "upvote" | "downvote";
 interface VoterInterface {
@@ -29,6 +30,7 @@ const vote = async (beerId: number, reaction: ReactionType) => {
 
 const Voter = (props: VoterInterface) => {
   const upvote = (event: React.MouseEvent<HTMLButtonElement>) => {
+    protectRoute();
     event.stopPropagation();
     event.preventDefault();
     const reaction = action === "upvote" ? "unreact" : "upvote";
@@ -37,6 +39,7 @@ const Voter = (props: VoterInterface) => {
   };
 
   const downvote = (event: React.MouseEvent<HTMLButtonElement>) => {
+    protectRoute();
     event.stopPropagation();
     event.preventDefault();
     const reaction = action === "downvote" ? "unreact" : "downvote";
