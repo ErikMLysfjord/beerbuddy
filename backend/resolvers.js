@@ -1,14 +1,10 @@
 const client = require("./db.js");
 
 const sqlQuery = async (query) => {
-  if (!client._connected) {
-    await client.connect();
-  }
-
   const results = await client
     .query(query)
-    .then((payload) => {
-      return payload.rows;
+    .then((query) => {
+      return query[0];
     })
     .catch(() => {
       return "Error in query";
@@ -30,40 +26,40 @@ const beerResolver = {
       ON comments.user_id = users.id 
       WHERE comments.beer_id = ${id} 
       ORDER BY created_at DESC
-      LIMIT ${size} OFFSET ${start || 0};`
+      LIMIT ${start || 0}, ${size};`
     );
   },
   beer: async ({ id }) => {
     return await sqlQuery(`
-      SELECT 
-        beers.abv, 
-        beers.ibu, 
-        beers.name, 
-        beers.style, 
-        beers.ounces, 
-        beers.id, 
-        breweries.name AS brewery_name, 
-        rating.rating, 
-        rating.vote_count, 
-        comments.comment_count
+    SELECT 
+      beers.abv, 
+      beers.ibu, 
+      beers.name, 
+      beers.style, 
+      beers.ounces, 
+      beers.id, 
+      breweries.name AS brewery_name, 
+      rating.rating, 
+      rating.vote_count, 
+      comments.comment_count
     FROM beers 
     JOIN breweries ON beers.brewery_id = breweries.id 
     LEFT JOIN (
-        SELECT 
-            beer_id, 
-            SUM(CASE WHEN vote_type = 'upvote' THEN 1 WHEN vote_type = 'downvote' THEN -1 ELSE 0 END) AS rating, 
-            COUNT(CASE WHEN vote_type IN ('upvote', 'downvote') THEN 1 ELSE NULL END) AS vote_count
-        FROM votes 
-        GROUP BY beer_id
-    ) AS rating ON beers.id = rating.beer_id 
+      SELECT 
+        beer_id, 
+        SUM(CASE WHEN vote_type = 'upvote' THEN 1 WHEN vote_type = 'downvote' THEN -1 ELSE 0 END) AS rating, 
+        COUNT(CASE WHEN vote_type IN ('upvote', 'downvote') THEN 1 ELSE NULL END) AS vote_count
+      FROM votes 
+      GROUP BY beer_id
+    ) rating ON beers.id = rating.beer_id 
     LEFT JOIN (
-        SELECT 
-            beer_id, 
-            COUNT(comment_text) AS comment_count
-        FROM comments 
-        JOIN users ON comments.user_id = users.id
-        GROUP BY beer_id
-    ) AS comments ON beers.id = comments.beer_id 
+      SELECT 
+        beer_id, 
+        COUNT(comment_text) AS comment_count
+      FROM comments 
+      JOIN users ON comments.user_id = users.id
+      GROUP BY beer_id
+    ) comments ON beers.id = comments.beer_id 
     WHERE beers.id = ${id};
     `);
   },
@@ -203,24 +199,24 @@ const beerResolver = {
         beers.id AS beer_id,
         SUM(CASE WHEN votes.vote_type = 'upvote' THEN 1 WHEN votes.vote_type = 'downvote' THEN -1 ELSE 0 END) AS vote_sum,
         COALESCE((SELECT vote_type FROM votes JOIN users ON votes.user_id = users.id WHERE users.id = '${userId}' AND votes.beer_id = beers.id), 'unreact') AS reaction,
-        COUNT(beers.id) OVER() AS beer_count
+        (SELECT COUNT(DISTINCT id) FROM beers) AS beer_count
       FROM 
         beers
       JOIN 
         breweries ON beers.brewery_id = breweries.id
       LEFT JOIN 
-          votes ON beers.id = votes.beer_id
+        votes ON beers.id = votes.beer_id
       WHERE
-          beers.abv > ${minAbvProsent} AND beers.abv < ${maxAbvProsent} AND
-          beers.ibu > ${minIbus} AND beers.ibu < ${maxIbus} AND
-          beers.name LIKE '%${searchQuery}%'
-          ${
-            beerStyles.length > 0
-              ? `AND beers.style IN (${beerStyles
-                  .map((style) => `'${style}'`)
-                  .join(", ")})`
-              : ""
-          }
+        beers.abv > ${minAbvProsent} AND beers.abv < ${maxAbvProsent} AND
+        beers.ibu > ${minIbus} AND beers.ibu < ${maxIbus} AND
+        beers.name LIKE '%${searchQuery}%'
+        ${
+          beerStyles.length > 0
+            ? `AND beers.style IN (${beerStyles
+                .map((style) => `'${style}'`)
+                .join(", ")})`
+            : ""
+        }
       GROUP BY 
         beers.id,
         beers.name, 
@@ -230,7 +226,7 @@ const beerResolver = {
         ${sorting},
         beer_name ASC,
         beer_id
-      LIMIT ${size} OFFSET ${start};
+      LIMIT ${start || 0}, ${size};
       `
     );
   },
@@ -251,8 +247,12 @@ const userResolver = {
       throw new Error("Username already exists");
     }
 
+    await sqlQuery(
+      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}');`
+    );
+
     const res = await sqlQuery(
-      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}') RETURNING id;`
+      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
 
     if (res === "Error in query") {
@@ -275,7 +275,7 @@ const userResolver = {
     if (user.length === 0) {
       throw new Error("User does not exist");
     }
-    const res = sqlQuery(
+    await sqlQuery(
       `UPDATE users SET username = '${username}' WHERE id = '${userId}';`
     );
 
@@ -289,7 +289,7 @@ const userResolver = {
     if (user.length === 0) {
       throw new Error("User does not exist");
     }
-    const res = sqlQuery(`DELETE FROM users WHERE id = '${userId}';`);
+    await sqlQuery(`DELETE FROM users WHERE id = '${userId}';`);
     return "You deleted your user!";
   },
 
@@ -297,12 +297,18 @@ const userResolver = {
     const userExists = await sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
-    if (userExists.length > 0) {
-      return { id: userExists[0].id, isNewUser: "no" };
-    }
 
+    if (userExists.length > 0) {
+      const user = await sqlQuery(
+        `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
+      );
+      return { id: user[0].id, isNewUser: "no" };
+    }
+    await sqlQuery(
+      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}');`
+    );
     const res = await sqlQuery(
-      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}') RETURNING id;`
+      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
 
     if (res === "Error in query") {
