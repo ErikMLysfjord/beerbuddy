@@ -29,3 +29,17 @@ To be implemented...
 ## Run frontend tests
 
 To test the frontend, please go to the [frontend documentation](./frontend/README.md).
+
+## Run end-to-end tests
+
+**NB: REQUIRES CONNECTION TO NTNU VPN TO WORK**
+
+To test the end-to-end tests, run the following command in the root folder:
+
+```bash
+npx playwright test
+```
+
+Keep in mind that the amount of workers performing the testing is set to 1. This is to avoid the tests to fail due to the database not being able to handle multiple users with the same name at the same time.
+
+If you encounter any problems running the tests, then make sure [playwright](https://playwright.dev/docs/intro) is installed before trying again.
