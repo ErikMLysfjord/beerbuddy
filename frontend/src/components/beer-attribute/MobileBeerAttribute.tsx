@@ -8,10 +8,10 @@ interface MobileBeerAttributeProps {
 const MobileBeerAttribute = ({ attributeProps }: MobileBeerAttributeProps) => {
   return (
     <div className={styles.mobileContainer}>
-      {attributeProps.map((prop) => {
+      {attributeProps.map((prop, index) => {
         if (prop.value !== null) {
           return (
-            <div>
+            <div key={`${prop.altText}-${index}`}>
               <div className={styles.mobileHeaderContainer}>
                 <img
                   height={"32px"}
