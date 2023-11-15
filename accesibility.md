@@ -11,6 +11,7 @@
     - [User feedback on actions](#user-feedback-on-actions)
     - [Labelling of interactive elements](#labelling-of-interactive-elements)
     - [Ant-design components](#ant-design-components)
+    - [Responsive design](#responsive-design)
 - [Keyboard navigation](#keyboard-navigation)
 - [Screen reader support](#screen-reader-support)
 - [HTML semantics](#html-semantics)
@@ -27,6 +28,7 @@ The design of the application was made with accessibility in mind, to make it as
 - User feedback on actions
 - Labelling of interactive elements
 - Ant-design components
+- Responsive design
 
 ### Color scheme<a name="color-scheme"></a>
 The color scheme of the application was chosen to be as accessible as possible. The colors were chosen to have a high contrast, and to be distinguishable from each other. We wanted to use a color scheme that was not too bright, to make it easier to use the application in a dark environment, which is why we use a dark theme with yellow highlights for the application. The yellow colors catches the eye, and is used for action buttons and other elements that the user should be able to find easily. The dark theme is also easier on the eyes, and makes it easier to focus on the content of the application.
@@ -54,6 +56,9 @@ The application gives the user feedback when they perform an action through ant-
 
 ### Ant-design components<a name="ant-design-components"></a>
 The application uses ant-design components for most of the interactive elements. These components are designed to be accessible, and is a commonly used library for user-friendly components.
+
+### Responsive design<a name="responsive-design"></a>
+The application is designed to be responsive, and to work on different screen sizes.
 
 ## Keyboard navigation<a name="keyboard-navigation"></a>
 TODO: Add content
