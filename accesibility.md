@@ -1,5 +1,5 @@
 # Accessibility measures for the application
-This document describes the accessibility measures that were taken to make the application more accessible. Into four different categories: UX-Design, Keyboard navigation, Screen reader support and HTML semantics. Each category is described in a separate section, and the different measures are described in detail in each section.
+This document describes the accessibility measures that were taken to make the application more accessible. Into two different categories: UX-Design and Screen reader support. Each category is described in a separate section, and the different measures are described in detail in each section.
 
 ## Table of contents
 - [UX-Design](#ux-design)
@@ -13,23 +13,14 @@ This document describes the accessibility measures that were taken to make the a
     - [Labelling of interactive elements](#labelling-of-interactive-elements)
     - [Ant-design components](#ant-design-components)
     - [Responsive design](#responsive-design)
-- [Keyboard navigation](#keyboard-navigation)
 - [Screen reader support](#screen-reader-support)
-- [HTML semantics](#html-semantics)
+    - [HTML semantics](#html-semantics)
+    - [ARIA attributes](#aria-attributes)
+    - [Skip to content](#skip-to-content)
+    - [Screen readers and infinite scroll](#screen-readers-and-infinite-scroll)
 
 ## UX-Design<a name="ux-design"></a>
 The design of the application was made with accessibility in mind, to make it as easy as possible for people with disabilities to use the application. Design choices that reinforce this, will also lead to a better user experience for everyone. The design choices that were made to make the application more accessible are listed below, and are explained in more detail in the following sections:
-
-- Color scheme
-- Font
-- Reduced information density
-- Focus indicators
-- Section headings
-- Tooltips
-- User feedback on actions
-- Labelling of interactive elements
-- Ant-design components
-- Responsive design
 
 ### Color scheme<a name="color-scheme"></a>
 The color scheme of the application was chosen to be as accessible as possible. The colors were chosen to have a high contrast, and to be distinguishable from each other. We wanted to use a color scheme that was not too bright, to make it easier to use the application in a dark environment, which is why we use a dark theme with yellow highlights for the application. The yellow colors catches the eye, and is used for action buttons and other elements that the user should be able to find easily. The dark theme is also easier on the eyes, and makes it easier to focus on the content of the application.
@@ -61,11 +52,17 @@ The application uses ant-design components for most of the interactive elements.
 ### Responsive design<a name="responsive-design"></a>
 The application is designed to be responsive, and to work on different screen sizes.
 
-## Keyboard navigation<a name="keyboard-navigation"></a>
-TODO: Add content
-
 ## Screen reader support<a name="screen-reader-support"></a>
-TODO: Add content
+Screen readers are used by people with visual impairments to navigate the web. This is our measures to make the application more accessible for screen readers:
 
-## HTML semantics<a name="html-semantics"></a>
-TODO: Add content
+### HTML semantics<a name="html-semantics"></a>
+HTML are important for accessibility because it provides semantic information about the content of the application. This makes it easier for screen readers to understand the content of the application, and it makes it easier to navigate the application using the keyboard. The application uses semantic HTML, and HTML5 tags like `<main>`, `<header>`, `<nav>`, `<section>`
+
+### ARIA attributes<a name="aria-attributes"></a>
+ARIA attributes like `aria-label` are used to make the application more accessible for screen readers. These attributes are used to provide additional information about the content of the application, and to make it easier to navigate the application using the keyboard. The application uses ARIA attributes for all interactive elements, and for all elements that are not self-explanatory.
+
+### Skip to content<a name="skip-to-content"></a>
+The application has a "skip to content" link that makes it possible to skip the navigation and go directly to the content of the application. This makes it easier to navigate the application using the keyboard.
+
+### Screen readers and infinite scroll<a name="screen-readers-and-infinite-scroll"></a>
+The application uses infinite scroll to load more data when the user scrolls to the bottom of the page. To exit the infinite scroll with keyboard navigation, the user can press the `Esc` key. This will exit the infinite scroll, and the user can continue to navigate the application using the keyboard.
