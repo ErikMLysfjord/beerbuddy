@@ -51,9 +51,10 @@ const fetchBeer = async (id: number) => {
     });
 };
 
-test("openBeerPage", async ({ page }) => {
+test("beer-page", async ({ page }) => {
   console.log("\n");
   console.log("####### Logging in");
+
   // ------------Login Logic------------- //
   await page.goto("http://it2810-15.idi.ntnu.no/project2/");
   await page.getByLabel("Username").click();
@@ -65,6 +66,7 @@ test("openBeerPage", async ({ page }) => {
   // ------------------------------------ //
 
   console.log("####### Testing correct loading of beer page");
+
   //Click on the first beer in the list
   await page.locator("ul>li").nth(0).click();
 
@@ -83,6 +85,7 @@ test("openBeerPage", async ({ page }) => {
   await page.getByRole("link", { name: "Back to menu" }).click();
 
   console.log("####### Testing home button");
+
   //Check if back to menu button works
   await expect(
     page.getByRole("heading", { name: "Welcome, E2EUser" })
@@ -103,6 +106,7 @@ test("openBeerPage", async ({ page }) => {
 test("vote", async ({ page }) => {
   console.log("\n");
   console.log("####### Logging in");
+
   // ------------Login Logic------------- //
   await page.goto("http://it2810-15.idi.ntnu.no/project2/");
   await page.getByLabel("Username").click();
@@ -114,6 +118,7 @@ test("vote", async ({ page }) => {
   // ------------------------------------ //
 
   console.log("####### Open first beer");
+
   //Open the first beer in the list
   await page.locator("ul>li").nth(0).click();
 
@@ -136,6 +141,7 @@ test("vote", async ({ page }) => {
   await page.getByRole("link", { name: "Back to menu" }).click();
 
   console.log("####### Test upvote of beer");
+
   //Upvote the beer and see if the rating is correct
   await page.getByLabel(beerName).getByLabel("Upvote this beer").click();
   await page.getByLabel(beerName).click();
@@ -148,6 +154,7 @@ test("vote", async ({ page }) => {
   await page.getByRole("link", { name: "Back to menu" }).click();
 
   console.log("####### Test downvote of beer");
+
   //Downvote the beer and see if the rating is correct
   await page.getByLabel(beerName).getByLabel("Downvote this beer").click();
   await page.getByLabel(beerName).click();
@@ -160,6 +167,7 @@ test("vote", async ({ page }) => {
   await page.getByRole("link", { name: "Back to menu" }).click();
 
   console.log("####### Test removal of vote of beer");
+
   //Remove the vote and see if the rating is correct
   await page.getByLabel(beerName).getByLabel("Downvote this beer").click();
   await page.getByLabel(beerName).click();
@@ -185,6 +193,7 @@ test("vote", async ({ page }) => {
 test("comment", async ({ page }) => {
   console.log("\n");
   console.log("####### Logging in");
+
   // ------------Login Logic------------- //
   await page.goto("http://it2810-15.idi.ntnu.no/project2/");
   await page.getByLabel("Username").click();
@@ -196,6 +205,7 @@ test("comment", async ({ page }) => {
   // ------------------------------------ //
 
   console.log("####### Open first beer");
+
   //Open the first beer in the list
   await page.locator("ul>li").nth(0).click();
 
@@ -205,9 +215,9 @@ test("comment", async ({ page }) => {
   //fetch beer data from the database
   const beerData = await fetchBeer(parseInt(beerId));
   const beerComments = beerData[0].comment_count;
-  console.log(beerComments);
 
   console.log("####### Test comment of beer");
+
   //Upvote the beer and see if the rating is correct
   await page.getByPlaceholder("Write a comment...").click();
   await page
@@ -220,6 +230,7 @@ test("comment", async ({ page }) => {
   ).toBeVisible();
 
   console.log("####### Check if number of comments is increased");
+
   const beerData2 = await fetchBeer(parseInt(beerId));
   const beerComments2 = parseInt(beerData2[0].comment_count);
 
@@ -236,6 +247,7 @@ test("comment", async ({ page }) => {
   // ------------------------------------ //
 
   console.log("####### Logging in with new user");
+
   // ------------Login Logic------------- //
   await page.goto("http://it2810-15.idi.ntnu.no/project2/");
   await page.getByLabel("Username").click();
@@ -247,6 +259,7 @@ test("comment", async ({ page }) => {
   // ------------------------------------ //
 
   console.log("####### Test comment deletion after user deletion");
+
   await page.goto("http://it2810-15.idi.ntnu.no/project2/");
   await page.locator("ul>li").nth(0).click();
   await expect(
@@ -254,6 +267,7 @@ test("comment", async ({ page }) => {
   ).not.toBeVisible();
 
   console.log("####### Check if number of comments is returned to previous");
+
   const beerData3 = await fetchBeer(parseInt(beerId));
   const beerComments3 = parseInt(beerData3[0].comment_count);
   expect(beerComments3 - beerComments).toBe(0);
