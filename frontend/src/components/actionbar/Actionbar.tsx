@@ -26,7 +26,9 @@ const Actionbar = () => {
       </label>
       <label className={styles.searchLabel}>
         Search
-        <Input.Search onSearch={(value) => setSearchString(value)} />
+        <Input.Search
+          onSearch={(value) => setSearchString(value.toLowerCase())}
+        />
       </label>
       <FilterButton />
     </div>
