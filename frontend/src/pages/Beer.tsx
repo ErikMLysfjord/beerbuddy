@@ -8,6 +8,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import CommentItem from "../components/comment-item/CommentItem";
 import { useEffect, useState } from "react";
 import CommentBar from "../components/comment-bar/CommentBar";
+import useWindowDimensions from "../utils/useWindowDimensions";
+import MobileBeerAttribute from "../components/beer-attribute/MobileBeerAttribute";
 
 type CommentInterface = {
   username: string;
@@ -26,7 +28,7 @@ const fetchComments = async (id: string, offset: number) => {
     query: `{ comments(id: ${id}, size: 5, start: ${offset}) }`,
   };
 
-  return await fetch("http://it2810-15.idi.ntnu.no:4000/beer", {
+  return await fetch("http://localhost:4000/beer", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -53,6 +55,7 @@ const BeerPage = () => {
   const [commentsLoading, setCommentsLoading] = useState(false);
   const [offset, setOffset] = useState(0);
   const [newComment, setNewComment] = useState(false);
+  const { width } = useWindowDimensions();
 
   const limit = 5;
   const [comments, setComments] = useState<CommentInterface[]>([]);
@@ -77,6 +80,33 @@ const BeerPage = () => {
     id: Number(id),
   });
 
+  const AttributeValues = [
+    {
+      attribute: "Style",
+      icon: "/project2/yellowBottle.svg",
+      altText: "Bottle icon",
+      value: beer?.style,
+    },
+    {
+      attribute: "ABV",
+      icon: "/project2/yellowPercent.svg",
+      altText: "Percentage icon",
+      value: String(beer?.abv ?? 0 * 100) + "%",
+    },
+    {
+      attribute: "IBU",
+      icon: "/project2/yellowHop.svg",
+      altText: "Hop icon",
+      value: beer?.ibu,
+    },
+    {
+      attribute: "Volume",
+      icon: "/project2/yellowVolume.svg",
+      altText: "Glass volume",
+      value: beer?.ounces + "oz",
+    },
+  ];
+
   if (isLoading || beer === undefined) {
     return (
       <div className={styles.centerContent}>
@@ -91,12 +121,24 @@ const BeerPage = () => {
 
   return (
     <main className={styles.main}>
-      <div className={styles.logo}>
-        <Logo />
-      </div>
-      <a href="/project2" className={styles.menuButton}>
-        {"Back to menu"}
-      </a>
+      {width > 1000 ? (
+        <>
+          <div className={styles.logo}>
+            <Logo />
+          </div>
+          <a href="/project2" className={styles.menuButton}>
+            {"Back to menu"}
+          </a>
+        </>
+      ) : (
+        <>
+          <header className={styles.headingWrapper}>
+            <Logo />
+          </header>
+          <hr className={styles.separator} />
+        </>
+      )}
+
       <p className={styles.breweryName}>{beer?.brewery_name}</p>
       <h1 className={styles.beerName}>{beer.name}</h1>
       <div className={styles.rating}>
@@ -108,32 +150,38 @@ const BeerPage = () => {
         Based on {beer.vote_count !== null ? beer.vote_count : "0"} reviews
       </p>
       <div className={styles.info}>
-        <BeerAttribute
-          attribute="Style"
-          icon={"/project2/bottle.svg"}
-          altText={"Bottle icon"}
-          value={beer.style}
-        />
-        <BeerAttribute
-          attribute="ABV"
-          icon={"/project2/percent.svg"}
-          altText={"Percentage icon"}
-          value={String((beer.abv * 100).toFixed(1)) + "%"}
-        />
-        {beer.ibu !== null && (
-          <BeerAttribute
-            icon={"/project2/hop.svg"}
-            altText={"Hop icon"}
-            attribute="IBU"
-            value={String(beer.ibu).split(".")[0]}
-          />
+        {width > 768 ? (
+          <>
+            <BeerAttribute
+              attribute="Style"
+              icon={"/project2/bottle.svg"}
+              altText={"Bottle icon"}
+              value={beer.style}
+            />
+            <BeerAttribute
+              attribute="ABV"
+              icon={"/project2/percent.svg"}
+              altText={"Percentage icon"}
+              value={String((beer.abv * 100).toFixed(1)) + "%"}
+            />
+            {beer.ibu !== null && (
+              <BeerAttribute
+                icon={"/project2/hop.svg"}
+                altText={"Hop icon"}
+                attribute="IBU"
+                value={String(beer.ibu).split(".")[0]}
+              />
+            )}
+            <BeerAttribute
+              icon={"/project2/volume.svg"}
+              altText={"Glass volume"}
+              attribute="Volume"
+              value={beer.ounces + "oz"}
+            />
+          </>
+        ) : (
+          <MobileBeerAttribute attributeProps={AttributeValues} />
         )}
-        <BeerAttribute
-          icon={"/project2/volume.svg"}
-          altText={"Glass volume"}
-          attribute="Volume"
-          value={beer.ounces + "oz"}
-        />
       </div>
       <hr className={styles.divider} />
       <InfiniteScroll
