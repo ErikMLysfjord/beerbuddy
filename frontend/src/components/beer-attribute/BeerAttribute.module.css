@@ -12,7 +12,6 @@
 
   @media (max-width: 1380px) {
     min-width: 100px;
-    /* height: 70px; */
   }
 }
 
@@ -75,5 +74,4 @@
 .textContainer {
   display: flex;
   flex-direction: column;
-  /* gap: 2px; */
 }

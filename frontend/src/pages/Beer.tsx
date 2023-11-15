@@ -28,7 +28,7 @@ const fetchComments = async (id: string, offset: number) => {
     query: `{ comments(id: ${id}, size: 5, start: ${offset}) }`,
   };
 
-  return await fetch("http://localhost:4000/beer", {
+  return await fetch("http://it2810-15.idi.ntnu.no:4000/beer", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

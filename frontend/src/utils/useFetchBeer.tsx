@@ -4,7 +4,7 @@ import { Beer } from "../types/types";
 const fetchBeer = async (id: number, onSuccess: (data: Beer) => void) => {
   const query = { query: `{ beer(id: ${id}) }` };
 
-  return await fetch("http://localhost:4000/beer", {
+  return await fetch("http://it2810-15.idi.ntnu.no:4000/beer", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
