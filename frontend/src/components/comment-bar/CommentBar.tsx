@@ -3,6 +3,7 @@ import styles from "./CommentBar.module.css";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { App } from "antd";
+import protectRoute from "../../utils/protectRoute";
 
 interface CommentBarInterface {
   onSuccess: () => void;
@@ -15,6 +16,7 @@ interface CommentBarInterface {
  * @returns - The response from the backend.
  */
 const postComment = async (beerId: string, comment: string) => {
+  protectRoute();
   const userId = localStorage.getItem("userIdBeerBuddy");
   const query = {
     query: `{ comment(userId: "${userId}", beerId: ${beerId}, comment: "${comment}") }`,

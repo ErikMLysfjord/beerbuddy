@@ -5,14 +5,13 @@ import BeerList from "../components/beer-list/BeerList";
 import Filters from "../components/filters/Filters";
 import useFetchMoreBeers from "../utils/useFetchMoreBeers";
 import appStyles from "./App.module.css";
+import protectRoute from "../utils/protectRoute";
+import { useEffect } from "react";
 
 function App() {
-  if (
-    !localStorage.getItem("userIdBeerBuddy") ||
-    !localStorage.getItem("userNameBeerBuddy")
-  ) {
-    window.location.replace("/project2/login");
-  }
+  useEffect(() => {
+    protectRoute();
+  }, []);
   const { beers, fetchMore } = useFetchMoreBeers();
 
   return (
