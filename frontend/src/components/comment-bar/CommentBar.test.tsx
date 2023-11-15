@@ -1,5 +1,5 @@
 import { Mock, vi } from "vitest";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { render, fireEvent, waitFor, act } from "@testing-library/react";
 import CommentBar from "./CommentBar";
 
 const mockError = vi.fn();
@@ -147,5 +147,25 @@ describe("CommentBar", () => {
     fireEvent.click(button);
 
     await waitFor(() => expect(mockSuccess).not.toHaveBeenCalled());
+    it("should render a button without text when the screen width is less than 768px", () => {
+      const { getByAltText, queryByText, queryByRole } = render(
+        <CommentBar onSuccess={() => {}} />
+      );
+
+      expect(queryByRole("img")).not.toBeInTheDocument();
+      expect(queryByText("Comment")).toBeInTheDocument();
+
+      // Mock the window width to be 500px.
+      // This is done to ensure the correct text is rendered.
+      global.innerWidth = 500;
+      act(() => {
+        global.dispatchEvent(new Event("resize"));
+      });
+
+      // The button should now have a send icon instead of "Comment".
+      expect(getByAltText("Send icon")).toBeInTheDocument();
+      expect(queryByText("Comment")).not.toBeInTheDocument();
+      expect(queryByRole("img")).toBeInTheDocument();
+    });
   });
 });
