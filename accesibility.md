@@ -1,4 +1,5 @@
 # Accessibility measures for the application
+This document describes the accessibility measures that were taken to make the application more accessible. Into four different categories: UX-Design, Keyboard navigation, Screen reader support and HTML semantics. Each category is described in a separate section, and the different measures are described in detail in each section.
 
 ## Table of contents
 - [UX-Design](#ux-design)
