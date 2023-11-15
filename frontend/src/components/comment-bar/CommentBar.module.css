@@ -21,6 +21,15 @@
 
 .submitButton {
   padding: 0 3rem;
+
+  &:hover {
+    background-color: #ffcc48;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0;
+    width: fit-content;
+  }
 }
 
 .divider {

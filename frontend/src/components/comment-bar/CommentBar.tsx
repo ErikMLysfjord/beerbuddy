@@ -2,6 +2,7 @@ import { Button, Input, Spin, App } from "antd";
 import styles from "./CommentBar.module.css";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import useWindowDimensions from "../../utils/useWindowDimensions";
 
 interface CommentBarInterface {
   onSuccess: () => void;
@@ -43,6 +44,7 @@ const CommentBar = ({ onSuccess }: CommentBarInterface) => {
   const { id } = useParams<{ id: string }>();
   const [commentText, setCommentText] = useState("");
   const { message } = App.useApp();
+  const { width } = useWindowDimensions();
 
   if (id === undefined)
     return (
@@ -101,15 +103,25 @@ const CommentBar = ({ onSuccess }: CommentBarInterface) => {
             }
           }}
         />
-        <Button
-          type="primary"
-          className={styles.submitButton}
-          onClick={() => {
-            handleComment();
-          }}
-        >
-          Comment
-        </Button>
+        {width > 768 ? (
+          <Button
+            type="primary"
+            className={styles.submitButton}
+            /* When clicking on post button, you post */
+            onClick={handleComment}
+          >
+            Comment
+          </Button>
+        ) : (
+          <Button type="primary" className={styles.submitButton}>
+            <img
+              width={"30px"}
+              height={"30px"}
+              alt="Send icon"
+              src={"/project2/paper-plane-right.svg"}
+            />
+          </Button>
+        )}
       </section>
     </div>
   );
