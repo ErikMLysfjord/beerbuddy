@@ -14,6 +14,7 @@ This document describes the accessibility measures that were taken to make the a
     - [Ant-design components](#ant-design-components)
     - [Responsive design](#responsive-design)
 - [Screen reader support](#screen-reader-support)
+    - [Keyboard navigation](#keyboard-navigation)
     - [HTML semantics](#html-semantics)
     - [ARIA attributes](#aria-attributes)
     - [Skip to content](#skip-to-content)
@@ -54,6 +55,9 @@ The application is designed to be responsive, and to work on different screen si
 
 ## Screen reader support<a name="screen-reader-support"></a>
 Screen readers are used by people with visual impairments to navigate the web. This is our measures to make the application more accessible for screen readers:
+
+### Keyboard navigation<a name="keyboard-navigation"></a>
+The application can be navigated using the keyboard. This makes it possible to use the application without a mouse, which is important for people with visual impairments. The application can be navigated using the `Tab` key, and the `Enter` key is used to select an element. The `Esc` key is used to exit the infinite scroll, and to close modals and popups.
 
 ### HTML semantics<a name="html-semantics"></a>
 HTML are important for accessibility because it provides semantic information about the content of the application. This makes it easier for screen readers to understand the content of the application, and it makes it easier to navigate the application using the keyboard. The application uses semantic HTML, and HTML5 tags like `<main>`, `<header>`, `<nav>`, `<section>`
