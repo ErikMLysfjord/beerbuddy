@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { Beer } from "../types/types";
 
+
+/**
+ * fetch information about a single beer.
+ * @param id - the id of the beer to fetch
+ * @param onSuccess - callback for when the fetch is successful
+ * @returns - the beer object
+ */
 const fetchBeer = async (id: number, onSuccess: (data: Beer) => void) => {
   const query = { query: `{ beer(id: ${id}) }` };
 
@@ -26,6 +33,11 @@ const fetchBeer = async (id: number, onSuccess: (data: Beer) => void) => {
     });
 };
 
+/**
+ * Custom hook for fetching a single beer.
+ * @param id - the id of the beer to fetch
+ * @returns - the beer object, loading state and error state
+ */
 const useFetchBeer = ({ id }: { id: number }) => {
   const [beer, setBeer] = useState<Beer>();
   const [isLoading, setIsLoading] = useState(true);

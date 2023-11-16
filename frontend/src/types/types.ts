@@ -1,3 +1,9 @@
+//TODO use this file more
+
+
+/**
+ * @typedef {Object} Beer - A beer object
+ */
 export type Beer = {
   abv: number;
   ibu: number;
