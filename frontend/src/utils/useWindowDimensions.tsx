@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-
 /**
  * Determines the width and height of the window
  * @returns width and height of the window

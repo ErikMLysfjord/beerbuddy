@@ -8,7 +8,7 @@ interface BeerAttributeProps {
 }
 
 /**
- * A component for displaying a beer attribute. 
+ * A component for displaying a beer attribute.
  * This is used to display more detailed information about a beer.
  * @param icon - The icon to display.
  * @param altText - The alt text for the icon.

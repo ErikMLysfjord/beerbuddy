@@ -17,7 +17,7 @@ interface LoginFormMobileProps {
  * Contains a sales pitch and the login form.
  * @param onFinishFailed - function that is called when the form is submitted and fails validation
  * @param saveUser - function that is called when the form is submitted and passes validation
- * @returns 
+ * @returns
  */
 const LoginFormMobile = ({
   onFinishFailed,

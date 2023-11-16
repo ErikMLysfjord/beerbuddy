@@ -37,10 +37,9 @@ const vote = async (beerId: number, reaction: ReactionType) => {
  * @param votes - number of votes
  * @param reaction - the reaction to vote with
  * @param beerId - id of the beer to vote on
- * @returns 
+ * @returns
  */
 const Voter = (props: VoterInterface) => {
-
   //? These look similar, maybe they can be refactored into one function?
   const upvote = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -66,7 +65,8 @@ const Voter = (props: VoterInterface) => {
     downvote: 0,
   };
 
-  const total = parseInt(`${props.votes}`) + values[action] - values[props.reaction];
+  const total =
+    parseInt(`${props.votes}`) + values[action] - values[props.reaction];
 
   //! typo
   const colorHighligt = "#ffbc0d";

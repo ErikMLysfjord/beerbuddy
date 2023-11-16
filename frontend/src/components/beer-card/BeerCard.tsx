@@ -10,7 +10,7 @@ type ReactionType = "unreact" | "upvote" | "downvote";
  * @param beer_id - The ID of the beer.
  * @param votes - The number of votes the beer has.
  * @param reaction - The reaction of the user to the beer.
-*/
+ */
 interface BeerCardInterface {
   name: string;
   brewery: string;

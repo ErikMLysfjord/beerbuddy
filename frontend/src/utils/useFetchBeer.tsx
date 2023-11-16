@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Beer } from "../types/types";
 
-
 /**
  * fetch information about a single beer.
  * @param id - the id of the beer to fetch

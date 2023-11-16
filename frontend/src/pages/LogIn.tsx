@@ -53,7 +53,6 @@ const fetchLoginId = async (
   }, 2000);
 };
 
-
 /**
  * LogInPage component that displays the login form.
  * @returns a LogInPage component

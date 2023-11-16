@@ -9,7 +9,7 @@ interface FilterProps {
 }
 
 /**
- * Filter component that contains an 
+ * Filter component that contains an
  * interactive filter control component
  * and a heading with a tooltip.
  * @param heading

@@ -31,15 +31,15 @@ interface FilterContextType {
  */
 export const FilterContext = createContext<FilterContextType>({
   searchString: "",
-  setSearchString: () => { },
+  setSearchString: () => {},
   IBU: [0, 140],
-  setIBU: () => { },
+  setIBU: () => {},
   ABV: [0, 40],
-  setABV: () => { },
+  setABV: () => {},
   styles: [],
-  setStyles: () => { },
+  setStyles: () => {},
   sorting: "top",
-  setSorting: () => { },
+  setSorting: () => {},
 });
 
 /**

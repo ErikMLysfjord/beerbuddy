@@ -1,6 +1,5 @@
 //TODO use this file more
 
-
 /**
  * @typedef {Object} Beer - A beer object
  */

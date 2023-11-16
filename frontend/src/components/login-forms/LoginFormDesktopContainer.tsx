@@ -20,7 +20,7 @@ interface LoginFormDesktopProps {
  * Contains the actual form that is rendered in LoginFormDesktop.tsx.
  * @param onFinishFailed - function that is called when the form is submitted and fails validation
  * @param saveUser - function that is called when the form is submitted and passes validation
- * @returns 
+ * @returns
  */
 const LoginFormDesktop = ({
   onFinishFailed,
