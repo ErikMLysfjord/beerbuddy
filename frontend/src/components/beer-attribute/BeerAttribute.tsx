@@ -7,6 +7,15 @@ interface BeerAttributeProps {
   value: string | number | undefined;
 }
 
+/**
+ * A component for displaying a beer attribute. 
+ * This is used to display more detailed information about a beer.
+ * @param icon - The icon to display.
+ * @param altText - The alt text for the icon.
+ * @param attribute - The attribute heading.
+ * @param value - The value of the attribute.
+ * @returns - The beer attribute component.
+ */
 const BeerAttribute = ({
   attribute,
   value,

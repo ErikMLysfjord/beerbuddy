@@ -40,11 +40,17 @@ const postComment = async (beerId: string, comment: string) => {
     });
 };
 
+/**
+ * The comment bar component. Contains the input field and submit button for posting a comment.
+ * @param onSuccess - The function to call when a comment has been successfully posted.
+ * @returns - The comment bar component.
+ */
 const CommentBar = ({ onSuccess }: CommentBarInterface) => {
   const { id } = useParams<{ id: string }>();
   const [commentText, setCommentText] = useState("");
   const { message } = App.useApp();
 
+  //? Shouldnt we return a not found page here instead? This indicates that something will show up
   if (id === undefined)
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -52,14 +58,18 @@ const CommentBar = ({ onSuccess }: CommentBarInterface) => {
       </div>
     );
 
+  /**
+   * Handles the posting of a comment.
+   * if a comment is invalid, a message will be posted to user and the function returns.
+   * if the response is "Error", a message is posted to the user.
+   * If the response is successful, the comment text is cleared and onSuccess is called.
+   */
   const handleComment = async () => {
     const response = await postComment(id, commentText);
-    /* If the call was not successful, then we must display error message */
     if (response === "Error") {
       message.error("There was a problem posting your comment.");
       return;
     }
-    /* Else, display success comment, clear message state and call onSuccess. */
     message.success("Comment posted.");
     setCommentText("");
     onSuccess();
@@ -85,7 +95,6 @@ const CommentBar = ({ onSuccess }: CommentBarInterface) => {
           type="primary"
           className={styles.submitButton}
           onClick={() => {
-            /* When clicking on post button, you post */
             handleComment();
           }}
         >

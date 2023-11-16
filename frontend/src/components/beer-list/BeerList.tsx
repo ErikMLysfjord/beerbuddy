@@ -24,15 +24,23 @@ interface BeerListProps {
   fetchMore: (reset?: boolean) => Promise<void>;
 }
 
+/**
+ * A component for displaying a list of beers.
+ * Uses lazy loading to load more beers when the user scrolls down.
+ * @param props - The interface for the BeerList component.
+ * @returns  - The beer list component.
+ */
 const BeerList = (props: BeerListProps) => {
   const { searchString, sorting } = useContext(FilterContext);
   const [mounted, setMounted] = useState(false);
 
+  //? What does this do?
   if (!mounted) {
     setMounted(true);
     props.fetchMore();
   }
 
+  //? What does this do?
   useEffect(() => {
     props.fetchMore(true);
     // The following line is to ignore the lint warning. We know this is bad practice.

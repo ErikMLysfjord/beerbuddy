@@ -4,6 +4,10 @@ import FilterButton from "../filter-button/FilterButton";
 import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
 
+/**
+ * The actionbar component. Contains the sorting and search functionality.
+ * @returns - The actionbar component.
+ */
 const Actionbar = () => {
   const { setSearchString, setSorting } = useContext(FilterContext);
 
