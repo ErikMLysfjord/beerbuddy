@@ -7,6 +7,15 @@ interface SidebarProps {
   fetchMore: (reset?: boolean) => Promise<void>;
 }
 
+/**
+ * Sidebar component that contains the BeerBuddy logo
+ * and a main section for the filter components.
+ * It also contains a button that applies the filter settings
+ * to the search result.
+ * @param children - filter components
+ * @param fetchMore - function that is called when the apply filters button is clicked
+ * @returns a Sidebar component
+ */
 const Sidebar = ({ children, fetchMore }: SidebarProps) => {
   return (
     <section className={styles.container}>

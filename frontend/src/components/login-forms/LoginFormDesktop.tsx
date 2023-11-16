@@ -3,11 +3,19 @@ import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import Logo from "../logo/Logo";
 import LoginFormDesktopContainer from "./LoginFormDesktopContainer.tsx";
 
+
 interface LoginFormDesktopProps {
   onFinishFailed: (errorInfo: ValidateErrorEntity) => void;
   saveUser: (string: { username: string }) => void;
 }
 
+/**
+ * Desktop version of the login form component.
+ * Contains a sales pitch and the login form.
+ * @param onFinishFailed - function that is called when the form is submitted and fails validation
+ * @param saveUser - function that is called when the form is submitted and passes validation
+ * @returns 
+ */
 const LoginFormDesktop = ({
   onFinishFailed,
   saveUser,

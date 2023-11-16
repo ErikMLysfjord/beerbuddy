@@ -2,6 +2,7 @@ import { Form, Input, Button } from "antd";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import styles from "./LoginFormMobile.module.css";
 
+//? What is this
 type FieldType = {
   username?: string;
   password?: string;
@@ -12,6 +13,13 @@ interface LoginFormMobileProps {
   saveUser: (string: { username: string }) => void;
 }
 
+/**
+ * Mobile version of the login form component.
+ * Contains the actual form that is rendered in LoginFormMobile.tsx.
+ * @param onFinishFailed - function that is called when the form is submitted and fails validation
+ * @param saveUser - function that is called when the form is submitted and passes validation
+ * @returns 
+ */
 const LoginFormMobile = ({
   onFinishFailed,
   saveUser,

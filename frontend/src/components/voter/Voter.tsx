@@ -10,6 +10,11 @@ interface VoterInterface {
   beerId: number;
 }
 
+/**
+ * Vote on a beer.
+ * @param beerId - id of the beer to vote on.
+ * @param reaction - the reaction to vote with.
+ */
 const vote = async (beerId: number, reaction: ReactionType) => {
   const userId = await localStorage.getItem("userIdBeerBuddy");
 
@@ -27,7 +32,16 @@ const vote = async (beerId: number, reaction: ReactionType) => {
   });
 };
 
+/**
+ * UI component to perform the vote action.
+ * @param votes - number of votes
+ * @param reaction - the reaction to vote with
+ * @param beerId - id of the beer to vote on
+ * @returns 
+ */
 const Voter = (props: VoterInterface) => {
+
+  //? These look similar, maybe they can be refactored into one function?
   const upvote = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     event.preventDefault();
@@ -45,14 +59,16 @@ const Voter = (props: VoterInterface) => {
   };
   const [action, setAction] = useState(props.reaction);
 
+  //?Values for what
   const values = {
     upvote: 2,
     unreact: 1,
     downvote: 0,
   };
 
-  const total =
-    parseInt(`${props.votes}`) + values[action] - values[props.reaction];
+  const total = parseInt(`${props.votes}`) + values[action] - values[props.reaction];
+
+  //! typo
   const colorHighligt = "#ffbc0d";
   return (
     <div className={styles.wrapper}>

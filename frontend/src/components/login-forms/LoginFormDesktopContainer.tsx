@@ -4,6 +4,7 @@ import { Card, Form, Input, Button, theme } from "antd";
 
 const { useToken } = theme;
 
+//? What is this
 type FieldType = {
   username?: string;
   password?: string;
@@ -14,6 +15,13 @@ interface LoginFormDesktopProps {
   saveUser: (string: { username: string }) => void;
 }
 
+/**
+ * Desktop version of the login form component.
+ * Contains the actual form that is rendered in LoginFormDesktop.tsx.
+ * @param onFinishFailed - function that is called when the form is submitted and fails validation
+ * @param saveUser - function that is called when the form is submitted and passes validation
+ * @returns 
+ */
 const LoginFormDesktop = ({
   onFinishFailed,
   saveUser,

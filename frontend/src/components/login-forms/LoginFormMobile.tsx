@@ -4,6 +4,7 @@ import styles from "./LoginFormMobile.module.css";
 import LoginFormMobileContainer from "./LoginFormMobileContainer";
 import Logo from "../logo/Logo";
 
+//? What is this
 const { useToken } = theme;
 
 interface LoginFormMobileProps {
@@ -11,6 +12,13 @@ interface LoginFormMobileProps {
   saveUser: (string: { username: string }) => void;
 }
 
+/**
+ * Mobile version of the login form component.
+ * Contains a sales pitch and the login form.
+ * @param onFinishFailed - function that is called when the form is submitted and fails validation
+ * @param saveUser - function that is called when the form is submitted and passes validation
+ * @returns 
+ */
 const LoginFormMobile = ({
   onFinishFailed,
   saveUser,

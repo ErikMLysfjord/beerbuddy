@@ -4,6 +4,7 @@ import { Slider, SliderProps, alpha, styled } from "@mui/material";
 import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
 
+// Styles of beer that can be filtered on
 const beerStyles = [
   "American IPA",
   "American Pale Ale (APA)",
@@ -23,6 +24,7 @@ const beerStyles = [
   "Other",
 ];
 
+// Styled slider component from MUI
 const StyledSlider = styled(Slider)<SliderProps>(() => ({
   color: "#FFCC48",
   "& .MuiSlider-thumb": {
@@ -35,6 +37,10 @@ const StyledSlider = styled(Slider)<SliderProps>(() => ({
   },
 }));
 
+/**
+ * Filters component that contains all filters.
+ * @returns a Filters component
+ */
 const Filters = () => {
   const { IBU, setIBU, ABV, setABV, setStyles, styles } =
     useContext(FilterContext);
