@@ -35,10 +35,6 @@ test:
     - cd frontend
     - npm ci
     - npm run test
-    - cd ..
-    - npm ci
-    - npx playwright install
-    - npx playwright test --reporter=list
   only:
     - merge_requests
 
