@@ -185,7 +185,7 @@ const BeerPage = () => {
       </div>
       <hr className={styles.divider} />
       <InfiniteScroll
-        style={{ overflow: "hidden", minHeight: "35vh" }}
+        style={{ overflow: "hidden", minHeight: "33vh" }}
         dataLength={comments.length}
         next={() => {
           /* Fetch the next comments we need, and add them to the comments state */

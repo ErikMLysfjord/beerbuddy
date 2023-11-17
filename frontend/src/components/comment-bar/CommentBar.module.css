@@ -13,10 +13,18 @@
   display: flex;
   gap: 10px;
   padding: 0 1rem;
+  align-items: end;
 }
 
 .inputField {
   background-color: #333333;
+}
+
+.labelContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
 }
 
 .submitButton {

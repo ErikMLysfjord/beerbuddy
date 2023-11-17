@@ -1,6 +1,6 @@
 import { Button, Input, Spin, App } from "antd";
 import styles from "./CommentBar.module.css";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useParams } from "react-router-dom";
 import useWindowDimensions from "../../utils/useWindowDimensions";
 
@@ -20,7 +20,7 @@ const postComment = async (beerId: string, comment: string) => {
     query: `{ comment(userId: "${userId}", beerId: ${beerId}, comment: "${comment}") }`,
   };
 
-  return await fetch("http://it2810-15.idi.ntnu.no:4000/action", {
+  return await fetch("http://localhost:4000/action", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -45,6 +45,7 @@ const CommentBar = ({ onSuccess }: CommentBarInterface) => {
   const [commentText, setCommentText] = useState("");
   const { message } = App.useApp();
   const { width } = useWindowDimensions();
+  const inputId = useId();
 
   if (id === undefined)
     return (
@@ -91,18 +92,22 @@ const CommentBar = ({ onSuccess }: CommentBarInterface) => {
     <div className={styles.wrapper}>
       <div className={styles.divider} />
       <section className={styles.container}>
-        <Input
-          placeholder="Write a comment..."
-          className={styles.inputField}
-          value={commentText}
-          onChange={(e) => setCommentText(e.target.value)}
-          onKeyDown={(e) => {
-            /* When you press Enter with focus on input, you post */
-            if (e.key === "Enter") {
-              handleComment();
-            }
-          }}
-        />
+        <div className={styles.labelContainer}>
+          <label htmlFor={inputId}>Comment</label>
+          <Input
+            id={inputId}
+            placeholder="Best beer ever!"
+            className={styles.inputField}
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+            onKeyDown={(e) => {
+              /* When you press Enter with focus on input, you post */
+              if (e.key === "Enter") {
+                handleComment();
+              }
+            }}
+          />
+        </div>
         {width > 768 ? (
           <Button
             type="primary"
