@@ -36,7 +36,8 @@ test:
     - npm ci
     - npm run test
     - cd ..
-    - npx playwright test
+    - npm ci
+    - npx playwright test --reporter=list
   only:
     - merge_requests
 

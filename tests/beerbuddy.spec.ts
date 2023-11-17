@@ -53,43 +53,34 @@ const fetchBeer = async (id: number) => {
 
 test.describe("Login functionality", () => {
   test("login", async ({ page }) => {
-    console.log("\n");
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
 
     //Shal automatically jump to login page as it is not logged in yet
-    console.log("####### Testing redirect to login page");
     await page.getByLabel("Username").click();
     await page.getByLabel("Username").fill("E2EUser");
     await page.getByRole("button", { name: "Submit" }).click();
 
-    console.log("####### Testing correct greeting message");
     //User is already in database, so welcome back message should be displayed
     await expect(page.getByText("Created new user E2EUser!")).toBeVisible();
 
     //Redirects to the home page
-    console.log("####### Testing redirect to home page");
     await new Promise((resolve) => setTimeout(resolve, 100));
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await expect(
       page.getByRole("heading", { name: "Welcome, E2EUser" })
     ).toBeVisible();
 
-    console.log(
-      "####### Testing correct greeting message when already logged in"
-    );
     //When trying to go back to , so welcome back message should be displayed
     await page.goto("http://it2810-15.idi.ntnu.no/project2/login");
     await expect(page.getByText("Welcome back E2EUser!")).toBeVisible();
 
     //E2EUser is already logged in, so it should be redirected to the home page
-    console.log("####### Testing redirect to home page when already logged in");
     await new Promise((resolve) => setTimeout(resolve, 100));
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await expect(
       page.getByRole("heading", { name: "Welcome, E2EUser" })
     ).toBeVisible();
 
-    console.log("####### Removing the generated user from the database");
     const storageState = page.context().storageState();
     const userId = (await storageState).origins[0].localStorage.filter(
       (item) => item.name === "userIdBeerBuddy"
@@ -97,8 +88,6 @@ test.describe("Login functionality", () => {
     deleteUser(`"${userId[0].value}"`);
     await page.evaluate(() => window.localStorage.clear());
 
-    console.log("####### Testing redirect to login page after logged out");
-    console.log("\n");
     //User is deleted, so it should be redirected to the login page
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await expect(page.getByText("Log in")).toBeVisible();
@@ -107,9 +96,6 @@ test.describe("Login functionality", () => {
 
 test.describe("BeerBuddy functionality", () => {
   test.beforeEach(async ({ page }) => {
-    console.log("\n");
-    console.log("####### Logging in");
-
     // ------------Login Logic------------- //
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await page.getByLabel("Username").click();
@@ -125,8 +111,6 @@ test.describe("BeerBuddy functionality", () => {
 
   test.afterEach(async ({ page }) => {
     // --------User Deletion Logic--------- //
-    console.log("####### Cleaning up");
-    console.log("\n");
     const storageState = page.context().storageState();
     const userId = (await storageState).origins[0].localStorage.filter(
       (item) => item.name === "userIdBeerBuddy"
@@ -137,8 +121,6 @@ test.describe("BeerBuddy functionality", () => {
   });
 
   test("beer-page", async ({ page }) => {
-    console.log("####### Testing correct loading of beer page");
-
     //Click on the first beer in the list
     await page.locator("ul>li").nth(0).click();
 
@@ -156,8 +138,6 @@ test.describe("BeerBuddy functionality", () => {
     await expect(page.getByText(beerStyle)).toBeVisible();
     await page.getByRole("link", { name: "Back to menu" }).click();
 
-    console.log("####### Testing home button");
-
     //Check if back to menu button works
     await expect(
       page.getByRole("heading", { name: "Welcome, E2EUser" })
@@ -165,8 +145,6 @@ test.describe("BeerBuddy functionality", () => {
   });
 
   test("vote", async ({ page }) => {
-    console.log("####### Open first beer");
-
     //Open the first beer in the list
     await page.locator("ul>li").nth(0).click();
 
@@ -188,8 +166,6 @@ test.describe("BeerBuddy functionality", () => {
     ).toBeVisible();
     await page.getByRole("link", { name: "Back to menu" }).click();
 
-    console.log("####### Test upvote of beer");
-
     //Upvote the beer and see if the rating is correct
     await page.getByLabel(beerName).getByLabel("Upvote this beer").click();
     await page.getByLabel(beerName).click();
@@ -201,8 +177,6 @@ test.describe("BeerBuddy functionality", () => {
     ).toBeVisible();
     await page.getByRole("link", { name: "Back to menu" }).click();
 
-    console.log("####### Test downvote of beer");
-
     //Downvote the beer and see if the rating is correct
     await page.getByLabel(beerName).getByLabel("Downvote this beer").click();
     await page.getByLabel(beerName).click();
@@ -213,8 +187,6 @@ test.describe("BeerBuddy functionality", () => {
       page.getByText(`Based on ${beerVotesStart + 1} reviews`)
     ).toBeVisible();
     await page.getByRole("link", { name: "Back to menu" }).click();
-
-    console.log("####### Test removal of vote of beer");
 
     //Remove the vote and see if the rating is correct
     await page.getByLabel(beerName).getByLabel("Downvote this beer").click();
@@ -228,8 +200,6 @@ test.describe("BeerBuddy functionality", () => {
   });
 
   test("comment", async ({ page }) => {
-    console.log("####### Open first beer");
-
     //Open the first beer in the list
     await page.locator("ul>li").nth(0).click();
 
@@ -239,8 +209,6 @@ test.describe("BeerBuddy functionality", () => {
     //fetch beer data from the database
     const beerData = await fetchBeer(parseInt(beerId));
     const beerComments = beerData[0].comment_count;
-
-    console.log("####### Test comment of beer");
 
     //Upvote the beer and see if the rating is correct
     await page.getByPlaceholder("Write a comment...").click();
@@ -253,15 +221,12 @@ test.describe("BeerBuddy functionality", () => {
       page.getByText(/^E2EUser•< 1 minute agoThis is a test comment$/)
     ).toBeVisible();
 
-    console.log("####### Check if number of comments is increased");
-
     const beerData2 = await fetchBeer(parseInt(beerId));
     const beerComments2 = parseInt(beerData2[0].comment_count);
 
     expect(beerComments2 - beerComments).toBe(1);
 
     // --------User Deletion Logic--------- //
-    console.log("####### Deleting user");
     const storageState = page.context().storageState();
     const userId = (await storageState).origins[0].localStorage.filter(
       (item) => item.name === "userIdBeerBuddy"
@@ -271,7 +236,6 @@ test.describe("BeerBuddy functionality", () => {
     // ------------------------------------ //
 
     // ------------Login Logic------------- //
-    console.log("####### Logging in with new user");
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await page.getByLabel("Username").click();
     await page.getByLabel("Username").fill("E2EUser2");
@@ -283,15 +247,11 @@ test.describe("BeerBuddy functionality", () => {
     ).toBeVisible();
     // ------------------------------------ //
 
-    console.log("####### Test comment deletion after user deletion");
-
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await page.locator("ul>li").nth(0).click();
     await expect(
       page.getByText(/^E2EUser•< 1 minute agoThis is a test comment$/)
     ).not.toBeVisible();
-
-    console.log("####### Check if number of comments is returned to previous");
 
     const beerData3 = await fetchBeer(parseInt(beerId));
     const beerComments3 = parseInt(beerData3[0].comment_count);
@@ -299,14 +259,12 @@ test.describe("BeerBuddy functionality", () => {
   });
 
   test("search", async ({ page }) => {
-    console.log("####### Test no result search");
     await page.getByRole("textbox", { name: "Search search" }).click();
     await page.getByRole("textbox", { name: "Search search" }).fill("NoResult");
     await page.getByRole("textbox", { name: "Search search" }).press("Enter");
 
     await expect(page.getByText("Yay! You have seen it all")).toBeVisible();
 
-    console.log("####### Test search with result");
     await page.getByRole("textbox", { name: "Search search" }).fill("IPA");
     await page.getByRole("button", { name: "search" }).click();
     await expect(page.getByText("Loading...")).toBeVisible();
@@ -326,8 +284,6 @@ test.describe("BeerBuddy functionality", () => {
   });
 
   test("sorting", async ({ page }) => {
-    console.log("####### Test most popular sorting");
-
     await page.locator("ul>li").nth(0).click();
     const beerId = page.url().split("/")[5];
     await page.getByRole("link", { name: "Back to menu" }).click();
@@ -343,8 +299,6 @@ test.describe("BeerBuddy functionality", () => {
     const beerRating2 = parseInt(beerData2[0].rating);
 
     expect(beerRating).toBeGreaterThanOrEqual(beerRating2);
-
-    console.log("####### Test least popular sorting");
 
     await page.getByText("Most popular").click();
     await page.getByText("Least popular").click();
@@ -366,7 +320,6 @@ test.describe("BeerBuddy functionality", () => {
     expect(beerRating3).toBeLessThanOrEqual(beerRating4);
     expect(beerRating3).toBeLessThanOrEqual(beerRating);
 
-    console.log("####### Test A-Z sorting");
     await page.getByText("Most popular").click();
     await page.getByText("A-Z").click();
 
@@ -386,7 +339,6 @@ test.describe("BeerBuddy functionality", () => {
 
     expect(beerName5.localeCompare(beerName6)).toBeLessThanOrEqual(0);
 
-    console.log("####### Test Z-A sorting");
     await page.getByText("Most popular").click();
     await page.getByText("Z-A").click();
 
@@ -410,8 +362,6 @@ test.describe("BeerBuddy functionality", () => {
   });
 
   test("styleFiltering", async ({ page }) => {
-    console.log("####### Test filtering on single style");
-
     await page.getByText("American IPA").click();
     await page.getByRole("button", { name: "Apply Filters" }).click();
 
@@ -448,7 +398,6 @@ test.describe("BeerBuddy functionality", () => {
     await expect(page.getByText("Witbier")).toBeVisible();
     await page.getByRole("link", { name: "Back to menu" }).click();
 
-    console.log("####### Test filtering on multiple style");
     //Select two styles at the same time
     await page.getByText("American Blonde Ale").click();
     await page.getByRole("button", { name: "Apply Filters" }).click();
