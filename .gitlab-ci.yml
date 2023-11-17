@@ -35,6 +35,7 @@ test:
     - cd frontend
     - npm ci
     - npm run test
+    - npx playwright test
   only:
     - merge_requests
 
