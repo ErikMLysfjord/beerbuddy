@@ -1,0 +1,21 @@
+.outerWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+
+.innerWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    text-align: center;
+    gap: 20px;
+}
+
+.logo{
+    width: 40%;
+    margin-bottom: 20px;
+}

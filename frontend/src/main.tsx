@@ -8,6 +8,7 @@ import "./index.css";
 import LogInPage from "./pages/LogIn.tsx";
 import BeerPage from "./pages/Beer.tsx";
 import { FilterContextProvider } from "./context/FilterContext.tsx";
+import FallbackPage from "./pages/FallbackPage.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -29,7 +30,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               <Route path="/login" element={<LogInPage />} />
               <Route path="/" element={<App />} />
               <Route path="/beer/:id" element={<BeerPage />} />
-              <Route path="*" element={<h1>Not Found</h1>} />
+              <Route path="*" element={<FallbackPage />} />
             </Routes>
           </BrowserRouter>
         </AntdApp>
