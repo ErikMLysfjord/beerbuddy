@@ -40,6 +40,7 @@ To test the end-to-end tests, run the following command in the root folder:
 
 ```bash
 npm ci
+npx playwright install
 npx playwright test
 ```
 
