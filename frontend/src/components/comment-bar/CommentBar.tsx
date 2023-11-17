@@ -1,8 +1,7 @@
-import { Button, Input, Spin } from "antd";
+import { Button, Input, Spin, App } from "antd";
 import styles from "./CommentBar.module.css";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { App } from "antd";
 
 interface CommentBarInterface {
   onSuccess: () => void;
@@ -52,7 +51,28 @@ const CommentBar = ({ onSuccess }: CommentBarInterface) => {
       </div>
     );
 
+  /**
+   * Checks if the comment is valid.
+   * A valid comment is a comment that is between 1 and 200 characters long
+   * A valid comment does not start with a whitespace.
+   * A valid comment cant only contain special characters.
+   * @param comment
+   * @returns false if the comment is invalid, true if the comment is valid.
+   */
+  const validComment = (comment: string) => {
+    const regex = /^(?=.{1,200}$)(?!\s)[^\w\s]+$/;
+
+    if (regex.test(comment)) {
+      message.error("Your comment is invalid.");
+      return false;
+    }
+    return true;
+  };
+
   const handleComment = async () => {
+    if (!validComment(commentText)) {
+      return;
+    }
     const response = await postComment(id, commentText);
     /* If the call was not successful, then we must display error message */
     if (response === "Error") {
@@ -85,7 +105,6 @@ const CommentBar = ({ onSuccess }: CommentBarInterface) => {
           type="primary"
           className={styles.submitButton}
           onClick={() => {
-            /* When clicking on post button, you post */
             handleComment();
           }}
         >

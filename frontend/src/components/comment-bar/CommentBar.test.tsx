@@ -107,4 +107,45 @@ describe("CommentBar", () => {
 
     await waitFor(() => expect(mockError).toHaveBeenCalled());
   });
+
+  it("Should Throw error on empty comment", async () => {
+    const { getByPlaceholderText, getByText } = render(
+      <CommentBar onSuccess={() => {}} />
+    );
+    const input = getByPlaceholderText("Write a comment...");
+    const button = getByText("Comment");
+
+    fireEvent.change(input, { target: { value: "    " } });
+    fireEvent.click(button);
+
+    await waitFor(() => expect(mockSuccess).not.toHaveBeenCalled());
+  });
+
+  it("should throw error for a comment with more than 280 characters", async () => {
+    const { getByPlaceholderText, getByText } = render(
+      <CommentBar onSuccess={() => {}} />
+    );
+    const input = getByPlaceholderText("Write a comment...");
+    const button = getByText("Comment");
+
+    fireEvent.change(input, { target: { value: "a".repeat(281) } });
+    fireEvent.click(button);
+
+    await waitFor(() => expect(mockSuccess).not.toHaveBeenCalled());
+  });
+
+  it("should throw error for a comment that only contains special charachters", async () => {
+    const { getByPlaceholderText, getByText } = render(
+      <CommentBar onSuccess={() => {}} />
+    );
+    const input = getByPlaceholderText("Write a comment...");
+    const button = getByText("Comment");
+
+    fireEvent.change(input, {
+      target: { value: "!!!@#$%^&*()_+{}[]|;'<>,.?/~`" },
+    });
+    fireEvent.click(button);
+
+    await waitFor(() => expect(mockSuccess).not.toHaveBeenCalled());
+  });
 });
