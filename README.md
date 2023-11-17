@@ -34,7 +34,7 @@ To test the frontend, please go to the [frontend documentation](./frontend/READM
 
 **NB: REQUIRES CONNECTION TO NTNU VPN TO WORK**
 
-Keep in mind that this test takes upwards of ~3 minutes to complete. This is due to the fact that the tests are run one at a time in a headless browser, and the browser needs to wait for the backend to respond to the requests.
+Keep in mind that this test takes ~1.5 minutes to complete. This is due to the fact that the tests are run one at a time in a headless browser, and the browser needs to wait for the backend to respond to the requests.
 
 To test the end-to-end tests, run the following command in the root folder:
 

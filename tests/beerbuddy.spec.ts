@@ -68,6 +68,8 @@ test.describe("Login functionality", () => {
 
     //Redirects to the home page
     console.log("####### Testing redirect to home page");
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await expect(
       page.getByRole("heading", { name: "Welcome, E2EUser" })
     ).toBeVisible();
@@ -81,6 +83,8 @@ test.describe("Login functionality", () => {
 
     //E2EUser is already logged in, so it should be redirected to the home page
     console.log("####### Testing redirect to home page when already logged in");
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await expect(
       page.getByRole("heading", { name: "Welcome, E2EUser" })
     ).toBeVisible();
@@ -111,6 +115,8 @@ test.describe("BeerBuddy functionality", () => {
     await page.getByLabel("Username").click();
     await page.getByLabel("Username").fill("E2EUser");
     await page.getByRole("button", { name: "Submit" }).click();
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await expect(
       page.getByRole("heading", { name: "Welcome, E2EUser" })
     ).toBeVisible();
@@ -264,13 +270,14 @@ test.describe("BeerBuddy functionality", () => {
     await page.evaluate(() => window.localStorage.clear());
     // ------------------------------------ //
 
-    console.log("####### Logging in with new user");
-
     // ------------Login Logic------------- //
+    console.log("####### Logging in with new user");
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await page.getByLabel("Username").click();
     await page.getByLabel("Username").fill("E2EUser2");
     await page.getByRole("button", { name: "Submit" }).click();
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await expect(
       page.getByRole("heading", { name: "Welcome, E2EUser2" })
     ).toBeVisible();
@@ -377,9 +384,7 @@ test.describe("BeerBuddy functionality", () => {
     const beerData6 = await fetchBeer(parseInt(beerId6));
     const beerName6 = beerData6[0].name;
 
-    expect(beerName5.charCodeAt(0)).toBeLessThanOrEqual(
-      beerName6.charCodeAt(0)
-    );
+    expect(beerName5.localeCompare(beerName6)).toBeLessThanOrEqual(0);
 
     console.log("####### Test Z-A sorting");
     await page.getByText("Most popular").click();
@@ -399,12 +404,9 @@ test.describe("BeerBuddy functionality", () => {
     const beerData8 = await fetchBeer(parseInt(beerId8));
     const beerName8 = beerData8[0].name;
 
-    expect(beerName7.charCodeAt(0)).toBeGreaterThanOrEqual(
-      beerName8.charCodeAt(0)
-    );
-    expect(beerName7.charCodeAt(0)).toBeGreaterThanOrEqual(
-      beerName5.charCodeAt(0)
-    );
+    expect(beerName7.localeCompare(beerName8)).toBeGreaterThanOrEqual(0);
+
+    expect(beerName7.localeCompare(beerName5)).toBeGreaterThanOrEqual(0);
   });
 
   test("styleFiltering", async ({ page }) => {
