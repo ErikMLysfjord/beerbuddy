@@ -25,7 +25,7 @@ const protectRoute = async () => {
 
   if (res.data.login[0].id !== userId) {
     resetLocalStorage();
-    window.location.replace("/project2/login")
+    window.location.replace("/project2/login");
     return true;
   }
 
