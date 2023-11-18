@@ -10,8 +10,10 @@
     "preview": "vite preview",
     "prettier": "npx prettier --write .",
     "prettiercheck": "npx prettier --check .",
-    "test": "vitest",
-    "coverage": "vitest --coverage"
+    "test:vitest": "vitest src --no-watch",
+    "test:e2e": "npx playwright test",
+    "test": "npm run test:vitest && npm run test:e2e",
+    "coverage": "vitest src --coverage"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
