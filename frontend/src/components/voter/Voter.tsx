@@ -14,7 +14,7 @@ interface VoterInterface {
 const vote = async (beerId: number, reaction: ReactionType) => {
   const userId = await localStorage.getItem("userIdBeerBuddy");
 
-  await fetch("http://it2810-15.idi.ntnu.no:4000/action", {
+  await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/action", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -22,7 +22,7 @@ const postComment = async (beerId: string, comment: string) => {
     query: `{ comment(userId: "${userId}", beerId: ${beerId}, comment: "${comment}") }`,
   };
 
-  return await fetch("http://it2810-15.idi.ntnu.no:4000/action", {
+  return await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/action", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
