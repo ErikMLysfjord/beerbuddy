@@ -107,7 +107,7 @@ test.describe("Login functionality", () => {
 });
 
 test.describe("BeerBuddy functionality", () => {
-  var E2EUserCounter = 0;
+  let E2EUserCounter = 0;
   test.beforeEach(async ({ page }) => {
     test.setTimeout(120000);
     // Login Logic
