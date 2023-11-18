@@ -3,11 +3,13 @@ import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Sidebar from "./Sidebar";
 import { axe } from "jest-axe";
+import Filters from "../filters/Filters";
 
 const mockFetchMore = vi.fn(async () => await Promise.resolve());
 
 const Template = () => (
-  <Sidebar fetchMore={mockFetchMore}>
+  <Sidebar>
+    <Filters fetchMore={mockFetchMore} />
     <p>Test</p>
   </Sidebar>
 );

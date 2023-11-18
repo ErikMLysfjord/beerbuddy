@@ -1,4 +1,4 @@
-import { Checkbox } from "antd";
+import { Button, Checkbox } from "antd";
 import Filter from "./Filter";
 import { Slider, SliderProps, alpha, styled } from "@mui/material";
 import { useContext } from "react";
@@ -35,7 +35,11 @@ const StyledSlider = styled(Slider)<SliderProps>(() => ({
   },
 }));
 
-const Filters = () => {
+interface FiltersProps {
+  fetchMore: (reset?: boolean) => Promise<void>;
+}
+
+const Filters = ({ fetchMore }: FiltersProps) => {
   const { IBU, setIBU, ABV, setABV, setStyles, styles } =
     useContext(FilterContext);
 
@@ -79,6 +83,20 @@ const Filters = () => {
           getAriaValueText={() => `Min value is ${ABV[0]}, max is ${ABV[1]}`}
         />
       </Filter>
+
+      <Button
+        type="primary"
+        style={{
+          width: "100%",
+          marginTop: "1rem",
+        }}
+        onClick={(e) => {
+          e.preventDefault();
+          fetchMore(true);
+        }}
+      >
+        Apply Filters
+      </Button>
     </>
   );
 };

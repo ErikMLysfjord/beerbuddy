@@ -22,8 +22,8 @@ function App() {
         <Actionbar />
         <BeerList beers={beers} fetchMore={fetchMore} />
       </section>
-      <Sidebar fetchMore={fetchMore}>
-        <Filters />
+      <Sidebar>
+        <Filters fetchMore={fetchMore} />
       </Sidebar>
     </div>
   );
