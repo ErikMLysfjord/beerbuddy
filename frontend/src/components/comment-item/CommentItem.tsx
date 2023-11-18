@@ -95,7 +95,7 @@ const CommentItem = ({
       <div className={styles.buttonContainer}>
         <img
           src="/project2/delete-kopi.svg"
-          alt="Trash can"
+          alt="Delete comment"
           width={"32px"}
           height={"32px"}
           style={{ cursor: "pointer" }}
