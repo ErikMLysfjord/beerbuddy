@@ -2,3 +2,21 @@
   list-style: none;
   padding: 0;
 }
+
+.resultsInfoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.resultsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.resultsInfo {
+  margin: 0;
+}
