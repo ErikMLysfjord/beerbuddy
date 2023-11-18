@@ -3,9 +3,11 @@ import { Button, Modal } from "antd";
 import styles from "./FilterButton.module.css";
 import { useState } from "react";
 import Filters from "../filters/Filters";
+import useFetchMoreBeers from "../../utils/useFetchMoreBeers";
 
 const FilterButton = () => {
   const [showFilter, setShowFilter] = useState(false);
+  const { fetchMore } = useFetchMoreBeers();
 
   const handleClick = () => {
     setShowFilter(!showFilter);
@@ -25,7 +27,7 @@ const FilterButton = () => {
         footer={null}
         width={1000}
       >
-        <Filters />
+        <Filters fetchMore={fetchMore} />
       </Modal>
     </div>
   );
