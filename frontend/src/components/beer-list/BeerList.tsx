@@ -35,7 +35,10 @@ const BeerList = (props: BeerListProps) => {
 
   useEffect(() => {
     props.fetchMore(true);
-  }, [props, searchString, sorting]);
+    // The following line is to ignore the lint warning. We know this is bad practice.
+    // However, we will find a fix for this and remove it for the next delivery when we have more time.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchString, sorting]);
 
   return (
     <main>
