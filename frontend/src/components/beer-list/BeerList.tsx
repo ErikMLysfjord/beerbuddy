@@ -25,6 +25,11 @@ interface BeerListProps {
   fetchMore: (reset?: boolean, noFilters?: boolean) => Promise<void>;
 }
 
+/**
+ * Helper function for translating the sorting method to a more readable format.
+ * @param sorting - The sorting method to translate.
+ * @returns - The translated sorting method.
+ */
 const translateSorting = (sorting: string) => {
   switch (sorting) {
     case "top":
@@ -41,15 +46,35 @@ const translateSorting = (sorting: string) => {
 };
 
 const BeerList = (props: BeerListProps) => {
-  const { searchString, sorting, setABV, setIBU, setStyles } =
-    useContext(FilterContext);
+  const {
+    searchString,
+    sorting,
+    setABV,
+    setIBU,
+    setStyles,
+    ABV,
+    IBU,
+    styles: beerStyles,
+  } = useContext(FilterContext);
   const [mounted, setMounted] = useState(false);
 
+  /**
+   * Function for resetting filters and fetching more beers.
+   */
   const resetFilters = () => {
-    setABV([0, 40]);
-    setIBU([0, 140]);
-    setStyles([]);
-    props.fetchMore(true, true);
+    /* Only reset filters and fetch beers if there are active filters */
+    if (
+      beerStyles.length > 0 ||
+      ABV[0] !== 0 ||
+      ABV[1] !== 40 ||
+      IBU[0] !== 0 ||
+      IBU[1] !== 140
+    ) {
+      setABV([0, 40]);
+      setIBU([0, 140]);
+      setStyles([]);
+      props.fetchMore(true, true);
+    }
   };
 
   if (!mounted) {
