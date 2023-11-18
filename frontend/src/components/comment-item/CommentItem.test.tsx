@@ -4,7 +4,10 @@ import CommentItem from "./CommentItem";
 import { axe } from "jest-axe";
 
 const mockDeleteComment = vi.fn();
-
+global.localStorage = {
+  ...global.localStorage,
+  getItem: vi.fn(() => "unique-id-123"),
+};
 const Template = () => {
   /* Create a timestamp that is 5 days old */
   const date = new Date();
@@ -18,6 +21,7 @@ const Template = () => {
       timestamp={String(date)}
       id={0}
       onDelete={mockDeleteComment}
+      userId={"unique-id-123"}
     />
   );
 };
@@ -54,6 +58,7 @@ describe("CommentItem", () => {
         timestamp={String(date)}
         id={0}
         onDelete={mockDeleteComment}
+        userId={""}
       />
     );
     expect(container).toHaveTextContent("< 1 minute ago");
@@ -69,6 +74,7 @@ describe("CommentItem", () => {
         timestamp={String(date)}
         id={0}
         onDelete={mockDeleteComment}
+        userId={""}
       />
     );
     expect(container).toHaveTextContent("10 minutes ago");
@@ -84,6 +90,7 @@ describe("CommentItem", () => {
         timestamp={String(date)}
         id={0}
         onDelete={mockDeleteComment}
+        userId=""
       />
     );
     expect(container).toHaveTextContent("10 hours ago");
@@ -99,6 +106,7 @@ describe("CommentItem", () => {
         timestamp={String(date)}
         id={0}
         onDelete={mockDeleteComment}
+        userId=""
       />
     );
     expect(container).toHaveTextContent("10 months ago");
@@ -114,12 +122,13 @@ describe("CommentItem", () => {
         timestamp={String(date)}
         id={0}
         onDelete={mockDeleteComment}
+        userId=""
       />
     );
     expect(container).toHaveTextContent("10 years ago");
   });
 
-  /* it("can not delete a comment if the user is not logged in", () => {
+  it("can not delete a comment if the user is not logged in", () => {
     const { queryByAltText } = render(
       <CommentItem
         username={"Test"}
@@ -127,8 +136,9 @@ describe("CommentItem", () => {
         timestamp={String(new Date())}
         id={0}
         onDelete={mockDeleteComment}
+        userId=""
       />
     );
     expect(queryByAltText("Delete comment")).not.toBeInTheDocument();
-  }); */
+  });
 });

@@ -12,10 +12,11 @@ import useWindowDimensions from "../utils/useWindowDimensions";
 import MobileBeerAttribute from "../components/beer-attribute/MobileBeerAttribute";
 
 type CommentInterface = {
+  id: number;
+  user_id: string;
   username: string;
   comment_text: string;
   created_at: string;
-  id: number;
 };
 
 /**
@@ -219,10 +220,11 @@ const BeerPage = () => {
                 key={`${comment.username}-${comment.created_at}}`}
               >
                 <CommentItem
+                  id={comment.id}
+                  userId={comment.user_id}
                   username={comment.username}
                   commentText={comment.comment_text}
                   timestamp={comment.created_at}
-                  id={comment.id}
                   onDelete={() => setNewComment(true)}
                 />
               </li>

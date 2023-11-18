@@ -25,6 +25,7 @@ const beerResolver = {
         comments.comment_text, 
         comments.created_at, 
         comments.id,
+        users.id AS user_id,
         users.username
       FROM comments 
       JOIN users 

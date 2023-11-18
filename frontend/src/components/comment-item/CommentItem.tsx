@@ -1,10 +1,11 @@
 import styles from "./CommentItem.module.css";
 
 interface CommentItemInterface {
+  id: number;
+  userId: string;
   username: string;
   commentText: string;
   timestamp: string;
-  id: number;
   onDelete: () => void;
 }
 
@@ -78,6 +79,7 @@ const CommentItem = ({
   commentText,
   timestamp,
   id,
+  userId,
   onDelete,
 }: CommentItemInterface) => {
   return (
@@ -92,23 +94,25 @@ const CommentItem = ({
         </div>
         <p className={styles.commentText}>{commentText}</p>
       </div>
-      <div className={styles.buttonContainer}>
-        <img
-          src="/project2/delete-kopi.svg"
-          alt="Delete comment"
-          width={"32px"}
-          height={"32px"}
-          style={{ cursor: "pointer" }}
-          onClick={() => {
-            deleteComment(
-              localStorage.getItem("userIdBeerBuddy") ?? "",
-              id.toString()
-            );
-            onDelete();
-          }}
-          tabIndex={0}
-        />
-      </div>
+      {userId === localStorage.getItem("userIdBeerBuddy") && (
+        <div className={styles.buttonContainer}>
+          <img
+            src="/project2/delete-kopi.svg"
+            alt="Delete comment"
+            width={"32px"}
+            height={"32px"}
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              deleteComment(
+                localStorage.getItem("userIdBeerBuddy") ?? "",
+                id.toString()
+              );
+              onDelete();
+            }}
+            tabIndex={0}
+          />
+        </div>
+      )}
     </div>
   );
 };
