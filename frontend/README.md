@@ -62,11 +62,11 @@ npx playwright install
 npm run test:e2e
 ```
 
-The tests can also be ran in parallel, however this is **not recommended** as the VM the backend is hosted on may not always be able to handle the load of multiple simultaneous requests.
+The tests can also be run in parallel, however this is **not recommended** as the VM the backend is hosted on may not always be able to handle the load of multiple simultaneous requests.
 To run the tests in parallel, run the following command:
 
 ```bash
-npm run test:e2e --workers 2
+npx playwright test --workers 2
 ```
 
 Keep in mind that the tests may fail just on the basis of the backend being slow to respond. If this happens, just run the tests again and they should pass.
