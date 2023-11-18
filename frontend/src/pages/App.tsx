@@ -21,14 +21,14 @@ function App() {
         Skip to main content
       </a>
       <div className={appStyles.appBody}>
+        <Sidebar fetchMore={fetchMore}>
+          <Filters />
+        </Sidebar>
         <section className={appStyles.mainSection} id="infiniteScrollTarget">
           <UserIntro />
           <Actionbar />
           <BeerList beers={beers} fetchMore={fetchMore} />
         </section>
-        <Sidebar fetchMore={fetchMore}>
-          <Filters />
-        </Sidebar>
       </div>
     </>
   );
