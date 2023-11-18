@@ -1,6 +1,6 @@
 import styles from "./BeerAttribute.module.css";
 
-interface BeerAttributeProps {
+export interface BeerAttributeProps {
   icon: string;
   altText: string;
   attribute: string;

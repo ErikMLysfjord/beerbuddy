@@ -1,0 +1,88 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MobileBeerAttribute > renders correctly 1`] = `
+<div>
+  <div
+    class="_mobileContainer_eeaf5b"
+  >
+    <div>
+      <div
+        class="_mobileHeaderContainer_eeaf5b"
+      >
+        <img
+          alt="alternative text"
+          height="32px"
+          src=""
+          width="20px"
+        />
+        <div
+          class="_textContainer_eeaf5b"
+        >
+          <h3
+            class="_mobileHeading_eeaf5b"
+          >
+            Testdata 1
+          </h3>
+          <p
+            class="_mobileText_eeaf5b"
+          >
+            1
+          </p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        class="_mobileHeaderContainer_eeaf5b"
+      >
+        <img
+          alt="alternative text"
+          height="32px"
+          src=""
+          width="20px"
+        />
+        <div
+          class="_textContainer_eeaf5b"
+        >
+          <h3
+            class="_mobileHeading_eeaf5b"
+          >
+            Testdata 2
+          </h3>
+          <p
+            class="_mobileText_eeaf5b"
+          >
+            2
+          </p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        class="_mobileHeaderContainer_eeaf5b"
+      >
+        <img
+          alt="alternative text"
+          height="32px"
+          src=""
+          width="20px"
+        />
+        <div
+          class="_textContainer_eeaf5b"
+        >
+          <h3
+            class="_mobileHeading_eeaf5b"
+          >
+            Testdata 3
+          </h3>
+          <p
+            class="_mobileText_eeaf5b"
+          >
+            3
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
