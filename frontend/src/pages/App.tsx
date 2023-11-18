@@ -16,16 +16,21 @@ function App() {
   const { beers, fetchMore } = useFetchMoreBeers();
 
   return (
-    <div className={appStyles.appBody}>
-      <section className={appStyles.mainSection} id="infiniteScrollTarget">
-        <UserIntro />
-        <Actionbar />
-        <BeerList beers={beers} fetchMore={fetchMore} />
-      </section>
-      <Sidebar fetchMore={fetchMore}>
-        <Filters />
-      </Sidebar>
-    </div>
+    <>
+      <a href="#main" className={appStyles.skipLink}>
+        Skip to main content
+      </a>
+      <div className={appStyles.appBody}>
+        <section className={appStyles.mainSection} id="infiniteScrollTarget">
+          <UserIntro />
+          <Actionbar />
+          <BeerList beers={beers} fetchMore={fetchMore} />
+        </section>
+        <Sidebar fetchMore={fetchMore}>
+          <Filters />
+        </Sidebar>
+      </div>
+    </>
   );
 }
 

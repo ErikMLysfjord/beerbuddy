@@ -105,7 +105,7 @@ const BeerList = (props: BeerListProps) => {
           Sorted by: {translateSorting(sorting)}
         </p>
       </section>
-      <main>
+      <main id="main">
         <InfiniteScroll
           dataLength={props.beers.length}
           next={props.fetchMore}
