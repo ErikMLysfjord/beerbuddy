@@ -29,27 +29,3 @@ To be implemented...
 ## Run frontend tests
 
 To test the frontend, please go to the [frontend documentation](./frontend/README.md).
-
-## Run end-to-end tests
-
-**NB: REQUIRES CONNECTION TO NTNU VPN TO WORK**
-
-Keep in mind that this test takes ~1.5 minutes to complete. This is due to the fact that the tests are run one at a time in a headless browser, and the browser needs to wait for the backend to respond to the requests.
-
-To test the end-to-end tests, run the following command in the root folder:
-
-```bash
-npm ci
-npx playwright install
-npx playwright test
-```
-
-To see the test results in a browser, run the following command in the root folder:
-
-```bash
-npx playwright show-results
-```
-
-Keep in mind that the amount of workers performing the testing is set to 1. This is to avoid the tests to fail due to the database not being able to handle multiple users with the same name at the same time.
-
-If you encounter any problems running the tests, then make sure [playwright](https://playwright.dev/docs/intro) is installed correctly before trying again.

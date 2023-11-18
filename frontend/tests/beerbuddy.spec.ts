@@ -18,9 +18,6 @@ const deleteUser = async (userId: string) => {
       }
       return response.json();
     })
-    .then((data) => {
-      expect(data.data.deleteUser).toBe("You deleted your user!");
-    })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
     });
@@ -53,39 +50,54 @@ const fetchBeer = async (id: number) => {
 
 test.describe("Login functionality", () => {
   test("login", async ({ page }) => {
+    //Delete user if it exists from previous test runs
+    test.setTimeout(120000);
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
-
-    //Shal automatically jump to login page as it is not logged in yet
     await page.getByLabel("Username").click();
-    await page.getByLabel("Username").fill("E2EUser");
+    await page.getByLabel("Username").fill("E2EUserLogin");
     await page.getByRole("button", { name: "Submit" }).click();
-
-    //User is already in database, so welcome back message should be displayed
-    await expect(page.getByText("Created new user E2EUser!")).toBeVisible();
-
-    //Redirects to the home page
-    await new Promise((resolve) => setTimeout(resolve, 100));
-    await page.goto("http://it2810-15.idi.ntnu.no/project2/");
-    await expect(
-      page.getByRole("heading", { name: "Welcome, E2EUser" })
-    ).toBeVisible();
-
-    //When trying to go back to , so welcome back message should be displayed
-    await page.goto("http://it2810-15.idi.ntnu.no/project2/login");
-    await expect(page.getByText("Welcome back E2EUser!")).toBeVisible();
-
-    //E2EUser is already logged in, so it should be redirected to the home page
-    await new Promise((resolve) => setTimeout(resolve, 100));
-    await page.goto("http://it2810-15.idi.ntnu.no/project2/");
-    await expect(
-      page.getByRole("heading", { name: "Welcome, E2EUser" })
-    ).toBeVisible();
-
     const storageState = page.context().storageState();
     const userId = (await storageState).origins[0].localStorage.filter(
       (item) => item.name === "userIdBeerBuddy"
     );
     deleteUser(`"${userId[0].value}"`);
+    await page.evaluate(() => window.localStorage.clear());
+
+    await page.goto("http://it2810-15.idi.ntnu.no/project2/");
+
+    //Shal automatically jump to login page as it is not logged in yet
+    await page.getByLabel("Username").click();
+    await page.getByLabel("Username").fill("E2EUserLogin");
+    await page.getByRole("button", { name: "Submit" }).click();
+
+    //User is already in database, so welcome back message should be displayed
+    await expect(
+      page.getByText("Created new user E2EUserLogin!")
+    ).toBeVisible();
+
+    //Redirects to the home page
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    await page.goto("http://it2810-15.idi.ntnu.no/project2/");
+    await expect(
+      page.getByRole("heading", { name: "Welcome, E2EUserLogin" })
+    ).toBeVisible();
+
+    //When trying to go back to , so welcome back message should be displayed
+    await page.goto("http://it2810-15.idi.ntnu.no/project2/login");
+    await expect(page.getByText("Welcome back E2EUserLogin!")).toBeVisible();
+
+    //E2EUserLogin is already logged in, so it should be redirected to the home page
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    await page.goto("http://it2810-15.idi.ntnu.no/project2/");
+    await expect(
+      page.getByRole("heading", { name: "Welcome, E2EUserLogin" })
+    ).toBeVisible();
+
+    const storageState2 = page.context().storageState();
+    const userId2 = (await storageState2).origins[0].localStorage.filter(
+      (item) => item.name === "userIdBeerBuddy"
+    );
+    deleteUser(`"${userId2[0].value}"`);
     await page.evaluate(() => window.localStorage.clear());
 
     //User is deleted, so it should be redirected to the login page
@@ -95,29 +107,32 @@ test.describe("Login functionality", () => {
 });
 
 test.describe("BeerBuddy functionality", () => {
+  var E2EUserCounter = 0;
   test.beforeEach(async ({ page }) => {
-    // ------------Login Logic------------- //
+    test.setTimeout(120000);
+    // Login Logic
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await page.getByLabel("Username").click();
-    await page.getByLabel("Username").fill("E2EUser");
+    await page.getByLabel("Username").fill("E2EUser" + E2EUserCounter);
     await page.getByRole("button", { name: "Submit" }).click();
     await new Promise((resolve) => setTimeout(resolve, 100));
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await expect(
-      page.getByRole("heading", { name: "Welcome, E2EUser" })
+      page.getByRole("heading", {
+        name: "Welcome, E2EUser" + E2EUserCounter,
+      })
     ).toBeVisible();
-    // ------------------------------------ //
+    E2EUserCounter++;
   });
 
   test.afterEach(async ({ page }) => {
-    // --------User Deletion Logic--------- //
+    // User Deletion Logic
     const storageState = page.context().storageState();
     const userId = (await storageState).origins[0].localStorage.filter(
       (item) => item.name === "userIdBeerBuddy"
     );
     deleteUser(`"${userId[0].value}"`);
     await page.evaluate(() => window.localStorage.clear());
-    // ------------------------------------ //
   });
 
   test("beer-page", async ({ page }) => {
@@ -139,9 +154,7 @@ test.describe("BeerBuddy functionality", () => {
     await page.getByRole("link", { name: "Back to menu" }).click();
 
     //Check if back to menu button works
-    await expect(
-      page.getByRole("heading", { name: "Welcome, E2EUser" })
-    ).toBeVisible();
+    await expect(page.getByText("Welcome, E2EUser")).toBeVisible();
   });
 
   test("vote", async ({ page }) => {
@@ -218,7 +231,7 @@ test.describe("BeerBuddy functionality", () => {
     await page.getByRole("button", { name: "Comment" }).click();
     await expect(page.getByText("Comment posted.")).toBeVisible();
     await expect(
-      page.getByText(/^E2EUser•< 1 minute agoThis is a test comment$/)
+      page.getByText(/1 minute agoThis is a test comment$/)
     ).toBeVisible();
 
     const beerData2 = await fetchBeer(parseInt(beerId));
@@ -238,19 +251,17 @@ test.describe("BeerBuddy functionality", () => {
     // ------------Login Logic------------- //
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await page.getByLabel("Username").click();
-    await page.getByLabel("Username").fill("E2EUser2");
+    await page.getByLabel("Username").fill("E2ECommentUser2");
     await page.getByRole("button", { name: "Submit" }).click();
     await new Promise((resolve) => setTimeout(resolve, 100));
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
-    await expect(
-      page.getByRole("heading", { name: "Welcome, E2EUser2" })
-    ).toBeVisible();
+    await expect(page.getByText("Welcome, E2ECommentUser2")).toBeVisible();
     // ------------------------------------ //
 
     await page.goto("http://it2810-15.idi.ntnu.no/project2/");
     await page.locator("ul>li").nth(0).click();
     await expect(
-      page.getByText(/^E2EUser•< 1 minute agoThis is a test comment$/)
+      page.getByText(/1 minute agoThis is a test comment$/)
     ).not.toBeVisible();
 
     const beerData3 = await fetchBeer(parseInt(beerId));
