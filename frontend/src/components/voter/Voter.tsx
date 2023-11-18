@@ -29,19 +29,19 @@ const vote = async (beerId: number, reaction: ReactionType) => {
 };
 
 const Voter = (props: VoterInterface) => {
-  const upvote = (event: React.MouseEvent<HTMLButtonElement>) => {
-    protectRoute();
+  const upvote = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     event.preventDefault();
+    if (await protectRoute()) return "Error";
     const reaction = action === "upvote" ? "unreact" : "upvote";
     setAction(reaction);
     vote(props.beerId, reaction);
   };
 
-  const downvote = (event: React.MouseEvent<HTMLButtonElement>) => {
-    protectRoute();
+  const downvote = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     event.preventDefault();
+    if (await protectRoute()) return "Error";
     const reaction = action === "downvote" ? "unreact" : "downvote";
     setAction(reaction);
     vote(props.beerId, reaction);

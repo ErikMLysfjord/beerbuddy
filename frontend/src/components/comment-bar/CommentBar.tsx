@@ -16,7 +16,7 @@ interface CommentBarInterface {
  * @returns - The response from the backend.
  */
 const postComment = async (beerId: string, comment: string) => {
-  protectRoute();
+  if (await protectRoute()) return "Error";
   const userId = localStorage.getItem("userIdBeerBuddy");
   const query = {
     query: `{ comment(userId: "${userId}", beerId: ${beerId}, comment: "${comment}") }`,
