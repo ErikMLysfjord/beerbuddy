@@ -36,7 +36,9 @@ exports[`BeerList > renders correctly 1`] = `
       Most popular
     </p>
   </section>
-  <main>
+  <main
+    id="main"
+  >
     <div
       class="infinite-scroll-component__outerdiv"
     >
