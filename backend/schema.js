@@ -26,6 +26,7 @@ const actionSchema = buildSchema(`
   type Query {
     react(userId: String! beerId: Int! action: String!): String
     comment(userId: String! beerId: Int! comment: String!): String
+    deleteComment(userId: String! commentId: Int!): String
   }
 `);
 

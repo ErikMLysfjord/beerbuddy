@@ -15,6 +15,7 @@ type CommentInterface = {
   username: string;
   comment_text: string;
   created_at: string;
+  id: number;
 };
 
 /**
@@ -28,7 +29,7 @@ const fetchComments = async (id: string, offset: number) => {
     query: `{ comments(id: ${id}, size: 5, start: ${offset}) }`,
   };
 
-  return await fetch("http://it2810-15.idi.ntnu.no:4000/beer", {
+  return await fetch("http://localhost:4000/beer", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -221,6 +222,8 @@ const BeerPage = () => {
                   username={comment.username}
                   commentText={comment.comment_text}
                   timestamp={comment.created_at}
+                  id={comment.id}
+                  onDelete={() => setNewComment(true)}
                 />
               </li>
             ))

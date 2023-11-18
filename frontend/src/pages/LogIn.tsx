@@ -29,7 +29,7 @@ const fetchLoginId = async (
   setIsNewUser: React.Dispatch<React.SetStateAction<string>>,
   isNewUser: string
 ) => {
-  const res = await fetch("http://it2810-15.idi.ntnu.no:4000/user", {
+  const res = await fetch("http://localhost:4000/user", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

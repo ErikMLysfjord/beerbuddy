@@ -22,7 +22,7 @@ const useFetchMoreBeers = () => {
   const userId = localStorage.getItem("userIdBeerBuddy");
 
   const fetchMore = async (reset?: boolean, noFilters?: boolean) => {
-    await fetch("http://it2810-15.idi.ntnu.no:4000/beer", {
+    await fetch("http://localhost:4000/beer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
