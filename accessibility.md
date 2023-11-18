@@ -20,7 +20,7 @@ This document describes the accessibility measures that were taken to make the a
   - [Keyboard navigation](#keyboard-navigation)
   - [HTML semantics](#html-semantics)
   - [ARIA attributes](#aria-attributes)
-  <!-- - [Skip to content](#skip-to-content) -->
+  - [Skip to content](#skip-to-content)
   - [Screen readers and infinite scroll](#screen-readers-and-infinite-scroll)
 - [Technologies used to measure accessibility](#technologies-used-to-measure-accessibility)
   - [Firefox Accessibility](#firefox-accessibility)
@@ -97,11 +97,11 @@ HTML are important for accessibility because it provides semantic information ab
 
 ARIA attributes like `aria-label` are used to make the application more accessible for screen readers. These attributes are used to provide additional information about the content of the application, and to make it easier to navigate the application using the keyboard. The application uses ARIA attributes for all interactive elements, and for all elements that are not self-explanatory.
 
-<!-- This is not implemented yet, but we will implement it if we have time.
-
 ### Skip to content
 
-The application has a "skip to content" link that makes it possible to skip the navigation and go directly to the content of the application. This makes it easier to navigate the application using the keyboard. -->
+The application has a "skip to content" link that makes it possible to skip the navigation and go directly to the content of the application. This makes it easier to navigate the application using the keyboard.
+
+We have only implemented it on the home page, as we felt the Beer-page was not complex enough to warrant it.
 
 ### Screen readers and infinite scroll
 
