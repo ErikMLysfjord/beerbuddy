@@ -19,7 +19,7 @@ describe("FilterButton", () => {
   });
 
   it("renders correctly", () => {
-    const { container } = render(<FilterButton fetchMore={fetchMore}/>);
+    const { container } = render(<FilterButton fetchMore={fetchMore} />);
     expect(container).toMatchSnapshot();
   });
 
