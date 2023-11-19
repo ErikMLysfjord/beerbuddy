@@ -5,7 +5,6 @@ import { useEffect, useRef } from "react";
 import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
 import { Button } from "antd";
-import useFetchMoreBeers from "../../utils/useFetchMoreBeers";
 
 /**
  * Helper function for translating the sorting method to a more readable format.
