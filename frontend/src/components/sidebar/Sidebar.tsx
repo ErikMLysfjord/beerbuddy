@@ -1,14 +1,13 @@
 import { Button } from "antd";
 import Logo from "../logo/Logo";
 import styles from "./Sidebar.module.css";
-import useFetchMoreBeers from "../../utils/useFetchMoreBeers";
 
 interface SidebarProps {
   children: React.ReactNode;
+  fetchMore: (reset?: boolean, noFilters?: boolean) => Promise<void>;
 }
 
-const Sidebar = ({ children }: SidebarProps) => {
-  const { fetchMore } = useFetchMoreBeers();
+const Sidebar = ({ children, fetchMore }: SidebarProps) => {
   return (
     <section className={styles.container}>
       <div>

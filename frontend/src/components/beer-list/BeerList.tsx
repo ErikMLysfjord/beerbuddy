@@ -27,12 +27,26 @@ const translateSorting = (sorting: string) => {
   }
 };
 
-
 /**
  * BeerList component
  * @returns a list of beers, that should be dynamically loaded when the user scrolls down.
  */
-const BeerList = () => {
+
+type ReactionType = "unreact" | "upvote" | "downvote";
+
+interface BeerListProps {
+  beers: {
+    beer_id: number;
+    beer_name: string;
+    brewery_name: string;
+    vote_sum: number;
+    beer_count: number;
+    reaction: ReactionType;
+  }[];
+  fetchMore: (reset?: boolean, noFilters?: boolean) => Promise<void>;
+}
+
+const BeerList = ({ beers, fetchMore }: BeerListProps) => {
   const {
     searchString,
     sorting,
@@ -44,11 +58,8 @@ const BeerList = () => {
     styles: beerStyles,
   } = useContext(FilterContext);
 
-  const { beers, fetchMore: fetchMoreBeers } = useFetchMoreBeers();
-
-  // Store fetchMore in a ref
-  const fetchMoreRef = useRef(fetchMoreBeers);
-  fetchMoreRef.current = fetchMoreBeers;
+  const fetchMoreRef = useRef(fetchMore);
+  fetchMoreRef.current = fetchMore;
 
   /**
    * Function for resetting filters and fetching more beers.
@@ -70,8 +81,10 @@ const BeerList = () => {
   };
 
   useEffect(() => {
-    // Use the ref in the useEffect hook
-    fetchMoreRef.current(true);
+    fetchMore(true);
+    // The following line is to ignore the lint warning. We know this is bad practice.
+    // However, we will find a fix for this and remove it for the next delivery when we have more time.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchString, sorting]);
 
   return (

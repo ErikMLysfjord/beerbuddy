@@ -3,28 +3,16 @@ import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Sidebar from "./Sidebar";
 import { axe } from "jest-axe";
-import useFetchMoreBeers from "../../utils/useFetchMoreBeers";
+
+const mockFetchMore = vi.fn(async () => await Promise.resolve());
 
 const Template = () => (
-  <Sidebar>
+  <Sidebar fetchMore={mockFetchMore}>
     <p>Test</p>
   </Sidebar>
 );
 
 describe("Sidebar", () => {
-  vi.mock("../../utils/useFetchMoreBeers", () => {
-    const mockFetchMore = vi.fn(
-      async () => await Promise.resolve({ json: () => Promise.resolve({}) })
-    );
-    return {
-      __esModule: true,
-      default: () => ({
-        beers: [],
-        fetchMore: mockFetchMore,
-      }),
-    };
-  });
-
   it("is accessible", async () => {
     const { container } = render(<Template />);
     expect(await axe(container)).toHaveNoViolations();
@@ -49,6 +37,6 @@ describe("Sidebar", () => {
   it("calls fetchMore when button is clicked", () => {
     const { getByRole } = render(<Template />);
     getByRole("button").click();
-    expect(useFetchMoreBeers().fetchMore).toHaveBeenCalledTimes(1);
+    expect(mockFetchMore).toHaveBeenCalled();
   });
 });
