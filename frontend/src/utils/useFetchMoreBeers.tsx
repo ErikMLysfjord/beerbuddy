@@ -22,7 +22,7 @@ const useFetchMoreBeers = () => {
   const [beers, setBeers] = useState<Beer[]>([]);
   const userId = localStorage.getItem("userIdBeerBuddy");
 
-  const fetchMore = async (reset?: boolean) => {
+  const fetchMore = async (reset?: boolean, noFilters?: boolean) => {
     await fetch("http://it2810-15.idi.ntnu.no:4000/beer", {
       method: "POST",
       headers: {
@@ -36,20 +36,20 @@ const useFetchMoreBeers = () => {
             start: ${reset ? 0 : beers.length}
             userId: "${userId}"
             sort: "${sorting}" 
-            minAbv: ${ABV[0]}
-            maxAbv: ${ABV[1]}
-            minIbu: ${IBU[0]}
-            maxIbu: ${IBU[1]}
+            minAbv: ${noFilters ? 0 : ABV[0]}
+            maxAbv: ${noFilters ? 40 : ABV[1]}
+            minIbu: ${noFilters ? 0 : IBU[0]}
+            maxIbu: ${noFilters ? 140 : IBU[1]}
             search: "${searchString}"
-            styles: ${JSON.stringify(styles)}
+            styles: ${noFilters ? "[]" : JSON.stringify(styles)}
           )
         }`,
       }),
     })
       .then((r) => r.json())
-      .then((data) =>
-        setBeers(reset ? data.data.beers : [...beers, ...data.data.beers])
-      );
+      .then((data) => {
+        setBeers(reset ? data.data.beers : [...beers, ...data.data.beers]);
+      });
 
     reset
       ? document.getElementById("infiniteScrollTarget")?.scrollTo(0, 0)
