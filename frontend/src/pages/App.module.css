@@ -71,6 +71,6 @@
 
 @media screen and (max-width: 1000px) {
   .iconStyle {
-    right: 50vw;
+    right: calc(50vw - 25px);
   }
 }
