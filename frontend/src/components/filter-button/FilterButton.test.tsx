@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import FilterButton from "./FilterButton";
@@ -11,18 +11,20 @@ const { getComputedStyle } = window;
 window.getComputedStyle = (elt) => getComputedStyle(elt);
 
 describe("FilterButton", () => {
+  const fetchMore = vi.fn();
+
   it("is accessible", async () => {
-    const { container } = render(<FilterButton />);
+    const { container } = render(<FilterButton fetchMore={fetchMore} />);
     expect(await axe(container)).toHaveNoViolations();
   });
 
   it("renders correctly", () => {
-    const { container } = render(<FilterButton />);
+    const { container } = render(<FilterButton fetchMore={fetchMore}/>);
     expect(container).toMatchSnapshot();
   });
 
   it("should open modal", () => {
-    const { getAllByRole } = render(<FilterButton />);
+    const { getAllByRole } = render(<FilterButton fetchMore={fetchMore} />);
 
     expect(screen.queryByText("Filters")).not.toBeInTheDocument();
 
@@ -34,7 +36,7 @@ describe("FilterButton", () => {
   });
 
   it("should close modal", () => {
-    render(<FilterButton />);
+    render(<FilterButton fetchMore={fetchMore} />);
 
     expect(screen.queryByText("Filters")).not.toBeInTheDocument();
 
