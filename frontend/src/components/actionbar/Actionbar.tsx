@@ -4,7 +4,11 @@ import FilterButton from "../filter-button/FilterButton";
 import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
 
-const Actionbar = () => {
+const Actionbar = ({
+  fetchMore,
+}: {
+  fetchMore: (reset?: boolean, noFilters?: boolean) => Promise<void>;
+}) => {
   const { setSearchString, setSorting } = useContext(FilterContext);
 
   return (
@@ -30,7 +34,7 @@ const Actionbar = () => {
           onSearch={(value) => setSearchString(value.toLowerCase())}
         />
       </label>
-      <FilterButton />
+      <FilterButton fetchMore={fetchMore} />
     </section>
   );
 };

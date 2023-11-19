@@ -23,7 +23,7 @@ function App() {
       <div className={appStyles.appBody}>
         <section className={appStyles.mainSection} id="infiniteScrollTarget">
           <UserIntro />
-          <Actionbar />
+          <Actionbar fetchMore={fetchMore} />
           <BeerList beers={beers} fetchMore={fetchMore} />
         </section>
         <Sidebar>

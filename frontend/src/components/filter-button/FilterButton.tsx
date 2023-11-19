@@ -3,11 +3,13 @@ import { Button, Modal } from "antd";
 import styles from "./FilterButton.module.css";
 import { useState } from "react";
 import Filters from "../filters/Filters";
-import useFetchMoreBeers from "../../utils/useFetchMoreBeers";
 
-const FilterButton = () => {
+const FilterButton = ({
+  fetchMore,
+}: {
+  fetchMore: (reset?: boolean, noFilters?: boolean) => Promise<void>;
+}) => {
   const [showFilter, setShowFilter] = useState(false);
-  const { fetchMore } = useFetchMoreBeers();
 
   const handleClick = () => {
     setShowFilter(!showFilter);
