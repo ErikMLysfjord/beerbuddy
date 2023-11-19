@@ -17,3 +17,18 @@
     padding: 3rem 2rem;
   }
 }
+
+.skipLink {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1em;
+  background-color: #ffcc48;
+  color: black;
+  opacity: 0;
+}
+.skipLink:focus {
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
+}

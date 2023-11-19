@@ -1,0 +1,30 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BeerAttribute > renders correctly 1`] = `
+<div>
+  <div
+    class="_attributeContainer_eeaf5b"
+  >
+    <div
+      class="_attributeHeaderContainer_eeaf5b"
+    >
+      <img
+        alt="Alternative text"
+        height="32px"
+        src=""
+        width="20px"
+      />
+      <h3
+        class="_attributeHeading_eeaf5b"
+      >
+        Test
+      </h3>
+    </div>
+    <p
+      class="_attributeText_eeaf5b"
+    >
+      5
+    </p>
+  </div>
+</div>
+`;

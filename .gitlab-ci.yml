@@ -34,7 +34,7 @@ test:
     - echo "Testing the project"
     - cd frontend
     - npm ci
-    - npm run test
+    - npm run test:vitest
   only:
     - merge_requests
 

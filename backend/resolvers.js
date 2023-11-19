@@ -213,7 +213,7 @@ const beerResolver = {
       WHERE
           beers.abv > ${minAbvProsent} AND beers.abv < ${maxAbvProsent} AND
           beers.ibu > ${minIbus} AND beers.ibu < ${maxIbus} AND
-          beers.name LIKE '%${searchQuery}%'
+          LOWER(beers.name) LIKE '%${searchQuery}%'
           ${
             beerStyles.length > 0
               ? `AND beers.style IN (${beerStyles

@@ -2,7 +2,43 @@
 
 exports[`BeerList > renders correctly 1`] = `
 <div>
-  <main>
+  <section
+    class="_resultsInfoContainer_ac700a"
+  >
+    <div
+      class="_resultsHeader_ac700a"
+    >
+      <h2
+        class="_resultsInfo_ac700a"
+      >
+        100
+         results
+      </h2>
+      <button
+        class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary"
+        type="button"
+      >
+        <span>
+          Reset filters
+        </span>
+      </button>
+    </div>
+    <p
+      class="_resultsInfo_ac700a"
+    >
+      Searched for: "
+      "
+    </p>
+    <p
+      class="_resultsInfo_ac700a"
+    >
+      Sorted by: 
+      Most popular
+    </p>
+  </section>
+  <main
+    id="main"
+  >
     <div
       class="infinite-scroll-component__outerdiv"
     >

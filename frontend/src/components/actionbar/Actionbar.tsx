@@ -8,7 +8,7 @@ const Actionbar = () => {
   const { setSearchString, setSorting, sorting } = useContext(FilterContext);
 
   return (
-    <div className={styles.wrapper}>
+    <section className={styles.wrapper}>
       <label className={styles.sortLabel}>
         Sort by
         <Select
@@ -26,10 +26,12 @@ const Actionbar = () => {
       </label>
       <label className={styles.searchLabel}>
         Search
-        <Input.Search onSearch={(value) => setSearchString(value)} />
+        <Input.Search
+          onSearch={(value) => setSearchString(value.toLowerCase())}
+        />
       </label>
       <FilterButton />
-    </div>
+    </section>
   );
 };
 export default Actionbar;
