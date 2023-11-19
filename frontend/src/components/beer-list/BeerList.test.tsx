@@ -3,7 +3,6 @@ import { render, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import BeerList from "./BeerList";
 import { axe } from "jest-axe";
-import useFetchMoreBeers from "../../utils/useFetchMoreBeers";
 
 describe("BeerList", () => {
   vi.mock("../../utils/useFetchMoreBeers", () => {
@@ -56,30 +55,22 @@ describe("BeerList", () => {
     };
   });
 
-  const { beers, fetchMore } = useFetchMoreBeers();
-
   afterEach(() => {
     vi.clearAllMocks();
   });
 
   it("is accessible", async () => {
-    const { container } = render(
-      <BeerList beers={beers} fetchMore={fetchMore} />
-    );
+    const { container } = render(<BeerList />);
     expect(await axe(container)).toHaveNoViolations();
   });
 
   it("renders correctly", () => {
-    const { container } = render(
-      <BeerList beers={beers} fetchMore={fetchMore} />
-    );
+    const { container } = render(<BeerList />);
     expect(container).toMatchSnapshot();
   });
 
   it("renders with correct number of beers", async () => {
-    const { getByText, getAllByRole } = render(
-      <BeerList beers={beers} fetchMore={fetchMore} />
-    );
+    const { getByText, getAllByRole } = render(<BeerList />);
 
     expect(getByText("Loading...")).toBeInTheDocument();
 
@@ -89,9 +80,7 @@ describe("BeerList", () => {
   });
 
   it("renders with correct names", async () => {
-    const { getByText } = render(
-      <BeerList beers={beers} fetchMore={fetchMore} />
-    );
+    const { getByText } = render(<BeerList />);
     expect(getByText("Loading...")).toBeInTheDocument();
 
     await waitFor(() => {

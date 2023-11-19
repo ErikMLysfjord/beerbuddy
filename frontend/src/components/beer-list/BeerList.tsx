@@ -1,51 +1,34 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 import BeerCard from "../beer-card/BeerCard";
 import style from "./BeerList.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
+import useFetchMoreBeers from "../../utils/useFetchMoreBeers";
 
 /**
  * BeerList component
  * @returns a list of beers, that should be dynamically loaded when the user scrolls down.
  */
-
-type ReactionType = "unreact" | "upvote" | "downvote";
-
-interface BeerListProps {
-  beers: {
-    beer_id: number;
-    beer_name: string;
-    brewery_name: string;
-    vote_sum: number;
-    beer_count: number;
-    reaction: ReactionType;
-  }[];
-  fetchMore: (reset?: boolean) => Promise<void>;
-}
-
-const BeerList = (props: BeerListProps) => {
+const BeerList = () => {
   const { searchString, sorting } = useContext(FilterContext);
-  const [mounted, setMounted] = useState(false);
+  const { beers, fetchMore: fetchMoreBeers } = useFetchMoreBeers();
 
-  if (!mounted) {
-    setMounted(true);
-    props.fetchMore();
-  }
+  // Store fetchMore in a ref
+  const fetchMoreRef = useRef(fetchMoreBeers);
+  fetchMoreRef.current = fetchMoreBeers;
 
   useEffect(() => {
-    props.fetchMore(true);
-    // The following line is to ignore the lint warning. We know this is bad practice.
-    // However, we will find a fix for this and remove it for the next delivery when we have more time.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Use the ref in the useEffect hook
+    fetchMoreRef.current(true);
   }, [searchString, sorting]);
 
   return (
     <main>
       <InfiniteScroll
-        dataLength={props.beers.length}
-        next={props.fetchMore}
-        hasMore={props.beers?.length < props.beers[0]?.beer_count}
+        dataLength={beers.length}
+        next={() => fetchMoreRef.current()}
+        hasMore={beers?.length < beers[0]?.beer_count}
         loader={
           <p style={{ textAlign: "center" }}>
             <b>Loading...</b>
@@ -60,7 +43,7 @@ const BeerList = (props: BeerListProps) => {
         scrollableTarget="infiniteScrollTarget"
       >
         <ul className={style.list}>
-          {props.beers?.map((beer) => (
+          {beers?.map((beer) => (
             <li key={beer.beer_id}>
               <BeerCard
                 beer_id={beer.beer_id}

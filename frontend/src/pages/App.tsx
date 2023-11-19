@@ -3,7 +3,6 @@ import Actionbar from "../components/actionbar/Actionbar";
 import UserIntro from "../components/user-intro/UserIntro";
 import BeerList from "../components/beer-list/BeerList";
 import Filters from "../components/filters/Filters";
-import useFetchMoreBeers from "../utils/useFetchMoreBeers";
 import appStyles from "./App.module.css";
 import protectRoute from "../utils/protectRoute";
 import { useEffect } from "react";
@@ -12,16 +11,14 @@ function App() {
   useEffect(() => {
     protectRoute();
   }, []);
-  const { beers, fetchMore } = useFetchMoreBeers();
-
   return (
     <div className={appStyles.appBody}>
       <section className={appStyles.mainSection} id="infiniteScrollTarget">
         <UserIntro />
         <Actionbar />
-        <BeerList beers={beers} fetchMore={fetchMore} />
+        <BeerList />
       </section>
-      <Sidebar fetchMore={fetchMore}>
+      <Sidebar>
         <Filters />
       </Sidebar>
     </div>
