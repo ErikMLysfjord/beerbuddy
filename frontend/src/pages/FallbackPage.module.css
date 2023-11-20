@@ -18,3 +18,15 @@
   width: 40%;
   margin-bottom: 20px;
 }
+
+@media screen and (max-width: 768px) {
+  .text {
+    font-size: 1.25rem;
+  }
+  .logo {
+    width: 40%;
+  }
+  .innerWrapper {
+    width: 60%;
+  }
+}

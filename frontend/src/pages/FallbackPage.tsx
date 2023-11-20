@@ -10,7 +10,9 @@ const FallbackPage = () => {
           alt="BeerBuddy logo"
           className={styles.logo}
         />
-        <h1>The page you were looking was not found!</h1>
+        <h1 className={styles.text}>
+          The page you were looking for was not found!
+        </h1>
         <Button type="primary" href="/project2">
           Return to dashboard
         </Button>
