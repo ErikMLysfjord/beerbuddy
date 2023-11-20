@@ -3,9 +3,18 @@ import styles from "./Actionbar.module.css";
 import FilterButton from "../filter-button/FilterButton";
 import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
+import SortingButton from "../SortingButton/SortingButton";
+import { SortingItem } from "../../types/types";
 
 const Actionbar = () => {
   const { setSearchString, setSorting } = useContext(FilterContext);
+
+  const items: SortingItem[] = [
+    { key: "top", label: "Most popular" },
+    { key: "low", label: "Least popular" },
+    { key: "atoz", label: "A-Z" },
+    { key: "ztoa", label: "Z-A" },
+  ];
 
   return (
     <section className={styles.wrapper}>
@@ -15,12 +24,7 @@ const Actionbar = () => {
           defaultValue="top"
           title="Sort by"
           style={{ width: 200 }}
-          options={[
-            { value: "top", label: "Most popular" },
-            { value: "low", label: "Least popular" },
-            { value: "atoz", label: "A-Z" },
-            { value: "ztoa", label: "Z-A" },
-          ]}
+          options={items}
           onChange={(value) => setSorting(value)}
         />
       </label>
@@ -31,7 +35,8 @@ const Actionbar = () => {
         />
       </label>
       <FilterButton />
-    </section>
+      <SortingButton items={items} />
+    </section >
   );
 };
 export default Actionbar;

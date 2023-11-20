@@ -10,3 +10,11 @@ export type Beer = {
   vote_count: number;
   comment_count: number;
 };
+
+/**
+ * @description SortingItem is used to define the sorting options
+ */
+export type SortingItem = {
+  key: string;
+  label: string;
+}
