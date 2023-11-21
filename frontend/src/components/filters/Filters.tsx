@@ -37,7 +37,7 @@ const StyledSlider = styled(Slider)<SliderProps>(() => ({
 
 interface FiltersProps {
   fetchMore: (reset?: boolean) => Promise<void>;
-  apply: () => void;
+  apply?: () => void;
 }
 
 const Filters = ({ fetchMore, apply }: FiltersProps) => {
@@ -93,7 +93,7 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
         }}
         onClick={(e) => {
           e.preventDefault();
-          apply();
+          if (apply) apply();
           fetchMore(true);
         }}
       >
