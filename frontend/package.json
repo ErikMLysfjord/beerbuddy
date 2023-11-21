@@ -11,7 +11,9 @@
     "prettier": "npx prettier --write .",
     "prettiercheck": "npx prettier --check .",
     "test:vitest": "vitest src --no-watch",
-    "test:e2e": "npx playwright test",
+    "test:headed": "npx playwright test --headed --project=chromiumHeaded",
+    "test:e2e": "npx playwright test --project=chromium --project=firefox --project=webkit",
+    "test:parallel": "npx playwright test --workers=2 --project=chromium --project=firefox --project=webkit",
     "test": "npm run test:vitest && npm run test:e2e",
     "coverage": "vitest src --coverage"
   },
