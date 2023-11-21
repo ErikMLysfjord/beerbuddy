@@ -10,6 +10,11 @@ interface VoterInterface {
   beerId: number;
 }
 
+/**
+ * Vote on a beer.
+ * @param beerId - id of the beer to vote on.
+ * @param reaction - the reaction to vote with.
+ */
 const vote = async (beerId: number, reaction: ReactionType) => {
   const userId = await localStorage.getItem("userIdBeerBuddy");
 
@@ -27,24 +32,30 @@ const vote = async (beerId: number, reaction: ReactionType) => {
   });
 };
 
+/**
+ * UI component to perform the vote action.
+ * @param votes - number of votes
+ * @param reaction - the reaction to vote with
+ * @param beerId - id of the beer to vote on
+ * @returns - the voter component
+ */
 const Voter = (props: VoterInterface) => {
-  const upvote = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    event.preventDefault();
-    const reaction = action === "upvote" ? "unreact" : "upvote";
-    setAction(reaction);
-    vote(props.beerId, reaction);
-  };
+  const handleVote =
+    (reaction: ReactionType) =>
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      event.preventDefault();
+      const newReaction = action === reaction ? "unreact" : reaction;
+      setAction(newReaction);
+      vote(props.beerId, newReaction);
+    };
 
-  const downvote = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    event.preventDefault();
-    const reaction = action === "downvote" ? "unreact" : "downvote";
-    setAction(reaction);
-    vote(props.beerId, reaction);
-  };
   const [action, setAction] = useState(props.reaction);
 
+  /**
+   * Give values to the different reactions.
+   * This is used to calculate the total number of votes.
+   */
   const values = {
     upvote: 2,
     unreact: 1,
@@ -53,16 +64,18 @@ const Voter = (props: VoterInterface) => {
 
   const total =
     parseInt(`${props.votes}`) + values[action] - values[props.reaction];
-  const colorHighligt = "#ffbc0d";
+
+  const highlightColor = "#ffbc0d";
+
   return (
     <div className={styles.wrapper}>
       <Button
         type="primary"
         icon={<CaretUpFilled />}
-        onClick={upvote}
+        onClick={handleVote("upvote")}
         aria-label="Upvote this beer"
         style={{
-          backgroundColor: action === "upvote" ? colorHighligt : "",
+          backgroundColor: action === "upvote" ? highlightColor : "",
           filter: action === "upvote" ? "" : "brightness(0.8)",
         }}
       />
@@ -70,10 +83,10 @@ const Voter = (props: VoterInterface) => {
       <Button
         type="primary"
         icon={<CaretDownFilled />}
-        onClick={downvote}
+        onClick={handleVote("downvote")}
         aria-label="Downvote this beer"
         style={{
-          backgroundColor: action === "downvote" ? colorHighligt : "",
+          backgroundColor: action === "downvote" ? highlightColor : "",
           filter: action === "downvote" ? "" : "brightness(0.8)",
         }}
       />

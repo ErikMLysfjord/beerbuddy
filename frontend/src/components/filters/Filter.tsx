@@ -8,6 +8,15 @@ interface FilterProps {
   children: React.ReactNode;
 }
 
+/**
+ * Filter component that contains an
+ * interactive filter control component
+ * and a heading with a tooltip.
+ * @param heading
+ * @param tooltip
+ * @param children
+ * @returns a Filter component
+ */
 const Filter = ({ heading, tooltip, children }: FilterProps) => {
   return (
     <>

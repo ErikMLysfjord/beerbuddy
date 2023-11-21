@@ -41,6 +41,13 @@ const convertTimestamp = (timestamp: string) => {
   return "< 1 minute ago";
 };
 
+/**
+ * The comment item component. Displays a comment.
+ * @param username - The username of the user who posted the comment.
+ * @param commentText - The text of the comment.
+ * @param timestamp - The timestamp of the comment.
+ * @returns - The comment item component.
+ */
 const CommentItem = ({
   username,
   commentText,

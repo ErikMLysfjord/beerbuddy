@@ -7,6 +7,10 @@ import SortingButton from "../SortingButton/SortingButton";
 import { SortingItem } from "../../types/types";
 import useWindowDimensions from "../../utils/useWindowDimensions";
 
+/**
+ * The actionbar component. Contains the sorting and search functionality.
+ * @returns - The actionbar component.
+ */
 const Actionbar = () => {
   const { setSearchString, setSorting } = useContext(FilterContext);
   const { width } = useWindowDimensions();

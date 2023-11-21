@@ -5,6 +5,7 @@ import BeerList from "../components/beer-list/BeerList";
 import Filters from "../components/filters/Filters";
 import useFetchMoreBeers from "../utils/useFetchMoreBeers";
 import appStyles from "./App.module.css";
+import { useRef } from "react";
 
 function App() {
   if (
@@ -15,9 +16,27 @@ function App() {
   }
   const { beers, fetchMore } = useFetchMoreBeers();
 
+  const mainRef = useRef<HTMLAnchorElement>(null);
+
+  /**
+   * Adds an event listener for the "Escape" key and executes the provided action when the key is pressed.
+   * @param action The action to be executed when the "Escape" key is pressed.
+   */
+  const onEscape = (action: () => void) => {
+    window &&
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          action();
+        }
+      });
+  };
+  onEscape(() => {
+    mainRef.current?.focus();
+  });
+
   return (
     <>
-      <a href="#main" className={appStyles.skipLink}>
+      <a href="#main" className={appStyles.skipLink} ref={mainRef}>
         Skip to main content
       </a>
       <div className={appStyles.appBody}>
