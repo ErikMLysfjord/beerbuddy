@@ -60,8 +60,8 @@ function App() {
         Skip to main content
       </a>
       <div className={appStyles.appBody}>
-        <Sidebar fetchMore={fetchMore}>
-          <Filters />
+        <Sidebar>
+          <Filters fetchMore={fetchMore} />
         </Sidebar>
         <section
           className={appStyles.mainSection}
@@ -69,7 +69,7 @@ function App() {
           ref={divRef}
         >
           <UserIntro />
-          <Actionbar />
+          <Actionbar fetchMore={fetchMore} />
           <BeerList beers={beers} fetchMore={fetchMore} />
           {showTopBtn && (
             <FloatButton

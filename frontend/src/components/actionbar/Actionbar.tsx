@@ -6,11 +6,15 @@ import { FilterContext } from "../../context/FilterContext";
 
 /**
  * The actionbar component. Contains the sorting and search functionality.
+ * @param fetchMore - function that is called when the apply filters button is clicked
  * @returns - The actionbar component.
  */
-const Actionbar = () => {
+const Actionbar = ({
+  fetchMore,
+}: {
+  fetchMore: (reset?: boolean, noFilters?: boolean) => Promise<void>;
+}) => {
   const { setSearchString, setSorting } = useContext(FilterContext);
-
   return (
     <section className={styles.wrapper}>
       <label className={styles.sortLabel}>
@@ -34,7 +38,7 @@ const Actionbar = () => {
           onSearch={(value) => setSearchString(value.toLowerCase())}
         />
       </label>
-      <FilterButton />
+      <FilterButton fetchMore={fetchMore} />
     </section>
   );
 };
