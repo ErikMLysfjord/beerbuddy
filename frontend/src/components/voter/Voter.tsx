@@ -9,6 +9,7 @@ interface VoterInterface {
   votes: number;
   reaction: ReactionType;
   beerId: number;
+  onSuccess?: () => void;
 }
 
 const vote = async (beerId: number, reaction: ReactionType) => {
@@ -35,7 +36,8 @@ const Voter = (props: VoterInterface) => {
     if (await protectRoute()) return "Error";
     const reaction = action === "upvote" ? "unreact" : "upvote";
     setAction(reaction);
-    vote(props.beerId, reaction);
+    await vote(props.beerId, reaction);
+    if (props.onSuccess) props.onSuccess();
   };
 
   const downvote = async (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,7 +46,8 @@ const Voter = (props: VoterInterface) => {
     if (await protectRoute()) return "Error";
     const reaction = action === "downvote" ? "unreact" : "downvote";
     setAction(reaction);
-    vote(props.beerId, reaction);
+    await vote(props.beerId, reaction);
+    if (props.onSuccess) props.onSuccess();
   };
   const [action, setAction] = useState(props.reaction);
 

@@ -1,3 +1,5 @@
+type ReactionType = "unreact" | "upvote" | "downvote";
+
 export type Beer = {
   abv: number;
   ibu: number;
@@ -9,4 +11,5 @@ export type Beer = {
   rating: number;
   vote_count: number;
   comment_count: number;
+  user_vote: ReactionType;
 };

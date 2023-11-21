@@ -11,6 +11,7 @@ import CommentBar from "../components/comment-bar/CommentBar";
 import protectRoute from "../utils/protectRoute";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import MobileBeerAttribute from "../components/beer-attribute/MobileBeerAttribute";
+import Voter from "../components/voter/Voter";
 
 type CommentInterface = {
   username: string;
@@ -80,8 +81,11 @@ const BeerPage = () => {
       });
   }, [id, newComment]);
 
+  const [newVote, setNewVote] = useState(false);
+
   const { beer, isLoading, isError } = useFetchBeer({
     id: Number(id),
+    newVote,
   });
 
   const AttributeValues = [
@@ -146,9 +150,15 @@ const BeerPage = () => {
       <p className={styles.breweryName}>{beer?.brewery_name}</p>
       <h1 className={styles.beerName}>{beer.name}</h1>
       <div className={styles.rating}>
-        <h2 className={styles.ratingText}>
-          <span>{beer.rating !== null ? beer.rating : "0"}</span> rated
-        </h2>
+        <Voter
+          votes={beer.rating || 0}
+          reaction={beer.user_vote}
+          beerId={beer.id}
+          onSuccess={() => {
+            console.log("success");
+            setNewVote(!newVote);
+          }}
+        />
       </div>
       <p className={styles.basedOn}>
         Based on {beer.vote_count !== null ? beer.vote_count : "0"} reviews

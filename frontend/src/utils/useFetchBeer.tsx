@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { Beer } from "../types/types";
 
 const fetchBeer = async (id: number, onSuccess: (data: Beer) => void) => {
-  const query = { query: `{ beer(id: ${id}) }` };
+  const userId = await localStorage.getItem("userIdBeerBuddy");
+  const query = {
+    query: `{ beer(id: ${id} userId: "${userId}") }`,
+  };
 
   return await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/beer", {
     method: "POST",
@@ -26,7 +29,7 @@ const fetchBeer = async (id: number, onSuccess: (data: Beer) => void) => {
     });
 };
 
-const useFetchBeer = ({ id }: { id: number }) => {
+const useFetchBeer = ({ id, newVote }: { id: number; newVote?: boolean }) => {
   const [beer, setBeer] = useState<Beer>();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -39,7 +42,7 @@ const useFetchBeer = ({ id }: { id: number }) => {
 
   useEffect(() => {
     fetchBeer(id, onSuccess);
-  }, [id]);
+  }, [id, newVote]);
 
   return { beer, isLoading, isError };
 };
