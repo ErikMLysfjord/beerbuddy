@@ -5,7 +5,9 @@ import BeerList from "../components/beer-list/BeerList";
 import Filters from "../components/filters/Filters";
 import useFetchMoreBeers from "../utils/useFetchMoreBeers";
 import appStyles from "./App.module.css";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { FloatButton } from "antd";
+import { ArrowUpOutlined } from "@ant-design/icons";
 
 function App() {
   if (
@@ -33,6 +35,24 @@ function App() {
   onEscape(() => {
     mainRef.current?.focus();
   });
+  const divRef = useRef<HTMLDivElement>(null);
+  const scrollToTop = () => {
+    divRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  const [showTopBtn, setShowTopBtn] = useState(false);
+
+  useEffect(() => {
+    divRef.current?.addEventListener("scroll", () => {
+      if (
+        divRef.current?.scrollTop !== undefined &&
+        divRef.current?.scrollTop > 100
+      ) {
+        setShowTopBtn(true);
+      } else {
+        setShowTopBtn(false);
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -43,10 +63,23 @@ function App() {
         <Sidebar fetchMore={fetchMore}>
           <Filters />
         </Sidebar>
-        <section className={appStyles.mainSection} id="infiniteScrollTarget">
+        <section
+          className={appStyles.mainSection}
+          id="infiniteScrollTarget"
+          ref={divRef}
+        >
           <UserIntro />
           <Actionbar />
           <BeerList beers={beers} fetchMore={fetchMore} />
+          {showTopBtn && (
+            <FloatButton
+              onClick={scrollToTop}
+              className={appStyles.iconStyle}
+              aria-label="Scroll to top button"
+              tooltip="To top"
+              icon={<ArrowUpOutlined />}
+            />
+          )}
         </section>
       </div>
     </>
