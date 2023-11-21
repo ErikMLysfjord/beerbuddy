@@ -5,9 +5,11 @@ import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
 import SortingButton from "../SortingButton/SortingButton";
 import { SortingItem } from "../../types/types";
+import useWindowDimensions from "../../utils/useWindowDimensions";
 
 const Actionbar = () => {
   const { setSearchString, setSorting } = useContext(FilterContext);
+  const { width } = useWindowDimensions();
 
   const items: SortingItem[] = [
     { key: "top", label: "Most popular" },
@@ -16,18 +18,21 @@ const Actionbar = () => {
     { key: "ztoa", label: "Z-A" },
   ];
 
+
   return (
     <section className={styles.wrapper}>
-      <label className={styles.sortLabel}>
-        Sort by
-        <Select
-          defaultValue="top"
-          title="Sort by"
-          style={{ width: 200 }}
-          options={items}
-          onChange={(value) => setSorting(value)}
-        />
-      </label>
+      {width > 768 &&
+        <label className={styles.sortLabel}>
+          Sort by
+          <Select
+            defaultValue="top"
+            title="Sort by"
+            style={{ width: 200 }}
+            options={items}
+            onChange={(value) => setSorting(value)}
+          />
+        </label>
+      }
       <label className={styles.searchLabel}>
         Search
         <Input.Search
@@ -35,7 +40,9 @@ const Actionbar = () => {
         />
       </label>
       <FilterButton />
-      <SortingButton items={items} />
+      {width <= 768 &&
+        <SortingButton items={items} />
+      }
     </section >
   );
 };
