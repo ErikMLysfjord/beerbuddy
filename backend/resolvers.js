@@ -24,7 +24,9 @@ const beerResolver = {
       `SELECT 
         comments.comment_text, 
         comments.created_at, 
-        users.username 
+        comments.id,
+        users.id AS user_id,
+        users.username
       FROM comments 
       JOIN users 
       ON comments.user_id = users.id 
@@ -359,6 +361,18 @@ const actionResolver = {
       throw new Error("Error in query");
     }
     return "You commented!";
+  },
+  deleteComment: async ({ userId, commentId }) => {
+    const comment = await sqlQuery(
+      `SELECT id FROM comments WHERE id = ${commentId} AND user_id = '${userId}' LIMIT 1;`
+    );
+    if (comment.length === 0) {
+      throw new Error("Comment does not exist");
+    }
+    const res = await sqlQuery(
+      `DELETE FROM comments WHERE id = ${commentId} AND user_id = '${userId}';`
+    );
+    return "You deleted your comment!";
   },
 };
 

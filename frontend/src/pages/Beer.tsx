@@ -12,6 +12,8 @@ import useWindowDimensions from "../utils/useWindowDimensions";
 import MobileBeerAttribute from "../components/beer-attribute/MobileBeerAttribute";
 
 type CommentInterface = {
+  id: number;
+  user_id: string;
   username: string;
   comment_text: string;
   created_at: string;
@@ -28,7 +30,7 @@ const fetchComments = async (id: string, offset: number) => {
     query: `{ comments(id: ${id}, size: 5, start: ${offset}) }`,
   };
 
-  return await fetch("http://it2810-15.idi.ntnu.no:4000/beer", {
+  return await fetch("http://localhost:4000/beer", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -218,9 +220,12 @@ const BeerPage = () => {
                 key={`${comment.username}-${comment.created_at}}`}
               >
                 <CommentItem
+                  id={comment.id}
+                  userId={comment.user_id}
                   username={comment.username}
                   commentText={comment.comment_text}
                   timestamp={comment.created_at}
+                  onDelete={() => setNewComment(true)}
                 />
               </li>
             ))

@@ -6,7 +6,7 @@
 }
 
 .commentContentContainer {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   width: 100%;
 }
@@ -41,4 +41,9 @@
 .commentText {
   padding-top: 5px;
   margin: 0px;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
 }

@@ -1,10 +1,36 @@
 import styles from "./CommentItem.module.css";
 
 interface CommentItemInterface {
+  id: number;
+  userId: string;
   username: string;
   commentText: string;
   timestamp: string;
+  onDelete: () => void;
 }
+
+const deleteComment = async (userId: string, commentId: string) => {
+  const query = {
+    query: `{ deleteComment(userId: "${userId}", commentId: ${commentId} ) }`,
+  };
+  return await fetch("http://localhost:4000/action", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(query),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+    });
+};
 
 /**
  * Function for converting a timestamp to a human readable format.
@@ -52,6 +78,9 @@ const CommentItem = ({
   username,
   commentText,
   timestamp,
+  id,
+  userId,
+  onDelete,
 }: CommentItemInterface) => {
   return (
     <div className={styles.commentContainer}>
@@ -65,6 +94,25 @@ const CommentItem = ({
         </div>
         <p className={styles.commentText}>{commentText}</p>
       </div>
+      {userId === localStorage.getItem("userIdBeerBuddy") && (
+        <div className={styles.buttonContainer}>
+          <img
+            src="/project2/delete-kopi.svg"
+            alt="Delete comment"
+            width={"32px"}
+            height={"32px"}
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              deleteComment(
+                localStorage.getItem("userIdBeerBuddy") ?? "",
+                id.toString()
+              );
+              onDelete();
+            }}
+            tabIndex={0}
+          />
+        </div>
+      )}
     </div>
   );
 };
