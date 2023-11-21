@@ -1,7 +1,16 @@
 import client from "./db";
 import { myCache } from "./caching";
 
-const sqlQuery = async (query) => {
+type QueryResult = {
+  comment_text: string;
+  created_at: string;
+  id: number;
+  user_id: number;
+  username: string;
+  vote_type: string;
+};
+
+const sqlQuery = async (query: string) => {
   const results = await client
     .query(query)
     .then((query) => {
@@ -11,8 +20,7 @@ const sqlQuery = async (query) => {
       return "Error in query";
     });
 
-  // console.log("results", results);
-  return results;
+  return results as QueryResult[] | "Error in query";
 };
 
 const beerResolver = {
@@ -262,7 +270,7 @@ const userResolver = {
       `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}');`
     );
 
-    const res: any = await sqlQuery(
+    const res = await sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
 
@@ -309,16 +317,14 @@ const userResolver = {
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
 
-    if (userExists.length > 0) {
-      const user: any = await sqlQuery(
-        `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
-      );
-      return { id: user[0].id, isNewUser: "no" };
+    if (userExists.length > 0 && userExists !== "Error in query") {
+      return { id: userExists[0].id, isNewUser: "no" };
     }
+
     await sqlQuery(
       `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}');`
     );
-    const res: any = await sqlQuery(
+    const res = await sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
 
@@ -343,10 +349,12 @@ const actionResolver = {
       throw new Error("User does not exist");
     }
 
-    const userReaction: any = await sqlQuery(
+    const userReaction = await sqlQuery(
       `SELECT vote_type FROM votes WHERE user_id = '${userId}' AND beer_id = ${beerId} LIMIT 1;`
     );
-    if (userReaction.length > 0) {
+    if (userReaction === "Error in query") {
+      throw new Error("Error in query");
+    } else if (userReaction.length > 0) {
       if (userReaction[0].vote_type === action) {
         throw new Error("User has already reacted");
       }
@@ -402,10 +410,3 @@ const queryResolver = {
 };
 
 export { beerResolver, queryResolver, userResolver, actionResolver };
-
-/* module.exports = {
-  beerResolver,
-  queryResolver,
-  userResolver,
-  actionResolver,
-}; */

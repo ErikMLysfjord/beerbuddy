@@ -39,10 +39,3 @@ const querySchema = buildSchema(`
 `);
 
 export { beerSchema, querySchema, userSchema, actionSchema };
-
-/* module.exports = {
-  beerSchema,
-  querySchema,
-  userSchema,
-  actionSchema,
-}; */
