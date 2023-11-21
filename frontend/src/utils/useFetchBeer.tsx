@@ -8,7 +8,10 @@ import { Beer } from "../types/types";
  * @returns - the beer object
  */
 const fetchBeer = async (id: number, onSuccess: (data: Beer) => void) => {
-  const query = { query: `{ beer(id: ${id}) }` };
+  const userId = await localStorage.getItem("userIdBeerBuddy");
+  const query = {
+    query: `{ beer(id: ${id} userId: "${userId}") }`,
+  };
 
   return await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/beer", {
     method: "POST",
@@ -35,9 +38,10 @@ const fetchBeer = async (id: number, onSuccess: (data: Beer) => void) => {
 /**
  * Custom hook for fetching a single beer.
  * @param id - the id of the beer to fetch
+ * @param newVote - boolean to indicate if a new vote has been cast
  * @returns - the beer object, loading state and error state
  */
-const useFetchBeer = ({ id }: { id: number }) => {
+const useFetchBeer = ({ id, newVote }: { id: number; newVote?: boolean }) => {
   const [beer, setBeer] = useState<Beer>();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -50,7 +54,7 @@ const useFetchBeer = ({ id }: { id: number }) => {
 
   useEffect(() => {
     fetchBeer(id, onSuccess);
-  }, [id]);
+  }, [id, newVote]);
 
   return { beer, isLoading, isError };
 };

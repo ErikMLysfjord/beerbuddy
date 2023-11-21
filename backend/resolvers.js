@@ -35,7 +35,7 @@ const beerResolver = {
       LIMIT ${size} OFFSET ${start || 0};`
     );
   },
-  beer: async ({ id }) => {
+  beer: async ({ id, userId }) => {
     return await sqlQuery(`
       SELECT 
         beers.abv, 
@@ -47,7 +47,8 @@ const beerResolver = {
         breweries.name AS brewery_name, 
         rating.rating, 
         rating.vote_count, 
-        comments.comment_count
+        comments.comment_count,
+        COALESCE(user_vote.vote_type, 'unreact') AS user_vote
     FROM beers 
     JOIN breweries ON beers.brewery_id = breweries.id 
     LEFT JOIN (
@@ -59,13 +60,20 @@ const beerResolver = {
         GROUP BY beer_id
     ) AS rating ON beers.id = rating.beer_id 
     LEFT JOIN (
-        SELECT 
-            beer_id, 
-            COUNT(comment_text) AS comment_count
-        FROM comments 
-        JOIN users ON comments.user_id = users.id
-        GROUP BY beer_id
-    ) AS comments ON beers.id = comments.beer_id 
+      SELECT 
+        beer_id, 
+        COUNT(comment_text) AS comment_count
+      FROM comments 
+      JOIN users ON comments.user_id = users.id
+      GROUP BY beer_id
+    ) comments ON beers.id = comments.beer_id 
+    LEFT JOIN (
+      SELECT 
+          beer_id, 
+          vote_type
+      FROM votes 
+      WHERE user_id = '${userId}'
+    ) user_vote ON beers.id = user_vote.beer_id 
     WHERE beers.id = ${id};
     `);
   },

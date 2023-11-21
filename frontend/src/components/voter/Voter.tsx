@@ -9,6 +9,7 @@ interface VoterInterface {
   votes: number;
   reaction: ReactionType;
   beerId: number;
+  onSuccess?: () => void;
 }
 
 /**
@@ -50,6 +51,7 @@ const Voter = (props: VoterInterface) => {
       const newReaction = action === reaction ? "unreact" : reaction;
       setAction(newReaction);
       vote(props.beerId, newReaction);
+      if (props.onSuccess) props.onSuccess();
     };
 
   const [action, setAction] = useState(props.reaction);

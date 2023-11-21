@@ -1,3 +1,5 @@
+type ReactionType = "unreact" | "upvote" | "downvote";
+
 //TODO use this file more
 
 /**
@@ -14,4 +16,5 @@ export type Beer = {
   rating: number;
   vote_count: number;
   comment_count: number;
+  user_vote: ReactionType;
 };
