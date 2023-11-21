@@ -3,9 +3,12 @@ import useWindowDimensions from "../../utils/useWindowDimensions";
 import Logo from "../logo/Logo";
 import styles from "./UserIntro.module.css";
 
+/**
+ * UserIntro component that greets a logged in user with their username.
+ * @returns a UserIntro component
+ */
 const UserIntro = () => {
   const { width } = useWindowDimensions();
-
   if (width < 1000) {
     return (
       <>

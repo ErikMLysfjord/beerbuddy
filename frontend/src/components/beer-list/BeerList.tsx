@@ -6,11 +6,6 @@ import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
 import { Button } from "antd";
 
-/**
- * BeerList component
- * @returns a list of beers, that should be dynamically loaded when the user scrolls down.
- */
-
 type ReactionType = "unreact" | "upvote" | "downvote";
 
 interface BeerListProps {
@@ -45,6 +40,12 @@ const translateSorting = (sorting: string) => {
   }
 };
 
+/**
+ * A component for displaying a list of beers.
+ * Uses lazy loading to load more beers when the user scrolls down.
+ * @param props - The interface for the BeerList component.
+ * @returns  - The beer list component.
+ */
 const BeerList = (props: BeerListProps) => {
   const {
     searchString,
@@ -77,11 +78,19 @@ const BeerList = (props: BeerListProps) => {
     }
   };
 
+  /**
+   * Ensures that the fetchMoreBeers is called on first mount.
+   * This is related to the next comment.
+   * If we find a way around the useEffect lint warning in the
+   * next comment then we can encompass this in a regular useEffect for mounting,
+   * however this has been a workaround for that in previous deliveries.
+   */
   if (!mounted) {
     setMounted(true);
     props.fetchMore();
   }
 
+  // Updates the beer list when the search string or sorting method changes.
   useEffect(() => {
     props.fetchMore(true);
     // The following line is to ignore the lint warning. We know this is bad practice.

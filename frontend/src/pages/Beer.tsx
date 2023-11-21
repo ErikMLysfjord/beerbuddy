@@ -50,6 +50,10 @@ const fetchComments = async (id: string, offset: number) => {
     });
 };
 
+/**
+ * BeerPage component that displays detailed information about a beer and its comments.
+ * @returns a BeerPage component
+ */
 const BeerPage = () => {
   const { id } = useParams<{ id: string }>();
   const [commentsLoading, setCommentsLoading] = useState(false);
