@@ -22,13 +22,13 @@ To set up the frontend, please go to the [frontend documentation](./frontend/REA
 
 # Run tests
 
-## Run backend tests
-
-To be implemented...
-
 ## Run frontend tests
 
 To test the frontend, please go to the [frontend documentation](./frontend/README.md).
+
+## Backend testing
+
+The backend and API are implicitly tested through the frontend tests. To run the frontend tests, please go to the [frontend documentation](./frontend/README.md).
 
 # Sustainability
 
