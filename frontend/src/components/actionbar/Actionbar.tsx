@@ -21,7 +21,7 @@ const Actionbar = ({
 
   return (
     <section className={styles.wrapper}>
-      {width > 768 &&
+      {width > 768 && (
         <label className={styles.sortLabel}>
           Sort by
           <Select
@@ -37,7 +37,7 @@ const Actionbar = ({
             onChange={(value) => setSorting(value)}
           />
         </label>
-      }
+      )}
       <label className={styles.searchLabel}>
         Search
         <Input.Search
@@ -45,14 +45,16 @@ const Actionbar = ({
         />
       </label>
       <FilterButton fetchMore={fetchMore} />
-      {width <= 768 &&
-        <SortingButton items={[
-          { key: "top", label: "Most popular" },
-          { key: "low", label: "Least popular" },
-          { key: "atoz", label: "A-Z" },
-          { key: "ztoa", label: "Z-A" },
-        ]} />
-      }
+      {width <= 768 && (
+        <SortingButton
+          items={[
+            { key: "top", label: "Most popular" },
+            { key: "low", label: "Least popular" },
+            { key: "atoz", label: "A-Z" },
+            { key: "ztoa", label: "Z-A" },
+          ]}
+        />
+      )}
     </section>
   );
 };
