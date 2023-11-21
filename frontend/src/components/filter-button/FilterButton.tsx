@@ -1,8 +1,9 @@
 import { FilterFilled } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import styles from "./FilterButton.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Filters from "../filters/Filters";
+import useWindowDimensions from "../../utils/useWindowDimensions";
 
 const FilterButton = ({
   fetchMore,
@@ -10,10 +11,17 @@ const FilterButton = ({
   fetchMore: (reset?: boolean, noFilters?: boolean) => Promise<void>;
 }) => {
   const [showFilter, setShowFilter] = useState(false);
+  const { width } = useWindowDimensions();
 
   const handleClick = () => {
     setShowFilter(!showFilter);
   };
+
+  useEffect(() => {
+    if (width > 1000) {
+      setShowFilter(false);
+    }
+  }, [width]);
 
   return (
     <div className={styles.filterButtonWrapper}>
