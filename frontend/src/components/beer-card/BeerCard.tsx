@@ -30,7 +30,7 @@ interface BeerCardInterface {
 const BeerCard = (props: BeerCardInterface) => {
   return (
     <a
-      href={"./beer/" + props.beer_id}
+      href={"./" + import.meta.env.VITE_APP_BASEURL + "beer/" + props.beer_id}
       aria-label={props.name}
       className={styles.card}
     >

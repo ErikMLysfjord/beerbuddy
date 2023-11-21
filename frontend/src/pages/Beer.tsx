@@ -8,6 +8,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import CommentItem from "../components/comment-item/CommentItem";
 import { useEffect, useState } from "react";
 import CommentBar from "../components/comment-bar/CommentBar";
+import protectRoute from "../utils/protectRoute";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import MobileBeerAttribute from "../components/beer-attribute/MobileBeerAttribute";
 
@@ -30,7 +31,7 @@ const fetchComments = async (id: string, offset: number) => {
     query: `{ comments(id: ${id}, size: 5, start: ${offset}) }`,
   };
 
-  return await fetch("http://localhost:4000/beer", {
+  return await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/beer", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -57,6 +58,9 @@ const fetchComments = async (id: string, offset: number) => {
  * @returns a BeerPage component
  */
 const BeerPage = () => {
+  useEffect(() => {
+    protectRoute();
+  }, []);
   const { id } = useParams<{ id: string }>();
   const [commentsLoading, setCommentsLoading] = useState(false);
   const [offset, setOffset] = useState(0);

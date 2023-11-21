@@ -29,7 +29,7 @@ const fetchLoginId = async (
   setIsNewUser: React.Dispatch<React.SetStateAction<string>>,
   isNewUser: string
 ) => {
-  const res = await fetch("http://localhost:4000/user", {
+  const res = await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/user", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

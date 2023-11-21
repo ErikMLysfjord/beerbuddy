@@ -1,7 +1,7 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 import BeerCard from "../beer-card/BeerCard";
 import styles from "./BeerList.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
 import { Button } from "antd";
@@ -46,7 +46,7 @@ const translateSorting = (sorting: string) => {
  * @param props - The interface for the BeerList component.
  * @returns  - The beer list component.
  */
-const BeerList = (props: BeerListProps) => {
+const BeerList = ({ beers, fetchMore }: BeerListProps) => {
   const {
     searchString,
     sorting,
@@ -57,7 +57,9 @@ const BeerList = (props: BeerListProps) => {
     IBU,
     styles: beerStyles,
   } = useContext(FilterContext);
-  const [mounted, setMounted] = useState(false);
+
+  const fetchMoreRef = useRef(fetchMore);
+  fetchMoreRef.current = fetchMore;
 
   /**
    * Function for resetting filters and fetching more beers.
@@ -74,25 +76,13 @@ const BeerList = (props: BeerListProps) => {
       setABV([0, 40]);
       setIBU([0, 140]);
       setStyles([]);
-      props.fetchMore(true, true);
+      fetchMoreRef.current(true, true);
     }
   };
 
-  /**
-   * Ensures that the fetchMoreBeers is called on first mount.
-   * This is related to the next comment.
-   * If we find a way around the useEffect lint warning in the
-   * next comment then we can encompass this in a regular useEffect for mounting,
-   * however this has been a workaround for that in previous deliveries.
-   */
-  if (!mounted) {
-    setMounted(true);
-    props.fetchMore();
-  }
-
   // Updates the beer list when the search string or sorting method changes.
   useEffect(() => {
-    props.fetchMore(true);
+    fetchMore(true);
     // The following line is to ignore the lint warning. We know this is bad practice.
     // However, we will find a fix for this and remove it for the next delivery when we have more time.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,7 +93,7 @@ const BeerList = (props: BeerListProps) => {
       <section className={styles.resultsInfoContainer}>
         <div className={styles.resultsHeader}>
           <h2 className={styles.resultsInfo}>
-            {props.beers[0]?.beer_count ?? 0} results
+            {beers[0]?.beer_count ?? 0} results
           </h2>
           <Button type="primary" onClick={resetFilters}>
             Reset filters
@@ -116,9 +106,9 @@ const BeerList = (props: BeerListProps) => {
       </section>
       <main id="main">
         <InfiniteScroll
-          dataLength={props.beers.length}
-          next={props.fetchMore}
-          hasMore={props.beers?.length < props.beers[0]?.beer_count}
+          dataLength={beers.length}
+          next={fetchMoreRef.current}
+          hasMore={beers?.length < beers[0]?.beer_count}
           loader={
             <p style={{ textAlign: "center" }}>
               <b>Loading...</b>
@@ -133,7 +123,7 @@ const BeerList = (props: BeerListProps) => {
           scrollableTarget="infiniteScrollTarget"
         >
           <ul className={styles.list}>
-            {props.beers?.map((beer) => (
+            {beers?.map((beer) => (
               <li key={beer.beer_id}>
                 <BeerCard
                   beer_id={beer.beer_id}

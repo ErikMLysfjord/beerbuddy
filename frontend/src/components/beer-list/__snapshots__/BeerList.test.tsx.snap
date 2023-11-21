@@ -53,7 +53,7 @@ exports[`BeerList > renders correctly 1`] = `
             <a
               aria-label="21st Amendment Bitter American"
               class="_card_539764"
-              href="./beer/1"
+              href="./project2/beer/1"
             >
               <div
                 class="_textWrapper_539764"
@@ -144,7 +144,7 @@ exports[`BeerList > renders correctly 1`] = `
             <a
               aria-label="Borg Citra"
               class="_card_539764"
-              href="./beer/2"
+              href="./project2/beer/2"
             >
               <div
                 class="_textWrapper_539764"
@@ -235,7 +235,7 @@ exports[`BeerList > renders correctly 1`] = `
             <a
               aria-label="Sierra Nevada Pale Ale"
               class="_card_539764"
-              href="./beer/3"
+              href="./project2/beer/3"
             >
               <div
                 class="_textWrapper_539764"
@@ -326,7 +326,7 @@ exports[`BeerList > renders correctly 1`] = `
             <a
               aria-label="Mono Stereo Mosaic"
               class="_card_539764"
-              href="./beer/4"
+              href="./project2/beer/4"
             >
               <div
                 class="_textWrapper_539764"

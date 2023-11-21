@@ -10,7 +10,7 @@ import { Beer } from "../types/types";
 const fetchBeer = async (id: number, onSuccess: (data: Beer) => void) => {
   const query = { query: `{ beer(id: ${id}) }` };
 
-  return await fetch("http://localhost:4000/beer", {
+  return await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/beer", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

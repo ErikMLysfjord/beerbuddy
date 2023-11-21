@@ -14,13 +14,13 @@ const Actionbar = ({
 }: {
   fetchMore: (reset?: boolean, noFilters?: boolean) => Promise<void>;
 }) => {
-  const { setSearchString, setSorting } = useContext(FilterContext);
+  const { setSearchString, setSorting, sorting } = useContext(FilterContext);
   return (
     <section className={styles.wrapper}>
       <label className={styles.sortLabel}>
         Sort by
         <Select
-          defaultValue="top"
+          defaultValue={sorting}
           title="Sort by"
           style={{ width: 200 }}
           options={[

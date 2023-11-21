@@ -2,6 +2,7 @@ import { Button, Input, Spin, App } from "antd";
 import styles from "./CommentBar.module.css";
 import { useId, useState } from "react";
 import { useParams } from "react-router-dom";
+import protectRoute from "../../utils/protectRoute";
 import useWindowDimensions from "../../utils/useWindowDimensions";
 
 interface CommentBarInterface {
@@ -15,12 +16,13 @@ interface CommentBarInterface {
  * @returns - The response from the backend.
  */
 const postComment = async (beerId: string, comment: string) => {
+  if (await protectRoute()) return "Error";
   const userId = localStorage.getItem("userIdBeerBuddy");
   const query = {
     query: `{ comment(userId: "${userId}", beerId: ${beerId}, comment: "${comment}") }`,
   };
 
-  return await fetch("http://localhost:4000/action", {
+  return await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/action", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

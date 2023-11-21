@@ -2,6 +2,7 @@ import { CaretDownFilled, CaretUpFilled } from "@ant-design/icons";
 import { Button } from "antd";
 import styles from "./Voter.module.css";
 import { useState } from "react";
+import protectRoute from "../../utils/protectRoute";
 
 type ReactionType = "unreact" | "upvote" | "downvote";
 interface VoterInterface {
@@ -18,7 +19,7 @@ interface VoterInterface {
 const vote = async (beerId: number, reaction: ReactionType) => {
   const userId = await localStorage.getItem("userIdBeerBuddy");
 
-  await fetch("http://localhost:4000/action", {
+  await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/action", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -42,9 +43,10 @@ const vote = async (beerId: number, reaction: ReactionType) => {
 const Voter = (props: VoterInterface) => {
   const handleVote =
     (reaction: ReactionType) =>
-    (event: React.MouseEvent<HTMLButtonElement>) => {
+    async (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
       event.preventDefault();
+      if (await protectRoute()) return "Error";
       const newReaction = action === reaction ? "unreact" : reaction;
       setAction(newReaction);
       vote(props.beerId, newReaction);
