@@ -37,9 +37,10 @@ const StyledSlider = styled(Slider)<SliderProps>(() => ({
 
 interface FiltersProps {
   fetchMore: (reset?: boolean) => Promise<void>;
+  apply: () => void;
 }
 
-const Filters = ({ fetchMore }: FiltersProps) => {
+const Filters = ({ fetchMore, apply }: FiltersProps) => {
   const { IBU, setIBU, ABV, setABV, setStyles, styles } =
     useContext(FilterContext);
 
@@ -92,6 +93,7 @@ const Filters = ({ fetchMore }: FiltersProps) => {
         }}
         onClick={(e) => {
           e.preventDefault();
+          apply();
           fetchMore(true);
         }}
       >

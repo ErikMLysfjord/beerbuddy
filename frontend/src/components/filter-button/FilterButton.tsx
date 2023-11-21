@@ -37,7 +37,7 @@ const FilterButton = ({
         footer={null}
         width={1000}
       >
-        <Filters fetchMore={fetchMore} />
+        <Filters fetchMore={fetchMore} apply={() => setShowFilter(false)} />
       </Modal>
     </div>
   );
