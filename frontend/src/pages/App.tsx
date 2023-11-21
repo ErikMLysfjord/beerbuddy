@@ -54,6 +54,15 @@ function App() {
 
   return (
     <>
+      <button
+        onClick={() => {
+          localStorage.removeItem("userIdBeerBuddy");
+          window.location.reload();
+        }}
+        className={appStyles.logoutBtn}
+      >
+        Logout
+      </button>
       <a href="#main" className={appStyles.skipLink} ref={mainRef}>
         Skip to main content
       </a>
