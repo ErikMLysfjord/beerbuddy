@@ -1,5 +1,5 @@
-const client = require("./db.js");
-const { myCache } = require("./caching.js");
+import client from "./db";
+import { myCache } from "./caching";
 
 const sqlQuery = async (query) => {
   const results = await client
@@ -262,7 +262,7 @@ const userResolver = {
       `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}');`
     );
 
-    const res = await sqlQuery(
+    const res: any = await sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
 
@@ -310,7 +310,7 @@ const userResolver = {
     );
 
     if (userExists.length > 0) {
-      const user = await sqlQuery(
+      const user: any = await sqlQuery(
         `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
       );
       return { id: user[0].id, isNewUser: "no" };
@@ -318,7 +318,7 @@ const userResolver = {
     await sqlQuery(
       `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}');`
     );
-    const res = await sqlQuery(
+    const res: any = await sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
 
@@ -343,14 +343,14 @@ const actionResolver = {
       throw new Error("User does not exist");
     }
 
-    const userReaction = await sqlQuery(
+    const userReaction: any = await sqlQuery(
       `SELECT vote_type FROM votes WHERE user_id = '${userId}' AND beer_id = ${beerId} LIMIT 1;`
     );
     if (userReaction.length > 0) {
       if (userReaction[0].vote_type === action) {
         throw new Error("User has already reacted");
       }
-      const res = await sqlQuery(
+      await sqlQuery(
         `UPDATE votes SET vote_type = '${action}' WHERE user_id = '${userId}' AND beer_id = ${beerId};`
       );
       myCache.flushAll();
@@ -387,7 +387,7 @@ const actionResolver = {
     if (comment.length === 0) {
       throw new Error("Comment does not exist");
     }
-    const res = await sqlQuery(
+    await sqlQuery(
       `DELETE FROM comments WHERE id = ${commentId} AND user_id = '${userId}';`
     );
     myCache.flushAll();
@@ -401,9 +401,11 @@ const queryResolver = {
   },
 };
 
-module.exports = {
+export { beerResolver, queryResolver, userResolver, actionResolver };
+
+/* module.exports = {
   beerResolver,
   queryResolver,
   userResolver,
   actionResolver,
-};
+}; */

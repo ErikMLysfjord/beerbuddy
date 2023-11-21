@@ -1,4 +1,4 @@
-const { buildSchema } = require("graphql");
+import { buildSchema } from "graphql";
 
 const beerSchema = buildSchema(`
   scalar Any
@@ -38,9 +38,11 @@ const querySchema = buildSchema(`
   }
 `);
 
-module.exports = {
+export { beerSchema, querySchema, userSchema, actionSchema };
+
+/* module.exports = {
   beerSchema,
   querySchema,
   userSchema,
   actionSchema,
-};
+}; */

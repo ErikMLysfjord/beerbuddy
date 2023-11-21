@@ -1,22 +1,12 @@
-const { graphqlHTTP } = require("express-graphql");
-const cors = require("cors");
-const bodyParser = require('body-parser');
-const { cacheMiddleware } = require("./caching.js");
+import { graphqlHTTP } from "express-graphql";
+import cors from "cors";
+import bodyParser from "body-parser";
+import { cacheMiddleware } from "./caching";
 
-const {
-  beerSchema,
-  userSchema,
-  actionSchema,
-  querySchema,
-} = require("./schema");
-const {
-  beerResolver,
-  userResolver,
-  actionResolver,
-  queryResolver,
-} = require("./resolvers");
+import { beerSchema, userSchema, actionSchema } from "./schema";
+import { beerResolver, userResolver, actionResolver } from "./resolvers";
 
-const express = require("express");
+import express from "express";
 
 const app = express();
 
@@ -24,8 +14,8 @@ const corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200,
 };
-app.use(cors(corsOptions)); 
-app.use(bodyParser.json()); 
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
 
 // Access static files from backend
 app.use(express.static("public"));
