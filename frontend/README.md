@@ -74,10 +74,10 @@ The tests can also be run in parallel to speed up the testing (~1 minute), howev
 To run the tests in parallel, run the following command:
 
 ```bash
-npx playwright test --project=chromium --project=firefox --project=webkit --workers 2
+npm run test:parallel
 ```
 
-Keep in mind that the tests may fail just on the basis of the backend being slow to respond. If this happens, just run the tests again and they should pass. The tests rerun automatically if they fail up to 2 times, so you usually this doesnt happen.
+Keep in mind that the tests may fail just on the basis of the backend being slow to respond. If this happens, just run the tests again and they should pass. The tests rerun automatically up to 2 times if they fail, so this usually doesnt happen.
 
 It may also be worth noting that if multiple people run the tests at the same time, they may interfere with each other and subsequently fail. This is due to the fact that the tests are not run in a sandboxed environment, but rather on the same database. If you quit a test run before it is finished, then the database may be left in an inconsistent state as the cleanup is not run. If this happens, just run the tests again and they should pass.
 
