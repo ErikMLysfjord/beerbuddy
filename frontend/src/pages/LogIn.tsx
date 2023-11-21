@@ -6,12 +6,23 @@ import LoginFormDesktop from "../components/login-forms/LoginFormDesktop";
 import { v4 } from "uuid";
 import { useEffect, useState } from "react";
 
+/**
+ * Callback for when the form fails to validate.
+ * @param errorInfo - the error info from the form
+ */
 const onFinishFailed = (
   errorInfo: ValidateErrorEntity<{ username: string }>
 ) => {
   console.error("Failed:", errorInfo);
 };
 
+/**
+ * Fetches the login id from the backend.
+ * @param username - the username to login with
+ * @param uuid - the user id to login with
+ * @param setIsNewUser - function to set isNewUser
+ * @param isNewUser - the isNewUser state
+ */
 const fetchLoginId = async (
   username: string,
   uuid: string,
@@ -42,6 +53,10 @@ const fetchLoginId = async (
   }, 2000);
 };
 
+/**
+ * LogInPage component that displays the login form.
+ * @returns a LogInPage component
+ */
 const LogInPage = () => {
   const { message } = App.useApp();
   const { width } = useWindowDimensions();

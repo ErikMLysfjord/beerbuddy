@@ -1,5 +1,18 @@
 import { createContext, useEffect, useState } from "react";
 
+/**
+ * interface for the FilterContext
+ * @param searchString - the string to search for
+ * @param setSearchString - function to update the searchString
+ * @param IBU - the IBU range to filter by
+ * @param setIBU - function to update the IBU range
+ * @param ABV - the ABV range to filter by
+ * @param setABV - function to update the ABV range
+ * @param styles - the styles to filter by
+ * @param setStyles - function to update the styles
+ * @param sorting - the sorting to apply
+ * @param setSorting - function to update the sorting
+ */
 interface FilterContextType {
   searchString: string;
   setSearchString: (searchString: string) => void;
@@ -13,6 +26,9 @@ interface FilterContextType {
   setSorting: (sorting: string) => void;
 }
 
+/**
+ * Context that contains the filter settings.
+ */
 export const FilterContext = createContext<FilterContextType>({
   searchString: "",
   setSearchString: () => {},
@@ -26,6 +42,11 @@ export const FilterContext = createContext<FilterContextType>({
   setSorting: () => {},
 });
 
+/**
+ * Provider for the FilterContext.
+ * A wrapper for the children that needs access to the FilterContext.
+ * @param children - the children of the provider
+ */
 export const FilterContextProvider: React.FC<
   React.PropsWithChildren<object>
 > = ({ children }) => {

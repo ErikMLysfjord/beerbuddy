@@ -2,6 +2,15 @@ import Voter from "../voter/Voter";
 import styles from "./BeerCard.module.css";
 
 type ReactionType = "unreact" | "upvote" | "downvote";
+
+/**
+ * The interface for the BeerCard component.
+ * @param name - The name of the beer.
+ * @param brewery - The brewery of the beer.
+ * @param beer_id - The ID of the beer.
+ * @param votes - The number of votes the beer has.
+ * @param reaction - The reaction of the user to the beer.
+ */
 interface BeerCardInterface {
   name: string;
   brewery: string;
@@ -10,6 +19,14 @@ interface BeerCardInterface {
   reaction: ReactionType;
 }
 
+/**
+ * A component for compactly displaying a beer in a list of beers
+ * Works as a link to the beer page.
+ * Displays the name, brewery and votes of the beer.
+ * Contains a voter component for voting on the beer.
+ * @param props : BeerCardInterface - The interface for the BeerCard component.
+ * @returns  - The beer card component.
+ */
 const BeerCard = (props: BeerCardInterface) => {
   return (
     <a

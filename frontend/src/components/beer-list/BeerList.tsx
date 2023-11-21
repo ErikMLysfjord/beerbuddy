@@ -6,6 +6,20 @@ import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
 import { Button } from "antd";
 
+type ReactionType = "unreact" | "upvote" | "downvote";
+
+interface BeerListProps {
+  beers: {
+    beer_id: number;
+    beer_name: string;
+    brewery_name: string;
+    vote_sum: number;
+    beer_count: number;
+    reaction: ReactionType;
+  }[];
+  fetchMore: (reset?: boolean, noFilters?: boolean) => Promise<void>;
+}
+
 /**
  * Helper function for translating the sorting method to a more readable format.
  * @param sorting - The sorting method to translate.
@@ -27,24 +41,11 @@ const translateSorting = (sorting: string) => {
 };
 
 /**
- * BeerList component
- * @returns a list of beers, that should be dynamically loaded when the user scrolls down.
+ * A component for displaying a list of beers.
+ * Uses lazy loading to load more beers when the user scrolls down.
+ * @param props - The interface for the BeerList component.
+ * @returns  - The beer list component.
  */
-
-type ReactionType = "unreact" | "upvote" | "downvote";
-
-interface BeerListProps {
-  beers: {
-    beer_id: number;
-    beer_name: string;
-    brewery_name: string;
-    vote_sum: number;
-    beer_count: number;
-    reaction: ReactionType;
-  }[];
-  fetchMore: (reset?: boolean, noFilters?: boolean) => Promise<void>;
-}
-
 const BeerList = ({ beers, fetchMore }: BeerListProps) => {
   const {
     searchString,
@@ -79,6 +80,7 @@ const BeerList = ({ beers, fetchMore }: BeerListProps) => {
     }
   };
 
+  // Updates the beer list when the search string or sorting method changes.
   useEffect(() => {
     fetchMore(true);
     // The following line is to ignore the lint warning. We know this is bad practice.

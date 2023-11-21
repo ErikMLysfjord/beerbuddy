@@ -51,6 +51,10 @@ const fetchComments = async (id: string, offset: number) => {
     });
 };
 
+/**
+ * BeerPage component that displays detailed information about a beer and its comments.
+ * @returns a BeerPage component
+ */
 const BeerPage = () => {
   useEffect(() => {
     protectRoute();

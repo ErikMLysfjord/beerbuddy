@@ -16,7 +16,6 @@ interface Beer {
  * @param fetchSize - The number of beers to fetch per request.
  * @returns An object containing an array of beers and a function to fetch more beers.
  */
-
 const useFetchMoreBeers = () => {
   const { searchString, IBU, ABV, styles, sorting } = useContext(FilterContext);
   const [beers, setBeers] = useState<Beer[]>([]);

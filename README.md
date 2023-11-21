@@ -29,3 +29,11 @@ To be implemented...
 ## Run frontend tests
 
 To test the frontend, please go to the [frontend documentation](./frontend/README.md).
+
+# Sustainability
+
+If you want to learn about the measures taken to ensure a sustainable application, please go to the [sustainability documentation](./sustainability/README.md).
+
+# Accessibility
+
+If you want to learn about how we have ensured that our website is accessible to as many as possible, please go to the [accessibility documentation](./accessibility/README.md).

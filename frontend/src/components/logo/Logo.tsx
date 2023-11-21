@@ -1,6 +1,12 @@
 import styles from "./Logo.module.css";
 import { CSSProperties } from "react";
 
+/**
+ * Logo component that contains the BeerBuddy logo
+ * and a heading.
+ * @param style - CSS properties for custom styling
+ * @returns a Logo component
+ */
 const Logo = (props: { style?: CSSProperties | undefined }) => {
   return (
     <a style={props.style} className={styles.wrapper} href="/project2">
