@@ -40,7 +40,7 @@ const vote = async (beerId: number, reaction: ReactionType) => {
  * @param beerId - id of the beer to vote on
  * @returns - the voter component
  */
-const Voter = async (props: VoterInterface) => {
+const Voter = (props: VoterInterface) => {
   const handleVote =
     async (reaction: ReactionType) =>
     async (event: React.MouseEvent<HTMLButtonElement>) => {
