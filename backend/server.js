@@ -1,6 +1,8 @@
 const { graphqlHTTP } = require("express-graphql");
 const cors = require("cors");
-const client = require("./db");
+const bodyParser = require('body-parser');
+const { cacheMiddleware } = require("./caching.js");
+
 const {
   beerSchema,
   userSchema,
@@ -22,13 +24,15 @@ const corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200,
 };
-app.use(cors(corsOptions));
+app.use(cors(corsOptions)); 
+app.use(bodyParser.json()); 
 
 // Access static files from backend
 app.use(express.static("public"));
 
 app.use(
   "/beer",
+  cacheMiddleware,
   graphqlHTTP({ schema: beerSchema, rootValue: beerResolver, graphiql: true })
 );
 
@@ -53,7 +57,6 @@ app.use(
 // );
 
 (async () => {
-  await client.connect();
   app.listen(4000, () => {
     console.log(`App listening at http://localhost:4000`);
   });

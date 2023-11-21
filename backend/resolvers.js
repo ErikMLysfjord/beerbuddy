@@ -1,14 +1,11 @@
 const client = require("./db.js");
+const { myCache } = require("./caching.js");
 
 const sqlQuery = async (query) => {
-  if (!client._connected) {
-    await client.connect();
-  }
-
   const results = await client
     .query(query)
-    .then((payload) => {
-      return payload.rows;
+    .then((query) => {
+      return query[0];
     })
     .catch(() => {
       return "Error in query";
@@ -52,13 +49,13 @@ const beerResolver = {
     FROM beers 
     JOIN breweries ON beers.brewery_id = breweries.id 
     LEFT JOIN (
-        SELECT 
-            beer_id, 
-            SUM(CASE WHEN vote_type = 'upvote' THEN 1 WHEN vote_type = 'downvote' THEN -1 ELSE 0 END) AS rating, 
-            COUNT(CASE WHEN vote_type IN ('upvote', 'downvote') THEN 1 ELSE NULL END) AS vote_count
-        FROM votes 
-        GROUP BY beer_id
-    ) AS rating ON beers.id = rating.beer_id 
+      SELECT 
+        beer_id, 
+        SUM(CASE WHEN vote_type = 'upvote' THEN 1 WHEN vote_type = 'downvote' THEN -1 ELSE 0 END) AS rating, 
+        COUNT(CASE WHEN vote_type IN ('upvote', 'downvote') THEN 1 ELSE NULL END) AS vote_count
+      FROM votes 
+      GROUP BY beer_id
+    ) rating ON beers.id = rating.beer_id 
     LEFT JOIN (
       SELECT 
         beer_id, 
@@ -212,25 +209,25 @@ const beerResolver = {
         breweries.name AS brewery_name, 
         beers.id AS beer_id,
         SUM(CASE WHEN votes.vote_type = 'upvote' THEN 1 WHEN votes.vote_type = 'downvote' THEN -1 ELSE 0 END) AS vote_sum,
-        COALESCE((SELECT vote_type FROM votes JOIN users ON votes.user_id = users.id WHERE users.id = '${userId}' AND votes.beer_id = beers.id), 'unreact') AS reaction,
+        IFNULL((SELECT vote_type FROM votes JOIN users ON votes.user_id = users.id WHERE users.id = '${userId}' AND votes.beer_id = beers.id), 'unreact') AS reaction,
         COUNT(beers.id) OVER() AS beer_count
       FROM 
         beers
       JOIN 
         breweries ON beers.brewery_id = breweries.id
       LEFT JOIN 
-          votes ON beers.id = votes.beer_id
+        votes ON beers.id = votes.beer_id
       WHERE
-          beers.abv > ${minAbvProsent} AND beers.abv < ${maxAbvProsent} AND
-          beers.ibu > ${minIbus} AND beers.ibu < ${maxIbus} AND
-          LOWER(beers.name) LIKE '%${searchQuery}%'
-          ${
-            beerStyles.length > 0
-              ? `AND beers.style IN (${beerStyles
-                  .map((style) => `'${style}'`)
-                  .join(", ")})`
-              : ""
-          }
+        beers.abv > ${minAbvProsent} AND beers.abv < ${maxAbvProsent} AND
+        beers.ibu > ${minIbus} AND beers.ibu < ${maxIbus} AND
+        LOWER(beers.name) LIKE '%${searchQuery}%'
+        ${
+          beerStyles.length > 0
+            ? `AND beers.style IN (${beerStyles
+                .map((style) => `'${style}'`)
+                .join(", ")})`
+            : ""
+        }
       GROUP BY 
         beers.id,
         beers.name, 
@@ -240,7 +237,7 @@ const beerResolver = {
         ${sorting},
         beer_name ASC,
         beer_id
-      LIMIT ${size} OFFSET ${start};
+      LIMIT ${size} OFFSET ${start || 0};
       `
     );
   },
@@ -261,8 +258,12 @@ const userResolver = {
       throw new Error("Username already exists");
     }
 
+    await sqlQuery(
+      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}');`
+    );
+
     const res = await sqlQuery(
-      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}') RETURNING id;`
+      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
 
     if (res === "Error in query") {
@@ -285,7 +286,7 @@ const userResolver = {
     if (user.length === 0) {
       throw new Error("User does not exist");
     }
-    const res = sqlQuery(
+    await sqlQuery(
       `UPDATE users SET username = '${username}' WHERE id = '${userId}';`
     );
 
@@ -299,7 +300,7 @@ const userResolver = {
     if (user.length === 0) {
       throw new Error("User does not exist");
     }
-    const res = sqlQuery(`DELETE FROM users WHERE id = '${userId}';`);
+    await sqlQuery(`DELETE FROM users WHERE id = '${userId}';`);
     return "You deleted your user!";
   },
 
@@ -307,12 +308,18 @@ const userResolver = {
     const userExists = await sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
-    if (userExists.length > 0) {
-      return { id: userExists[0].id, isNewUser: "no" };
-    }
 
+    if (userExists.length > 0) {
+      const user = await sqlQuery(
+        `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
+      );
+      return { id: user[0].id, isNewUser: "no" };
+    }
+    await sqlQuery(
+      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}');`
+    );
     const res = await sqlQuery(
-      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}') RETURNING id;`
+      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
 
     if (res === "Error in query") {
@@ -346,6 +353,7 @@ const actionResolver = {
       const res = await sqlQuery(
         `UPDATE votes SET vote_type = '${action}' WHERE user_id = '${userId}' AND beer_id = ${beerId};`
       );
+      myCache.flushAll();
       return "You reacted!";
     }
 
@@ -357,6 +365,7 @@ const actionResolver = {
       throw new Error("Error in query");
     }
 
+    myCache.flushAll();
     return "You reacted!";
   },
 
@@ -368,6 +377,7 @@ const actionResolver = {
     if (res === "Error in query") {
       throw new Error("Error in query");
     }
+    myCache.flushAll();
     return "You commented!";
   },
   deleteComment: async ({ userId, commentId }) => {
@@ -380,6 +390,7 @@ const actionResolver = {
     const res = await sqlQuery(
       `DELETE FROM comments WHERE id = ${commentId} AND user_id = '${userId}';`
     );
+    myCache.flushAll();
     return "You deleted your comment!";
   },
 };
