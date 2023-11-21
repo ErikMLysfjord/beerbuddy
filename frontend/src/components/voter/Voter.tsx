@@ -14,7 +14,7 @@ interface VoterInterface {
 const vote = async (beerId: number, reaction: ReactionType) => {
   const userId = await localStorage.getItem("userIdBeerBuddy");
 
-  await fetch("http://it2810-15.idi.ntnu.no:4000/action", {
+  await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/action", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -29,19 +29,19 @@ const vote = async (beerId: number, reaction: ReactionType) => {
 };
 
 const Voter = (props: VoterInterface) => {
-  const upvote = (event: React.MouseEvent<HTMLButtonElement>) => {
-    protectRoute();
+  const upvote = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     event.preventDefault();
+    if (await protectRoute()) return "Error";
     const reaction = action === "upvote" ? "unreact" : "upvote";
     setAction(reaction);
     vote(props.beerId, reaction);
   };
 
-  const downvote = (event: React.MouseEvent<HTMLButtonElement>) => {
-    protectRoute();
+  const downvote = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     event.preventDefault();
+    if (await protectRoute()) return "Error";
     const reaction = action === "downvote" ? "unreact" : "downvote";
     setAction(reaction);
     vote(props.beerId, reaction);

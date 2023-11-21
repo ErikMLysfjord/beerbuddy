@@ -2,7 +2,7 @@
 
 exports[`Actionbar > renders correctly 1`] = `
 <div>
-  <div
+  <section
     class="_wrapper_ebfc65"
   >
     <label
@@ -155,6 +155,6 @@ exports[`Actionbar > renders correctly 1`] = `
         </span>
       </button>
     </div>
-  </div>
+  </section>
 </div>
 `;

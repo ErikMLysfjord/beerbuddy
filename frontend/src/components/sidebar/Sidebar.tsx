@@ -4,7 +4,7 @@ import styles from "./Sidebar.module.css";
 
 interface SidebarProps {
   children: React.ReactNode;
-  fetchMore: (reset?: boolean) => Promise<void>;
+  fetchMore: (reset?: boolean, noFilters?: boolean) => Promise<void>;
 }
 
 const Sidebar = ({ children, fetchMore }: SidebarProps) => {

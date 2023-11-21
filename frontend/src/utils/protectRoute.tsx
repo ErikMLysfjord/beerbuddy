@@ -19,13 +19,17 @@ const protectRoute = async () => {
 
   if (res.data.login && res.data.login.length === 0) {
     resetLocalStorage();
-    return window.location.replace("/project2/login");
+    window.location.replace("/project2/login");
+    return true;
   }
 
   if (res.data.login[0].id !== userId) {
     resetLocalStorage();
-    return window.location.replace("/project2/login");
+    window.location.replace("/project2/login");
+    return true;
   }
+
+  return false;
 };
 
 const resetLocalStorage = () => {
