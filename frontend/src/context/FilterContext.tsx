@@ -13,7 +13,7 @@ import { createContext, useEffect, useState } from "react";
  * @param sorting - the sorting to apply
  * @param setSorting - function to update the sorting
  */
-interface FilterContextType {
+export interface FilterContextType {
   searchString: string;
   setSearchString: (searchString: string) => void;
   IBU: number[];
