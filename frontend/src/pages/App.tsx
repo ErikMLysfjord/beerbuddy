@@ -8,7 +8,7 @@ import appStyles from "./App.module.css";
 import protectRoute from "../utils/protectRoute";
 import { useEffect, useRef, useState } from "react";
 import { FloatButton } from "antd";
-import { ArrowUpOutlined } from "@ant-design/icons";
+import { ArrowUpOutlined, LogoutOutlined } from "@ant-design/icons";
 
 function App() {
   useEffect(() => {
@@ -54,15 +54,14 @@ function App() {
 
   return (
     <>
-      <button
+      <LogoutOutlined
         onClick={() => {
           localStorage.removeItem("userIdBeerBuddy");
           window.location.reload();
         }}
+        style={{ fontSize: "1.5rem", color: "black" }}
         className={appStyles.logoutBtn}
-      >
-        Logout
-      </button>
+      />
       <a href="#main" className={appStyles.skipLink} ref={mainRef}>
         Skip to main content
       </a>
