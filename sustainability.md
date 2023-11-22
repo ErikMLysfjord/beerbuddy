@@ -12,9 +12,11 @@ Both the list of beers on the main page as well as the comments on each beer are
 
 Our fetching does not fetch more data than necessary, saving a lot of bandwidth and energy. For example, when fetching a beer, we only fetch the comments for that beer, not all comments for all beers. We also only fetch the first 10 beers when loading the main page, and then fetch more when the user scrolls down.
 
-## Database
+ ## Database
 
-Our database is designed to be as efficient as possible. We have a table for beers, a table for breweries, a table for comments, a table for users, and a table for votes. This means that we easily can fetch all the information we need with as few joins as possible.
+Initially, we used Docker and PostgreSQL as a relational database is capable of handling large datasets in an efficient way. However, due to restrictions on Docker usage, we had to switch our database.
+
+We now use SQLite, a lightweight, file-based relational database, for efficiency and sustainability. Its small footprint saves energy as it doesn't require a separate server process. Plus, its support for complex queries reduces CPU usage by minimizing the need for multiple joins. We have a table for beers, a table for breweries, a table for comments, a table for users, and a table for votes. This means that we can easily fetch all the information we need with as few joins as possible.
 
 ## GraphQL
 
@@ -39,3 +41,7 @@ Our website is hosted in Norway which means that the data does not have to trave
 ## Dependencies
 
 We have tried to keep our dependencies to a minimum. This means that we avoid unnecessary code and unnecessary updates. Each npm install and npm update requires a lot of energy, so by keeping our dependencies to a minimum we can reduce the energy consumption of our website. We also remove unused dependencies when we no longer need them.
+
+## Caching
+
+Our backend utilizes caching to improve efficiency and sustainability. By storing frequently accessed data in cache, we reduce the need for repeated database queries, saving CPU usage and energy. This also provides faster response times, enhancing user experience while conservely using resources.
