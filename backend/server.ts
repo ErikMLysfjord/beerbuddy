@@ -25,12 +25,12 @@ app.use(express.static("public"));
 app.use(
   "/beer",
   cacheMiddleware,
-  graphqlHTTP({ schema: beerSchema, rootValue: beerResolver, graphiql: true })
+  graphqlHTTP({ schema: beerSchema, rootValue: beerResolver, graphiql: true }),
 );
 
 app.use(
   "/user",
-  graphqlHTTP({ schema: userSchema, rootValue: userResolver, graphiql: true })
+  graphqlHTTP({ schema: userSchema, rootValue: userResolver, graphiql: true }),
 );
 
 app.use(
@@ -39,7 +39,7 @@ app.use(
     schema: actionSchema,
     rootValue: actionResolver,
     graphiql: true,
-  })
+  }),
 );
 
 // Start the server
