@@ -18,3 +18,11 @@ export type Beer = {
   comment_count: number;
   user_vote: ReactionType;
 };
+
+/**
+ * @description SortingItem is used to define the sorting options
+ */
+export type SortingItem = {
+  key: string;
+  label: string;
+};
