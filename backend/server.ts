@@ -1,10 +1,10 @@
 import { graphqlHTTP } from "express-graphql";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { cacheMiddleware } from "./caching";
+import { cacheMiddleware } from "./caching.js";
 
-import { beerSchema, userSchema, actionSchema } from "./schema";
-import { beerResolver, userResolver, actionResolver } from "./resolvers";
+import { beerSchema, userSchema, actionSchema } from "./schema.js";
+import { beerResolver, userResolver, actionResolver } from "./resolvers.js";
 
 import express from "express";
 
@@ -44,7 +44,7 @@ app.use(
 
 // Start the server
 (async () => {
-  app.listen(4000, () => {
-    console.log(`App listening at http://localhost:4000`);
+  app.listen(3000, () => {
+    console.log(`App listening at port 3000`);
   });
 })();

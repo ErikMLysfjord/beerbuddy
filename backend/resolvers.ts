@@ -1,5 +1,5 @@
-import client from "./db";
-import { myCache } from "./caching";
+import client from "./db.js";
+import { myCache } from "./caching.js";
 
 /**
  * Type for the results of a query.
