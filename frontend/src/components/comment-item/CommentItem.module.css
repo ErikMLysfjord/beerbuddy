@@ -6,6 +6,7 @@
 }
 
 .commentContentContainer {
+  background-color: #333333;
   display: inline-flex;
   flex-direction: column;
   width: 100%;
@@ -46,4 +47,14 @@
 .buttonContainer {
   display: flex;
   align-items: center;
+  all: unset;
+}
+
+.buttonContainer:hover {
+  cursor: pointer;
+}
+
+.buttonContainer:focus {
+  outline: 4px dashed #ffcc48;
+  outline-offset: -2px;
 }

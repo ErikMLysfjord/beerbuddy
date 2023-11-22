@@ -95,23 +95,24 @@ const CommentItem = ({
         <p className={styles.commentText}>{commentText}</p>
       </div>
       {userId === localStorage.getItem("userIdBeerBuddy") && (
-        <div className={styles.buttonContainer}>
+        <button
+          className={styles.buttonContainer}
+          onClick={() => {
+            deleteComment(
+              localStorage.getItem("userIdBeerBuddy") ?? "",
+              id.toString()
+            );
+            onDelete();
+          }}
+          aria-label="Delete comment"
+        >
           <img
             src="/project2/delete-kopi.svg"
-            alt="Delete comment"
+            alt="Trash icon"
             width={"32px"}
             height={"32px"}
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              deleteComment(
-                localStorage.getItem("userIdBeerBuddy") ?? "",
-                id.toString()
-              );
-              onDelete();
-            }}
-            tabIndex={0}
           />
-        </div>
+        </button>
       )}
     </div>
   );
