@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import NodeCache from "node-cache";
-import { Request, Response, NextFunction } from "express";
+import { Request, NextFunction } from "express";
 
 type CacheContent = {
   response: string;
@@ -18,7 +18,7 @@ const myCache = new NodeCache({ stdTTL: 60 * 60 * 24 });
  * @param res - The response object.
  * @param next - The next middleware function.
  */
-const cacheMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const cacheMiddleware = (req: Request, res, next: NextFunction) => {
   const hash = crypto.createHash("md5");
   const keyData = req.originalUrl + JSON.stringify(req.body);
 
@@ -28,12 +28,13 @@ const cacheMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const cacheContent: CacheContent = myCache.get(key);
 
   if (cacheContent) {
-    return res.send(cacheContent.response);
+    res.send(cacheContent.response);
+    return;
   } else {
-    const sendResponse = res.send;
-    res.send = (body) => {
-      myCache.set(key, JSON.stringify(body));
-      return sendResponse(body);
+    res.sendResponse = res.send;
+    res.send = (body: string) => {
+      myCache.set(key, { response: body });
+      res.sendResponse(body);
     };
     next();
   }
