@@ -83,7 +83,7 @@ const Voter = (props: VoterInterface) => {
           filter: action === "upvote" ? "" : "brightness(0.8)",
         }}
       />
-      <p className={styles.count}>{total}</p>
+      <h2 className={styles.count}>{total}</h2>
       <Button
         type="primary"
         icon={<CaretDownFilled />}

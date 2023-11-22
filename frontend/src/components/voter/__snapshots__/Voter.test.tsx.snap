@@ -35,11 +35,11 @@ exports[`Voter > should render 1`] = `
         </span>
       </span>
     </button>
-    <p
+    <h2
       class="_count_0f0ab2"
     >
       10
-    </p>
+    </h2>
     <button
       aria-label="Downvote this beer"
       class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary ant-btn-icon-only"
