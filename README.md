@@ -4,6 +4,8 @@ BeerBuddy is a website where you can find and review beers. The website displays
 
 ## How to use the website
 
+If you are using NTNU network or are connected to its VPN you can access the website [here](https://it2810-15.idi.ntnu.no/project2). If not, you can run the project locally.
+
 To be able to use the website you must first register to the website. The first time you visit the website you will be prompted to the login page. You only need to register your name, and then a unique ID is generated and stored in the localstorage. This will then be used to identify you and your actions.
 
 ![Login](./images/login.png)
