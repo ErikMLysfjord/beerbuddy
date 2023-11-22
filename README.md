@@ -57,7 +57,7 @@ To set up the frontend, please go to the [frontend documentation](./frontend/REA
 
 We used Vitest together with React, Typescript and ES lint as it was a requirement for the course. But it is also a good choice for testing React applications. It is easy to set up and use, and it is fast. It also has a good documentation. 
 
-We used Antd and Material UI for styling. We used Antd mostly everywhere since it has high accessibility and is easy to use. And used MUI where the components from Antd did not fit our needs.
+We used Antd and Material UI for styling. We used Antd for most of the components, and used MUI where the components from Antd did not fit our needs.
 
 Playwright was used for testing the end to end functionality of the website. It is a good choice for testing web applications, and it is easy to use. It is also fast and has a good documentation.
 
