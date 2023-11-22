@@ -121,6 +121,14 @@ Firefox Accessibility is a tool that is built into Firefox. It is used to measur
 
 WAVE is an extension that is used to detect accessibility issues in the application. It is used to find issues with the HTML semantics, contrast issues, keyboard navigation and so on. We have used this thoroughly to find issues with the application. Link to the extension: https://wave.webaim.org/extension/
 
+Using WAVE we have discovered that the main page has no errors, warnings, or contrast issues. The beer page has one warning on desktop, as it finds the "go back"-button redundant. We have chosen to keep this button, as it communicates to the user that they can go back to the previous page. The log in page also has an alert, which we have chosen to ignore.
+
+<p align="middle">
+  <img src="./docs-images/WAVE-app.png" width="200" style="margin-right: 10px" />
+  <img src="./docs-images/WAVE-beer.png" width="200" style="margin-right: 10px" /> 
+  <img src="./docs-images/WAVE-login.png" width="200" />
+</p>
+
 ### aXe
 
 jest-axe is a tool that is used to find accessibility issues in the application. It usually looks for the most common accessibility issues, which makes it useful for an extra layer of accessibility testing. We do not rely solely on this tool, but it is useful to find issues that we might have missed. Link to the tool: https://github.com/NickColley/jest-axe
@@ -128,6 +136,14 @@ jest-axe is a tool that is used to find accessibility issues in the application.
 ### Lighthouse
 
 Google Lighthouse is an automated tool used to improve the quality of web pages. It is used to measure the performance, accessibility, best practices and SEO of the application. It is used to find issues with the HTML semantics, contrast issues, keyboard navigation and so on. Link to the tool: https://developers.google.com/web/tools/lighthouse
+
+Using Lighthouse, we found that the main page gets a score of 96 for accessibility, while the beer page and the log in page gets a score of 100 for accessibility. The reason we did not receive a score of 100 for the main page is because the BeerCard-components aria-label is not the same as the text in the card. We found that this was not an issue, as the aria-label only displays the name of the beer, which we find is the most important aspect of the beer card.
+
+<p align="middle">
+  <img src="./docs-images/lighthouse-app.png" width="200" style="margin-right: 10px" />
+  <img src="./docs-images/lighthouse-beer.png" width="200" style="margin-right: 10px" /> 
+  <img src="./docs-images/lighthouse-login.png" width="200" />
+</p>
 
 ### Screen readers
 
