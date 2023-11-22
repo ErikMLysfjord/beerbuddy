@@ -21,7 +21,7 @@ exports[`Sidebar > renders correctly 1`] = `
           BeerBuddy
         </h1>
       </a>
-      <main>
+      <section>
         <div
           class="ant-divider css-dev-only-do-not-override-pr0fja ant-divider-horizontal"
           role="separator"
@@ -412,7 +412,7 @@ exports[`Sidebar > renders correctly 1`] = `
             style="left: 0%;"
           >
             <input
-              aria-label="Temperature range"
+              aria-label="IBU range"
               aria-orientation="horizontal"
               aria-valuemax="140"
               aria-valuemin="0"
@@ -447,7 +447,7 @@ exports[`Sidebar > renders correctly 1`] = `
             style="left: 100%;"
           >
             <input
-              aria-label="Temperature range"
+              aria-label="IBU range"
               aria-orientation="horizontal"
               aria-valuemax="140"
               aria-valuemin="0"
@@ -526,7 +526,7 @@ exports[`Sidebar > renders correctly 1`] = `
             style="left: 0%;"
           >
             <input
-              aria-label="Temperature range"
+              aria-label="ABV range"
               aria-orientation="horizontal"
               aria-valuemax="40"
               aria-valuemin="0"
@@ -561,7 +561,7 @@ exports[`Sidebar > renders correctly 1`] = `
             style="left: 100%;"
           >
             <input
-              aria-label="Temperature range"
+              aria-label="ABV range"
               aria-orientation="horizontal"
               aria-valuemax="40"
               aria-valuemin="0"
@@ -603,7 +603,7 @@ exports[`Sidebar > renders correctly 1`] = `
         <p>
           Test
         </p>
-      </main>
+      </section>
     </div>
   </section>
 </div>

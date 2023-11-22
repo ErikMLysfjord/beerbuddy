@@ -148,3 +148,7 @@ Using Lighthouse, we found that the main page gets a score of 96 for accessibili
 ### Screen readers
 
 We have used screen readers to test the accessibility of the application. We have used the screen readers NVDA and VoiceOver. We have used the screen readers to test the keyboard navigation, and to test the HTML semantics and ARIA attributes.
+
+Using screen readers we have currently found two issues, one of which had to do with the alcohol and IBU slider having poor aria labels. We have fixed this issue by adding aria labels to the sliders with more informative feedback. Another issue was that an image was used as a button, and it was hard to realise through the screen reader that the user could interact with the image. This was addressed by adding a button around the image, with an aria label that describes the button.
+
+Other than that everything seems to work fine. There are some areas where the screen reader repeats itself, likely due to AntDesign's components, but we have not noted it as a major issue as the important information is still read out loud.

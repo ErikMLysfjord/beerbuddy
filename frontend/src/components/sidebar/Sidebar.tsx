@@ -19,7 +19,7 @@ const Sidebar = ({ children }: SidebarProps) => {
     <section className={styles.container}>
       <div>
         <Logo />
-        <main>{children}</main>
+        <section>{children}</section>
       </div>
     </section>
   );

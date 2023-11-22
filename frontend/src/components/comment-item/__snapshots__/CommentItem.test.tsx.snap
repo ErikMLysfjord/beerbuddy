@@ -35,18 +35,17 @@ exports[`CommentItem > matches snapshot 1`] = `
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus sem diam, eget consectetur quam interdum eu. Aliquam ornare lectus vel sapien blandit eleifend. Aenean ac vestibulum metus. Nam auctor sed dui dapibus pharetra.
       </p>
     </div>
-    <div
+    <button
+      aria-label="Delete comment"
       class="_buttonContainer_7a79ad"
     >
       <img
-        alt="Delete comment"
+        alt="Trash icon"
         height="32px"
         src="/project2/delete-kopi.svg"
-        style="cursor: pointer;"
-        tabindex="0"
         width="32px"
       />
-    </div>
+    </button>
   </div>
 </div>
 `;

@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render } from "@testing-library/react";
 import CommentItem from "./CommentItem";
 import { axe } from "jest-axe";
+import { act } from "react-dom/test-utils";
 
 const mockDeleteComment = vi.fn();
 global.localStorage = {
@@ -44,8 +45,10 @@ describe("CommentItem", () => {
   });
 
   it("calls onDelete when delete button is clicked", () => {
-    const { getByAltText } = render(<Template />);
-    getByAltText("Delete comment").click();
+    const { getByRole } = render(<Template />);
+    act(() => {
+      getByRole("button").click();
+    });
     expect(mockDeleteComment).toHaveBeenCalled();
   });
 
@@ -129,7 +132,7 @@ describe("CommentItem", () => {
   });
 
   it("can not delete a comment if the user is not logged in", () => {
-    const { queryByAltText } = render(
+    const { queryByRole } = render(
       <CommentItem
         username={"Test"}
         commentText={"Lorem ipsum"}
@@ -139,6 +142,6 @@ describe("CommentItem", () => {
         userId=""
       />
     );
-    expect(queryByAltText("Delete comment")).not.toBeInTheDocument();
+    expect(queryByRole("button")).not.toBeInTheDocument();
   });
 });
