@@ -12,6 +12,27 @@
   overflow-y: scroll;
 }
 
+.logoutBtn {
+  background-color: #ffcb48;
+  filter: brightness(0.8);
+  border: 2px solid black;
+  border-radius: 50%;
+  padding: 6px;
+  height: 2.5rem;
+  color: black;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  z-index: 1000;
+}
+
+.logoutBtn:active {
+  filter: brightness(1);
+  transition: all 0.01s ease-in-out;
+}
+
 @media screen and (max-width: 1000px) {
   .mainSection {
     padding: 3rem 2rem;

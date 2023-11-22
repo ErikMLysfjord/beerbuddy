@@ -4,10 +4,13 @@
 
 Make sure you have node installed on your machine. Then run the following command in the root of the project:
 
-- cd frontend
-- npm install
-- npm run dev
-  The frontend should now be running on localhost:3000.
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend should now be running on localhost:3000.
 
 ## Run all frontend tests
 

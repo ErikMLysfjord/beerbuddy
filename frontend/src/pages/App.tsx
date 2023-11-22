@@ -7,8 +7,8 @@ import useFetchMoreBeers from "../utils/useFetchMoreBeers";
 import appStyles from "./App.module.css";
 import protectRoute from "../utils/protectRoute";
 import { useEffect, useRef, useState } from "react";
-import { FloatButton } from "antd";
-import { ArrowUpOutlined } from "@ant-design/icons";
+import { Button, FloatButton } from "antd";
+import { ArrowUpOutlined, LogoutOutlined } from "@ant-design/icons";
 
 function App() {
   useEffect(() => {
@@ -57,6 +57,18 @@ function App() {
       <a href="#main" className={appStyles.skipLink} ref={mainRef}>
         Skip to main content
       </a>
+      <Button
+        icon={<LogoutOutlined style={{ fontSize: "1.5rem", color: "black" }} />}
+        onClick={() => {
+          localStorage.removeItem("userIdBeerBuddy");
+          window.location.reload();
+        }}
+        aria-label="Logout button"
+        className={appStyles.logoutBtn}
+        style={{
+          width: "2.5rem",
+        }}
+      />
       <div className={appStyles.appBody}>
         <Sidebar>
           <Filters fetchMore={fetchMore} />
