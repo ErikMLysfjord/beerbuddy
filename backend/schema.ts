@@ -1,5 +1,8 @@
-const { buildSchema } = require("graphql");
+import { buildSchema } from "graphql";
 
+/**
+ * GraphQL schema for beer-related queries
+ */
 const beerSchema = buildSchema(`
   scalar Any
 
@@ -10,6 +13,9 @@ const beerSchema = buildSchema(`
   }
 `);
 
+/**
+ * GraphQL schema for user-related queries
+ */
 const userSchema = buildSchema(`
   scalar Any
 
@@ -22,6 +28,9 @@ const userSchema = buildSchema(`
   }
 `);
 
+/**
+ * GraphQL schema for action-related queries
+ */
 const actionSchema = buildSchema(`
   type Query {
     react(userId: String! beerId: Int! action: String!): String
@@ -30,17 +39,4 @@ const actionSchema = buildSchema(`
   }
 `);
 
-const querySchema = buildSchema(`
-  scalar Any
-
-  type Query {
-    query(query: String!): Any
-  }
-`);
-
-module.exports = {
-  beerSchema,
-  querySchema,
-  userSchema,
-  actionSchema,
-};
+export { beerSchema, userSchema, actionSchema };

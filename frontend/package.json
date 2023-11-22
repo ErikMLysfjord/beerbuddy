@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prettier": "npx prettier --write .",
-    "prettiercheck": "npx prettier --check .",
+    "prettier:check": "npx prettier --check .",
     "test:vitest": "vitest src --no-watch",
     "test:headed": "npx playwright test --headed --project=chromiumHeaded",
     "test:e2e": "npx playwright test --project=chromium --project=firefox --project=webkit",

@@ -5,25 +5,47 @@ stages:
   - build
   - deploy
 
-lint:
+lint frontend:
   stage: lint
   image: node:19
   script:
-    - echo "Linting the project"
+    - echo "Linting the frontend"
     - cd frontend
     - npm ci
     - npm run lint
   only:
     - merge_requests
 
-prettier:
+lint backend:
+  stage: lint
+  image: node:19
+  script:
+    - echo "Linting the backend"
+    - cd backend
+    - npm ci
+    - npm run lint
+  only:
+    - merge_requests
+
+prettier frontend:
   stage: prettier
   image: node:19
   script:
-    - echo "Checking prettier"
+    - echo "Checking prettier frontend"
     - cd frontend
     - npm ci
-    - npm run prettiercheck
+    - npm run prettier:check
+  only:
+    - merge_requests
+
+prettier backend:
+  stage: prettier
+  image: node:19
+  script:
+    - echo "Checking prettier backend"
+    - cd backend
+    - npm ci
+    - npm run prettier:check
   only:
     - merge_requests
 
