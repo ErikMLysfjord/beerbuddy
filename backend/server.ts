@@ -1,10 +1,10 @@
 import { graphqlHTTP } from "express-graphql";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { cacheMiddleware } from "./caching";
+import { cacheMiddleware } from "./caching.js";
 
-import { beerSchema, userSchema, actionSchema } from "./schema";
-import { beerResolver, userResolver, actionResolver } from "./resolvers";
+import { beerSchema, userSchema, actionSchema } from "./schema.js";
+import { beerResolver, userResolver, actionResolver } from "./resolvers.js";
 
 import express from "express";
 
@@ -25,12 +25,12 @@ app.use(express.static("public"));
 app.use(
   "/beer",
   cacheMiddleware,
-  graphqlHTTP({ schema: beerSchema, rootValue: beerResolver, graphiql: true }),
+  graphqlHTTP({ schema: beerSchema, rootValue: beerResolver, graphiql: true })
 );
 
 app.use(
   "/user",
-  graphqlHTTP({ schema: userSchema, rootValue: userResolver, graphiql: true }),
+  graphqlHTTP({ schema: userSchema, rootValue: userResolver, graphiql: true })
 );
 
 app.use(
@@ -39,12 +39,12 @@ app.use(
     schema: actionSchema,
     rootValue: actionResolver,
     graphiql: true,
-  }),
+  })
 );
 
 // Start the server
 (async () => {
-  app.listen(4000, () => {
-    console.log(`App listening at http://localhost:4000`);
+  app.listen(3000, () => {
+    console.log(`App listening at port 3000`);
   });
 })();
