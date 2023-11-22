@@ -54,6 +54,9 @@ function App() {
 
   return (
     <>
+      <a href="#main" className={appStyles.skipLink} ref={mainRef}>
+        Skip to main content
+      </a>
       <Button
         icon={<LogoutOutlined style={{ fontSize: "1.5rem", color: "black" }} />}
         onClick={() => {
@@ -66,10 +69,6 @@ function App() {
           width: "2.5rem",
         }}
       />
-
-      <a href="#main" className={appStyles.skipLink} ref={mainRef}>
-        Skip to main content
-      </a>
       <div className={appStyles.appBody}>
         <Sidebar>
           <Filters fetchMore={fetchMore} />
