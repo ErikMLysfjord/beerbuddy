@@ -67,7 +67,7 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
         tooltip="IBU is International Bitternes Units, a metric for the bitternes of your beer. The higher the number, the more bitter the beer."
       >
         <StyledSlider
-          getAriaLabel={() => "Temperature range"}
+          getAriaLabel={() => "IBU range"}
           value={IBU}
           onChange={(e: Event, newValue: number | number[]) => {
             e.preventDefault();
@@ -80,7 +80,7 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
       </Filter>
       <Filter heading="Alcohol" tooltip="Percentage of alcohol in the beer">
         <StyledSlider
-          getAriaLabel={() => "Temperature range"}
+          getAriaLabel={() => "ABV range"}
           value={ABV}
           onChange={(e: Event, newValue: number | number[]) => {
             e.preventDefault();
