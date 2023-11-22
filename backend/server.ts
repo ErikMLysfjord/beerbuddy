@@ -10,6 +10,7 @@ import express from "express";
 
 const app = express();
 
+// Enable CORS
 const corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200,
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 // Access static files from backend
 app.use(express.static("public"));
 
+// GraphQL endpoints
 app.use(
   "/beer",
   cacheMiddleware,
@@ -40,12 +42,7 @@ app.use(
   }),
 );
 
-// Testing only
-// app.use(
-//   "/sqlQuery",
-//   graphqlHTTP({ schema: querySchema, rootValue: queryResolver, graphiql: true })
-// );
-
+// Start the server
 (async () => {
   app.listen(4000, () => {
     console.log(`App listening at http://localhost:4000`);
