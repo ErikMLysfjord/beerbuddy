@@ -42,7 +42,15 @@ const beerResolver = {
    * @param start - The index of the first comment to be returned.
    * @returns - The comments of the beer.
    */
-  comments: async ({ id, size, start }) => {
+  comments: async ({
+    id,
+    size,
+    start,
+  }: {
+    id: string;
+    size: number;
+    start: number;
+  }) => {
     return await sqlQuery(
       `SELECT 
         comments.comment_text, 
@@ -65,7 +73,7 @@ const beerResolver = {
    * @param userId - The id of the user.
    * @returns - Information about the beer.
    */
-  beer: async ({ id, userId }) => {
+  beer: async ({ id, userId }: { id: string; userId: string }) => {
     return await sqlQuery(`
       SELECT 
         beers.abv, 
@@ -133,6 +141,17 @@ const beerResolver = {
     minIbu,
     maxIbu,
     styles,
+  }: {
+    size: number;
+    start: number;
+    userId: string;
+    sort: string;
+    search: string;
+    minAbv: number;
+    maxAbv: number;
+    minIbu: number;
+    maxIbu: number;
+    styles: string[];
   }) => {
     const minAbvs = minAbv || 0;
     const maxAbvs = maxAbv || 40;
@@ -300,7 +319,7 @@ const userResolver = {
    * @param username - Username of person logging in.
    * @returns - The id of the user.
    */
-  login: ({ username }) => {
+  login: ({ username }: { username: string }) => {
     return sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`,
     );
@@ -312,7 +331,7 @@ const userResolver = {
    * @param uuid - The id of the user.
    * @returns - Id of the user.
    */
-  signUp: async ({ username, uuid }) => {
+  signUp: async ({ username, uuid }: { username: string; uuid: string }) => {
     const userExists = await sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`,
     );
@@ -341,7 +360,13 @@ const userResolver = {
    * @param username - The new username of the user.
    * @returns - A message confirming that the user was updated.
    */
-  updateUser: async ({ userId, username }) => {
+  updateUser: async ({
+    userId,
+    username,
+  }: {
+    userId: string;
+    username: string;
+  }) => {
     const userExists = await sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`,
     );
@@ -366,7 +391,7 @@ const userResolver = {
    * @param userId - The id of the user.
    * @returns - A message confirming that the user was deleted.
    */
-  deleteUser: async ({ userId }) => {
+  deleteUser: async ({ userId }: { userId: string }) => {
     const user = await sqlQuery(
       `SELECT id FROM users WHERE id = '${userId}' LIMIT 1;`,
     );
@@ -383,7 +408,13 @@ const userResolver = {
    * @param uuid - The id of the user.
    * @returns - Id of the user and whether the user is new or not.
    */
-  loginOrSignUp: async ({ username, uuid }) => {
+  loginOrSignUp: async ({
+    username,
+    uuid,
+  }: {
+    username: string;
+    uuid: string;
+  }) => {
     const userExists = await sqlQuery(
       `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`,
     );
@@ -418,7 +449,15 @@ const actionResolver = {
    * @param action - The reaction to the beer.
    * @returns - A message confirming that the user reacted.
    */
-  react: async ({ userId, beerId, action }) => {
+  react: async ({
+    userId,
+    beerId,
+    action,
+  }: {
+    userId: string;
+    beerId: string;
+    action: string;
+  }) => {
     if (!["upvote", "downvote", "unreact"].includes(action)) {
       throw new Error("Invalid action");
     }
@@ -464,7 +503,15 @@ const actionResolver = {
    * @param comment - The comment to the beer.
    * @returns - A message confirming that the user commented.
    */
-  comment: async ({ userId, beerId, comment }) => {
+  comment: async ({
+    userId,
+    beerId,
+    comment,
+  }: {
+    userId: string;
+    beerId: string;
+    comment: string;
+  }) => {
     const res = await sqlQuery(
       `INSERT INTO comments (user_id, beer_id, comment_text) VALUES ('${userId}', ${beerId}, '${comment}');`,
     );
@@ -482,7 +529,13 @@ const actionResolver = {
    * @param commentId - The id of the comment.
    * @returns - A message confirming that the user deleted the comment.
    */
-  deleteComment: async ({ userId, commentId }) => {
+  deleteComment: async ({
+    userId,
+    commentId,
+  }: {
+    userId: string;
+    commentId: string;
+  }) => {
     const comment = await sqlQuery(
       `SELECT id FROM comments WHERE id = ${commentId} AND user_id = '${userId}' LIMIT 1;`,
     );
