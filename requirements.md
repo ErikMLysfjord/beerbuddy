@@ -16,7 +16,7 @@ We have implemented a feature where a person can click on a beer and then get re
 
 > Option for sorting and filtering the result set (note that sorting and filtering should be performed on the entire result set and not just what is currently loaded on the client)
 
-Yes, we have implemented both sorting and filtering that seaches trough the entire result set. With sending a request to the backend that send sql queries to the database.
+Yes, we have implemented both sorting and filtering that search through the entire result set by sending a request to the backend that sends SQL-queries to the database.
 
 > There should be some form of user-generated data that is stored persistently on the database server and presented to the user (e.g., user adding information, reviews, ratings, search history, shopping list)
 
