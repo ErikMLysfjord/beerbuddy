@@ -87,6 +87,9 @@ If you want to learn about the measures taken to ensure a sustainable applicatio
 
 If you want to learn about how we have ensured that our website is accessible to as many as possible, please go to the [accessibility documentation](./accessibility.md).
 
+# Requirements
+If you want to learn about how we have fulfilled the requirements for the project, please go to the [requirements documentation](./requirements.md).
+
 # Contribution
 
 This project was developed as a part of the course IT2810 - Web Development at NTNU during the autumn of 2023.
