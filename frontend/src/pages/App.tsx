@@ -60,6 +60,7 @@ function App() {
           localStorage.removeItem("userIdBeerBuddy");
           window.location.reload();
         }}
+        aria-label="Logout button"
         className={appStyles.logoutBtn}
         style={{
           width: "2.5rem",
