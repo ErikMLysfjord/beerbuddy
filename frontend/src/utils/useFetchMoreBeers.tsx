@@ -22,7 +22,6 @@ const useFetchMoreBeers = () => {
   const userId = localStorage.getItem("userIdBeerBuddy");
 
   const fetchMore = async (reset?: boolean, noFilters?: boolean) => {
-
     if (reset) {
       localStorage.setItem("searchString", searchString);
       localStorage.setItem("IBU", JSON.stringify(IBU));
