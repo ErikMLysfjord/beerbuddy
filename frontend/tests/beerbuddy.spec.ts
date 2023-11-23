@@ -233,7 +233,7 @@ test.describe("BeerBuddy functionality", () => {
     await page
       .getByPlaceholder("Best beer ever!")
       .fill("This is a test comment");
-    await page.getByRole("button", { name: "Comment" }).click();
+    await page.getByRole("button", { name: "Comment", exact: true }).click();
     await expect(page.getByText("Comment posted.")).toBeVisible();
     await expect(page.getByText(/This is a test comment$/)).toBeVisible();
 
@@ -243,11 +243,11 @@ test.describe("BeerBuddy functionality", () => {
 
     expect(beerComments2 - beerComments).toBe(1);
 
+    await page.getByLabel("Delete comment").click();
+
     const beerData3 = await fetchBeer(beerId, "");
     const beerComments3 =
       beerData3[0].comment_count != null ? beerData3[0].comment_count : 0;
-
-    await page.getByLabel("Delete comment").click();
 
     expect(beerComments3 - beerComments).toBe(0);
   });
