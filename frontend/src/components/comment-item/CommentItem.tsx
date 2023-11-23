@@ -13,7 +13,7 @@ const deleteComment = async (userId: string, commentId: string) => {
   const query = {
     query: `{ deleteComment(userId: "${userId}", commentId: ${commentId} ) }`,
   };
-  return await fetch("http://localhost:4000/action", {
+  return await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/action", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
