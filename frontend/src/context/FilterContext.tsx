@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 /**
  * interface for the FilterContext
@@ -65,15 +65,6 @@ export const FilterContextProvider: React.FC<
   const [sorting, setSorting] = useState<string>(
     localStorage.getItem("sorting") || "top"
   );
-
-  // update localStorage when searchString changes
-  useEffect(() => {
-    localStorage.setItem("searchString", searchString);
-    localStorage.setItem("IBU", JSON.stringify(IBU));
-    localStorage.setItem("ABV", JSON.stringify(ABV));
-    localStorage.setItem("styles", JSON.stringify(styles));
-    localStorage.setItem("sorting", sorting);
-  }, [searchString, IBU, ABV, styles, sorting]);
 
   return (
     <FilterContext.Provider

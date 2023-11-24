@@ -22,6 +22,15 @@ const useFetchMoreBeers = () => {
   const userId = localStorage.getItem("userIdBeerBuddy");
 
   const fetchMore = async (reset?: boolean, noFilters?: boolean) => {
+    // If reset is true, we want to remember the filters in localStorage.
+    if (reset) {
+      localStorage.setItem("searchString", searchString);
+      localStorage.setItem("IBU", JSON.stringify(IBU));
+      localStorage.setItem("ABV", JSON.stringify(ABV));
+      localStorage.setItem("styles", JSON.stringify(styles));
+      localStorage.setItem("sorting", sorting);
+    }
+
     await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/beer", {
       method: "POST",
       headers: {
