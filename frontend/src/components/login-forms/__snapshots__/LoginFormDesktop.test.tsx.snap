@@ -43,6 +43,7 @@ exports[`LoginFormDesktop > matches snapshot 1`] = `
         </p>
       </section>
       <section
+        aria-label="Log in form"
         class="_loginFormContainer_b973b1"
       >
         <div

@@ -31,7 +31,9 @@ exports[`LoginFormMobile > matches snapshot 1`] = `
       <div
         class="ant-card-body"
       >
-        <section>
+        <section
+          aria-label="Log in form"
+        >
           <h1
             class="_loginFormHeaderMobile_b69d51"
           >

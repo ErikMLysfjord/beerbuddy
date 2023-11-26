@@ -23,7 +23,8 @@ const UserIntro = () => {
     <>
       <header className={styles.headingWrapper} aria-label="User intro">
         <h1 className={styles.heading}>
-          <b>Welcome,</b>{" "}
+          <b>Welcome</b>
+          {", "}
           {localStorage.getItem("userNameBeerBuddy")
             ? localStorage.getItem("userNameBeerBuddy")
             : ""}

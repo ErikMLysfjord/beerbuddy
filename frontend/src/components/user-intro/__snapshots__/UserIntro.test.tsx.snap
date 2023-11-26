@@ -3,18 +3,16 @@
 exports[`UserIntro > renders correctly 1`] = `
 <div>
   <header
+    aria-label="User intro"
     class="_headingWrapper_95bd34"
   >
     <h1
       class="_heading_95bd34"
     >
-      <span
-        class="_bold_95bd34"
-      >
+      <b>
         Welcome
-      </span>
-      ,
-       
+      </b>
+      , 
       Erik
     </h1>
     <img

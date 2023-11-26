@@ -3,6 +3,7 @@
 exports[`Sidebar > renders correctly 1`] = `
 <div>
   <section
+    aria-label="Sidebar"
     class="_container_26077f"
   >
     <div>
@@ -21,7 +22,9 @@ exports[`Sidebar > renders correctly 1`] = `
           BeerBuddy
         </h1>
       </a>
-      <section>
+      <section
+        aria-label="Filters"
+      >
         <div
           class="ant-divider css-dev-only-do-not-override-pr0fja ant-divider-horizontal"
           role="separator"
