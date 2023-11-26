@@ -90,7 +90,10 @@ const BeerList = ({ beers, fetchMore }: BeerListProps) => {
 
   return (
     <>
-      <section className={styles.resultsInfoContainer}>
+      <section
+        className={styles.resultsInfoContainer}
+        aria-label="Search and sorting information"
+      >
         <div className={styles.resultsHeader}>
           <h2 className={styles.resultsInfo}>
             {beers[0]?.beer_count ?? 0} results
@@ -104,7 +107,7 @@ const BeerList = ({ beers, fetchMore }: BeerListProps) => {
           Sorted by: {translateSorting(sorting)}
         </p>
       </section>
-      <main id="main">
+      <section aria-label="Beer list">
         <InfiniteScroll
           dataLength={beers.length}
           next={fetchMoreRef.current}
@@ -136,7 +139,7 @@ const BeerList = ({ beers, fetchMore }: BeerListProps) => {
             ))}
           </ul>
         </InfiniteScroll>
-      </main>
+      </section>
     </>
   );
 };

@@ -19,7 +19,7 @@ const LoginFormMobile = ({
   saveUser,
 }: LoginFormMobileProps) => {
   return (
-    <section>
+    <section aria-label="Log in form">
       <h1 className={styles.loginFormHeaderMobile}>Log in</h1>
       <Form
         name="basic"

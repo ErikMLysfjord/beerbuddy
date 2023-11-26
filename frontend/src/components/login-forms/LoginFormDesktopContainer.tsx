@@ -22,7 +22,7 @@ const LoginFormDesktop = ({
 }: LoginFormDesktopProps) => {
   const { token } = useToken();
   return (
-    <section className={styles.loginFormContainer}>
+    <section className={styles.loginFormContainer} aria-label="Log in form">
       <Card
         style={{
           height: "100%",

@@ -16,10 +16,10 @@ interface SidebarProps {
  */
 const Sidebar = ({ children }: SidebarProps) => {
   return (
-    <section className={styles.container}>
+    <section className={styles.container} aria-label="Sidebar">
       <div>
         <Logo />
-        <section>{children}</section>
+        <section aria-label="Filters">{children}</section>
       </div>
     </section>
   );

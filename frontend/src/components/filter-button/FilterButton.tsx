@@ -36,7 +36,8 @@ const FilterButton = ({
         type="primary"
         icon={<FilterFilled />}
         onClick={handleClick}
-      ></Button>
+        aria-label="Filter button"
+      />
       <Modal
         title="Filters"
         open={showFilter}
