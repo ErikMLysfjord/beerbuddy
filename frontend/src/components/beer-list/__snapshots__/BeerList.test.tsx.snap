@@ -15,14 +15,6 @@ exports[`BeerList > renders correctly 1`] = `
         100
          results
       </h2>
-      <button
-        class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary"
-        type="button"
-      >
-        <span>
-          Reset filters
-        </span>
-      </button>
     </div>
     <p
       class="_resultsInfo_ac700a"

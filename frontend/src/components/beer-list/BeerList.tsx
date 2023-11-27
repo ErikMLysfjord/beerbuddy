@@ -4,7 +4,6 @@ import styles from "./BeerList.module.css";
 import { useEffect, useRef } from "react";
 import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
-import { Button } from "antd";
 
 type ReactionType = "unreact" | "upvote" | "downvote";
 
@@ -47,38 +46,10 @@ const translateSorting = (sorting: string) => {
  * @returns  - The beer list component.
  */
 const BeerList = ({ beers, fetchMore }: BeerListProps) => {
-  const {
-    searchString,
-    sorting,
-    setABV,
-    setIBU,
-    setStyles,
-    ABV,
-    IBU,
-    styles: beerStyles,
-  } = useContext(FilterContext);
+  const { searchString, sorting } = useContext(FilterContext);
 
   const fetchMoreRef = useRef(fetchMore);
   fetchMoreRef.current = fetchMore;
-
-  /**
-   * Function for resetting filters and fetching more beers.
-   */
-  const resetFilters = () => {
-    /* Only reset filters and fetch beers if there are active filters */
-    if (
-      beerStyles.length > 0 ||
-      ABV[0] !== 0 ||
-      ABV[1] !== 40 ||
-      IBU[0] !== 0 ||
-      IBU[1] !== 140
-    ) {
-      setABV([0, 40]);
-      setIBU([0, 140]);
-      setStyles([]);
-      fetchMoreRef.current(true, true);
-    }
-  };
 
   // Updates the beer list when the search string or sorting method changes.
   useEffect(() => {
@@ -98,9 +69,6 @@ const BeerList = ({ beers, fetchMore }: BeerListProps) => {
           <h2 className={styles.resultsInfo}>
             {beers[0]?.beer_count ?? 0} results
           </h2>
-          <Button type="primary" onClick={resetFilters}>
-            Reset filters
-          </Button>
         </div>
         <p className={styles.resultsInfo}>Searched for: "{searchString}"</p>
         <p className={styles.resultsInfo}>

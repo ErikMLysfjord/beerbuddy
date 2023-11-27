@@ -1,8 +1,9 @@
 import { Button, Checkbox } from "antd";
 import Filter from "./Filter";
 import { Slider, SliderProps, alpha, styled } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { FilterContext } from "../../context/FilterContext";
+import { RollbackOutlined } from "@ant-design/icons";
 
 // Styles of beer that can be filtered on
 const beerStyles = [
@@ -48,8 +49,39 @@ interface FiltersProps {
  * @returns a Filters component
  */
 const Filters = ({ fetchMore, apply }: FiltersProps) => {
-  const { IBU, setIBU, ABV, setABV, setStyles, styles } =
-    useContext(FilterContext);
+  const {
+    IBU,
+    setIBU,
+    ABV,
+    setABV,
+    setStyles,
+    styles,
+    searchString,
+    setSearchString,
+  } = useContext(FilterContext);
+  const fetchMoreRef = useRef(fetchMore);
+  fetchMoreRef.current = fetchMore;
+
+  /**
+   * Function for resetting filters and fetching more beers.
+   */
+  const resetFilters = () => {
+    /* Only reset filters and fetch beers if there are active filters */
+    if (
+      beerStyles.length > 0 ||
+      ABV[0] !== 0 ||
+      ABV[1] !== 40 ||
+      IBU[0] !== 0 ||
+      IBU[1] !== 140 ||
+      searchString !== ""
+    ) {
+      setABV([0, 40]);
+      setIBU([0, 140]);
+      setStyles([]);
+      setSearchString("");
+      fetchMoreRef.current(true);
+    }
+  };
 
   return (
     <>
@@ -105,6 +137,17 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
         }}
       >
         Apply Filters
+      </Button>
+      <Button
+        type="default"
+        style={{
+          width: "100%",
+          marginTop: "1rem",
+        }}
+        onClick={resetFilters}
+        icon={<RollbackOutlined />}
+      >
+        Reset Filters
       </Button>
     </>
   );
