@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Sidebar from "./Sidebar";
 import { axe } from "jest-axe";
@@ -31,14 +31,16 @@ describe("Sidebar", () => {
   });
 
   it("renders with correct button", () => {
-    const { getByRole } = render(<Template />);
-    expect(getByRole("button")).toBeInTheDocument();
-    expect(getByRole("button")).toHaveTextContent("Apply Filters");
+    const { getByText } = render(<Template />);
+    const applyButton = getByText("Apply Filters");
+    expect(applyButton).toBeInTheDocument();
+    expect(applyButton).toHaveTextContent("Apply Filters");
   });
 
   it("calls fetchMore when button is clicked", () => {
-    const { getByRole } = render(<Template />);
-    getByRole("button").click();
+    const { getByText } = render(<Template />);
+    const applyButton = getByText("Apply Filters");
+    fireEvent.click(applyButton);
     expect(mockFetchMore).toHaveBeenCalled();
   });
 });

@@ -49,14 +49,22 @@ interface FiltersProps {
  * @returns a Filters component
  */
 const Filters = ({ fetchMore, apply }: FiltersProps) => {
-  const { IBU, setIBU, ABV, setABV, setStyles, styles, searchString, setSearchString } =
-    useContext(FilterContext);
+  const {
+    IBU,
+    setIBU,
+    ABV,
+    setABV,
+    setStyles,
+    styles,
+    searchString,
+    setSearchString,
+  } = useContext(FilterContext);
   const fetchMoreRef = useRef(fetchMore);
   fetchMoreRef.current = fetchMore;
 
   /**
- * Function for resetting filters and fetching more beers.
- */
+   * Function for resetting filters and fetching more beers.
+   */
   const resetFilters = () => {
     /* Only reset filters and fetch beers if there are active filters */
     if (
@@ -141,7 +149,6 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
       >
         Reset Filters
       </Button>
-
     </>
   );
 };

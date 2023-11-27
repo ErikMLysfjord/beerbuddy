@@ -46,15 +46,10 @@ const translateSorting = (sorting: string) => {
  * @returns  - The beer list component.
  */
 const BeerList = ({ beers, fetchMore }: BeerListProps) => {
-  const {
-    searchString,
-    sorting
-  } = useContext(FilterContext);
+  const { searchString, sorting } = useContext(FilterContext);
 
   const fetchMoreRef = useRef(fetchMore);
   fetchMoreRef.current = fetchMore;
-
-
 
   // Updates the beer list when the search string or sorting method changes.
   useEffect(() => {
