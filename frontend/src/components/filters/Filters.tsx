@@ -73,7 +73,7 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
             e.preventDefault();
             setIBU(newValue as number[]);
           }}
-          max={140}
+          max={137}
           valueLabelDisplay="auto"
           getAriaValueText={() => `Min value is ${IBU[0]}, max is ${IBU[1]}`}
         />
@@ -86,7 +86,7 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
             e.preventDefault();
             setABV(newValue as number[]);
           }}
-          max={40}
+          max={12}
           valueLabelDisplay="auto"
           getAriaValueText={() => `Min value is ${ABV[0]}, max is ${ABV[1]}`}
         />

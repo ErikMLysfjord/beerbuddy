@@ -69,12 +69,12 @@ const BeerList = ({ beers, fetchMore }: BeerListProps) => {
     if (
       beerStyles.length > 0 ||
       ABV[0] !== 0 ||
-      ABV[1] !== 40 ||
+      ABV[1] !== 12 ||
       IBU[0] !== 0 ||
-      IBU[1] !== 140
+      IBU[1] !== 137
     ) {
-      setABV([0, 40]);
-      setIBU([0, 140]);
+      setABV([0, 12]);
+      setIBU([0, 137]);
       setStyles([]);
       fetchMoreRef.current(true, true);
     }

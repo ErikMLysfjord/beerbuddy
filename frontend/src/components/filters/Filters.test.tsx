@@ -122,7 +122,7 @@ test("my test", () => {
 //       fireEvent.change(minSlider, { target: { value: 25 } });
 //     });
 //     expect(setState).toHaveBeenCalledTimes(1);
-//     expect(setState).toHaveBeenCalledWith([25, 140]);
+//     expect(setState).toHaveBeenCalledWith([25, 137]);
 
 //     setState.mockReset();
 //     act(() => {
@@ -142,7 +142,7 @@ test("my test", () => {
 //       fireEvent.change(minSlider, { target: { value: 10 } });
 //     });
 //     expect(setState).toHaveBeenCalledTimes(1);
-//     expect(setState).toHaveBeenCalledWith([10, 40]);
+//     expect(setState).toHaveBeenCalledWith([10, 12]);
 
 //     setState.mockReset();
 //     act(() => {
