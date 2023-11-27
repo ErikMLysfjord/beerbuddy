@@ -221,7 +221,7 @@ const BeerPage = () => {
         }
         scrollThreshold={1}
       >
-        <ul className={styles.commentListContainer} aria-label="Comment list">
+        <ul className={styles.commentListContainer} aria-label="List of comments">
           {commentsLoading ? (
             <div className={styles.centerContent}>
               <Spin size="default" />
