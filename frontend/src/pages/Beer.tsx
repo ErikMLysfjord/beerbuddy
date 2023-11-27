@@ -168,7 +168,7 @@ const BeerPage = () => {
       <p className={styles.basedOn}>
         Based on {beer.vote_count !== null ? beer.vote_count : "0"} reviews
       </p>
-      <div className={styles.info}>
+      <section className={styles.info} aria-label="Beer attributes">
         {width > 768 ? (
           <>
             <BeerAttribute
@@ -201,7 +201,7 @@ const BeerPage = () => {
         ) : (
           <MobileBeerAttribute attributeProps={AttributeValues} />
         )}
-      </div>
+      </section>
       <hr className={styles.divider} />
       <InfiniteScroll
         style={{ overflow: "hidden", minHeight: "33vh" }}
@@ -221,7 +221,10 @@ const BeerPage = () => {
         }
         scrollThreshold={1}
       >
-        <ul className={styles.commentListContainer}>
+        <ul
+          className={styles.commentListContainer}
+          aria-label="List of comments"
+        >
           {commentsLoading ? (
             <div className={styles.centerContent}>
               <Spin size="default" />

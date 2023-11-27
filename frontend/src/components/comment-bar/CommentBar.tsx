@@ -102,7 +102,7 @@ const CommentBar = ({ onSuccess }: CommentBarInterface) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.divider} />
-      <section className={styles.container}>
+      <section className={styles.container} aria-label="Post a comment">
         <div className={styles.labelContainer}>
           <label htmlFor={inputId}>Comment</label>
           <Input

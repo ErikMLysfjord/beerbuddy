@@ -3,6 +3,7 @@
 exports[`BeerList > renders correctly 1`] = `
 <div>
   <section
+    aria-label="Search and sorting information"
     class="_resultsInfoContainer_ac700a"
   >
     <div
@@ -36,8 +37,8 @@ exports[`BeerList > renders correctly 1`] = `
       Most popular
     </p>
   </section>
-  <main
-    id="main"
+  <section
+    aria-label="Beer list"
   >
     <div
       class="infinite-scroll-component__outerdiv"
@@ -103,6 +104,7 @@ exports[`BeerList > renders correctly 1`] = `
                   </span>
                 </button>
                 <h2
+                  aria-label="Total score"
                   class="_count_0f0ab2"
                 >
                   NaN
@@ -194,6 +196,7 @@ exports[`BeerList > renders correctly 1`] = `
                   </span>
                 </button>
                 <h2
+                  aria-label="Total score"
                   class="_count_0f0ab2"
                 >
                   NaN
@@ -285,6 +288,7 @@ exports[`BeerList > renders correctly 1`] = `
                   </span>
                 </button>
                 <h2
+                  aria-label="Total score"
                   class="_count_0f0ab2"
                 >
                   NaN
@@ -376,6 +380,7 @@ exports[`BeerList > renders correctly 1`] = `
                   </span>
                 </button>
                 <h2
+                  aria-label="Total score"
                   class="_count_0f0ab2"
                 >
                   NaN
@@ -423,6 +428,6 @@ exports[`BeerList > renders correctly 1`] = `
         </p>
       </div>
     </div>
-  </main>
+  </section>
 </div>
 `;

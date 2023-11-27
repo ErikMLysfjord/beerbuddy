@@ -20,7 +20,7 @@ const Actionbar = ({
   const { width } = useWindowDimensions();
 
   return (
-    <section className={styles.wrapper}>
+    <section className={styles.wrapper} aria-label="Search for and sort beers">
       {width > 768 && (
         <label className={styles.sortLabel}>
           Sort by

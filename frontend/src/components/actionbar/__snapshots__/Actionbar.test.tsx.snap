@@ -3,6 +3,7 @@
 exports[`Actionbar > renders correctly 1`] = `
 <div>
   <section
+    aria-label="Search for and sort beers"
     class="_wrapper_ebfc65"
   >
     <label
@@ -127,6 +128,7 @@ exports[`Actionbar > renders correctly 1`] = `
       class="_filterButtonWrapper_1f5523"
     >
       <button
+        aria-label="Filter button"
         class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary ant-btn-icon-only"
         type="button"
       >

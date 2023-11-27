@@ -117,6 +117,10 @@ We have used different technologies to measure the accessibility of our applicat
 
 Firefox Accessibility is a tool that is built into Firefox. It is used to measure the accessibility of the application, and it is used to find accessibility issues. We have used this technology a lot in the development of the website. Link to the tool: https://developer.mozilla.org/en-US/docs/Tools/Accessibility_inspector
 
+We have used Firefox accessibility in two ways. The first way using it to find any issues with the HTML semantics, contrast issues, keyboard navigation and so on. The second way is to see how the screen reader reads the application, by finding sections and roles tied to HTML elements. This is useful to see if the screen reader reads the application in a way that makes sense, and has been used to find issues with the HTML semantics and ARIA attributes.
+
+![Document structure](./images/document-structure.png)
+
 ### WAVE
 
 WAVE is an extension that is used to detect accessibility issues in the application. It is used to find issues with the HTML semantics, contrast issues, keyboard navigation and so on. We have used this thoroughly to find issues with the application. Link to the extension: https://wave.webaim.org/extension/

@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button, FloatButton } from "antd";
 import { ArrowUpOutlined, LogoutOutlined } from "@ant-design/icons";
 
-function App() {
+const App = () => {
   useEffect(() => {
     protectRoute();
   }, []);
@@ -54,7 +54,11 @@ function App() {
 
   return (
     <>
-      <a href="#main" className={appStyles.skipLink} ref={mainRef}>
+      <a
+        href="#infiniteScrollTarget"
+        className={appStyles.skipLink}
+        ref={mainRef}
+      >
         Skip to main content
       </a>
       <Button
@@ -73,7 +77,7 @@ function App() {
         <Sidebar>
           <Filters fetchMore={fetchMore} />
         </Sidebar>
-        <section
+        <main
           className={appStyles.mainSection}
           id="infiniteScrollTarget"
           ref={divRef}
@@ -90,10 +94,10 @@ function App() {
               icon={<ArrowUpOutlined />}
             />
           )}
-        </section>
+        </main>
       </div>
     </>
   );
-}
+};
 
 export default App;

@@ -23,7 +23,7 @@ const BeerAttribute = ({
   altText,
 }: BeerAttributeProps) => {
   return (
-    <div className={styles.attributeContainer}>
+    <div className={styles.attributeContainer} aria-label={attribute}>
       <div className={styles.attributeHeaderContainer}>
         <img height={"32px"} width={"20px"} src={icon} alt={altText} />
         <h3 className={styles.attributeHeading}>{attribute}</h3>

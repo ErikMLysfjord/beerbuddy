@@ -3,6 +3,7 @@
 exports[`BeerAttribute > renders correctly 1`] = `
 <div>
   <div
+    aria-label="Test"
     class="_attributeContainer_eeaf5b"
   >
     <div

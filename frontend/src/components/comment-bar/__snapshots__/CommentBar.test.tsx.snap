@@ -9,6 +9,7 @@ exports[`CommentBar > should match snapshot 1`] = `
       class="_divider_18a6db"
     />
     <section
+      aria-label="Post a comment"
       class="_container_18a6db"
     >
       <div

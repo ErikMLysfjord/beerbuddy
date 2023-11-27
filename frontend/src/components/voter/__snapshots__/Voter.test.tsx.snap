@@ -36,6 +36,7 @@ exports[`Voter > should render 1`] = `
       </span>
     </button>
     <h2
+      aria-label="Total score"
       class="_count_0f0ab2"
     >
       10

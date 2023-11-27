@@ -37,8 +37,8 @@ const SortingButton = ({ items }: { items: SortingItem[] }) => {
   );
 
   return (
-    <Dropdown overlay={menu} trigger={["click"]}>
-      <Button type="primary" icon={<SortDescendingOutlined />}></Button>
+    <Dropdown overlay={menu} trigger={["click"]} aria-label="">
+      <Button type="primary" icon={<SortDescendingOutlined />} />
     </Dropdown>
   );
 };
