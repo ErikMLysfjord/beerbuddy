@@ -79,7 +79,7 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
       setIBU([0, 140]);
       setStyles([]);
       setSearchString("");
-      fetchMoreRef.current(true, true);
+      fetchMoreRef.current(true);
     }
   };
 
