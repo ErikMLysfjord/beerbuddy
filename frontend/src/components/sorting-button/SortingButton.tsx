@@ -1,5 +1,5 @@
 import { SortDescendingOutlined } from "@ant-design/icons";
-import { Menu, Dropdown, Button, MenuProps } from "antd";
+import { Dropdown, Button } from "antd";
 import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
 import { SortingItem } from "../../types/types";
@@ -11,7 +11,7 @@ import { SortingItem } from "../../types/types";
  * @param items The items that are used to create the menu.
  */
 const SortingButton = ({ items }: { items: SortingItem[] }) => {
-  const { setSorting, sorting } = useContext(FilterContext);
+  const { setSorting } = useContext(FilterContext);
 
   /**
    * Menu can be used to create a dropdown menu.
@@ -24,20 +24,12 @@ const SortingButton = ({ items }: { items: SortingItem[] }) => {
     setSorting(key);
   };
 
-  /**
-   * The menu is created using the Ant Design Menu component.
-   * It is used as an overlay for the dropdown component.
-   */
-  const menu = (
-    <Menu onClick={handleMenuClick} selectedKeys={[sorting]}>
-      {items.map((item) =>
-        item ? <Menu.Item key={item.key}>{item.label}</Menu.Item> : null
-      )}
-    </Menu>
-  );
-
   return (
-    <Dropdown menu={menu as MenuProps} trigger={["click"]} aria-label="">
+    <Dropdown
+      menu={{ onClick: handleMenuClick, items: items }}
+      trigger={["click"]}
+      aria-label="Sorting dropdown menu"
+    >
       <Button type="primary" icon={<SortDescendingOutlined />} />
     </Dropdown>
   );
