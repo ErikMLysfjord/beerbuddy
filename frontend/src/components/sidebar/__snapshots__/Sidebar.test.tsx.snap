@@ -593,7 +593,6 @@ exports[`Sidebar > renders correctly 1`] = `
         </span>
         <button
           class="ant-btn css-dev-only-do-not-override-pr0fja ant-btn-primary"
-          id="apply-filters-button"
           style="width: 100%; margin-top: 1rem;"
           type="button"
         >
