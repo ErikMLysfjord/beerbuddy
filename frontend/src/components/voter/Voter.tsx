@@ -84,7 +84,7 @@ const Voter = (props: VoterInterface) => {
         }}
       />
       <h2 className={styles.count} aria-label="Total score">
-        {total}
+        {!isNaN(total) ? total : 0}
       </h2>
       <Button
         type="primary"

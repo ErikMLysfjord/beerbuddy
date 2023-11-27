@@ -99,7 +99,7 @@ exports[`BeerList > renders correctly 1`] = `
                   aria-label="Total score"
                   class="_count_0f0ab2"
                 >
-                  NaN
+                  0
                 </h2>
                 <button
                   aria-label="Downvote this beer"
@@ -191,7 +191,7 @@ exports[`BeerList > renders correctly 1`] = `
                   aria-label="Total score"
                   class="_count_0f0ab2"
                 >
-                  NaN
+                  0
                 </h2>
                 <button
                   aria-label="Downvote this beer"
@@ -283,7 +283,7 @@ exports[`BeerList > renders correctly 1`] = `
                   aria-label="Total score"
                   class="_count_0f0ab2"
                 >
-                  NaN
+                  0
                 </h2>
                 <button
                   aria-label="Downvote this beer"
@@ -375,7 +375,7 @@ exports[`BeerList > renders correctly 1`] = `
                   aria-label="Total score"
                   class="_count_0f0ab2"
                 >
-                  NaN
+                  0
                 </h2>
                 <button
                   aria-label="Downvote this beer"
