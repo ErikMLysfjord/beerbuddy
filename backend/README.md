@@ -12,7 +12,7 @@ npm run dev
 
 If you want to run the backend with mysql instead of sqlite3, you will need to do a few more steps:
 
-- Go into the backend folder and change the `.env` file to use mysql instead of sqlite3
+- Go into the backend folder and change the `.env` file to use MySQL instead of SQLite3
   - If you already have a mysql server running on your machine, update the `.env` file with your credentials
 - Make sure you have mysql installed on your machine (example for mac: `brew install mysql` or `sudo apt-get install mysql-server` for linux)
 - After installing mysql, start the server 
