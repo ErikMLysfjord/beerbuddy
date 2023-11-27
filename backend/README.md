@@ -46,4 +46,4 @@ rm database.db
 sqlite3 database.db < database-seed.sql
 ```
 
-For mysql, go into the mysql console and write `source./database-seed.sql;`. Then write `exit;`.
+For MySQL, go into the MySQL console and write `source./database-seed.sql;`. Then write `exit;`.
