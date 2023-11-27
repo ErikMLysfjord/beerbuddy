@@ -1,5 +1,5 @@
 import { SortDescendingOutlined } from "@ant-design/icons";
-import { Menu, Dropdown, Button } from "antd";
+import { Menu, Dropdown, Button, MenuProps } from "antd";
 import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
 import { SortingItem } from "../../types/types";
@@ -37,7 +37,7 @@ const SortingButton = ({ items }: { items: SortingItem[] }) => {
   );
 
   return (
-    <Dropdown overlay={menu} trigger={["click"]}>
+    <Dropdown menu={menu as MenuProps} trigger={["click"]}>
       <Button type="primary" icon={<SortDescendingOutlined />}></Button>
     </Dropdown>
   );

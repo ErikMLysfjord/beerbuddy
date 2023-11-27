@@ -26,6 +26,11 @@ vi.mock("react-router-dom", () => ({
   useParams: () => ({ id: "1" }),
 }));
 
+global.window.location = {
+  ...global.window.location,
+  replace: vi.fn(() => {}),
+};
+
 /**
  * Mock fetch to always return a successful response.
  */
@@ -99,6 +104,9 @@ describe("CommentBar", () => {
   });
 
   it("should display an error message when posting a comment fails", async () => {
+    //prevent stderr from printing expected error message, keeps test output clean
+    vi.spyOn(console, "error").mockImplementation(() => {});
+
     /* Mock fetch to always return an unsuccessful response */
     global.fetch = vi.fn(() =>
       Promise.resolve({

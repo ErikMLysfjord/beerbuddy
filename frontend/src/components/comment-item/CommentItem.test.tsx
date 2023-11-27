@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, Mock } from "vitest";
 import { render } from "@testing-library/react";
 import CommentItem from "./CommentItem";
 import { axe } from "jest-axe";
@@ -9,6 +9,14 @@ global.localStorage = {
   ...global.localStorage,
   getItem: vi.fn(() => "unique-id-123"),
 };
+
+global.fetch = vi.fn(() =>
+  Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve(),
+  })
+) as Mock;
+
 const Template = () => {
   /* Create a timestamp that is 5 days old */
   const date = new Date();

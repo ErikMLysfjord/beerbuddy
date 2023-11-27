@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "prettier": "npx prettier --write .",
     "prettier:check": "npx prettier --check .",
-    "test:vitest": "vitest src --no-watch",
+    "test:vitest": "NODE_OPTIONS='--no-deprecation' vitest src --no-watch",
     "test:headed": "npx playwright test --headed --project=chromiumHeaded",
     "test:e2e": "npx playwright test --project=chromium --project=firefox --project=webkit",
     "test:parallel": "npx playwright test --workers=2 --project=chromium --project=firefox --project=webkit",
