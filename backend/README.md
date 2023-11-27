@@ -39,7 +39,7 @@ npm run dev
 
 ### Reset database for sqlite3
 
-Make sure you have sqlite3 installed on your machine. Then run the following command in the root of the project (NB: remember to uncomment the lines in database-seed.sql):
+Make sure you have SQLite3 installed on your machine. Then run the following command in the root of the project (NB: remember to uncomment the lines in database-seed.sql):
 ```bash
 cd backend
 rm database.db
