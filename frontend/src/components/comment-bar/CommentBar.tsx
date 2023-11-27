@@ -70,9 +70,10 @@ const CommentBar = ({ onSuccess }: CommentBarInterface) => {
    * @returns false if the comment is invalid, true if the comment is valid.
    */
   const validComment = (comment: string) => {
-    const regex = /^(?=.{1,200}$)(?!\s)[^\w\s]+$/;
+    const commentRegex = /^(?! )[^\n].{0,199}$/;
+    const onlySpecialCharsRegex = /^[^a-zA-Z0-9]+$/;
 
-    if (regex.test(comment)) {
+    if (!(commentRegex.test(comment) && !onlySpecialCharsRegex.test(comment))) {
       message.error("Your comment is invalid.");
       return false;
     }
