@@ -1,5 +1,11 @@
 import { describe, it, expect, vi } from "vitest";
-import { render } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import LoginFormDesktop from "./LoginFormDesktop";
 import { axe } from "jest-axe";
 
@@ -36,5 +42,25 @@ describe("LoginFormDesktop", () => {
       />
     );
     expect(container).toMatchSnapshot();
+  });
+
+  it("handles submit", async () => {
+    render(
+      <LoginFormDesktop
+        onFinishFailed={onFinishFailed}
+        saveUser={(string: { username: string }) => saveUser(string.username)}
+      />
+    );
+    act(() => {
+      fireEvent.change(screen.getByRole("textbox"), {
+        target: { value: "test" },
+      });
+      screen.getByRole("button").click();
+    });
+
+    await waitFor(() => {
+      expect(saveUser).toHaveBeenCalledTimes(1);
+      expect(saveUser).toHaveBeenCalledWith("test");
+    });
   });
 });
