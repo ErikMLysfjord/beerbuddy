@@ -24,7 +24,7 @@ If you want to run the backend with MySQL instead of SQLite3, you will need to d
   - Write `ALTER USER 'root'@'localhost' IDENTIFIED BY 'Password12345678*';`
   - Then write `FLUSH PRIVILEGES;`
 - Now that you have created credentials, you can create the database
-  - Write `source./database-seed.sql;`
+  - Write `source ./database-seed.sql;`
   - Then write `exit;`
   
 Now you have mysql running as databse in your system. 
