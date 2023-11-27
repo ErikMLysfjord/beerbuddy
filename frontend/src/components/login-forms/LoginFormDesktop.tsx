@@ -1,7 +1,9 @@
 import styles from "./LoginFormDesktop.module.css";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import Logo from "../logo/Logo";
-import LoginFormDesktopContainer from "./LoginFormDesktopContainer.tsx";
+import { Button, Card, Form, Input, theme } from "antd";
+
+const { useToken } = theme;
 
 interface LoginFormDesktopProps {
   onFinishFailed: (errorInfo: ValidateErrorEntity) => void;
@@ -19,6 +21,7 @@ const LoginFormDesktop = ({
   onFinishFailed,
   saveUser,
 }: LoginFormDesktopProps) => {
+  const { token } = useToken();
   return (
     <main className={styles.container}>
       <header className={styles.logoContainer}>
@@ -36,10 +39,48 @@ const LoginFormDesktop = ({
             {"features and be part of a global craft beer conversation."}
           </p>
         </section>
-        <LoginFormDesktopContainer
-          onFinishFailed={onFinishFailed}
-          saveUser={saveUser}
-        />
+        <section className={styles.loginFormContainer} aria-label="Login form">
+          <Card
+            style={{
+              height: "100%",
+              backgroundColor: token.colorPrimaryBg,
+            }}
+            bodyStyle={{ padding: "20", height: "100%" }}
+          >
+            <h1>Log in</h1>
+            <Form
+              name="basic"
+              className={styles.loginForm}
+              layout="vertical"
+              initialValues={{ remember: true }}
+              onFinish={(values) => {
+                saveUser({ username: values.username });
+              }}
+              onFinishFailed={onFinishFailed}
+              autoComplete="off"
+            >
+              <Form.Item
+                label="Username"
+                name="username"
+                rules={[
+                  { required: true, message: "Please input your username!" },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className={styles.loginButton}
+                >
+                  Submit
+                </Button>
+              </Form.Item>
+            </Form>
+          </Card>
+        </section>
       </div>
     </main>
   );

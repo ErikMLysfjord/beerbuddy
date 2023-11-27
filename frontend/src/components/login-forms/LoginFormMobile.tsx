@@ -1,7 +1,6 @@
-import { Card, theme } from "antd";
+import { Button, Card, Form, Input, theme } from "antd";
 import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 import styles from "./LoginFormMobile.module.css";
-import LoginFormMobileContainer from "./LoginFormMobileContainer";
 import Logo from "../logo/Logo";
 
 /**
@@ -38,10 +37,41 @@ const LoginFormMobile = ({
         }}
         className={styles.mobileCard}
       >
-        <LoginFormMobileContainer
-          onFinishFailed={onFinishFailed}
-          saveUser={saveUser}
-        />
+        <section aria-label="Login form">
+          <h1 className={styles.loginFormHeaderMobile}>Log in</h1>
+          <Form
+            name="basic"
+            className={styles.loginFormMobile}
+            layout="vertical"
+            initialValues={{ remember: true }}
+            onFinish={(values) => {
+              saveUser({ username: values.username });
+            }}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+          >
+            <Form.Item
+              label="Username"
+              name="username"
+              className={styles.loginFormUsername}
+              rules={[
+                { required: true, message: "Please input your username!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className={styles.loginButton}
+              >
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </section>
       </Card>
     </main>
   );
