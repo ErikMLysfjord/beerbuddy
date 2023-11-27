@@ -3,7 +3,7 @@
 exports[`LoginFormMobileContainer > matches snapshot 1`] = `
 <div>
   <section
-    aria-label="Log in form"
+    aria-label="Login form"
   >
     <h1
       class="_loginFormHeaderMobile_b69d51"

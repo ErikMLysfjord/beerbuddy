@@ -3,7 +3,7 @@
 exports[`LoginFormDesktopContainer > matches snapshot 1`] = `
 <div>
   <section
-    aria-label="Log in form"
+    aria-label="Login form"
     class="_loginFormContainer_b973b1"
   >
     <div
