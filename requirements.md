@@ -50,7 +50,7 @@ We are using the react context api for state management.
 
 > Custom/developer GraphQL backend, free choice of backend database server, but the project should use a backend database set up by the group.
 
-We have a custom GraphQL backend with a SQLite or MySql database depending on the user's choice.
+We have a custom GraphQL backend with a SQLite or MySQL database depending on the user's choice.
 
 > Use of good and relevant components and libraries (free choice and we encourage as much reuse of third-party solutions as possible).
 
