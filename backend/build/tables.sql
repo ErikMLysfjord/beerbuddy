@@ -1,3 +1,8 @@
+-- Only needed for mysql
+DROP DATABASE IF EXISTS beers;
+CREATE DATABASE beers;
+USE beers;
+
 CREATE TABLE breweries (
     id INTEGER PRIMARY KEY,
     name TEXT,
@@ -18,13 +23,14 @@ CREATE TABLE beers (
 );
 
 CREATE TABLE users (
-    id TEXT PRIMARY KEY,
+    id VARCHAR(255) PRIMARY KEY,
     username TEXT
 );
 
 CREATE TABLE votes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id TEXT,
+    -- id INTEGER PRIMARY KEY AUTOINCREMENT, for sqlite3
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    user_id VARCHAR(255),
     beer_id INTEGER,
     vote_type TEXT CHECK( vote_type IN ('upvote','downvote','unreact') ),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
@@ -32,8 +38,9 @@ CREATE TABLE votes (
 );
 
 CREATE TABLE comments (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id TEXT,
+    -- id INTEGER PRIMARY KEY AUTOINCREMENT, for sqlite3
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    user_id VARCHAR(255),
     beer_id INTEGER,
     comment_text TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

@@ -16,7 +16,9 @@ Our fetching does not fetch more data than necessary, saving a lot of bandwidth 
 
 Initially, we used Docker and PostgreSQL as a relational database is capable of handling large datasets in an efficient way. However, due to restrictions on Docker usage, we had to switch our database.
 
-We now use SQLite, a lightweight, file-based relational database, for efficiency and sustainability. Its small footprint saves energy as it doesn't require a separate server process. Plus, its support for complex queries reduces CPU usage by minimizing the need for multiple joins. We have a table for beers, a table for breweries, a table for comments, a table for users, and a table for votes. This means that we can easily fetch all the information we need with as few joins as possible.
+We now use SQLite, a lightweight, file-based relational database, for efficiency and sustainability. Its small footprint saves energy as it doesn't require a separate server process. Plus, its support for complex queries reduces CPU usage by minimizing the need for multiple joins. In addition to SQLite, it is also possible to use MySQL as the database for this project. MySQL is a powerful, open-source relational database system that is very fast and reliable. It can handle large datasets and supports complex queries, similar to SQLite. To use MySQL, please follow the instructions provided [here](./backend/README.md#run-backend-and-database-with-mysql). Please note that using MySQL may require more resources than SQLite, but it can provide better performance for larger datasets.
+
+The virtual machine is using MySQL as the database. This is because SQLite is unsuitable for large datasets, and we wanted to demonstrate that our solution can handle large datasets. We wanted to keep SQLite as the default database when cloning the project because it is much easier to set up and use than MySQL. And it does not require a separate server process.
 
 ## GraphQL
 
