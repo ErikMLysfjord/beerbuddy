@@ -14,7 +14,7 @@ If you want to run the backend with MySQL instead of SQLite3, you will need to d
 
 - Go into the backend folder and change the `.env` file to use MySQL instead of SQLite3
   - If you already have a mysql server running on your machine, update the `.env` file with your credentials
-- Make sure you have mysql installed on your machine (example for mac: `brew install mysql` or `sudo apt-get install mysql-server` for linux)
+- Make sure you have mysql installed on your machine (example for mac: `brew install mysql` or `sudo apt-get install mysql-server` for linux or [here](https://dev.mysql.com/downloads/installer/) for windows)
 - After installing mysql, start the server 
   - `brew services start mysql` or `sudo service mysql` start in mac/linux
   - `mysqld start` in windows
@@ -46,4 +46,4 @@ rm database.db
 sqlite3 database.db < database-seed.sql
 ```
 
-For MySQL, go into the MySQL console and write `source./database-seed.sql;`. Then write `exit;`.
+For MySQL, go into the MySQL console and write `source ./database-seed.sql;`. Then write `exit;`.
