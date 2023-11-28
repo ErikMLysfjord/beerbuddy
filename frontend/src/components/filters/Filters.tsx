@@ -43,7 +43,7 @@ const StyledSlider = styled(Slider)<SliderProps>(() => ({
 }));
 
 interface FiltersProps {
-  fetchMore: (reset?: boolean) => Promise<void>;
+  fetchMore: (reset?: boolean, noFilters?: boolean) => Promise<void>;
   apply?: () => void;
 }
 /**
@@ -53,40 +53,11 @@ interface FiltersProps {
  * @returns a Filters component
  */
 const Filters = ({ fetchMore, apply }: FiltersProps) => {
-  const {
-    IBU,
-    setIBU,
-    ABV,
-    setABV,
-    setStyles,
-    styles,
-    searchString,
-    setSearchString,
-  } = useContext(FilterContext);
+  const { IBU, setIBU, ABV, setABV, setStyles, styles, setSearchString } =
+    useContext(FilterContext);
   const fetchMoreRef = useRef(fetchMore);
   fetchMoreRef.current = fetchMore;
   const headingID = useId();
-
-  /**
-   * Function for resetting filters and fetching more beers.
-   */
-  const resetFilters = () => {
-    /* Only reset filters and fetch beers if there are active filters */
-    if (
-      beerStyles.length > 0 ||
-      ABV[0] !== 0 ||
-      ABV[1] !== 12 ||
-      IBU[0] !== 0 ||
-      IBU[1] !== 137 ||
-      searchString !== ""
-    ) {
-      setABV([0, 12]);
-      setIBU([0, 137]);
-      setStyles([]);
-      setSearchString("");
-      fetchMoreRef.current(true);
-    }
-  };
 
   return (
     <section aria-labelledby={headingID}>
@@ -208,7 +179,14 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
       <Button
         type="default"
         className={CSSstyles.buttons}
-        onClick={resetFilters}
+        onClick={(e) => {
+          e.preventDefault();
+          fetchMore(true, true);
+          setSearchString("");
+          setStyles([]);
+          setABV([0, 12]);
+          setIBU([0, 137]);
+        }}
         icon={<RollbackOutlined />}
       >
         Reset Filters
