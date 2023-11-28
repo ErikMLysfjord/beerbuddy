@@ -173,9 +173,8 @@ test.describe("BeerBuddy functionality", () => {
     const beerRatingStart = parseInt(beerData[0].rating);
 
     //See if the beer page is correct
-    await expect(
-      page.getByRole("heading", { name: `${beerRatingStart}`, exact: true })
-    ).toBeVisible();
+
+    expect(page.getByLabel("Total score")).toHaveText(`${beerRatingStart}`);
 
     await expect(
       page.getByText(`Based on ${beerVotesStart} reviews`)
@@ -185,9 +184,7 @@ test.describe("BeerBuddy functionality", () => {
     //Upvote the beer and see if the rating is correct
     await page.getByLabel(beerName).getByLabel("Upvote this beer").click();
     await page.getByLabel(beerName).click();
-    await expect(
-      page.getByRole("heading", { name: `${beerRatingStart + 1}`, exact: true })
-    ).toBeVisible();
+    expect(page.getByLabel("Total score")).toHaveText(`${beerRatingStart + 1}`);
     await expect(
       page.getByText(`Based on ${beerVotesStart + 1} reviews`)
     ).toBeVisible();
@@ -196,9 +193,7 @@ test.describe("BeerBuddy functionality", () => {
     //Downvote the beer and see if the rating is correct
     await page.getByLabel(beerName).getByLabel("Downvote this beer").click();
     await page.getByLabel(beerName).click();
-    await expect(
-      page.getByRole("heading", { name: `${beerRatingStart - 1}`, exact: true })
-    ).toBeVisible();
+    expect(page.getByLabel("Total score")).toHaveText(`${beerRatingStart - 1}`);
     await expect(
       page.getByText(`Based on ${beerVotesStart + 1} reviews`)
     ).toBeVisible();
@@ -207,9 +202,7 @@ test.describe("BeerBuddy functionality", () => {
     //Remove the vote and see if the rating is correct
     await page.getByLabel(beerName).getByLabel("Downvote this beer").click();
     await page.getByLabel(beerName).click();
-    await expect(
-      page.getByRole("heading", { name: `${beerRatingStart}` })
-    ).toBeVisible();
+    expect(page.getByLabel("Total score")).toHaveText(`${beerRatingStart}`);
     await expect(
       page.getByText(`Based on ${beerVotesStart} reviews`)
     ).toBeVisible();
@@ -360,6 +353,7 @@ test.describe("BeerBuddy functionality", () => {
   });
 
   test("styleFiltering", async ({ page }) => {
+    await page.getByRole("button", { name: "Beer styles" }).click();
     await page.getByText("American IPA").click();
     await page.getByRole("button", { name: "Apply Filters" }).click();
 
@@ -377,6 +371,7 @@ test.describe("BeerBuddy functionality", () => {
 
     //Deselect the style
     await page.getByRole("link", { name: "BeerBuddy logo BeerBuddy" }).click();
+    await page.getByRole("button", { name: "Beer styles" }).click();
     await page.getByText("American IPA").click();
 
     //Select another style
@@ -397,6 +392,7 @@ test.describe("BeerBuddy functionality", () => {
     await page.getByRole("link", { name: "BeerBuddy logo BeerBuddy" }).click();
 
     //Select two styles at the same time
+    await page.getByRole("button", { name: "Beer styles" }).click();
     await page.getByText("American Blonde Ale").click();
     await page.getByRole("button", { name: "Apply Filters" }).click();
 
