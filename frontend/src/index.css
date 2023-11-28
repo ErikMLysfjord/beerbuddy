@@ -9,3 +9,7 @@
 body {
   margin: 0;
 }
+
+.ant-collapse-header:focus-visible {
+  outline: 4px dashed #ffcc48 !important;
+}

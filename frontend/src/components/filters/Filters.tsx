@@ -1,9 +1,13 @@
-import { Button, Checkbox } from "antd";
-import Filter from "./Filter";
+import { Button, Checkbox, Collapse, Divider, Tooltip } from "antd";
 import { Slider, SliderProps, alpha, styled } from "@mui/material";
-import { useContext, useRef } from "react";
+import { useContext, useId, useRef } from "react";
 import { FilterContext } from "../../context/FilterContext";
-import { RollbackOutlined } from "@ant-design/icons";
+import {
+  QuestionCircleOutlined,
+  RollbackOutlined,
+  RightOutlined,
+} from "@ant-design/icons";
+import { default as CSSstyles } from "./Filters.module.css";
 
 // Styles of beer that can be filtered on
 const beerStyles = [
@@ -61,6 +65,7 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
   } = useContext(FilterContext);
   const fetchMoreRef = useRef(fetchMore);
   fetchMoreRef.current = fetchMore;
+  const headingID = useId();
 
   /**
    * Function for resetting filters and fetching more beers.
@@ -84,52 +89,114 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
   };
 
   return (
-    <>
-      <Filter heading="Style" tooltip="Filter on certain styles of beer.">
-        <Checkbox.Group
-          options={beerStyles}
-          onChange={(checkedValues) =>
-            setStyles(checkedValues.map((value) => value.toString()))
-          }
-          value={styles}
-        />
-      </Filter>
-      <Filter
-        heading="IBU"
-        tooltip="IBU is International Bitternes Units, a metric for the bitternes of your beer. The higher the number, the more bitter the beer."
-      >
-        <StyledSlider
-          getAriaLabel={() => "IBU range"}
-          value={IBU}
-          onChange={(e: Event, newValue: number | number[]) => {
-            e.preventDefault();
-            setIBU(newValue as number[]);
-          }}
-          max={140}
-          valueLabelDisplay="auto"
-          getAriaValueText={() => `Min value is ${IBU[0]}, max is ${IBU[1]}`}
-        />
-      </Filter>
-      <Filter heading="Alcohol" tooltip="Percentage of alcohol in the beer">
-        <StyledSlider
-          getAriaLabel={() => "ABV range"}
-          value={ABV}
-          onChange={(e: Event, newValue: number | number[]) => {
-            e.preventDefault();
-            setABV(newValue as number[]);
-          }}
-          max={40}
-          valueLabelDisplay="auto"
-          getAriaValueText={() => `Min value is ${ABV[0]}, max is ${ABV[1]}`}
-        />
-      </Filter>
+    <section aria-labelledby={headingID}>
+      <Divider />
+      <h2 id={headingID}>Filters</h2>
+
+      <Collapse
+        aria-label="Beer styles"
+        expandIcon={({ isActive }) => (
+          <RightOutlined rotate={isActive ? 90 : 0} aria-hidden />
+        )}
+        className={CSSstyles.collapse}
+        items={[
+          {
+            key: "styles-checkbox-key",
+            label: (
+              <span className={CSSstyles.collapseSpan}>
+                Beer styles
+                <Tooltip title={"Filter on certain styles of beer."}>
+                  <QuestionCircleOutlined aria-hidden />
+                </Tooltip>
+              </span>
+            ),
+            children: (
+              <Checkbox.Group
+                options={beerStyles}
+                name="styles"
+                onChange={(checkedValues) =>
+                  setStyles(checkedValues.map((value) => value.toString()))
+                }
+                value={styles}
+              />
+            ),
+          },
+        ]}
+      />
+      <Collapse
+        expandIcon={({ isActive }) => (
+          <RightOutlined rotate={isActive ? 90 : 0} aria-hidden />
+        )}
+        className={CSSstyles.collapse}
+        items={[
+          {
+            key: "IBU-range-key",
+            label: (
+              <span className={CSSstyles.collapseSpan}>
+                IBU
+                <Tooltip title={"Filter on the bitterness of the beer."}>
+                  <QuestionCircleOutlined aria-hidden />
+                </Tooltip>
+              </span>
+            ),
+            children: (
+              <StyledSlider
+                getAriaLabel={() => "IBU range"}
+                value={IBU}
+                onChange={(e: Event, newValue: number | number[]) => {
+                  e.preventDefault();
+                  setIBU(newValue as number[]);
+                }}
+                max={140}
+                valueLabelDisplay="auto"
+                getAriaValueText={() =>
+                  `Min value is ${IBU[0]}, max is ${IBU[1]}`
+                }
+              />
+            ),
+          },
+        ]}
+      />
+      <Collapse
+        className={CSSstyles.collapse}
+        expandIcon={({ isActive }) => (
+          <RightOutlined rotate={isActive ? 90 : 0} aria-hidden />
+        )}
+        items={[
+          {
+            key: "ABV-range-key",
+            label: (
+              <span className={CSSstyles.collapseSpan}>
+                ABV
+                <Tooltip
+                  title={"Filter on the alcohol percentage of the beer."}
+                >
+                  <QuestionCircleOutlined aria-hidden />
+                </Tooltip>
+              </span>
+            ),
+            children: (
+              <StyledSlider
+                getAriaLabel={() => "ABV range"}
+                value={ABV}
+                onChange={(e: Event, newValue: number | number[]) => {
+                  e.preventDefault();
+                  setABV(newValue as number[]);
+                }}
+                max={40}
+                valueLabelDisplay="auto"
+                getAriaValueText={() =>
+                  `Min value is ${ABV[0]}, max is ${ABV[1]}`
+                }
+              />
+            ),
+          },
+        ]}
+      />
 
       <Button
         type="primary"
-        style={{
-          width: "100%",
-          marginTop: "1rem",
-        }}
+        className={CSSstyles.buttons}
         onClick={(e) => {
           e.preventDefault();
           if (apply) apply();
@@ -140,16 +207,13 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
       </Button>
       <Button
         type="default"
-        style={{
-          width: "100%",
-          marginTop: "1rem",
-        }}
+        className={CSSstyles.buttons}
         onClick={resetFilters}
         icon={<RollbackOutlined />}
       >
         Reset Filters
       </Button>
-    </>
+    </section>
   );
 };
 export default Filters;

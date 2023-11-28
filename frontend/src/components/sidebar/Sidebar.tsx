@@ -19,7 +19,7 @@ const Sidebar = ({ children }: SidebarProps) => {
     <section className={styles.container} aria-label="Sidebar">
       <div>
         <Logo />
-        <section aria-label="Filters">{children}</section>
+        {children}
       </div>
     </section>
   );
