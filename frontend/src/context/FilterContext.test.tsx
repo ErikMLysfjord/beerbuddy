@@ -44,7 +44,7 @@ describe("FilterContextProvider", () => {
   it("initializes context with values from localStorage", () => {
     localStorage.setItem("searchString", "test");
     localStorage.setItem("IBU", JSON.stringify([10, 20]));
-    localStorage.setItem("ABV", JSON.stringify([30, 40]));
+    localStorage.setItem("ABV", JSON.stringify([5, 10]));
     localStorage.setItem("styles", JSON.stringify(["style1", "style2"]));
     localStorage.setItem("sorting", "bottom");
 
@@ -60,7 +60,7 @@ describe("FilterContextProvider", () => {
 
     expect(localStorage.getItem("searchString")).toBe("test");
     expect(localStorage.getItem("IBU")).toBe(JSON.stringify([10, 20]));
-    expect(localStorage.getItem("ABV")).toBe(JSON.stringify([30, 40]));
+    expect(localStorage.getItem("ABV")).toBe(JSON.stringify([5, 10]));
     expect(localStorage.getItem("styles")).toBe(
       JSON.stringify(["style1", "style2"])
     );
@@ -105,9 +105,9 @@ describe("FilterContext", () => {
     (useContextMock as jest.Mock).mockImplementation(() => ({
       searchString: "",
       setSearchString: setState,
-      IBU: [0, 140],
+      IBU: [0, 137],
       setIBU: setState,
-      ABV: [0, 40],
+      ABV: [0, 12],
       setABV: setState,
       styles: [],
       setStyles: setState,
@@ -137,7 +137,7 @@ describe("FilterContext", () => {
         <TestComponent />
       </FilterContextProvider>
     );
-    expect(getByText("0,1400,40top")).toBeInTheDocument();
+    expect(getByText("0,1370,12top")).toBeInTheDocument();
   });
 
   it("allows updating the context", () => {
@@ -150,8 +150,8 @@ describe("FilterContext", () => {
     render(<TestComponent />);
 
     expect(contextValue!.searchString).toBe("");
-    expect(contextValue!.IBU).toEqual([0, 140]);
-    expect(contextValue!.ABV).toEqual([0, 40]);
+    expect(contextValue!.IBU).toEqual([0, 137]);
+    expect(contextValue!.ABV).toEqual([0, 12]);
     expect(contextValue!.styles).toEqual([]);
     expect(contextValue!.sorting).toBe("top");
   });

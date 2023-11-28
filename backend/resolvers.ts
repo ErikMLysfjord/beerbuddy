@@ -154,10 +154,10 @@ const beerResolver = {
     styles: string[];
   }) => {
     const minAbvs = minAbv || 0;
-    const maxAbvs = maxAbv || 40;
+    const maxAbvs = maxAbv || 12;
 
     const minIbus = minIbu || 0;
-    const maxIbus = maxIbu || 140;
+    const maxIbus = maxIbu || 137;
 
     const minAbvProsent = minAbvs / 100;
     const maxAbvProsent = maxAbvs / 100;
