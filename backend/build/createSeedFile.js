@@ -16,8 +16,8 @@ fs.createReadStream("build/beers.csv")
     let sql =
       "INSERT INTO beers(number, abv, ibu, id, name, style, brewery_id, ounces) VALUES\n";
     results.forEach((row, index) => {
-      sql += `(${row.number}, ${row.abv ? row.abv : "NULL"}, ${
-        row.ibu ? row.ibu : "NULL"
+      sql += `(${row.number}, ${row.abv ? row.abv : 0}, ${
+        row.ibu ? row.ibu : 0
       }, ${row.id}, '${row.name.replace(/'/g, "''")}', '${row.style.replace(
         /'/g,
         "''"
