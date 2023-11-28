@@ -1,6 +1,6 @@
 # About the project
 
-BeerBuddy is a website where you can find and review beers. The website displays craft beers from the US, and uses a dataset [from Kaggle](https://www.kaggle.com/datasets/nickhould/craft-cans/data). The website is made with a frontend in React and a backend in GraphQL. The backend uses a SQLite database.
+BeerBuddy is a website where you can find, vote on, and review beers. The website displays craft beers from the US, and uses a dataset [from Kaggle](https://www.kaggle.com/datasets/nickhould/craft-cans/data). The website is made with a frontend in React and a backend in GraphQL. The backend uses a MySQL database, and is set up to use SQLite as well.
 
 ## How to use the website
 
@@ -10,7 +10,7 @@ To be able to use the website you must first register to the website. The first 
 
 ![Login](./images/login.png)
 
-When you have logged in you will be able to see the main page. Here you will see a list of beers. You can vote on a beer by clicking the arrow up or down. 
+When you have logged in you will be able to see the main page. Here you will see a list of beers. You can vote on a beer by clicking the arrow up or down.
 
 ![Main page](./images/main.png)
 
@@ -41,13 +41,17 @@ To set up the frontend, please go to the [frontend documentation](./frontend/REA
 - [Vitest](https://vitest.dev/) - A test runner for React applications
 - [Playwright](https://playwright.dev) - A library for testing web applications
 - [React infinite scroll](https://www.npmjs.com/package/react-infinite-scroll-component) A library for infinite scrolling
-- [Uuid](https://www.npmjs.com/package/uuid) A library for generating unique IDs
+- [UUID](https://www.npmjs.com/package/uuid) A library for generating unique IDs
+- [React router dom](https://reactrouter.com/en/main) - A library for routing in React
+- [Vite](https://vitejs.dev) - A build tool for React
 
 ## Backend
+
 - [Express](https://expressjs.com) - A server framework for node js.
 - [Typescript](https://www.typescriptlang.org) - A typed superset of JavaScript that compiles to plain JavaScript.
 - [Graphql & express-graphql](https://graphql.org) - A query language for APIs and a server for running queries.
 - [SQLite](https://www.sqlite.org/index.html) - A relational database for storing data
+- [MySQL](https://www.mysql.com) - A relational database for storing data, suitable for larger datasets
 - [Sequelize](https://sequelize.org) - A promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server.
 - [Node-cache & Crypto](https://www.npmjs.com/package/node-cache) - A library for caching data and hashing data
 
@@ -55,19 +59,19 @@ To set up the frontend, please go to the [frontend documentation](./frontend/REA
 
 ## Frontend
 
-We used Vitest together with React, Typescript and ES lint as it was a requirement for the course. But it is also a good choice for testing React applications. It is easy to set up and use, and it is fast. It also has a good documentation. 
+We used Vitest together with React, Typescript and ESlint as it was a requirement for the course. But it is also a good choice for testing React applications. It is easy to set up and use, and it is fast. It also has a good documentation.
 
-We used Antd and Material UI for styling. We used Antd for most of the components, and used MUI where the components from Antd did not fit our needs.
+We used Antd and Material UI for styling. We used Antd for most of the components, and used MUI where the components from Antd were not accessible enough.
 
 Playwright was used for testing the end to end functionality of the website. It is a good choice for testing web applications, and it is easy to use. It is also fast and has a good documentation.
 
-And lastly React infinite scroll and Uuid was used for infinite scrolling and generating unique IDs.
+And lastly React infinite scroll and UUID was used for infinite scrolling and generating unique IDs.
 
 ## Backend
 
-We used express and typescript as a server framework for node js. It is a good choice for building a server and many of us had experience with it from before. It is also easy to use and has a good documentation. 
+We used express and typescript as a server framework for Node JS. It is a good choice for building a server and many of us had experience with it from before. It is also easy to use and has a good documentation.
 
-The other libraries we have we explained more on why we used in [sustainability documentation](./sustainability.md).
+The other libraries we have we explained more on why we used in [sustainability documentation](./docs/sustainability.md).
 
 # Run tests
 
@@ -81,20 +85,21 @@ The backend and API are implicitly tested through the frontend tests. To run the
 
 # Sustainability
 
-If you want to learn about the measures taken to ensure a sustainable application, please go to the [sustainability documentation](./sustainability.md).
+If you want to learn about the measures taken to ensure a sustainable application, please go to the [sustainability documentation](./docs/sustainability.md).
 
 # Accessibility
 
-If you want to learn about how we have ensured that our website is accessible to as many as possible, please go to the [accessibility documentation](./accessibility.md).
+If you want to learn about how we have ensured that our website is accessible to as many as possible, please go to the [accessibility documentation](./docs/accessibility.md).
 
 # Requirements
-If you want to learn about how we have fulfilled the requirements for the project, please go to the [requirements documentation](./requirements.md).
+
+If you want to learn about how we have fulfilled the requirements for the project, please go to the [requirements documentation](./docs/requirements.md).
 
 # Contribution
 
 This project was developed as a part of the course IT2810 - Web Development at NTNU during the autumn of 2023.
 
-The project is developed by a group of four students and we have used the following conventions for contribution: [Contribution](./contribution.md)
+The project is developed by a group of four students and we have used the following conventions for contribution: [Contribution](./docs/contribution.md)
 
 The contributors are:
 
@@ -102,4 +107,3 @@ The contributors are:
 - Erik Menkin Lysfjord
 - Frederik Andreas Brunvoll Farstad
 - Markus Aleksander Råkil Johansen
-

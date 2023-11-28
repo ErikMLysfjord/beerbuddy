@@ -128,9 +128,9 @@ WAVE is an extension that is used to detect accessibility issues in the applicat
 Using WAVE we have discovered that the main page has no errors, warnings, or contrast issues. The beer page has one warning on desktop, as it finds the "go back"-button redundant. We have chosen to keep this button, as it communicates to the user that they can go back to the previous page. The log in page also has an alert, which we have chosen to ignore.
 
 <p align="middle">
-  <img src="./docs-images/WAVE-app.png" width="200" style="margin-right: 10px" />
-  <img src="./docs-images/WAVE-beer.png" width="200" style="margin-right: 10px" /> 
-  <img src="./docs-images/WAVE-login.png" width="200" />
+  <img src="../images/WAVE-app.png" width="200" style="margin-right: 10px" />
+  <img src="../images/WAVE-beer.png" width="200" style="margin-right: 10px" /> 
+  <img src="../images/WAVE-login.png" width="200" />
 </p>
 
 ### aXe
@@ -144,9 +144,9 @@ Google Lighthouse is an automated tool used to improve the quality of web pages.
 Using Lighthouse, we found that the main page gets a score of 96 for accessibility, while the beer page and the log in page gets a score of 100 for accessibility. The reason we did not receive a score of 100 for the main page is because the BeerCard-components aria-label is not the same as the text in the card. We found that this was not an issue, as the aria-label only displays the name of the beer, which we find is the most important aspect of the beer card.
 
 <p align="middle">
-  <img src="./docs-images/lighthouse-app.png" width="200" style="margin-right: 10px" />
-  <img src="./docs-images/lighthouse-beer.png" width="200" style="margin-right: 10px" /> 
-  <img src="./docs-images/lighthouse-login.png" width="200" />
+  <img src="../images/lighthouse-app.png" width="200" style="margin-right: 10px" />
+  <img src="../images/lighthouse-beer.png" width="200" style="margin-right: 10px" /> 
+  <img src="../images/lighthouse-login.png" width="200" />
 </p>
 
 ### Screen readers
