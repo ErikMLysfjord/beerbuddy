@@ -63,7 +63,7 @@ const beerResolver = {
       ON comments.user_id = users.id 
       WHERE comments.beer_id = ${id} 
       ORDER BY created_at DESC
-      LIMIT ${size} OFFSET ${start || 0};`,
+      LIMIT ${size} OFFSET ${start || 0};`
     );
   },
 
@@ -154,10 +154,10 @@ const beerResolver = {
     styles: string[];
   }) => {
     const minAbvs = minAbv || 0;
-    const maxAbvs = maxAbv || 40;
+    const maxAbvs = maxAbv || 12;
 
     const minIbus = minIbu || 0;
-    const maxIbus = maxIbu || 140;
+    const maxIbus = maxIbu || 137;
 
     const minAbvProsent = minAbvs / 100;
     const maxAbvProsent = maxAbvs / 100;
@@ -305,7 +305,7 @@ const beerResolver = {
         beer_name ASC,
         beer_id
       LIMIT ${size} OFFSET ${start || 0};
-      `,
+      `
     );
   },
 };
@@ -321,7 +321,7 @@ const userResolver = {
    */
   login: ({ username }: { username: string }) => {
     return sqlQuery(
-      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`,
+      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
   },
 
@@ -333,18 +333,18 @@ const userResolver = {
    */
   signUp: async ({ username, uuid }: { username: string; uuid: string }) => {
     const userExists = await sqlQuery(
-      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`,
+      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
     if (userExists.length > 0) {
       throw new Error("Username already exists");
     }
 
     await sqlQuery(
-      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}');`,
+      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}');`
     );
 
     const res = await sqlQuery(
-      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`,
+      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
 
     if (res === "Error in query") {
@@ -368,19 +368,19 @@ const userResolver = {
     username: string;
   }) => {
     const userExists = await sqlQuery(
-      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`,
+      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
     if (userExists.length > 0) {
       throw new Error("Username already exists");
     }
     const user = await sqlQuery(
-      `SELECT id FROM users WHERE id = '${userId}' LIMIT 1;`,
+      `SELECT id FROM users WHERE id = '${userId}' LIMIT 1;`
     );
     if (user.length === 0) {
       throw new Error("User does not exist");
     }
     await sqlQuery(
-      `UPDATE users SET username = '${username}' WHERE id = '${userId}';`,
+      `UPDATE users SET username = '${username}' WHERE id = '${userId}';`
     );
 
     return "You updated your user!";
@@ -393,7 +393,7 @@ const userResolver = {
    */
   deleteUser: async ({ userId }: { userId: string }) => {
     const user = await sqlQuery(
-      `SELECT id FROM users WHERE id = '${userId}' LIMIT 1;`,
+      `SELECT id FROM users WHERE id = '${userId}' LIMIT 1;`
     );
     if (user.length === 0) {
       throw new Error("User does not exist");
@@ -416,7 +416,7 @@ const userResolver = {
     uuid: string;
   }) => {
     const userExists = await sqlQuery(
-      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`,
+      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
 
     if (userExists.length > 0 && userExists !== "Error in query") {
@@ -424,10 +424,10 @@ const userResolver = {
     }
 
     await sqlQuery(
-      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}');`,
+      `INSERT INTO users (username, id) VALUES ('${username}', '${uuid}');`
     );
     const res = await sqlQuery(
-      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`,
+      `SELECT id FROM users WHERE username = '${username}' LIMIT 1;`
     );
 
     if (res === "Error in query") {
@@ -463,14 +463,14 @@ const actionResolver = {
     }
 
     const user = await sqlQuery(
-      `SELECT id FROM users WHERE id = '${userId}' LIMIT 1;`,
+      `SELECT id FROM users WHERE id = '${userId}' LIMIT 1;`
     );
     if (user.length === 0) {
       throw new Error("User does not exist");
     }
 
     const userReaction = await sqlQuery(
-      `SELECT vote_type FROM votes WHERE user_id = '${userId}' AND beer_id = ${beerId} LIMIT 1;`,
+      `SELECT vote_type FROM votes WHERE user_id = '${userId}' AND beer_id = ${beerId} LIMIT 1;`
     );
     if (userReaction === "Error in query") {
       throw new Error("Error in query");
@@ -479,13 +479,13 @@ const actionResolver = {
         throw new Error("User has already reacted");
       }
       await sqlQuery(
-        `UPDATE votes SET vote_type = '${action}' WHERE user_id = '${userId}' AND beer_id = ${beerId};`,
+        `UPDATE votes SET vote_type = '${action}' WHERE user_id = '${userId}' AND beer_id = ${beerId};`
       );
       myCache.flushAll();
       return "You reacted!";
     }
     const res = await sqlQuery(
-      `INSERT INTO votes (user_id, beer_id, vote_type) VALUES ('${userId}', ${beerId}, '${action}');`,
+      `INSERT INTO votes (user_id, beer_id, vote_type) VALUES ('${userId}', ${beerId}, '${action}');`
     );
 
     if (res === "Error in query") {
@@ -513,7 +513,7 @@ const actionResolver = {
     comment: string;
   }) => {
     const res = await sqlQuery(
-      `INSERT INTO comments (user_id, beer_id, comment_text) VALUES ('${userId}', ${beerId}, '${comment}');`,
+      `INSERT INTO comments (user_id, beer_id, comment_text) VALUES ('${userId}', ${beerId}, '${comment}');`
     );
 
     if (res === "Error in query") {
@@ -537,13 +537,13 @@ const actionResolver = {
     commentId: string;
   }) => {
     const comment = await sqlQuery(
-      `SELECT id FROM comments WHERE id = ${commentId} AND user_id = '${userId}' LIMIT 1;`,
+      `SELECT id FROM comments WHERE id = ${commentId} AND user_id = '${userId}' LIMIT 1;`
     );
     if (comment.length === 0) {
       throw new Error("Comment does not exist");
     }
     await sqlQuery(
-      `DELETE FROM comments WHERE id = ${commentId} AND user_id = '${userId}';`,
+      `DELETE FROM comments WHERE id = ${commentId} AND user_id = '${userId}';`
     );
     myCache.flushAll();
     return "You deleted your comment!";
