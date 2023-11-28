@@ -86,6 +86,7 @@ exports[`Actionbar > renders correctly 1`] = `
         >
           <input
             class="ant-input css-dev-only-do-not-override-pr0fja"
+            name="search"
             type="text"
             value=""
           />

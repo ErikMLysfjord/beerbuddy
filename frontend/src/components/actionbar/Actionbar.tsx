@@ -41,6 +41,7 @@ const Actionbar = ({
       <label className={styles.searchLabel}>
         Search
         <Input.Search
+          name="search"
           onSearch={(value) => setSearchString(value.toLowerCase())}
         />
       </label>
