@@ -1,7 +1,7 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 import BeerCard from "../beer-card/BeerCard";
 import styles from "./BeerList.module.css";
-import { useCallback, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
 
@@ -52,11 +52,9 @@ const BeerList = ({ beers, fetchMore }: BeerListProps) => {
   fetchMoreRef.current = fetchMore;
 
   // Updates the beer list when the search string or sorting method changes.
-  const handleFetchMore = useCallback(() => fetchMoreRef.current(true), []);
-
   useEffect(() => {
-    handleFetchMore();
-  }, [handleFetchMore, searchString, sorting]);
+    fetchMoreRef.current(true);
+  }, [searchString, sorting]);
 
   return (
     <>
