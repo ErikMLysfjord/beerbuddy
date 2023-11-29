@@ -30,6 +30,13 @@ const useFetchMoreBeers = () => {
       localStorage.setItem("styles", JSON.stringify(styles));
       localStorage.setItem("sorting", sorting);
     }
+    if (noFilters) {
+      localStorage.setItem("searchString", "");
+      localStorage.setItem("IBU", "[0, 138]");
+      localStorage.setItem("ABV", "[0, 13]");
+      localStorage.setItem("styles", "[]");
+      localStorage.setItem("sorting", "top");
+    }
 
     await fetch(import.meta.env.VITE_APP_BACKEND_URL, {
       method: "POST",
@@ -43,12 +50,12 @@ const useFetchMoreBeers = () => {
             size: 10
             start: ${reset ? 0 : beers.length}
             userId: "${userId}"
-            sort: "${sorting}" 
+            sort: "${noFilters ? "top" : sorting}" 
             minAbv: ${noFilters ? 0 : ABV[0]}
             maxAbv: ${noFilters ? 13 : ABV[1]}
             minIbu: ${noFilters ? 0 : IBU[0]}
             maxIbu: ${noFilters ? 138 : IBU[1]}
-            search: "${searchString}"
+            search: "${noFilters ? "" : searchString}"
             styles: ${noFilters ? "[]" : JSON.stringify(styles)}
           )
         }`,
