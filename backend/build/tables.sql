@@ -1,4 +1,4 @@
--- Only needed for mysql
+-- Only needed for mysql, comment out for sqlite3
 DROP DATABASE IF EXISTS beers;
 CREATE DATABASE beers;
 USE beers;

@@ -105,9 +105,9 @@ describe("FilterContext", () => {
     (useContextMock as jest.Mock).mockImplementation(() => ({
       searchString: "",
       setSearchString: setState,
-      IBU: [0, 137],
+      IBU: [0, 138],
       setIBU: setState,
-      ABV: [0, 12],
+      ABV: [0, 13],
       setABV: setState,
       styles: [],
       setStyles: setState,
@@ -137,7 +137,7 @@ describe("FilterContext", () => {
         <TestComponent />
       </FilterContextProvider>
     );
-    expect(getByText("0,1370,12top")).toBeInTheDocument();
+    expect(getByText("0,1380,13top")).toBeInTheDocument();
   });
 
   it("allows updating the context", () => {
@@ -150,8 +150,8 @@ describe("FilterContext", () => {
     render(<TestComponent />);
 
     expect(contextValue!.searchString).toBe("");
-    expect(contextValue!.IBU).toEqual([0, 137]);
-    expect(contextValue!.ABV).toEqual([0, 12]);
+    expect(contextValue!.IBU).toEqual([0, 138]);
+    expect(contextValue!.ABV).toEqual([0, 13]);
     expect(contextValue!.styles).toEqual([]);
     expect(contextValue!.sorting).toBe("top");
   });

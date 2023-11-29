@@ -32,9 +32,9 @@ export interface FilterContextType {
 export const FilterContext = createContext<FilterContextType>({
   searchString: "",
   setSearchString: () => {},
-  IBU: [0, 137],
+  IBU: [0, 138],
   setIBU: () => {},
-  ABV: [0, 12],
+  ABV: [0, 13],
   setABV: () => {},
   styles: [],
   setStyles: () => {},
@@ -54,10 +54,10 @@ export const FilterContextProvider: React.FC<
     localStorage.getItem("searchString") || ""
   );
   const [IBU, setIBU] = useState<number[]>(
-    JSON.parse(localStorage.getItem("IBU") || "[0, 137]") as number[]
+    JSON.parse(localStorage.getItem("IBU") || "[0, 138]") as number[]
   );
   const [ABV, setABV] = useState<number[]>(
-    JSON.parse(localStorage.getItem("ABV") || "[0, 12]") as number[]
+    JSON.parse(localStorage.getItem("ABV") || "[0, 13]") as number[]
   );
   const [styles, setStyles] = useState<string[]>(
     JSON.parse(localStorage.getItem("styles") || "[]") as string[]

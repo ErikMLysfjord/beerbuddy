@@ -154,10 +154,10 @@ const beerResolver = {
     styles: string[];
   }) => {
     const minAbvs = minAbv || 0;
-    const maxAbvs = maxAbv || 12;
+    const maxAbvs = maxAbv || 13;
 
     const minIbus = minIbu || 0;
-    const maxIbus = maxIbu || 137;
+    const maxIbus = maxIbu || 138;
 
     const minAbvProsent = minAbvs / 100;
     const maxAbvProsent = maxAbvs / 100;
@@ -285,8 +285,8 @@ const beerResolver = {
       LEFT JOIN 
         votes ON beers.id = votes.beer_id
       WHERE
-        beers.abv > ${minAbvProsent} AND beers.abv < ${maxAbvProsent} AND
-        beers.ibu > ${minIbus} AND beers.ibu < ${maxIbus} AND
+        beers.abv >= ${minAbvProsent} AND beers.abv <= ${maxAbvProsent} AND
+        beers.ibu >= ${minIbus} AND beers.ibu <= ${maxIbus} AND
         LOWER(beers.name) LIKE '%${searchQuery}%'
         ${
           beerStyles.length > 0

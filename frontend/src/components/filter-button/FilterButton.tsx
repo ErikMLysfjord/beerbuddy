@@ -39,7 +39,6 @@ const FilterButton = ({
         aria-label="Filter button"
       />
       <Modal
-        /* title="Filters" */
         open={showFilter}
         onCancel={handleClick}
         footer={null}

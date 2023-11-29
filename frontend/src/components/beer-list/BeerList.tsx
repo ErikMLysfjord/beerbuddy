@@ -53,10 +53,7 @@ const BeerList = ({ beers, fetchMore }: BeerListProps) => {
 
   // Updates the beer list when the search string or sorting method changes.
   useEffect(() => {
-    fetchMore(true);
-    // The following line is to ignore the lint warning. We know this is bad practice.
-    // However, we will find a fix for this and remove it for the next delivery when we have more time.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchMoreRef.current(true);
   }, [searchString, sorting]);
 
   return (
