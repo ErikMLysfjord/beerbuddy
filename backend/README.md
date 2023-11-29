@@ -19,7 +19,7 @@ If you want to run the backend with MySQL instead of SQLite3, you will need to d
   - `brew services start mysql` or `sudo service mysql start` start in mac/linux
   - `mysqld start` in windows
 - Write `cd backend` to go into the backend folder
-- Then go into mysql console (write `sudo mysql` or `sudo mysql -u user` or `sudo mysql -u user -p`)
+- Then go into mysql console (write `sudo mysql` or `sudo mysql -u root` or `sudo mysql -u root -p`)
 - Then create credentials
   - Write `CREATE USER 'user'@'localhost' IDENTIFIED BY 'Password12345678*';`
   - Then write `GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost';`
