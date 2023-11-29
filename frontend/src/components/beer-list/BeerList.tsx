@@ -1,7 +1,7 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 import BeerCard from "../beer-card/BeerCard";
 import styles from "./BeerList.module.css";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useContext } from "react";
 import { FilterContext } from "../../context/FilterContext";
 
@@ -52,12 +52,11 @@ const BeerList = ({ beers, fetchMore }: BeerListProps) => {
   fetchMoreRef.current = fetchMore;
 
   // Updates the beer list when the search string or sorting method changes.
+  const handleFetchMore = useCallback(() => fetchMoreRef.current(true), []);
+
   useEffect(() => {
-    fetchMore(true);
-    // The following line is to ignore the lint warning. We know this is bad practice.
-    // However, we will find a fix for this and remove it for the next delivery when we have more time.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchString, sorting]);
+    handleFetchMore();
+  }, [handleFetchMore, searchString, sorting]);
 
   return (
     <>
