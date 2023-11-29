@@ -107,6 +107,10 @@ We have only implemented it on the home page, as we felt the Beer-page was not c
 
 The application uses infinite scroll to load more data when the user scrolls to the bottom of the page. To exit the infinite scroll with keyboard navigation, the user can press the `Esc` key. This will exit the infinite scroll, and the user can continue to navigate the application using the keyboard.
 
+### Information about results
+
+The application provides information about the number of results that are currently displayed, what has been searched for, and how the results are sorted. This makes it easier to understand what is currently displayed, and it makes it easier to navigate the application using the keyboard.
+
 ---
 
 ## Technologies used to measure accessibility
@@ -119,7 +123,7 @@ Firefox Accessibility is a tool that is built into Firefox. It is used to measur
 
 We have used Firefox accessibility in two ways. The first way using it to find any issues with the HTML semantics, contrast issues, keyboard navigation and so on. The second way is to see how the screen reader reads the application, by finding sections and roles tied to HTML elements. This is useful to see if the screen reader reads the application in a way that makes sense, and has been used to find issues with the HTML semantics and ARIA attributes.
 
-![Document structure](./images/document-structure.png)
+![Document structure](../images/document-structure.png)
 
 ### WAVE
 
@@ -128,9 +132,9 @@ WAVE is an extension that is used to detect accessibility issues in the applicat
 Using WAVE we have discovered that the main page has no errors, warnings, or contrast issues. The beer page has one warning on desktop, as it finds the "go back"-button redundant. We have chosen to keep this button, as it communicates to the user that they can go back to the previous page. The log in page also has an alert, which we have chosen to ignore.
 
 <p align="middle">
-  <img src="./docs-images/WAVE-app.png" width="200" style="margin-right: 10px" />
-  <img src="./docs-images/WAVE-beer.png" width="200" style="margin-right: 10px" /> 
-  <img src="./docs-images/WAVE-login.png" width="200" />
+  <img src="../images/WAVE-app.png" width="200" style="margin-right: 10px" />
+  <img src="../images/WAVE-beer.png" width="200" style="margin-right: 10px" /> 
+  <img src="../images/WAVE-login.png" width="200" />
 </p>
 
 ### aXe
@@ -144,9 +148,9 @@ Google Lighthouse is an automated tool used to improve the quality of web pages.
 Using Lighthouse, we found that the main page gets a score of 96 for accessibility, while the beer page and the log in page gets a score of 100 for accessibility. The reason we did not receive a score of 100 for the main page is because the BeerCard-components aria-label is not the same as the text in the card. We found that this was not an issue, as the aria-label only displays the name of the beer, which we find is the most important aspect of the beer card.
 
 <p align="middle">
-  <img src="./docs-images/lighthouse-app.png" width="200" style="margin-right: 10px" />
-  <img src="./docs-images/lighthouse-beer.png" width="200" style="margin-right: 10px" /> 
-  <img src="./docs-images/lighthouse-login.png" width="200" />
+  <img src="../images/lighthouse-app.png" width="200" style="margin-right: 10px" />
+  <img src="../images/lighthouse-beer.png" width="200" style="margin-right: 10px" /> 
+  <img src="../images/lighthouse-login.png" width="200" />
 </p>
 
 ### Screen readers

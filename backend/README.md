@@ -16,13 +16,15 @@ If you want to run the backend with MySQL instead of SQLite3, you will need to d
   - If you already have a mysql server running on your machine, update the `.env` file with your credentials
 - Make sure you have mysql installed on your machine (example for mac: `brew install mysql` or `sudo apt-get install mysql-server` for linux or [here](https://dev.mysql.com/downloads/installer/) for windows)
 - After installing mysql, start the server 
-  - `brew services start mysql` or `sudo service mysql` start in mac/linux
+  - `brew services start mysql` or `sudo service mysql start` start in mac/linux
   - `mysqld start` in windows
 - Write `cd backend` to go into the backend folder
 - Then go into mysql console (write `sudo mysql` or `sudo mysql -u root` or `sudo mysql -u root -p`)
 - Then create credentials
-  - Write `ALTER USER 'root'@'localhost' IDENTIFIED BY 'Password12345678*';`
+  - Write `CREATE USER 'user'@'localhost' IDENTIFIED BY 'Password12345678*';`
+  - Then write `GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost';`
   - Then write `FLUSH PRIVILEGES;`
+- NB: If you are having issues, do the same steps only for "root" user instead of "user". Then change the credentials in the `.env` file to use "root" instead of "user". And write `ALTER USER` instead of `CREATE USER` in the first step.
 - Now that you have created credentials, you can create the database
   - Write `source ./database-seed.sql;`
   - Then write `exit;`
