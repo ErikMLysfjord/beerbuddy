@@ -351,6 +351,7 @@ const userResolver = {
       throw new Error("Error in query");
     }
 
+    myCache.flushAll();
     return res[0].id;
   },
 
@@ -383,6 +384,7 @@ const userResolver = {
       `UPDATE users SET username = '${username}' WHERE id = '${userId}';`
     );
 
+    myCache.flushAll();
     return "You updated your user!";
   },
 
@@ -399,6 +401,7 @@ const userResolver = {
       throw new Error("User does not exist");
     }
     await sqlQuery(`DELETE FROM users WHERE id = '${userId}';`);
+    myCache.flushAll();
     return "You deleted your user!";
   },
 
@@ -433,7 +436,7 @@ const userResolver = {
     if (res === "Error in query") {
       throw new Error("Error in query");
     }
-
+    myCache.flushAll();
     return { id: res[0].id, isNewUser: "yes" };
   },
 };
