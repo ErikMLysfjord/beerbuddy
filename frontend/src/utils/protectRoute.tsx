@@ -6,7 +6,7 @@ const protectRoute = async () => {
     return window.location.replace("/project2/login");
   }
 
-  const res = await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/user", {
+  const res = await fetch(import.meta.env.VITE_APP_BACKEND_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

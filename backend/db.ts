@@ -18,7 +18,7 @@ const sequelize = new Sequelize(
         password: process.env.DB_PASS || "",
         database: process.env.DB_NAME || "beers",
         logging: false,
-      },
+      }
 );
 
 export default sequelize;

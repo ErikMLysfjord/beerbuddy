@@ -25,7 +25,7 @@ const myCache = new NodeCache({ stdTTL: 60 * 60 * 24 });
 const cacheMiddleware = (
   req: Request,
   res: CacheResponse,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   const hash = crypto.createHash("md5");
   const keyData = req.originalUrl + JSON.stringify(req.body);

@@ -4,7 +4,7 @@ import { expect, test } from "@playwright/test";
 const deleteUser = async (userId: string) => {
   const query = { query: `{ deleteUser(userId: ${userId}) }` };
 
-  return await fetch("http://it2810-15.idi.ntnu.no:3000/user", {
+  return await fetch("http://it2810-15.idi.ntnu.no:3000/graphql", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +28,7 @@ const fetchBeer = async (id: string, userId: string) => {
     query: `{ beer(id: ${id} userId: "${userId}") }`,
   };
 
-  return await fetch("http://it2810-15.idi.ntnu.no:3000/beer", {
+  return await fetch("http://it2810-15.idi.ntnu.no:3000/graphql", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -31,7 +31,7 @@ const useFetchMoreBeers = () => {
       localStorage.setItem("sorting", sorting);
     }
 
-    await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/beer", {
+    await fetch(import.meta.env.VITE_APP_BACKEND_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

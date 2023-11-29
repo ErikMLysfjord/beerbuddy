@@ -22,7 +22,7 @@ const postComment = async (beerId: string, comment: string) => {
     query: `{ comment(userId: "${userId}", beerId: ${beerId}, comment: "${comment}") }`,
   };
 
-  return await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/action", {
+  return await fetch(import.meta.env.VITE_APP_BACKEND_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
