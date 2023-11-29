@@ -16,7 +16,7 @@ If you want to run the backend with MySQL instead of SQLite3, you will need to d
   - If you already have a mysql server running on your machine, update the `.env` file with your credentials
 - Make sure you have mysql installed on your machine (example for mac: `brew install mysql` or `sudo apt-get install mysql-server` for linux or [here](https://dev.mysql.com/downloads/installer/) for windows)
 - After installing mysql, start the server 
-  - `brew services start mysql` or `sudo service mysql` start in mac/linux
+  - `brew services start mysql` or `sudo service mysql start` start in mac/linux
   - `mysqld start` in windows
 - Write `cd backend` to go into the backend folder
 - Then go into mysql console (write `sudo mysql` or `sudo mysql -u root` or `sudo mysql -u root -p`)

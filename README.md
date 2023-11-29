@@ -71,17 +71,13 @@ And lastly React infinite scroll and UUID was used for infinite scrolling and ge
 
 We used express and typescript as a server framework for Node JS. It is a good choice for building a server and many of us had experience with it from before. It is also easy to use and has a good documentation.
 
+We used Express instead of Apollo Server as it is more lightweight and therefore more sustainable. Apollo includes a lot of features that we did not need such as subscriptions, tracing, cloud integration and so on. This means a lot of additional NPM packages we dont need, which is unsustainable. You can read more about this [here](https://httptoolkit.com/blog/simple-graphql-server-without-apollo/)
+
 The other libraries we have we explained more on why we used in [sustainability documentation](./docs/sustainability.md).
 
 # Run tests
 
-## Run frontend tests
-
-To test the frontend, please go to the [frontend documentation](./frontend/README.md).
-
-## Backend testing
-
-The backend and API are implicitly tested through the frontend tests. To run the frontend tests, please go to the [frontend documentation](./frontend/README.md).
+To test the frontend, please go to the [frontend documentation](./frontend/README.md). The backend and API are implicitly tested through the frontend tests.
 
 # Sustainability
 
