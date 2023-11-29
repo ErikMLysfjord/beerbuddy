@@ -13,7 +13,7 @@ const deleteComment = async (userId: string, commentId: string) => {
   const query = {
     query: `{ deleteComment(userId: "${userId}", commentId: ${commentId} ) }`,
   };
-  return await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/action", {
+  return await fetch(import.meta.env.VITE_APP_BACKEND_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -46,23 +46,28 @@ const convertTimestamp = (timestamp: string) => {
   let interval = seconds / 31536000;
 
   if (interval > 1) {
-    return Math.floor(interval) + " years ago";
+    const flooredInterval = Math.floor(interval);
+    return flooredInterval + ` year${flooredInterval === 1 ? "" : "s"} ago`;
   }
   interval = seconds / 2592000;
   if (interval > 1) {
-    return Math.floor(interval) + " months ago";
+    const flooredInterval = Math.floor(interval);
+    return flooredInterval + ` month${flooredInterval === 1 ? "" : "s"} ago`;
   }
   interval = seconds / 86400;
   if (interval > 1) {
-    return Math.floor(interval) + " days ago";
+    const flooredInterval = Math.floor(interval);
+    return flooredInterval + ` day${flooredInterval === 1 ? "" : "s"} ago`;
   }
   interval = seconds / 3600;
   if (interval > 1) {
-    return Math.floor(interval) + " hours ago";
+    const flooredInterval = Math.floor(interval);
+    return flooredInterval + ` hour${flooredInterval === 1 ? "" : "s"} ago`;
   }
   interval = seconds / 60;
   if (interval > 1) {
-    return Math.floor(interval) + " minutes ago";
+    const flooredInterval = Math.floor(interval);
+    return flooredInterval + ` minute${flooredInterval === 1 ? "" : "s"} ago`;
   }
   return "< 1 minute ago";
 };

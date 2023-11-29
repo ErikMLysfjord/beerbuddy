@@ -32,7 +32,7 @@ const fetchComments = async (id: string, offset: number) => {
     query: `{ comments(id: ${id}, size: 5, start: ${offset}) }`,
   };
 
-  return await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/beer", {
+  return await fetch(import.meta.env.VITE_APP_BACKEND_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

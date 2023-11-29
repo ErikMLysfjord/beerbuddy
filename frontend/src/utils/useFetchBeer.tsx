@@ -13,7 +13,7 @@ const fetchBeer = async (id: number, onSuccess: (data: Beer) => void) => {
     query: `{ beer(id: ${id} userId: "${userId}") }`,
   };
 
-  return await fetch(import.meta.env.VITE_APP_BACKEND_URL + "/beer", {
+  return await fetch(import.meta.env.VITE_APP_BACKEND_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

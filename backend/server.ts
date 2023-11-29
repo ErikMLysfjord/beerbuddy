@@ -1,4 +1,5 @@
 import { graphqlHTTP } from "express-graphql";
+import { mergeSchemas } from "@graphql-tools/schema";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { cacheMiddleware } from "./caching.js";
@@ -18,28 +19,23 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
+// Merge all schemas
+const mergedSchema = mergeSchemas({
+  schemas: [beerSchema, userSchema, actionSchema],
+});
+
 // Access static files from backend
 app.use(express.static("public"));
 
-// GraphQL endpoints
+// GraphQL endpoint
 app.use(
-  "/beer",
+  "/graphql",
   cacheMiddleware,
-  graphqlHTTP({ schema: beerSchema, rootValue: beerResolver, graphiql: true }),
-);
-
-app.use(
-  "/user",
-  graphqlHTTP({ schema: userSchema, rootValue: userResolver, graphiql: true }),
-);
-
-app.use(
-  "/action",
   graphqlHTTP({
-    schema: actionSchema,
-    rootValue: actionResolver,
+    schema: mergedSchema,
+    rootValue: { ...beerResolver, ...userResolver, ...actionResolver },
     graphiql: true,
-  }),
+  })
 );
 
 // Start the server
