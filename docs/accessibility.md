@@ -107,6 +107,10 @@ We have only implemented it on the home page, as we felt the Beer-page was not c
 
 The application uses infinite scroll to load more data when the user scrolls to the bottom of the page. To exit the infinite scroll with keyboard navigation, the user can press the `Esc` key. This will exit the infinite scroll, and the user can continue to navigate the application using the keyboard.
 
+### Information about results
+
+The application provides information about the number of results that are currently displayed, what has been searched for, and how the results are sorted. This makes it easier to understand what is currently displayed, and it makes it easier to navigate the application using the keyboard.
+
 ---
 
 ## Technologies used to measure accessibility
@@ -119,7 +123,7 @@ Firefox Accessibility is a tool that is built into Firefox. It is used to measur
 
 We have used Firefox accessibility in two ways. The first way using it to find any issues with the HTML semantics, contrast issues, keyboard navigation and so on. The second way is to see how the screen reader reads the application, by finding sections and roles tied to HTML elements. This is useful to see if the screen reader reads the application in a way that makes sense, and has been used to find issues with the HTML semantics and ARIA attributes.
 
-![Document structure](./images/document-structure.png)
+![Document structure](../images/document-structure.png)
 
 ### WAVE
 
