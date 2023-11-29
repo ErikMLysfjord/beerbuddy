@@ -45,9 +45,9 @@ const useFetchMoreBeers = () => {
             userId: "${userId}"
             sort: "${sorting}" 
             minAbv: ${noFilters ? 0 : ABV[0]}
-            maxAbv: ${noFilters ? 12 : ABV[1]}
+            maxAbv: ${noFilters ? 13 : ABV[1]}
             minIbu: ${noFilters ? 0 : IBU[0]}
-            maxIbu: ${noFilters ? 137 : IBU[1]}
+            maxIbu: ${noFilters ? 138 : IBU[1]}
             search: "${searchString}"
             styles: ${noFilters ? "[]" : JSON.stringify(styles)}
           )

@@ -53,11 +53,41 @@ interface FiltersProps {
  * @returns a Filters component
  */
 const Filters = ({ fetchMore, apply }: FiltersProps) => {
-  const { IBU, setIBU, ABV, setABV, setStyles, styles, setSearchString } =
-    useContext(FilterContext);
+  const {
+    IBU,
+    setIBU,
+    ABV,
+    setABV,
+    setStyles,
+    styles,
+    searchString,
+    setSearchString,
+  } = useContext(FilterContext);
   const fetchMoreRef = useRef(fetchMore);
   fetchMoreRef.current = fetchMore;
   const headingID = useId();
+
+  /**
+   * Function for resetting filters and fetching more beers.
+   */
+  const resetFilters = (e: React.MouseEvent) => {
+    /* Only reset filters and fetch beers if there are active filters */
+    if (
+      beerStyles.length > 0 ||
+      ABV[0] !== 0 ||
+      ABV[1] !== 13 ||
+      IBU[0] !== 0 ||
+      IBU[1] !== 138 ||
+      searchString !== ""
+    ) {
+      e.preventDefault();
+      setABV([0, 13]);
+      setIBU([0, 138]);
+      setStyles([]);
+      setSearchString("");
+      fetchMoreRef.current(true, true);
+    }
+  };
 
   return (
     <section aria-labelledby={headingID}>
@@ -118,7 +148,7 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
                   e.preventDefault();
                   setIBU(newValue as number[]);
                 }}
-                max={137}
+                max={138}
                 valueLabelDisplay="auto"
                 getAriaValueText={() =>
                   `Min value is ${IBU[0]}, max is ${IBU[1]}`
@@ -154,7 +184,7 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
                   e.preventDefault();
                   setABV(newValue as number[]);
                 }}
-                max={12}
+                max={13}
                 valueLabelDisplay="auto"
                 getAriaValueText={() =>
                   `Min value is ${ABV[0]}, max is ${ABV[1]}`
@@ -179,14 +209,7 @@ const Filters = ({ fetchMore, apply }: FiltersProps) => {
       <Button
         type="default"
         className={CSSstyles.buttons}
-        onClick={(e) => {
-          e.preventDefault();
-          fetchMore(true, true);
-          setSearchString("");
-          setStyles([]);
-          setABV([0, 12]);
-          setIBU([0, 137]);
-        }}
+        onClick={resetFilters}
         icon={<RollbackOutlined />}
       >
         Reset Filters

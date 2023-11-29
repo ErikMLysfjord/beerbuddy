@@ -183,7 +183,7 @@ const BeerPage = () => {
               altText={"Percentage icon"}
               value={String((beer.abv * 100).toFixed(1)) + "%"}
             />
-            {beer.ibu !== null && (
+            {beer.ibu !== 0 && (
               <BeerAttribute
                 icon={"/project2/hop.svg"}
                 altText={"Hop icon"}
