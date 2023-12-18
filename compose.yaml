@@ -1,0 +1,41 @@
+services:
+  frontend:
+    image: beer-buddy/frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    env_file:
+      - ./frontend/.env
+    restart: always
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - 5173:5173
+
+  mysqldb:
+    image: mariadb:10.4
+    restart: always
+    env_file:
+      - ./.env
+    volumes:
+      - ./backend/database-seed.sql:/docker-entrypoint-initdb.d/setup.sql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${ROOT_PASS}
+      - MYSQL_DATABASE=${DB_NAME}
+
+  backend:
+    depends_on:
+      - mysqldb
+    image: beer-buddy/backend
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000

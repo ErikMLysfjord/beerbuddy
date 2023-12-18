@@ -24,8 +24,8 @@ const sqlQuery = async (query: string) => {
     .then((query) => {
       return query[0];
     })
-    .catch(() => {
-      return "Error in query";
+    .catch((e) => {
+      return `Error in query ${e}`;
     });
 
   return results as QueryResult[] | "Error in query";
