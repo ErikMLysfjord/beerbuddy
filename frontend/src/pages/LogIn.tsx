@@ -48,8 +48,8 @@ const fetchLoginId = async (
     setIsNewUser(res.data.loginOrSignUp.isNewUser);
   }
 
-  await setTimeout(() => {
-    window.location.replace("/project2");
+  setTimeout(() => {
+    window.location.replace("/");
   }, 2000);
 };
 

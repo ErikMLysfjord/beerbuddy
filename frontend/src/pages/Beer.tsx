@@ -65,6 +65,7 @@ const BeerPage = () => {
   const { id } = useParams<{ id: string }>();
   const [commentsLoading, setCommentsLoading] = useState(false);
   const [offset, setOffset] = useState(0);
+  const [newVote, setNewVote] = useState(false);
   const [newComment, setNewComment] = useState(false);
   const { width } = useWindowDimensions();
 
@@ -87,35 +88,34 @@ const BeerPage = () => {
       });
   }, [id, newComment]);
 
-  const [newVote, setNewVote] = useState(false);
-
   const { beer, isLoading, isError } = useFetchBeer({
     id: Number(id),
     newVote,
+    newComment,
   });
 
   const AttributeValues = [
     {
       attribute: "Style",
-      icon: "/project2/yellowBottle.svg",
+      icon: "/yellowBottle.svg",
       altText: "Bottle icon",
       value: beer?.style,
     },
     {
       attribute: "ABV",
-      icon: "/project2/yellowPercent.svg",
+      icon: "/yellowPercent.svg",
       altText: "Percentage icon",
       value: String(beer?.abv ?? 0 * 100) + "%",
     },
     {
       attribute: "IBU",
-      icon: "/project2/yellowHop.svg",
+      icon: "/yellowHop.svg",
       altText: "Hop icon",
       value: beer?.ibu,
     },
     {
       attribute: "Volume",
-      icon: "/project2/yellowVolume.svg",
+      icon: "/yellowVolume.svg",
       altText: "Glass volume",
       value: beer?.ounces + "oz",
     },
@@ -140,7 +140,7 @@ const BeerPage = () => {
           <div className={styles.logo}>
             <Logo />
           </div>
-          <a href="/project2" className={styles.menuButton}>
+          <a href="/" className={styles.menuButton}>
             {"Back to menu"}
           </a>
         </>
@@ -166,33 +166,34 @@ const BeerPage = () => {
         />
       </div>
       <p className={styles.basedOn}>
-        Based on {beer.vote_count !== null ? beer.vote_count : "0"} reviews
+        Based on {beer.vote_count !== null ? beer.vote_count : "0"} review
+        {beer.vote_count === 1 ? "" : "s"}
       </p>
       <section className={styles.info} aria-label="Beer attributes">
         {width > 768 ? (
           <>
             <BeerAttribute
               attribute="Style"
-              icon={"/project2/bottle.svg"}
+              icon={"/bottle.svg"}
               altText={"Bottle icon"}
               value={beer.style}
             />
             <BeerAttribute
               attribute="ABV"
-              icon={"/project2/percent.svg"}
+              icon={"/percent.svg"}
               altText={"Percentage icon"}
               value={String((beer.abv * 100).toFixed(1)) + "%"}
             />
             {beer.ibu !== 0 && (
               <BeerAttribute
-                icon={"/project2/hop.svg"}
+                icon={"/hop.svg"}
                 altText={"Hop icon"}
                 attribute="IBU"
                 value={String(beer.ibu).split(".")[0]}
               />
             )}
             <BeerAttribute
-              icon={"/project2/volume.svg"}
+              icon={"/volume.svg"}
               altText={"Glass volume"}
               attribute="Volume"
               value={beer.ounces + "oz"}

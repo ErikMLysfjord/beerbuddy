@@ -135,7 +135,7 @@ const CommentBar = ({ onSuccess }: CommentBarInterface) => {
               width={"30px"}
               height={"30px"}
               alt="Send icon"
-              src={"/project2/paper-plane-right.svg"}
+              src={"/paper-plane-right.svg"}
             />
           </Button>
         )}

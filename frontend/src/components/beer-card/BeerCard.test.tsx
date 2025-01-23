@@ -57,9 +57,6 @@ describe("BeerCard", () => {
         reaction="unreact"
       />
     );
-    expect(getByRole("link")).toHaveAttribute(
-      "href",
-      "./" + import.meta.env.VITE_APP_BASEURL + "beer/" + "2"
-    );
+    expect(getByRole("link")).toHaveAttribute("href", "./beer/2");
   });
 });

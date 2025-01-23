@@ -8,7 +8,7 @@ import { Beer } from "../types/types";
  * @returns - the beer object
  */
 const fetchBeer = async (id: number, onSuccess: (data: Beer) => void) => {
-  const userId = await localStorage.getItem("userIdBeerBuddy");
+  const userId = localStorage.getItem("userIdBeerBuddy");
   const query = {
     query: `{ beer(id: ${id} userId: "${userId}") }`,
   };
@@ -41,7 +41,15 @@ const fetchBeer = async (id: number, onSuccess: (data: Beer) => void) => {
  * @param newVote - boolean to indicate if a new vote has been cast
  * @returns - the beer object, loading state and error state
  */
-const useFetchBeer = ({ id, newVote }: { id: number; newVote?: boolean }) => {
+const useFetchBeer = ({
+  id,
+  newVote,
+  newComment,
+}: {
+  id: number;
+  newVote?: boolean;
+  newComment?: boolean;
+}) => {
   const [beer, setBeer] = useState<Beer>();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -54,7 +62,7 @@ const useFetchBeer = ({ id, newVote }: { id: number; newVote?: boolean }) => {
 
   useEffect(() => {
     fetchBeer(id, onSuccess);
-  }, [id, newVote]);
+  }, [id, newVote, newComment]);
 
   return { beer, isLoading, isError };
 };

@@ -17,7 +17,7 @@
 .logo {
   position: absolute;
   left: 1rem;
-  top: 10px;
+  top: 1rem;
 
   @media (max-width: 768px) {
     display: none;

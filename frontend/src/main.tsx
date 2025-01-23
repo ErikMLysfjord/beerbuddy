@@ -25,7 +25,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         }}
       >
         <AntdApp>
-          <BrowserRouter basename="/project2">
+          <BrowserRouter basename="/">
             <Routes>
               <Route path="/login" element={<LogInPage />} />
               <Route path="/" element={<App />} />

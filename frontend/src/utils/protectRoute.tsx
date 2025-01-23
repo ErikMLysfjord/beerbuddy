@@ -3,7 +3,7 @@ const protectRoute = async () => {
   const userId = localStorage.getItem("userIdBeerBuddy");
   if (!username || !userId) {
     resetLocalStorage();
-    return window.location.replace("/project2/login");
+    return window.location.replace("/login");
   }
 
   const res = await fetch(import.meta.env.VITE_APP_BACKEND_URL, {
@@ -19,13 +19,13 @@ const protectRoute = async () => {
 
   if (res.data.login && res.data.login.length === 0) {
     resetLocalStorage();
-    window.location.replace("/project2/login");
+    window.location.replace("/login");
     return true;
   }
 
   if (res.data.login[0].id !== userId) {
     resetLocalStorage();
-    window.location.replace("/project2/login");
+    window.location.replace("/login");
     return true;
   }
 

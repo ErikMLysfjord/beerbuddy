@@ -106,13 +106,12 @@ const CommentItem = ({
             deleteComment(
               localStorage.getItem("userIdBeerBuddy") ?? "",
               id.toString()
-            );
-            onDelete();
+            ).finally(() => onDelete());
           }}
           aria-label="Delete comment"
         >
           <img
-            src="/project2/delete-kopi.svg"
+            src="/delete-kopi.svg"
             alt="Trash icon"
             width={"32px"}
             height={"32px"}
